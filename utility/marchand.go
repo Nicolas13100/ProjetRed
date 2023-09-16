@@ -16,6 +16,7 @@ func NewMarchand(personnage *game.Personnage) *Marchand {
 		},
 	}
 }
+
 func (m *Marchand) Sell(Personnage *game.Personnage, item string, price int) {
 	fmt.Println("Les objets disponibles à l'achat sont :")
 	for key, value := range m.inventory {
@@ -33,11 +34,7 @@ func (m *Marchand) Sell(Personnage *game.Personnage, item string, price int) {
 		if Personnage.Gold >= price {
 			m.inventory[itemToBuy]--
 			Personnage.Gold -= price
-			if _, ok := Personnage.Inventory[itemToBuy]; ok {
-				Personnage.Inventory[itemToBuy]++
-			} else {
-				Personnage.Inventory[itemToBuy] = 1
-			}
+			Personnage.Inventory[itemToBuy]++
 			fmt.Println("Vous avez acheté une", itemToBuy)
 		} else {
 			fmt.Println("Vous n'avez pas assez d'argent pour acheter cet objet.")
