@@ -11,6 +11,8 @@ func main() {
 
 	fmt.Println("Bienvenue dans le jeu RPG !")
 
+	m := utility.NewMarchand(nil)
+
 	// Start menu
 	fmt.Println("1. Commencer le jeu")
 	fmt.Println("2. Quitter")
@@ -37,7 +39,6 @@ func main() {
 		}
 
 		personnage := game.InitPersonnage(name, race)
-		marchand := utility.NewMarchand(personnage)
 
 		for {
 			fmt.Println("Que voulez-vous faire ?")
@@ -59,7 +60,19 @@ func main() {
 			case 2:
 				personnage.AccessInventory()
 			case 3:
-				marchand.Sell(personnage, "Potion de soin", 50) // Assuming a price of 50 gold for a potion
+				var merchantChoice string
+				fmt.Print("Do you want to buy or sell? (buy/sell): ")
+				fmt.Scan(&merchantChoice)
+				switch merchantChoice {
+				case "buy":
+					m.Buy(personnage)
+				case "sell":
+					// Handle selling to the merchant if needed
+					fmt.Println("You chose to sell.")
+				default:
+					fmt.Println("Invalid choice for merchant.")
+				}
+
 			case 4:
 				fmt.Println("Au revoir !")
 				return
