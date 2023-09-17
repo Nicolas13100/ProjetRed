@@ -3,7 +3,9 @@ package main
 import (
 	"ProjectRed/game"
 	"ProjectRed/utility"
+	"bufio"
 	"fmt"
+	"os"
 )
 
 func main() {
@@ -32,7 +34,7 @@ func main() {
 			return
 		}
 
-		fmt.Print("Entrez votre classe : ")
+		fmt.Print("Entrez votre race : ")
 		if _, err := fmt.Scan(&race); err != nil {
 			fmt.Println("Erreur lors de la saisie.")
 			return
@@ -61,17 +63,21 @@ func main() {
 				personnage.AccessInventory()
 			case 3:
 				var merchantChoice string
-				fmt.Print("Do you want to buy or sell? (buy/sell): ")
+				fmt.Print("Do you want to buy or sell? (acheter/vendre): ")
 				fmt.Scan(&merchantChoice)
 				switch merchantChoice {
-				case "buy":
+				case "acheter":
 					m.Buy(personnage)
-				case "sell":
+				case "vendre":
 					// Handle selling to the merchant if needed
 					fmt.Println("You chose to sell.")
 				default:
 					fmt.Println("Invalid choice for merchant.")
 				}
+
+				// Wait for user to press Enter to continue
+				fmt.Print("Press Enter to continue...")
+				bufio.NewReader(os.Stdin).ReadBytes('\n')
 
 			case 4:
 				fmt.Println("Au revoir !")
