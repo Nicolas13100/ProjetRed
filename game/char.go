@@ -35,10 +35,10 @@ func CharCreation() *Personnage {
 	name = strings.Title(strings.ToLower(name))
 
 	// Demander à l'utilisateur de choisir sa race (vous pouvez adapter cette partie selon vos besoins)
-	fmt.Print("Choisissez votre race : ")
-	fmt.Println("Humain : Vous commencez avec 100 PV Max")
-	fmt.Println("Elfe : Vous commencez avec 80 PV Max")
-	fmt.Println(" Nain : Vous commencez avec 120 PV Max")
+	fmt.Print("Choisissez votre race : \n")
+	fmt.Print("Humain : Vous commencez avec 100 PV Max\n")
+	fmt.Print("Elfe : Vous commencez avec 80 PV Max\n")
+	fmt.Println("Nain : Vous commencez avec 120 PV Max")
 	fmt.Scan(&race)
 
 	switch race {
