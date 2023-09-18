@@ -45,14 +45,14 @@ func (m *Marchand) Buy(personnage *game.Personnage) {
 			return
 		}
 		itemToBuy = "Potion de " + potionType
-	case "skill":
+	case "sort":
 		fmt.Println("Quel type de sort voulez-vous acheter ? (feu/autre)")
 		var spellType string
 		if _, err := fmt.Scan(&spellType); err != nil {
 			fmt.Println("Erreur lors de la saisie.")
 			return
 		}
-		itemToBuy = "Boule de " + spellType
+		itemToBuy = "Livre de sort : Boule de " + spellType
 	}
 	switch quantity := m.inventory[itemToBuy]; {
 	case quantity > 0:

@@ -78,6 +78,7 @@ func (p1 *Personnage) DisplayInfo() {
 		fmt.Println("Points de vie maximum:", p1.HpMax)
 		fmt.Println("Points de vie actuels:", p1.Hp)
 		fmt.Println("Cash:", p1.Gold)
+		fmt.Println("Sorts", p1.Skills)
 		// Affichage de l'inventaire
 		fmt.Println("\nType 'return' to come back to main menu")
 
@@ -95,8 +96,8 @@ func (p1 *Personnage) DisplayInfo() {
 func (p1 *Personnage) AccessInventory() {
 	for {
 		fmt.Println("\nInventaire:")
+		fmt.Println(p1.Gold)
 		for key, value := range p1.Inventory {
-			fmt.Println(p1.Gold)
 			fmt.Printf("%s: %d \n", key, value)
 
 		}
@@ -123,7 +124,7 @@ func (p1 *Personnage) AccessInventory() {
 				fmt.Println("Vous n'avez pas de Potion de poison dans votre inventaire.")
 			}
 		case 3:
-			if count, ok := p1.Inventory["Boule de feu"]; ok && count > 0 {
+			if count, ok := p1.Inventory["Livre de sort : Boule de feu"]; ok && count > 0 {
 				SpellBook(p1)
 			}
 		case 4:
@@ -148,4 +149,12 @@ func (p1 *Personnage) LimiteInventory() bool {
 		totalQuantity += count
 	}
 	return totalQuantity < 10
+}
+
+func (p1 *Personnage) RemoveZeroValueItems() {
+	for key, value := range p1.Inventory {
+		if value == 0 {
+			delete(p1.Inventory, key)
+		}
+	}
 }
