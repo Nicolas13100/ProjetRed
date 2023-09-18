@@ -6,9 +6,9 @@ import (
 )
 
 type Personnage struct {
-	Name         string
-	Race         string
-	Equipment    struct{}
+	Name string
+	Race string
+
 	Level        int
 	HpMax        int
 	Hp           int
