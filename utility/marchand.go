@@ -14,12 +14,23 @@ func NewMarchand(personnage *game.Personnage) *Marchand {
 	return &Marchand{
 		inventory: map[string]int{
 			"Potion de soin":               3,
+			"Potion de poison":             3,
 			"Livre de sort : Boule de feu": 1,
+			"Fourrure de Loup":             4,
+			"Peau de Troll":                1,
+			"Cuir de Sanglier":             1,
+			"Plume de Corbeau":             1,
 		},
 		prices: map[string]int{
-			"Potion de soin": 10, // Set the price of "Potion de soin" to 10
+			"Potion de soin":   3,
+			"Potion de poison": 6,
+			// Set the price of "Potion de soin" to 10
 			// Add more items and their prices as needed
-			"Livre de sort : Boule de feu": 10,
+			"Livre de sort : Boule de feu": 25,
+			"Fourrure de Loup":             4,
+			"Peau de Troll":                7,
+			"Cuir de Sanglier":             3,
+			"Plume de Corbeau":             1,
 		},
 	}
 }
