@@ -11,17 +11,19 @@ type Personnage struct {
 	HpMax     int
 	Hp        int
 	Inventory map[string]int
+	Skills    []string
 	Gold      int
 }
 
 func InitPersonnage(name string, race string) *Personnage {
 	p1 := &Personnage{
-		Name:  name,
-		Race:  race,
-		Level: 1,
-		HpMax: 100,
-		Hp:    40,
-		Gold:  100, // Assuming an initial gold amount for the Personnage
+		Name:   name,
+		Race:   race,
+		Level:  1,
+		HpMax:  100,
+		Hp:     40,
+		Gold:   100, // Assuming an initial gold amount for the Personnage
+		Skills: []string{"coup de poing"},
 		Inventory: map[string]int{
 			"Potion de soin": 3,
 		},
@@ -89,4 +91,16 @@ func (p1 *Personnage) Dead() {
 		fmt.Printf("Vous avez été ressuscité avec %d PV", p1.Hp)
 	}
 
+}
+
+func (p1 *Personnage) SpellBook() {
+	spell := "Boule de feu"
+	for _, skill := range p1.Skills {
+		if skill == spell {
+			fmt.Println("Vous avez déjà appris le sort Boule de feu")
+			return
+		}
+	}
+	p1.Skills = append(p1.Skills, spell)
+	fmt.Println("Sort appris :", spell)
 }
