@@ -42,7 +42,8 @@ func main() {
 			fmt.Println("1. Afficher les informations du personnage")
 			fmt.Println("2. Accéder au contenu de l'inventaire")
 			fmt.Println("3. Marchand")
-			fmt.Println("4. Quitter")
+			fmt.Println("4. Forgeron")
+			fmt.Println("5. Quitter")
 
 			var choice int
 			fmt.Print("Entrez votre choix : ")
@@ -73,8 +74,9 @@ func main() {
 				// Wait for user to press Enter to continue
 				fmt.Print("Taper Entrer pour continuer...")
 				bufio.NewReader(os.Stdin).ReadBytes('\n')
-
 			case 4:
+
+			case 5:
 				fmt.Println("Au revoir !")
 				return
 			default:
