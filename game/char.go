@@ -25,7 +25,7 @@ func InitPersonnage(name string, race string) *Personnage {
 		Gold:   100, // Assuming an initial gold amount for the Personnage
 		Skills: []string{"coup de poing"},
 		Inventory: map[string]int{
-			"Potion de soin":   3,
+			"Potion de soin":   7,
 			"Potion de poison": 3,
 		},
 	}
@@ -60,9 +60,7 @@ func (p1 *Personnage) AccessInventory() {
 	for {
 		fmt.Println("\nInventaire:")
 		for key, value := range p1.Inventory {
-			fmt.Println(p1.Gold)
 			fmt.Printf("%s: %d \n", key, value)
-
 		}
 		fmt.Println("\nQue voulez-vous faire ?")
 		fmt.Println("1. Sélectionner une potion de soin")
@@ -87,7 +85,7 @@ func (p1 *Personnage) AccessInventory() {
 				fmt.Println("Vous n'avez pas de Potion de poison dans votre inventaire.")
 			}
 		case 3:
-			if count, ok := p1.Inventory["Boule de feu"]; ok && count > 0 {
+			if count, ok := p1.Inventory["Livre de sort : Boule de feu"]; ok && count > 0 {
 				SpellBook(p1)
 			}
 		case 4:
@@ -105,4 +103,11 @@ func (p1 *Personnage) Dead() {
 		fmt.Printf("Vous avez été ressuscité avec %d PV", p1.Hp)
 	}
 
+}
+func (p1 *Personnage) LimiteInventory() bool {
+	totalQuantity := 0
+	for _, count := range p1.Inventory {
+		totalQuantity += count
+	}
+	return totalQuantity < 10
 }
