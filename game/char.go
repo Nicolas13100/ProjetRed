@@ -42,6 +42,7 @@ func (p1 *Personnage) DisplayInfo() {
 		fmt.Println("Points de vie maximum:", p1.HpMax)
 		fmt.Println("Points de vie actuels:", p1.Hp)
 		fmt.Println("Cash:", p1.Gold)
+		fmt.Println("Sorts", p1.Skills)
 		// Affichage de l'inventaire
 		fmt.Println("\nType 'return' to come back to main menu")
 
