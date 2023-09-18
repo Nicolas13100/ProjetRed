@@ -13,13 +13,13 @@ type Marchand struct {
 func NewMarchand(personnage *game.Personnage) *Marchand {
 	return &Marchand{
 		inventory: map[string]int{
-			"Potion de soin": 3,
-			"Boule de feu":   1,
+			"Potion de soin":               3,
+			"Livre de sort : Boule de feu": 1,
 		},
 		prices: map[string]int{
 			"Potion de soin": 10, // Set the price of "Potion de soin" to 10
 			// Add more items and their prices as needed
-			"Boule de feu": 10,
+			"Livre de sort : Boule de feu": 10,
 		},
 	}
 }
