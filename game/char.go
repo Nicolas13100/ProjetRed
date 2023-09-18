@@ -81,3 +81,12 @@ func (p1 *Personnage) AccessInventory() {
 		}
 	}
 }
+
+func (p1 *Personnage) Dead() {
+	if p1.Hp < 0 {
+		fmt.Printf("Vous êtes mort ! \n")
+		p1.Hp = p1.HpMax / 2
+		fmt.Printf("Vous avez été ressuscité avec %d PV", p1.Hp)
+	}
+
+}
