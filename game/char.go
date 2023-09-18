@@ -64,7 +64,8 @@ func (p1 *Personnage) AccessInventory() {
 		}
 		fmt.Println("\nQue voulez-vous faire ?")
 		fmt.Println("1. Sélectionner une potion de soin")
-		fmt.Println("2. Retourner en arrière")
+		fmt.Println("2. Sélectionner un livre de sort")
+		fmt.Println("3. Retourner en arrière")
 
 		var input int
 		fmt.Scan(&input)
@@ -77,6 +78,7 @@ func (p1 *Personnage) AccessInventory() {
 				fmt.Println("Vous n'avez pas de Potion de soin dans votre inventaire.")
 			}
 		case 2:
+		case 3:
 			return
 		default:
 			fmt.Println("Choix invalide.")
