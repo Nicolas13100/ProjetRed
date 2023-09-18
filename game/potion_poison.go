@@ -13,6 +13,7 @@ func poisonPot(p1 *Personnage) {
 	if choice == "Oui" {
 		if count, ok := p1.Inventory["Potion de poison"]; ok && count > 0 {
 			p1.Inventory["Potion de poison"]--
+			p1.RemoveZeroValueItems()
 			fmt.Println("Vous avez utilisé une potion de poison.")
 			duration := 3 * time.Second
 			fmt.Printf("Vous perdez 10 PV chaque seconde pendant %s\n", duration)

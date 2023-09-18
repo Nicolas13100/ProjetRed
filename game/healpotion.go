@@ -14,6 +14,7 @@ func TakePot(p1 *Personnage) {
 			fmt.Println("Vos points de vie sont déjà pleins.")
 		} else if count, ok := p1.Inventory["Potion de soin"]; ok && count > 0 {
 			p1.Inventory["Potion de soin"]--
+			p1.RemoveZeroValueItems()
 			p1.Hp += 50
 			if p1.Hp > p1.HpMax {
 				surplus := p1.Hp - p1.HpMax
