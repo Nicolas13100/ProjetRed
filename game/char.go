@@ -59,8 +59,8 @@ func (p1 *Personnage) DisplayInfo() {
 func (p1 *Personnage) AccessInventory() {
 	for {
 		fmt.Println("\nInventaire:")
+		fmt.Println(p1.Gold)
 		for key, value := range p1.Inventory {
-			fmt.Println(p1.Gold)
 			fmt.Printf("%s: %d \n", key, value)
 
 		}
@@ -87,7 +87,7 @@ func (p1 *Personnage) AccessInventory() {
 				fmt.Println("Vous n'avez pas de Potion de poison dans votre inventaire.")
 			}
 		case 3:
-			if count, ok := p1.Inventory["Boule de feu"]; ok && count > 0 {
+			if count, ok := p1.Inventory["Livre de sort : Boule de feu"]; ok && count > 0 {
 				SpellBook(p1)
 			}
 		case 4:

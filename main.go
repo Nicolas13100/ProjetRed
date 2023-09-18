@@ -39,7 +39,6 @@ func CharCreation() *game.Personnage {
 	case 1:
 
 	}
-
 	// Créer et initialiser le personnage
 	p := game.InitPersonnage(name, race)
 
