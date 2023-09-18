@@ -63,20 +63,20 @@ func main() {
 				personnage.AccessInventory()
 			case 3:
 				var merchantChoice string
-				fmt.Print("Do you want to buy or sell? (acheter/vendre): ")
+				fmt.Print("Veux-tu acheter ou vendre un objet ? (acheter/vendre): ")
 				fmt.Scan(&merchantChoice)
 				switch merchantChoice {
-				case "acheter":
+				case "Acheter":
 					m.Buy(personnage)
-				case "vendre":
+				case "Vendre":
 					// Handle selling to the merchant if needed
-					fmt.Println("You chose to sell.")
+					fmt.Println("Que veux-tu vendre ?")
 				default:
-					fmt.Println("Invalid choice for merchant.")
+					fmt.Println("Choix invalide.")
 				}
 
 				// Wait for user to press Enter to continue
-				fmt.Print("Press Enter to continue...")
+				fmt.Print("Taper Entrer pour continuer...")
 				bufio.NewReader(os.Stdin).ReadBytes('\n')
 
 			case 4:
