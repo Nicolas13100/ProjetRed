@@ -6,56 +6,9 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"strings"
 )
 
-func CharCreation() *game.Personnage {
-	var name, race string
-
-	fmt.Println("Création de votre personnage :")
-
-	// Demander à l'utilisateur de choisir son nom
-	fmt.Print("Entrez votre nom : ")
-	fmt.Scan(&name)
-
-	// Vérifier si le nom contient uniquement des lettres
-	if !OnlyLetters(name) {
-		fmt.Println("Le nom doit contenir uniquement des lettres.")
-		return nil
-	}
-
-	// Mettre la première lettre en majuscule et le reste en minuscule
-	name = strings.Title(strings.ToLower(name))
-
-	// Demander à l'utilisateur de choisir sa race (vous pouvez adapter cette partie selon vos besoins)
-	fmt.Print("Choisissez votre race : ")
-	fmt.Println("Humain : Vous commencez avec 100 PV Max")
-	fmt.Println("Elfe : Vous commencez avec 80 PV Max")
-	fmt.Println(" Nain : Vous commencez avec 120 PV Max")
-	fmt.Scan(&race)
-
-	var choicerace int
-	switch choicerace {
-	case 1:
-
-	}
-	// Créer et initialiser le personnage
-	p := game.InitPersonnage(name, race)
-
-	fmt.Printf("Bienvenue à toi : %s\n", p.Name)
-	return p
-}
-
-func OnlyLetters(s string) bool {
-	for _, char := range s {
-		if !('a' <= char && char <= 'z' || 'A' <= char && char <= 'Z') {
-			return false
-		}
-	}
-	return true
-}
 func main() {
-	var name, race string
 
 	fmt.Println("Bienvenue dans le jeu RPG !")
 
@@ -72,11 +25,17 @@ func main() {
 		return
 	}
 
+	var personnage *game.Personnage // Declare the personnage variable outside of the switch
+
 	switch startChoice {
 	case 1:
-		CharCreation()
-
-		personnage := game.InitPersonnage(name, race)
+		character := game.CharCreation()
+		if character == nil {
+			fmt.Println("Mauvais choix de race")
+		} else {
+			personnage = game.CharCreation()
+			// Handle the character creation success
+		}
 
 		for {
 			fmt.Println("Que voulez-vous faire ?")

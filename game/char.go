@@ -2,6 +2,7 @@ package game
 
 import (
 	"fmt"
+	"strings"
 )
 
 type Personnage struct {
@@ -15,7 +16,31 @@ type Personnage struct {
 	Gold      int
 }
 
-func InitPersonnage(name string, race string) *Personnage {
+func CharCreation() *Personnage {
+	var name string
+	var race string
+	fmt.Println("Création de votre personnage :")
+
+	// Demander à l'utilisateur de choisir son nom
+	fmt.Print("Entrez votre nom : ")
+	fmt.Scan(&name)
+
+	// Vérifier si le nom contient uniquement des lettres
+	if !OnlyLetters(name) {
+		fmt.Println("Le nom doit contenir uniquement des lettres.")
+		return nil
+	}
+
+	// Mettre la première lettre en majuscule et le reste en minuscule
+	name = strings.Title(strings.ToLower(name))
+
+	// Demander à l'utilisateur de choisir sa race (vous pouvez adapter cette partie selon vos besoins)
+	fmt.Print("Choisissez votre race : ")
+	fmt.Println("Humain : Vous commencez avec 100 PV Max")
+	fmt.Println("Elfe : Vous commencez avec 80 PV Max")
+	fmt.Println(" Nain : Vous commencez avec 120 PV Max")
+	fmt.Scan(&race)
+
 	switch race {
 	case "Humain":
 		p1 := &Personnage{
@@ -24,7 +49,7 @@ func InitPersonnage(name string, race string) *Personnage {
 			Level:  1,
 			HpMax:  100,
 			Hp:     50,
-			Gold:   100, // Assuming an initial gold amount for the Personnage
+			Gold:   100,
 			Skills: []string{"coup de poing"},
 			Inventory: map[string]int{
 				"Potion de soin":   3,
@@ -40,7 +65,7 @@ func InitPersonnage(name string, race string) *Personnage {
 			Level:  1,
 			HpMax:  80,
 			Hp:     40,
-			Gold:   100, // Assuming an initial gold amount for the Personnage
+			Gold:   100,
 			Skills: []string{"coup de poing"},
 			Inventory: map[string]int{
 				"Potion de soin":   3,
@@ -56,16 +81,26 @@ func InitPersonnage(name string, race string) *Personnage {
 			Level:  1,
 			HpMax:  120,
 			Hp:     60,
-			Gold:   100, // Assuming an initial gold amount for the Personnage
+			Gold:   100,
 			Skills: []string{"coup de poing"},
 			Inventory: map[string]int{
 				"Potion de soin":   3,
 				"Potion de poison": 3,
 			},
 		}
+		fmt.Printf("Bienvenue à toi : %s\n", name)
 		return p1
 	}
 	return nil
+}
+
+func OnlyLetters(s string) bool {
+	for _, char := range s {
+		if !('a' <= char && char <= 'z' || 'A' <= char && char <= 'Z') {
+			return false
+		}
+	}
+	return true
 }
 
 func (p1 *Personnage) DisplayInfo() {
