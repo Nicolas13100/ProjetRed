@@ -6,15 +6,16 @@ import (
 )
 
 type Personnage struct {
-	Name      string
-	Race      string
-	Equipment struct{}
-	Level     int
-	HpMax     int
-	Hp        int
-	Inventory map[string]int
-	Skills    []string
-	Gold      int
+	Name         string
+	Race         string
+	Equipment    struct{}
+	Level        int
+	HpMax        int
+	Hp           int
+	Inventory    map[string]int
+	Skills       []string
+	Gold         int
+	InventoryCap int
 }
 
 type Equipment struct {
@@ -51,13 +52,14 @@ func CharCreation() *Personnage {
 	switch race {
 	case "Humain":
 		p1 := &Personnage{
-			Name:   name,
-			Race:   race,
-			Level:  1,
-			HpMax:  100,
-			Hp:     50,
-			Gold:   100,
-			Skills: []string{"coup de poing"},
+			Name:         name,
+			Race:         race,
+			Level:        1,
+			HpMax:        100,
+			Hp:           50,
+			Gold:         100,
+			InventoryCap: 10,
+			Skills:       []string{"coup de poing"},
 			Inventory: map[string]int{
 				"Potion de soin":   3,
 				"Potion de poison": 3,
@@ -67,13 +69,14 @@ func CharCreation() *Personnage {
 
 	case "Elfe":
 		p1 := &Personnage{
-			Name:   name,
-			Race:   race,
-			Level:  1,
-			HpMax:  80,
-			Hp:     40,
-			Gold:   100,
-			Skills: []string{"coup de poing"},
+			Name:         name,
+			Race:         race,
+			Level:        1,
+			HpMax:        80,
+			Hp:           40,
+			Gold:         100,
+			InventoryCap: 10,
+			Skills:       []string{"coup de poing"},
 			Inventory: map[string]int{
 				"Potion de soin":   3,
 				"Potion de poison": 3,
@@ -83,13 +86,14 @@ func CharCreation() *Personnage {
 
 	case "Nain":
 		p1 := &Personnage{
-			Name:   name,
-			Race:   race,
-			Level:  1,
-			HpMax:  120,
-			Hp:     60,
-			Gold:   100,
-			Skills: []string{"coup de poing"},
+			Name:         name,
+			Race:         race,
+			Level:        1,
+			HpMax:        120,
+			Hp:           60,
+			Gold:         100,
+			InventoryCap: 10,
+			Skills:       []string{"coup de poing"},
 			Inventory: map[string]int{
 				"Potion de soin":   3,
 				"Potion de poison": 3,
@@ -190,7 +194,13 @@ func (p1 *Personnage) LimiteInventory() bool {
 	for _, count := range p1.Inventory {
 		totalQuantity += count
 	}
-	return totalQuantity < 10
+	return totalQuantity < p1.InventoryCap
+}
+func (p1 *Personnage) UpgradeInventorySlot() {
+	if p1.InventoryCap < 30 {
+		p1.InventoryCap += 10
+		return
+	}
 }
 
 func (p1 *Personnage) RemoveZeroValueItems() {
