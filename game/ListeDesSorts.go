@@ -3,7 +3,7 @@ package game
 import "fmt"
 
 func SpellBook(p1 *Personnage) {
-	spell1 := "Boule de feu"
+	spell1 := "Livre de sort : Boule de feu"
 	p1.Inventory[spell1]--
 	for _, skill := range p1.Skills {
 		if skill == spell1 {
