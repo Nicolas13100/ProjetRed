@@ -13,6 +13,7 @@ type Marchand struct {
 func NewMarchand(personnage *game.Personnage) *Marchand {
 	return &Marchand{
 		inventory: map[string]int{
+			"Augmentation d'inventaire":    3,
 			"Potion de soin":               3,
 			"Potion de poison":             3,
 			"Livre de sort : Boule de feu": 1,
@@ -27,6 +28,7 @@ func NewMarchand(personnage *game.Personnage) *Marchand {
 			// Set the price of "Potion de soin" to 10
 			// Add more items and their prices as needed
 			"Livre de sort : Boule de feu": 25,
+			"Augmentation d'inventaire":    30,
 			"Fourrure de Loup":             4,
 			"Peau de Troll":                7,
 			"Cuir de Sanglier":             3,

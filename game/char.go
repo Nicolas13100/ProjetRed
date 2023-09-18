@@ -8,12 +8,19 @@ import (
 type Personnage struct {
 	Name      string
 	Race      string
+	Equipment struct{}
 	Level     int
 	HpMax     int
 	Hp        int
 	Inventory map[string]int
 	Skills    []string
 	Gold      int
+}
+
+type Equipment struct {
+	Head string
+	Body string
+	Leg  string
 }
 
 func CharCreation() *Personnage {
