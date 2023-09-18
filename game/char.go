@@ -16,20 +16,56 @@ type Personnage struct {
 }
 
 func InitPersonnage(name string, race string) *Personnage {
-	p1 := &Personnage{
-		Name:   name,
-		Race:   race,
-		Level:  1,
-		HpMax:  100,
-		Hp:     40,
-		Gold:   100, // Assuming an initial gold amount for the Personnage
-		Skills: []string{"coup de poing"},
-		Inventory: map[string]int{
-			"Potion de soin":   3,
-			"Potion de poison": 3,
-		},
+	switch race {
+	case "Humain":
+		p1 := &Personnage{
+			Name:   name,
+			Race:   race,
+			Level:  1,
+			HpMax:  100,
+			Hp:     50,
+			Gold:   100, // Assuming an initial gold amount for the Personnage
+			Skills: []string{"coup de poing"},
+			Inventory: map[string]int{
+				"Potion de soin":   3,
+				"Potion de poison": 3,
+			},
+		}
+		return p1
+
+	case "Elfe":
+		p1 := &Personnage{
+			Name:   name,
+			Race:   race,
+			Level:  1,
+			HpMax:  80,
+			Hp:     40,
+			Gold:   100, // Assuming an initial gold amount for the Personnage
+			Skills: []string{"coup de poing"},
+			Inventory: map[string]int{
+				"Potion de soin":   3,
+				"Potion de poison": 3,
+			},
+		}
+		return p1
+
+	case "Nain":
+		p1 := &Personnage{
+			Name:   name,
+			Race:   race,
+			Level:  1,
+			HpMax:  120,
+			Hp:     60,
+			Gold:   100, // Assuming an initial gold amount for the Personnage
+			Skills: []string{"coup de poing"},
+			Inventory: map[string]int{
+				"Potion de soin":   3,
+				"Potion de poison": 3,
+			},
+		}
+		return p1
 	}
-	return p1
+	return nil
 }
 
 func (p1 *Personnage) DisplayInfo() {

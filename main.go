@@ -29,16 +29,10 @@ func CharCreation() *game.Personnage {
 
 	// Demander à l'utilisateur de choisir sa race (vous pouvez adapter cette partie selon vos besoins)
 	fmt.Print("Choisissez votre race : ")
-	fmt.Println("1. Humain : Vous commencez avec 100 PV Max")
-	fmt.Println("2. Elfe : Vous commencez avec 80 PV Max")
-	fmt.Println("3. Nain : Vous commencez avec 120 PV Max")
+	fmt.Println("Humain : Vous commencez avec 100 PV Max")
+	fmt.Println("Elfe : Vous commencez avec 80 PV Max")
+	fmt.Println(" Nain : Vous commencez avec 120 PV Max")
 	fmt.Scan(&race)
-
-	var choicerace int
-	switch choicerace {
-	case 1:
-
-	}
 
 	// Créer et initialiser le personnage
 	p := game.InitPersonnage(name, race)
