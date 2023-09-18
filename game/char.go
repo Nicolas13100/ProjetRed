@@ -8,7 +8,7 @@ import (
 type Personnage struct {
 	Name         string
 	Race         string
-	Equipment    struct{}
+	Equipement   Equipment
 	Level        int
 	HpMax        int
 	Hp           int
@@ -19,12 +19,19 @@ type Personnage struct {
 }
 
 type Equipment struct {
-	Head string
-	Body string
-	Leg  string
+	Head    bool
+	Body    bool
+	Leg     bool
+	HPBonus int
 }
 
 func CharCreation() *Personnage {
+	equipement := Equipment{
+		Head:    false,
+		Body:    false,
+		Leg:     false,
+		HPBonus: 0,
+	}
 	var name string
 	var race string
 	fmt.Println("Création de votre personnage :")
@@ -54,6 +61,7 @@ func CharCreation() *Personnage {
 		p1 := &Personnage{
 			Name:         name,
 			Race:         race,
+			Equipement:   equipement,
 			Level:        1,
 			HpMax:        100,
 			Hp:           50,
@@ -71,6 +79,7 @@ func CharCreation() *Personnage {
 		p1 := &Personnage{
 			Name:         name,
 			Race:         race,
+			Equipement:   equipement,
 			Level:        1,
 			HpMax:        80,
 			Hp:           40,
@@ -88,6 +97,7 @@ func CharCreation() *Personnage {
 		p1 := &Personnage{
 			Name:         name,
 			Race:         race,
+			Equipement:   equipement,
 			Level:        1,
 			HpMax:        120,
 			Hp:           60,
@@ -208,5 +218,72 @@ func (p1 *Personnage) RemoveZeroValueItems() {
 		if value == 0 {
 			delete(p1.Inventory, key)
 		}
+	}
+}
+
+func NewEquipement(personnage *Personnage) *Equipment {
+	return &Equipment{
+		Head: false,
+		Body: false,
+		Leg:  false,
+	}
+}
+
+func (p1 *Personnage) EquiperHead() {
+	if p1.Inventory["Chapeau de l'aventurier"] > 0 {
+		if p1.Equipement.Head {
+			// Si le personnage a déjà un chapeau équipé, le remettre dans l'inventaire
+			p1.Inventory["Chapeau de l'aventurier"]++
+		}
+		p1.Equipement.Head = true
+		p1.Equipement.HPBonus += 10
+		delete(p1.Inventory, "Chapeau de l'aventurier")
+	}
+}
+
+func (p1 *Personnage) EquiperBody() {
+	if p1.Inventory["Tunique de l'aventurier"] > 0 {
+		if p1.Equipement.Body {
+			p1.DesequiperBody()
+			p1.Inventory["Tunique de l'aventurier"]++
+		}
+		p1.Equipement.Body = true
+		p1.Equipement.HPBonus += 25
+		delete(p1.Inventory, "Tunique de l'aventurier")
+	}
+}
+
+func (p1 *Personnage) EquiperLeg() {
+	if p1.Inventory["Bottes de l'aventurier"] > 0 {
+		if p1.Equipement.Leg {
+			p1.Inventory["Bottes de l'aventurier"]++
+		}
+		p1.Equipement.Leg = true
+		p1.Equipement.HPBonus += 15
+		delete(p1.Inventory, "Bottes de l'aventurier")
+	}
+}
+
+func (p1 *Personnage) DesequiperHead() {
+	if p1.Equipement.Head {
+		p1.Inventory["Chapeau de l'aventurier"]++
+		p1.Equipement.HPBonus -= 10
+		p1.Equipement.Head = false
+	}
+}
+
+func (p1 *Personnage) DesequiperBody() {
+	if p1.Equipement.Body {
+		p1.Inventory["Tunique de l'aventurier"]++
+		p1.Equipement.HPBonus -= 25
+		p1.Equipement.Body = false
+	}
+}
+
+func (p1 *Personnage) DesequiperLeg() {
+	if p1.Equipement.Leg {
+		p1.Inventory["Bottes de l'aventurier"]++
+		p1.Equipement.HPBonus -= 15
+		p1.Equipement.Leg = false
 	}
 }
