@@ -63,7 +63,7 @@ func main() {
 				personnage.AccessInventory()
 			case 3:
 				var merchantChoice string
-				fmt.Print("Veux-tu acheter ou vendre un objet ? (acheter/vendre): ")
+				fmt.Print("Veux-tu acheter ou vendre un objet ? (Acheter/Vendre): ")
 				fmt.Scan(&merchantChoice)
 				switch merchantChoice {
 				case "Acheter":

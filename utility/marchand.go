@@ -56,14 +56,18 @@ func (m *Marchand) Buy(personnage *game.Personnage) {
 	}
 	switch quantity := m.inventory[itemToBuy]; {
 	case quantity > 0:
-		m.inventory[itemToBuy]--
-		price, exists := m.prices[itemToBuy]
-		if exists {
-			personnage.Gold -= price // Deduct the price from character's gold
-			personnage.Inventory[itemToBuy]++
-			fmt.Println("Vous avez acheté une", itemToBuy)
+		if personnage.LimiteInventory() {
+			m.inventory[itemToBuy]--
+			price, exists := m.prices[itemToBuy]
+			if exists {
+				personnage.Gold -= price // Deduct the price from character's gold
+				personnage.Inventory[itemToBuy]++
+				fmt.Println("Vous avez acheté une", itemToBuy)
+			} else {
+				fmt.Println("Désolé, je ne connais pas le prix de cet objet.")
+			}
 		} else {
-			fmt.Println("Désolé, je ne connais pas le prix de cet objet.")
+			fmt.Println("L'inventaire est plein, vous ne pouvez pas acheter cet objet.")
 		}
 	default:
 		fmt.Println("Désolé, je n'ai pas cet objet en stock.")
