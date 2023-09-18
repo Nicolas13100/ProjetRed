@@ -106,3 +106,10 @@ func (p1 *Personnage) Dead() {
 	}
 
 }
+func (p1 *Personnage) LimiteInventory() bool {
+	totalQuantity := 0
+	for _, count := range p1.Inventory {
+		totalQuantity += count
+	}
+	return totalQuantity < 10
+}
