@@ -2,7 +2,7 @@ package game
 
 import "fmt"
 
-func (p1 *Personnage) SpellBook() {
+func SpellBook(p1 *Personnage) {
 	spell1 := "Boule de feu"
 	for _, skill := range p1.Skills {
 		if skill == spell1 {

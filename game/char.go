@@ -67,7 +67,8 @@ func (p1 *Personnage) AccessInventory() {
 		fmt.Println("\nQue voulez-vous faire ?")
 		fmt.Println("1. Sélectionner une potion de soin")
 		fmt.Println("2. Sélectionner une potion de poison")
-		fmt.Println("3. Retourner en arrière")
+		fmt.Println("3. Sélectionner un sort")
+		fmt.Println("4. Retourner en arrière")
 
 		var input int
 		fmt.Scan(&input)
@@ -86,6 +87,10 @@ func (p1 *Personnage) AccessInventory() {
 				fmt.Println("Vous n'avez pas de Potion de poison dans votre inventaire.")
 			}
 		case 3:
+			if count, ok := p1.Inventory["Boule de feu"]; ok && count > 0 {
+				SpellBook(p1)
+			}
+		case 4:
 			return
 		default:
 			fmt.Println("Choix invalide.")
