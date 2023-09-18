@@ -33,7 +33,7 @@ func main() {
 		if character == nil {
 			fmt.Println("Mauvais choix de race")
 		} else {
-			personnage = game.CharCreation()
+			personnage = character
 			// Handle the character creation success
 		}
 
