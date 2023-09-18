@@ -31,6 +31,7 @@ func Forgeron(personnage *game.Personnage) {
 								personnage.Inventory["Plume de Corbeau"]--
 								personnage.Inventory["Cuir de Sanglier"]--
 								personnage.Gold = -5
+								personnage.RemoveZeroValueItems()
 							}
 						} else {
 							fmt.Println("Vous n'avez pas asser d'argent")
@@ -61,6 +62,7 @@ func Forgeron(personnage *game.Personnage) {
 								personnage.Inventory["Fourrure de loup"] = -2
 								personnage.Inventory["Peau de Troll"]--
 								personnage.Gold = -5
+								personnage.RemoveZeroValueItems()
 							}
 						} else {
 							fmt.Println("Vous n'avez pas asser d'argent")
@@ -91,6 +93,7 @@ func Forgeron(personnage *game.Personnage) {
 								personnage.Inventory["Fourrure de loup"]--
 								personnage.Inventory["Cuir de Sanglier"]--
 								personnage.Gold = -5
+								personnage.RemoveZeroValueItems()
 							}
 						} else {
 							fmt.Println("Vous n'avez pas asser d'argent")
