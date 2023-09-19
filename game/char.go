@@ -206,6 +206,7 @@ func (p1 *Personnage) LimiteInventory() bool {
 	}
 	return totalQuantity < p1.InventoryCap
 }
+
 func (p1 *Personnage) UpgradeInventorySlot() {
 	if p1.InventoryCap < 30 {
 		p1.InventoryCap += 10
@@ -244,7 +245,6 @@ func (p1 *Personnage) EquiperHead() {
 func (p1 *Personnage) EquiperBody() {
 	if p1.Inventory["Tunique de l'aventurier"] > 0 {
 		if p1.Equipement.Body {
-			p1.DesequiperBody()
 			p1.Inventory["Tunique de l'aventurier"]++
 		}
 		p1.Equipement.Body = true
