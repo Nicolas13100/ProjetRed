@@ -51,80 +51,104 @@ func CharCreation() *Personnage {
 
 	// Mettre la première lettre en majuscule et le reste en minuscule
 	name = strings.Title(strings.ToLower(name))
+	for {
+		// Demander à l'utilisateur de choisir sa race (vous pouvez adapter cette partie selon vos besoins)
+		fmt.Print("Choisissez votre race : \n")
+		fmt.Print("Humain : Vous commencez avec 100 PV Max\n")
+		fmt.Print("Elfe : Vous commencez avec 80 PV Max\n")
+		fmt.Println("Nain : Vous commencez avec 120 PV Max")
+		fmt.Scan(&race)
+		switch race {
+		case "Humain":
+			p1 := &Personnage{
+				Name:         name,
+				Race:         race,
+				Equipement:   equipement,
+				Level:        1,
+				HpMax:        100,
+				Hp:           50,
+				Gold:         100,
+				InventoryCap: 10,
+				Skills:       []string{"coup de poing"},
+				Inventory: map[string]int{
+					"Potion de soin":   3,
+					"Potion de poison": 3,
+				},
+				Atk:        5,
+				Defense:    0,
+				Initiative: 10,
+			}
+			return p1
 
-	// Demander à l'utilisateur de choisir sa race (vous pouvez adapter cette partie selon vos besoins)
-	fmt.Print("Choisissez votre race : \n")
-	fmt.Print("Humain : Vous commencez avec 100 PV Max\n")
-	fmt.Print("Elfe : Vous commencez avec 80 PV Max\n")
-	fmt.Println("Nain : Vous commencez avec 120 PV Max")
-	fmt.Scan(&race)
+		case "Elfe":
+			p1 := &Personnage{
+				Name:         name,
+				Race:         race,
+				Equipement:   equipement,
+				Level:        1,
+				HpMax:        80,
+				Hp:           40,
+				Gold:         100,
+				InventoryCap: 10,
+				Skills:       []string{"coup de poing"},
+				Inventory: map[string]int{
+					"Potion de soin":   3,
+					"Potion de poison": 3,
+				},
+				Atk:        5,
+				Defense:    0,
+				Initiative: 20,
+			}
+			return p1
 
-	switch race {
-	case "Humain":
-		p1 := &Personnage{
-			Name:         name,
-			Race:         race,
-			Equipement:   equipement,
-			Level:        1,
-			HpMax:        100,
-			Hp:           50,
-			Gold:         100,
-			InventoryCap: 10,
-			Skills:       []string{"coup de poing"},
-			Inventory: map[string]int{
-				"Potion de soin":   3,
-				"Potion de poison": 3,
-			},
-			Atk:        5,
-			Defense:    0,
-			Initiative: 10,
+		case "Nain":
+			p1 := &Personnage{
+				Name:         name,
+				Race:         race,
+				Equipement:   equipement,
+				Level:        1,
+				HpMax:        120,
+				Hp:           60,
+				Gold:         100,
+				InventoryCap: 10,
+				Skills:       []string{"coup de poing"},
+				Inventory: map[string]int{
+					"Potion de soin":   3,
+					"Potion de poison": 3,
+				},
+				Atk:        5,
+				Defense:    0,
+				Initiative: 5,
+			}
+			fmt.Printf("Bienvenue à toi : %s\n", name)
+			return p1
+
+		case "Dieu":
+			p1 := &Personnage{
+				Name:         name,
+				Race:         race,
+				Equipement:   equipement,
+				Level:        99,
+				HpMax:        999999,
+				Hp:           999999,
+				Gold:         99999999,
+				InventoryCap: 99999999,
+				Skills:       []string{"coup de poing"},
+				Inventory: map[string]int{
+					"Potion de soin":   99,
+					"Potion de poison": 99,
+				},
+				Atk:        999,
+				Defense:    999,
+				Initiative: 999,
+			}
+			fmt.Printf("Bienvenue à toi : %s\n", name)
+			return p1
+		default:
+			fmt.Printf("Race inconnue : %s\n", race)
+			continue
 		}
-		return p1
-
-	case "Elfe":
-		p1 := &Personnage{
-			Name:         name,
-			Race:         race,
-			Equipement:   equipement,
-			Level:        1,
-			HpMax:        80,
-			Hp:           40,
-			Gold:         100,
-			InventoryCap: 10,
-			Skills:       []string{"coup de poing"},
-			Inventory: map[string]int{
-				"Potion de soin":   3,
-				"Potion de poison": 3,
-			},
-			Atk:        5,
-			Defense:    0,
-			Initiative: 20,
-		}
-		return p1
-
-	case "Nain":
-		p1 := &Personnage{
-			Name:         name,
-			Race:         race,
-			Equipement:   equipement,
-			Level:        1,
-			HpMax:        120,
-			Hp:           60,
-			Gold:         100,
-			InventoryCap: 10,
-			Skills:       []string{"coup de poing"},
-			Inventory: map[string]int{
-				"Potion de soin":   3,
-				"Potion de poison": 3,
-			},
-			Atk:        5,
-			Defense:    0,
-			Initiative: 5,
-		}
-		fmt.Printf("Bienvenue à toi : %s\n", name)
-		return p1
 	}
-	return nil
 }
 
 func OnlyLetters(s string) bool {
