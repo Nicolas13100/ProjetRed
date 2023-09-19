@@ -2,6 +2,9 @@ package game
 
 import (
 	"fmt"
+	"os"
+	"os/exec"
+	"runtime"
 	"strings"
 	"unicode"
 
@@ -32,6 +35,18 @@ type Equipment struct {
 	HPBonus int
 }
 
+func clearConsole() {
+	if runtime.GOOS == "windows" {
+		cmd := exec.Command("cmd", "/c", "cls")
+		cmd.Stdout = os.Stdout
+		cmd.Run()
+	} else {
+		cmd := exec.Command("clear")
+		cmd.Stdout = os.Stdout
+		cmd.Run()
+	}
+}
+
 func isValidName(name string, maxLetters int) bool {
 	if len(name) > maxLetters {
 		return false
@@ -55,6 +70,7 @@ func CharCreation() *Personnage {
 	var name string
 	var race string
 	for {
+		clearConsole()
 		fmt.Println("Création de votre personnage :")
 		// Demander à l'utilisateur de choisir son nom
 		fmt.Print("Entrez votre nom : ")
@@ -62,14 +78,14 @@ func CharCreation() *Personnage {
 		maxLetters := 10
 		if !isValidName(name, maxLetters) {
 			fmt.Printf("Le nom doit contenir uniquement des lettres et avoir au maximum %d caractères.\n", maxLetters)
-			return nil
+			continue
 		}
 		// Vérifier si le nom contient uniquement des lettres
 		if !OnlyLetters(name) {
 			fmt.Println("Le nom doit contenir uniquement des lettres.")
-			return nil
+			continue
 		}
-		if isValidName(name, maxLetters) && !OnlyLetters(name) {
+		if isValidName(name, maxLetters) && OnlyLetters(name) {
 			// Create a Title case converter
 			tc := cases.Title(language.English)
 
@@ -82,6 +98,7 @@ func CharCreation() *Personnage {
 	// Mettre la première lettre en majuscule et le reste en minuscule
 
 	for {
+		clearConsole()
 		// Demander à l'utilisateur de choisir sa race (vous pouvez adapter cette partie selon vos besoins)
 		fmt.Print("Choisissez votre race : \n")
 		fmt.Print("Humain : Vous commencez avec 100 PV Max\n")
@@ -194,6 +211,7 @@ func (p1 *Personnage) DisplayInfo() {
 	// Affichage des informations du Personnage p1
 
 	for {
+		clearConsole()
 		fmt.Println("Nom:", p1.Name)
 		fmt.Println("Classe:", p1.Race)
 		fmt.Println("Niveau:", p1.Level)
@@ -217,6 +235,7 @@ func (p1 *Personnage) DisplayInfo() {
 
 func (p1 *Personnage) AccessInventory(m1 *Monstre) {
 	for {
+		clearConsole()
 		fmt.Println("\nInventaire:")
 		fmt.Println(p1.Gold)
 		for key, value := range p1.Inventory {

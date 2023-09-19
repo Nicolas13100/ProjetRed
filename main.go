@@ -21,10 +21,9 @@ func clearConsole() {
 		cmd.Run()
 	}
 }
+
 func main() {
-
 	fmt.Println("Bienvenue dans le jeu RPG !")
-
 	m := utility.NewMarchand(nil)
 	var startChoice int
 	var personnage *game.Personnage // Declare the personnage variable outside of the switch
