@@ -9,11 +9,11 @@ func Tutorial(p1 *Personnage, m1 *Monstre) {
 	fmt.Println("Nous allons vous apprendre les bases du combat en tour par tour")
 	fmt.Println("Vous allez vous battre contre un golbin d'entrainement")
 	fmt.Println("Bonne chance")
-	trainFight(p1, m1)
+	TrainFight(p1, m1)
 
 }
 
-func trainFight(p1 *Personnage, m1 *Monstre) {
+func TrainFight(p1 *Personnage, m1 *Monstre) {
 	for p1.Hp > 0 && m1.Hp > 0 {
 		fmt.Printf("Vous etes au tour %d\n", Tours)
 		goblinPatternActivated := GoblinPattern(m1)
@@ -52,6 +52,7 @@ func trainFight(p1 *Personnage, m1 *Monstre) {
 		// Vérifier si le Joueur est toujours en vie
 		if p1.Hp <= 0 {
 			fmt.Printf("%s est vaincu!\n", p1.Name)
+			p1.Dead()
 			break
 		}
 	}
@@ -82,6 +83,6 @@ func charTurn(p1 *Personnage, m1 *Monstre) {
 	case 1:
 		fmt.Println("Attaque basic")
 	case 2:
-		p1.AccessInventory()
+		p1.AccessInventory(m1)
 	}
 }

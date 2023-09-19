@@ -57,7 +57,8 @@ func main() {
 			fmt.Println("2. Accéder au contenu de l'inventaire")
 			fmt.Println("3. Marchand")
 			fmt.Println("4. Forgeron")
-			fmt.Println("5. Quitter")
+			fmt.Println("5. Entrainement")
+			fmt.Println("6. Quitter")
 
 			var choice int
 			fmt.Print("Entrez votre choix : ")
@@ -70,7 +71,7 @@ func main() {
 			case 1:
 				personnage.DisplayInfo()
 			case 2:
-				personnage.AccessInventory()
+				personnage.AccessInventory(goblin)
 			case 3:
 				var merchantChoice string
 				fmt.Print("Veux-tu acheter ou vendre un objet ? (Acheter/Vendre): ")
@@ -89,8 +90,10 @@ func main() {
 				fmt.Print("Taper Entrer pour continuer...")
 				bufio.NewReader(os.Stdin).ReadBytes('\n')
 			case 4:
-
+				utility.Forgeron(personnage)
 			case 5:
+				game.TrainFight(personnage, goblin)
+			case 6:
 				fmt.Println("Au revoir !")
 				return
 			default:

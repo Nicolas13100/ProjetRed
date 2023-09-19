@@ -157,7 +157,7 @@ func (p1 *Personnage) DisplayInfo() {
 	}
 }
 
-func (p1 *Personnage) AccessInventory() {
+func (p1 *Personnage) AccessInventory(m1 *Monstre) {
 	for {
 		fmt.Println("\nInventaire:")
 		fmt.Println(p1.Gold)
@@ -184,7 +184,7 @@ func (p1 *Personnage) AccessInventory() {
 			}
 		case 2:
 			if count, ok := p1.Inventory["Potion de poison"]; ok && count > 0 {
-				poisonPot(p1)
+				poisonPot(p1, m1)
 			} else {
 				fmt.Println("Vous n'avez pas de Potion de poison dans votre inventaire.")
 			}
@@ -238,10 +238,10 @@ func (p1 *Personnage) AccessInventory() {
 }
 
 func (p1 *Personnage) Dead() {
-	if p1.Hp < 0 {
+	if p1.Hp <= 0 {
 		fmt.Printf("Vous êtes mort ! \n")
 		p1.Hp = p1.HpMax / 2
-		fmt.Printf("Vous avez été ressuscité avec %d PV", p1.Hp)
+		fmt.Printf("Vous avez été ressuscité avec %d PV\n", p1.Hp)
 	}
 
 }

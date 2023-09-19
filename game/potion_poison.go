@@ -5,12 +5,13 @@ import (
 	"time"
 )
 
-func poisonPot(p1 *Personnage) {
-	var choice string
-	fmt.Println("Voulez-vous prendre une potion ? (Oui/Non) ")
+func poisonPot(p1 *Personnage, m1 *Monstre) {
+	var choice int
+	fmt.Println("Voulez-vous utiliser une potion ? (1.Oui/2.Non) ")
 	fmt.Scan(&choice)
 
-	if choice == "Oui" {
+	switch choice {
+	case 1:
 		if count, ok := p1.Inventory["Potion de poison"]; ok && count > 0 {
 			p1.Inventory["Potion de poison"]--
 			p1.RemoveZeroValueItems()
@@ -18,23 +19,14 @@ func poisonPot(p1 *Personnage) {
 			duration := 3 * time.Second
 			fmt.Printf("Vous perdez 10 PV chaque seconde pendant %s\n", duration)
 			for start := time.Now(); time.Since(start) < duration; {
-				p1.Hp -= 10
-				if p1.Hp < 0 {
-					p1.Dead()
-					return
-				}
-				fmt.Printf("Vous avez %d PV restants sur %d PV\n", p1.Hp, p1.HpMax)
+				m1.Hp -= 10
+				fmt.Printf("%d PV restants sur %d PV\n", m1.Hp, m1.HpMax)
 				time.Sleep(time.Second)
 			}
 		} else {
-			fmt.Println("Vous n'avez pas de Potion de soin dans votre inventaire.")
+			fmt.Println("Vous n'avez pas de Potion de poison dans votre inventaire.")
 		}
-
-	} else if choice == "Non" {
+	case 2:
 		return
 	}
-	if p1.Hp <= 0 {
-		p1.Dead()
-	}
-
 }
