@@ -16,6 +16,8 @@ type Personnage struct {
 	Skills       []string
 	Gold         int
 	InventoryCap int
+	Atk          int
+	Defense      int
 }
 
 type Equipment struct {
@@ -72,6 +74,8 @@ func CharCreation() *Personnage {
 				"Potion de soin":   3,
 				"Potion de poison": 3,
 			},
+			Atk:     5,
+			Defense: 0,
 		}
 		return p1
 
