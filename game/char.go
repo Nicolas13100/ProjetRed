@@ -131,8 +131,8 @@ func (p1 *Personnage) DisplayInfo() {
 		fmt.Println("Nom:", p1.Name)
 		fmt.Println("Classe:", p1.Race)
 		fmt.Println("Niveau:", p1.Level)
-		fmt.Println("Points de vie maximum:", p1.HpMax)
-		fmt.Println("Points de vie actuels:", p1.Hp)
+		fmt.Println("Points de vie maximum:", p1.HpMax+p1.Equipement.HPBonus)
+		fmt.Println("Points de vie actuels:", p1.Hp+p1.Equipement.HPBonus)
 		fmt.Println("Cash:", p1.Gold)
 		fmt.Println("Sorts", p1.Skills)
 		// Affichage de l'inventaire
@@ -160,8 +160,9 @@ func (p1 *Personnage) AccessInventory() {
 		fmt.Println("\nQue voulez-vous faire ?")
 		fmt.Println("1. Sélectionner une potion de soin")
 		fmt.Println("2. Sélectionner une potion de poison")
-		fmt.Println("3. Sélectionner un sort")
-		fmt.Println("4. Retourner en arrière")
+		fmt.Println("3. Sélectionner un livre de sort")
+		fmt.Println("4. Equipements")
+		fmt.Println("5. Retourner en arrière")
 
 		var input int
 		fmt.Scan(&input)
@@ -184,6 +185,43 @@ func (p1 *Personnage) AccessInventory() {
 				SpellBook(p1)
 			}
 		case 4:
+			fmt.Println("Voulez-vous 1.équiper ou 2.désequiper un equipement ? (3. retour)")
+			var input int
+			fmt.Scan(&input)
+			switch input {
+			case 1:
+				fmt.Println("Que souhaitez-vous équiper ? 1. Casque / 2. Armure / 3. Pied / 4. retour ")
+				var input int
+				fmt.Scan(&input)
+				switch input {
+				case 1:
+					p1.EquiperHead()
+				case 2:
+					p1.EquiperBody()
+				case 3:
+					p1.EquiperLeg()
+				case 4:
+					continue
+
+				}
+			case 2:
+				fmt.Println("Que souhaitez-vous déquiper ? 1. Casque / 2. Armure / 3. Pied / 4. retour ")
+				var input int
+				fmt.Scan(&input)
+				switch input {
+				case 1:
+					p1.DesequiperHead()
+				case 2:
+					p1.DesequiperBody()
+				case 3:
+					p1.DesequiperLeg()
+				case 4:
+					continue
+				}
+			case 3:
+				continue
+			}
+		case 5:
 			return
 		default:
 			fmt.Println("Choix invalide.")
