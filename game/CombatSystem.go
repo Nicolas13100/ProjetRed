@@ -15,7 +15,9 @@ func Tutorial(p1 *Personnage, m1 *Monstre) {
 
 func trainFight(p1 *Personnage, m1 *Monstre) {
 	for p1.Hp > 0 && m1.Hp > 0 {
-		fmt.Printf("Vous etes au tour %d", Tours)
+		fmt.Printf("Vous etes au tour %d\n", Tours)
+		goblinPatternActivated := GoblinPattern(m1)
+
 		// Tour du Joueur 1
 		charTurn(p1, m1)
 		attaqueJoueur := p1.Atk - m1.Defense
@@ -41,6 +43,11 @@ func trainFight(p1 *Personnage, m1 *Monstre) {
 
 		fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", m1.name, p1.Name, attaqueJoueur2)
 		Tours++
+		// Apply goblin's attack pattern if it was activated
+		if goblinPatternActivated {
+			// Reset goblin's attack back to its original value
+			m1.Atk /= 2
+		}
 
 		// Vérifier si le Joueur est toujours en vie
 		if p1.Hp <= 0 {
@@ -51,11 +58,21 @@ func trainFight(p1 *Personnage, m1 *Monstre) {
 }
 
 func GetTours() int {
-	return Tours
+	return Tours + 1
 }
 
 func charTurn(p1 *Personnage, m1 *Monstre) {
 	fmt.Println("C'est votre tour, que voulez vous faire ?")
+	fmt.Print("Vos point de vie :")
+	fmt.Print(p1.Hp)
+	fmt.Print(" / ")
+	fmt.Print(p1.HpMax)
+	fmt.Println("HP")
+	fmt.Print("Goblin:")
+	fmt.Print(m1.Hp)
+	fmt.Print(" / ")
+	fmt.Print(m1.HpMax)
+	fmt.Println("HP")
 	fmt.Println("1 : Attaquer")
 	fmt.Println("2 : Ouvrir l'inventaire")
 	var choice int
