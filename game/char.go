@@ -3,6 +3,10 @@ package game
 import (
 	"fmt"
 	"strings"
+	"unicode"
+
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 )
 
 type Personnage struct {
@@ -28,6 +32,19 @@ type Equipment struct {
 	HPBonus int
 }
 
+func isValidName(name string, maxLetters int) bool {
+	if len(name) > maxLetters {
+		return false
+	}
+
+	for _, char := range name {
+		if !unicode.IsLetter(char) {
+			return false
+		}
+	}
+
+	return true
+}
 func CharCreation() *Personnage {
 	equipement := Equipment{
 		Head:    false,
@@ -37,20 +54,33 @@ func CharCreation() *Personnage {
 	}
 	var name string
 	var race string
-	fmt.Println("Création de votre personnage :")
+	for {
+		fmt.Println("Création de votre personnage :")
+		// Demander à l'utilisateur de choisir son nom
+		fmt.Print("Entrez votre nom : ")
+		fmt.Scan(&name)
+		maxLetters := 10
+		if !isValidName(name, maxLetters) {
+			fmt.Printf("Le nom doit contenir uniquement des lettres et avoir au maximum %d caractères.\n", maxLetters)
+			return nil
+		}
+		// Vérifier si le nom contient uniquement des lettres
+		if !OnlyLetters(name) {
+			fmt.Println("Le nom doit contenir uniquement des lettres.")
+			return nil
+		}
+		if isValidName(name, maxLetters) && !OnlyLetters(name) {
+			// Create a Title case converter
+			tc := cases.Title(language.English)
 
-	// Demander à l'utilisateur de choisir son nom
-	fmt.Print("Entrez votre nom : ")
-	fmt.Scan(&name)
-
-	// Vérifier si le nom contient uniquement des lettres
-	if !OnlyLetters(name) {
-		fmt.Println("Le nom doit contenir uniquement des lettres.")
-		return nil
+			// Convert the name to Title case
+			name = tc.String(strings.ToLower(name))
+			break
+		}
+		continue
 	}
-
 	// Mettre la première lettre en majuscule et le reste en minuscule
-	name = strings.Title(strings.ToLower(name))
+
 	for {
 		// Demander à l'utilisateur de choisir sa race (vous pouvez adapter cette partie selon vos besoins)
 		fmt.Print("Choisissez votre race : \n")
