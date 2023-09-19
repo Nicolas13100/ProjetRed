@@ -58,8 +58,9 @@ func charTurn(p1 *Personnage, m1 *Monstre) {
 	fmt.Println("C'est votre tour, que voulez vous faire ?")
 	fmt.Println("1 : Attaquer")
 	fmt.Println("2 : Ouvrir l'inventaire")
-
 	var choice int
+	fmt.Scan(&choice)
+
 	switch choice {
 	case 1:
 		fmt.Println("Attaque basic")

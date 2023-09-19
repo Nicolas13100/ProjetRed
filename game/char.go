@@ -94,6 +94,8 @@ func CharCreation() *Personnage {
 				"Potion de soin":   3,
 				"Potion de poison": 3,
 			},
+			Atk:     5,
+			Defense: 0,
 		}
 		return p1
 
@@ -112,6 +114,8 @@ func CharCreation() *Personnage {
 				"Potion de soin":   3,
 				"Potion de poison": 3,
 			},
+			Atk:     5,
+			Defense: 0,
 		}
 		fmt.Printf("Bienvenue à toi : %s\n", name)
 		return p1
