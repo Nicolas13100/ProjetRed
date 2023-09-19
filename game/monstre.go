@@ -19,3 +19,9 @@ func InitGoblin() *Monstre {
 	}
 	return m1
 }
+
+func GoblinPattern(m1 *Monstre) {
+	if GetTours()%3 == 0 {
+		m1.Atk = m1.Atk * 2
+	}
+}

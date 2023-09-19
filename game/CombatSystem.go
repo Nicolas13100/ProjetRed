@@ -2,14 +2,16 @@ package game
 
 import "fmt"
 
-func trainFight(p1 *Personnage, m1 *Monstre) {
+var Tours int
+
+func TrainFight(p1 *Personnage, m1 *Monstre) {
 	fmt.Println("Bienvenue dans le tutoriel")
 	fmt.Println("Nous allons vous apprendre les bases du combat en tour par tour")
 	fmt.Println("Vous allez vous battre contre un gobin basic")
 	fmt.Println("Bonne chance")
 
 	for p1.Hp > 0 && m1.Hp > 0 {
-
+		fmt.Printf("Vous etes au tour %d", Tours)
 		// Tour du Joueur 1
 		attaqueJoueur1 := p1.Atk - m1.Defense
 		if attaqueJoueur1 < 0 {
@@ -33,6 +35,7 @@ func trainFight(p1 *Personnage, m1 *Monstre) {
 		p1.Hp -= attaqueJoueur2
 
 		fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", m1.name, p1.Name, attaqueJoueur2)
+		Tours++
 
 		// Vérifier si le Joueur 1 est toujours en vie
 		if p1.Hp <= 0 {
@@ -40,4 +43,8 @@ func trainFight(p1 *Personnage, m1 *Monstre) {
 			break
 		}
 	}
+}
+
+func GetTours() int {
+	return Tours
 }
