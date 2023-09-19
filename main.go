@@ -44,6 +44,7 @@ func main() {
 		}
 		switch choice {
 		case 1:
+			game.InitGoblin()
 			game.Tutorial(personnage, monstre)
 
 		case 2:
