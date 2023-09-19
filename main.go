@@ -26,10 +26,10 @@ func main() {
 	}
 
 	var personnage *game.Personnage // Declare the personnage variable outside of the switch
-	var monstre *game.Monstre
 	switch startChoice {
 	case 1:
 		character := game.CharCreation()
+		goblin := game.InitGoblin()
 		if character == nil {
 			fmt.Println("Mauvais choix de race")
 		} else {
@@ -44,8 +44,8 @@ func main() {
 		}
 		switch choice {
 		case 1:
-			game.InitGoblin()
-			game.Tutorial(personnage, monstre)
+
+			game.Tutorial(personnage, goblin)
 
 		case 2:
 			break
