@@ -36,6 +36,18 @@ func main() {
 			personnage = character
 			// Handle the character creation success
 		}
+		var choice int
+		fmt.Print("voulez-vous un tutoriel ? 1.Oui / 2.Non ")
+		if _, err := fmt.Scan(&choice); err != nil {
+			fmt.Println("Erreur lors de la saisie.")
+			return
+		}
+		switch choice {
+		case 1:
+
+		case 2:
+			break
+		}
 
 		for {
 			fmt.Println("Que voulez-vous faire ?")
