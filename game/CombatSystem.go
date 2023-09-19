@@ -4,12 +4,12 @@ import "fmt"
 
 var Tours int
 
-func Tutorial() {
+func Tutorial(p1 *Personnage, m1 *Monstre) {
 	fmt.Println("Bienvenue dans le tutoriel")
 	fmt.Println("Nous allons vous apprendre les bases du combat en tour par tour")
 	fmt.Println("Vous allez vous battre contre un golbin d'entrainement")
 	fmt.Println("Bonne chance")
-	trainFight()
+	trainFight(p1, m1)
 
 }
 
@@ -26,7 +26,7 @@ func trainFight(p1 *Personnage, m1 *Monstre) {
 
 		fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", p1.Name, m1.name, attaqueJoueur)
 
-		// Vérifier si le Joueur 2 est toujours en vie
+		// Vérifier si le Monstre est toujours en vie
 		if m1.Hp <= 0 {
 			fmt.Printf("%s est vaincu!\n", m1.name)
 			break
@@ -42,7 +42,7 @@ func trainFight(p1 *Personnage, m1 *Monstre) {
 		fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", m1.name, p1.Name, attaqueJoueur2)
 		Tours++
 
-		// Vérifier si le Joueur 1 est toujours en vie
+		// Vérifier si le Joueur est toujours en vie
 		if p1.Hp <= 0 {
 			fmt.Printf("%s est vaincu!\n", p1.Name)
 			break
@@ -62,7 +62,7 @@ func charTurn(p1 *Personnage, m1 *Monstre) {
 	var choice int
 	switch choice {
 	case 1:
-
+		fmt.Println("Attaque basic")
 	case 2:
 		p1.AccessInventory()
 	}

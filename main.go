@@ -26,7 +26,7 @@ func main() {
 	}
 
 	var personnage *game.Personnage // Declare the personnage variable outside of the switch
-
+	var monstre *game.Monstre
 	switch startChoice {
 	case 1:
 		character := game.CharCreation()
@@ -44,6 +44,7 @@ func main() {
 		}
 		switch choice {
 		case 1:
+			game.Tutorial(personnage, monstre)
 
 		case 2:
 			break
