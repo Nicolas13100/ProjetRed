@@ -28,7 +28,7 @@ func main() {
 	var startChoice int
 	var personnage *game.Personnage // Declare the personnage variable outside of the switch
 	for {                           // Start menu
-		clearConsole()
+
 		fmt.Println("1. Commencer le jeu")
 		fmt.Println("2. Quitter")
 		fmt.Print("Entrez votre choix : ")

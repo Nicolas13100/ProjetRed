@@ -42,7 +42,7 @@ func (m *Marchand) Buy(personnage *game.Personnage) {
 	for key, value := range m.inventory {
 		fmt.Println(key, ": ", value)
 	}
-	fmt.Println("Que voulez-vous acheter ? (potion/sort/autre)")
+	fmt.Println("Que voulez-vous acheter ? (potion/sort/loot)")
 	var itemToBuy string
 	if _, err := fmt.Scan(&itemToBuy); err != nil {
 		fmt.Println("Erreur lors de la saisie.")
@@ -58,6 +58,8 @@ func (m *Marchand) Buy(personnage *game.Personnage) {
 			return
 		}
 		itemToBuy = "Potion de " + potionType
+		// Handle item purchase here...
+
 	case "sort":
 		fmt.Println("Quel type de sort voulez-vous acheter ? (feu/autre)")
 		var spellType string
@@ -66,7 +68,78 @@ func (m *Marchand) Buy(personnage *game.Personnage) {
 			return
 		}
 		itemToBuy = "Livre de sort : Boule de " + spellType
+		// Handle item purchase here...
+
+	case "loot":
+		fmt.Println("Quel type de loot souhaitez-vous acheter ? (1 : Loup/ 2 : Troll/ 3 : Sanglier/ 4 : Corbeau)")
+		var loot int
+		if _, err := fmt.Scan(&loot); err != nil {
+			fmt.Println("Erreur lors de la saisie.")
+			return
+		}
+
+		switch loot {
+		case 1:
+			fmt.Println("Vous souhaitez acheter une Fourrure de Loup ?(Oui/Non)")
+			var lootype string
+			if _, err := fmt.Scan(&lootype); err != nil {
+				fmt.Println("Erreur lors de la saisie.")
+				return
+			}
+			if lootype == "Oui" {
+				itemToBuy = "Fourrure de Loup"
+			} else {
+				fmt.Println("Achat annulé.")
+				return
+			}
+		case 2:
+			fmt.Println("Vous souhaitez acheter une Peau de Troll ?")
+			var lootype string
+			if _, err := fmt.Scan(&lootype); err != nil {
+				fmt.Println("Erreur lors de la saisie.")
+				return
+			}
+			if lootype == "Oui" {
+				itemToBuy = "Peau de Troll"
+			} else {
+				fmt.Println("Achat annulé.")
+				return
+			}
+		case 3:
+			fmt.Println("Vous souhaitez acheter une Cuir de Sanglier ?")
+			var lootype string
+			if _, err := fmt.Scan(&lootype); err != nil {
+				fmt.Println("Erreur lors de la saisie.")
+				return
+			}
+			if lootype == "Oui" {
+				itemToBuy = "Cuir de Sanglier"
+			} else {
+				fmt.Println("Achat annulé.")
+				return
+			}
+		case 4:
+			fmt.Println("Vous souhaitez acheter une Plume de Corbeau ?")
+			var lootype string
+			if _, err := fmt.Scan(&lootype); err != nil {
+				fmt.Println("Erreur lors de la saisie.")
+				return
+			}
+			if lootype == "Oui" {
+				itemToBuy = "Plume de Corbeau"
+			} else {
+				fmt.Println("Achat annulé.")
+				return
+			}
+		default:
+			fmt.Println("Type de loot invalide.")
+			return
+		}
+	default:
+		fmt.Println("Type d'objet invalide.")
+		return
 	}
+
 	switch quantity := m.inventory[itemToBuy]; {
 	case quantity > 0:
 		if personnage.LimiteInventory() {

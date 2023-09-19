@@ -104,17 +104,10 @@ func GetTours() int {
 }
 
 func charTurn(p1 *Personnage, m1 *Monstre) {
+	fmt.Printf("Vous avez %d Pv / %d Pv \n", p1.Hp, p1.HpMax)
+	fmt.Printf("Il reste %d Pv / %d Pv à l'ennemi \n", m1.Hp, m1.HpMax)
+
 	fmt.Println("C'est votre tour, que voulez vous faire ?")
-	fmt.Print("Vos point de vie :")
-	fmt.Print(p1.Hp)
-	fmt.Print(" / ")
-	fmt.Print(p1.HpMax)
-	fmt.Println("HP")
-	fmt.Print("Goblin:")
-	fmt.Print(m1.Hp)
-	fmt.Print(" / ")
-	fmt.Print(m1.HpMax)
-	fmt.Println("HP")
 	fmt.Println("1 : Attaquer")
 	fmt.Println("2 : Ouvrir l'inventaire")
 	var choice int
