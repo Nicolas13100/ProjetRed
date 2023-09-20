@@ -23,6 +23,7 @@ func ClearConsole() {
 }
 
 func main() {
+
 	fmt.Println("Bienvenue dans le jeu RPG !")
 	m := utility.NewMarchand(nil)
 	var startChoice int
