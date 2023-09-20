@@ -34,13 +34,16 @@ type Personnage struct {
 }
 
 type Equipment struct {
-	Head    bool
-	Body    bool
-	Leg     bool
-	HPBonus int
+	Head            bool
+	Body            bool
+	Leg             bool
+	HPBonus         int
+	AtkBonus        int
+	DefBonus        int
+	InitiativeBonus int
 }
 
-func clearConsole() {
+func ClearConsole() {
 	if runtime.GOOS == "windows" {
 		cmd := exec.Command("cmd", "/c", "cls")
 		cmd.Stdout = os.Stdout
@@ -67,15 +70,18 @@ func isValidName(name string, maxLetters int) bool {
 }
 func CharCreation() *Personnage {
 	equipement := Equipment{
-		Head:    false,
-		Body:    false,
-		Leg:     false,
-		HPBonus: 0,
+		Head:            false,
+		Body:            false,
+		Leg:             false,
+		HPBonus:         0,
+		AtkBonus:        0,
+		DefBonus:        0,
+		InitiativeBonus: 0,
 	}
 	var name string
 	var race string
 	for {
-		clearConsole()
+		ClearConsole()
 		fmt.Println("Création de votre personnage :")
 		// Demander à l'utilisateur de choisir son nom
 		fmt.Print("Entrez votre nom : ")
@@ -90,20 +96,27 @@ func CharCreation() *Personnage {
 			fmt.Println("Le nom doit contenir uniquement des lettres.")
 			continue
 		}
-		if isValidName(name, maxLetters) && OnlyLetters(name) {
+
+		// Confirm the name
+		fmt.Printf("Votre nom est %s, est-ce correct ? (1.Oui/2.Non) ", name)
+		var confirmation int
+		fmt.Scan(&confirmation)
+
+		if confirmation == 1 {
 			// Create a Title case converter
 			tc := cases.Title(language.English)
 
 			// Convert the name to Title case
 			name = tc.String(strings.ToLower(name))
 			break
+		} else if confirmation == 2 {
+			// If user chooses "no", restart the loop
+			continue
 		}
-		continue
 	}
-	// Mettre la première lettre en majuscule et le reste en minuscule
 
 	for {
-		clearConsole()
+		ClearConsole()
 		// Demander à l'utilisateur de choisir sa race (vous pouvez adapter cette partie selon vos besoins)
 		fmt.Print("Choisissez votre race : \n")
 		fmt.Print("Humain : Vous commencez avec 100 PV Max\n")
@@ -234,7 +247,7 @@ func (p1 *Personnage) DisplayInfo() {
 	// Affichage des informations du Personnage p1
 
 	for {
-		clearConsole()
+		ClearConsole()
 		fmt.Println("Nom:", p1.Name)
 		fmt.Println("Classe:", p1.Race)
 		fmt.Println("Niveau:", p1.Level)
@@ -258,7 +271,7 @@ func (p1 *Personnage) DisplayInfo() {
 
 func (p1 *Personnage) AccessInventory(m1 *Monstre) {
 	for {
-		clearConsole()
+		ClearConsole()
 		fmt.Println("\nInventaire:")
 		fmt.Println(p1.Gold)
 		for key, value := range p1.Inventory {
