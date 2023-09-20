@@ -139,8 +139,9 @@ func CharCreation() *Personnage {
 				Inventory: map[string]int{
 					"Potion de soin":   3,
 					"Potion de poison": 3,
+					"Potion de mana":   3,
 				},
-				Mana:       10,
+				Mana:       40,
 				ManaMax:    100,
 				Atk:        5,
 				Defense:    0,
@@ -164,8 +165,9 @@ func CharCreation() *Personnage {
 				Inventory: map[string]int{
 					"Potion de soin":   3,
 					"Potion de poison": 3,
+					"Potion de mana":   3,
 				},
-				Mana:       15,
+				Mana:       50,
 				ManaMax:    100,
 				Atk:        5,
 				Defense:    0,
@@ -189,8 +191,9 @@ func CharCreation() *Personnage {
 				Inventory: map[string]int{
 					"Potion de soin":   3,
 					"Potion de poison": 3,
+					"Potion de mana":   3,
 				},
-				Mana:       10,
+				Mana:       40,
 				ManaMax:    90,
 				Atk:        5,
 				Defense:    0,
@@ -213,6 +216,7 @@ func CharCreation() *Personnage {
 				Inventory: map[string]int{
 					"Potion de soin":   99,
 					"Potion de poison": 99,
+					"Potion de mana":   99,
 				},
 				Mana:       999,
 				ManaMax:    999,
@@ -276,9 +280,10 @@ func (p1 *Personnage) AccessInventory(m1 *Monstre) {
 		fmt.Println("\nQue voulez-vous faire ?")
 		fmt.Println("1. Sélectionner une potion de soin")
 		fmt.Println("2. Sélectionner une potion de poison")
-		fmt.Println("3. Sélectionner un livre de sort")
-		fmt.Println("4. Equipements")
-		fmt.Println("5. Retourner en arrière")
+		fmt.Println("3. Sélectionner une potion de mana")
+		fmt.Println("4. Sélectionner un livre de sort")
+		fmt.Println("5. Equipements")
+		fmt.Println("6. Retourner en arrière")
 
 		var input int
 		fmt.Scan(&input)
@@ -297,10 +302,16 @@ func (p1 *Personnage) AccessInventory(m1 *Monstre) {
 				fmt.Println("Vous n'avez pas de Potion de poison dans votre inventaire.")
 			}
 		case 3:
-			if count, ok := p1.Inventory["Livre de sort : Boule de feu"]; ok && count > 0 {
-				SpellBook(p1)
+			if count, ok := p1.Inventory["Potion de mana"]; ok && count > 0 {
+				ManaPot(p1, m1)
+			} else {
+				fmt.Println("Vous n'avez pas de Potion de mana dans votre inventaire.")
 			}
 		case 4:
+			if count, ok := p1.Inventory["Livre de sort : Boule de feu"]; ok && count > 0 {
+				SpellBook(p1, spells[])
+			}
+		case 5:
 			fmt.Println("Voulez-vous 1.équiper ou 2.désequiper un equipement ? (3. retour)")
 			var input int
 			fmt.Scan(&input)
@@ -337,7 +348,7 @@ func (p1 *Personnage) AccessInventory(m1 *Monstre) {
 			case 3:
 				continue
 			}
-		case 5:
+		case 6:
 			return
 		default:
 			fmt.Println("Choix invalide.")

@@ -19,6 +19,7 @@ func NewMarchand(personnage *game.Personnage) *Marchand {
 			"Augmentation d'inventaire":    3,
 			"Potion de soin":               3,
 			"Potion de poison":             3,
+			"Potion de mana":               3,
 			"Livre de sort : Boule de feu": 1,
 			"Fourrure de Loup":             4,
 			"Peau de Troll":                1,
@@ -28,6 +29,7 @@ func NewMarchand(personnage *game.Personnage) *Marchand {
 		prices: map[string]int{
 			"Potion de soin":   3,
 			"Potion de poison": 6,
+			"Potion de mana":   8,
 			// Set the price of "Potion de soin" to 10
 			// Add more items and their prices as needed
 			"Livre de sort : Boule de feu": 25,
@@ -54,7 +56,7 @@ func (m *Marchand) Buy(personnage *game.Personnage) {
 
 	switch itemToBuy {
 	case "potion":
-		fmt.Println("Quel type de potion voulez-vous acheter ? (soin/autre)")
+		fmt.Println("Quel type de potion voulez-vous acheter ? (soin/poison/mana)")
 		var potionType string
 		if _, err := fmt.Scan(&potionType); err != nil {
 			fmt.Println("Erreur lors de la saisie.")
