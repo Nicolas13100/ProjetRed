@@ -31,13 +31,16 @@ type Personnage struct {
 }
 
 type Equipment struct {
-	Head    bool
-	Body    bool
-	Leg     bool
-	HPBonus int
+	Head            bool
+	Body            bool
+	Leg             bool
+	HPBonus         int
+	AtkBonus        int
+	DefBonus        int
+	InitiativeBonus int
 }
 
-func clearConsole() {
+func ClearConsole() {
 	if runtime.GOOS == "windows" {
 		cmd := exec.Command("cmd", "/c", "cls")
 		cmd.Stdout = os.Stdout
@@ -72,7 +75,7 @@ func CharCreation() *Personnage {
 	var name string
 	var race string
 	for {
-		clearConsole()
+		ClearConsole()
 		fmt.Println("Création de votre personnage :")
 		// Demander à l'utilisateur de choisir son nom
 		fmt.Print("Entrez votre nom : ")
@@ -100,7 +103,7 @@ func CharCreation() *Personnage {
 	// Mettre la première lettre en majuscule et le reste en minuscule
 
 	for {
-		clearConsole()
+		ClearConsole()
 		// Demander à l'utilisateur de choisir sa race (vous pouvez adapter cette partie selon vos besoins)
 		fmt.Print("Choisissez votre race : \n")
 		fmt.Print("Humain : Vous commencez avec 100 PV Max\n")
@@ -219,7 +222,7 @@ func (p1 *Personnage) DisplayInfo() {
 	// Affichage des informations du Personnage p1
 
 	for {
-		clearConsole()
+		ClearConsole()
 		fmt.Println("Nom:", p1.Name)
 		fmt.Println("Classe:", p1.Race)
 		fmt.Println("Niveau:", p1.Level)
@@ -243,7 +246,7 @@ func (p1 *Personnage) DisplayInfo() {
 
 func (p1 *Personnage) AccessInventory(m1 *Monstre) {
 	for {
-		clearConsole()
+		ClearConsole()
 		fmt.Println("\nInventaire:")
 		fmt.Println(p1.Gold)
 		for key, value := range p1.Inventory {
