@@ -21,6 +21,7 @@ type Personnage struct {
 	XpMax        int
 	HpMax        int
 	Hp           int
+	Spells       []string
 	Inventory    map[string]int
 	Skills       []string
 	Gold         int
@@ -269,11 +270,11 @@ func (p1 *Personnage) DisplayInfo() {
 	}
 }
 
-func (p1 *Personnage) AccessInventory(m1 *Monstre, spells *Spell) {
+func (p1 *Personnage) FightInventory(m1 *Monstre, spells *Spell) {
 	for {
 		ClearConsole()
 		fmt.Println("\nInventaire:")
-		fmt.Println(p1.Gold)
+		fmt.Println("Cash :", p1.Gold)
 		for key, value := range p1.Inventory {
 			fmt.Printf("%s: %d \n", key, value)
 
@@ -282,7 +283,7 @@ func (p1 *Personnage) AccessInventory(m1 *Monstre, spells *Spell) {
 		fmt.Println("1. Sélectionner une potion de soin")
 		fmt.Println("2. Sélectionner une potion de poison")
 		fmt.Println("3. Sélectionner une potion de mana")
-		fmt.Println("4. Sélectionner un livre de sort")
+		fmt.Println("4. Sélectionnez un sort à utiliser")
 		fmt.Println("5. Equipements")
 		fmt.Println("6. Retourner en arrière")
 
@@ -309,9 +310,95 @@ func (p1 *Personnage) AccessInventory(m1 *Monstre, spells *Spell) {
 				fmt.Println("Vous n'avez pas de Potion de mana dans votre inventaire.")
 			}
 		case 4:
-			if count, ok := p1.Inventory["Livre de sort : Boule de feu"]; ok && count > 0 {
-				SpellBook(p1, spells)
+			InitSpells()
+
+		case 5:
+			fmt.Println("Voulez-vous 1.équiper ou 2.désequiper un equipement ? (3. retour)")
+			var input int
+			fmt.Scan(&input)
+			switch input {
+			case 1:
+				fmt.Println("Que souhaitez-vous équiper ? 1. Casque / 2. Armure / 3. Pied / 4. retour ")
+				var input int
+				fmt.Scan(&input)
+				switch input {
+				case 1:
+					p1.EquiperHead()
+				case 2:
+					p1.EquiperBody()
+				case 3:
+					p1.EquiperLeg()
+				case 4:
+					continue
+
+				}
+			case 2:
+				fmt.Println("Que souhaitez-vous déquiper ? 1. Casque / 2. Armure / 3. Pied / 4. retour ")
+				var input int
+				fmt.Scan(&input)
+				switch input {
+				case 1:
+					p1.DesequiperHead()
+				case 2:
+					p1.DesequiperBody()
+				case 3:
+					p1.DesequiperLeg()
+				case 4:
+					continue
+				}
+			case 3:
+				continue
 			}
+		case 6:
+			return
+		default:
+			fmt.Println("Choix invalide.")
+		}
+	}
+}
+
+func (p1 *Personnage) BaseInventory(m1 *Monstre, spells *Spell) {
+	for {
+		ClearConsole()
+		fmt.Println("\nInventaire:")
+		fmt.Println("Cash :", p1.Gold)
+		for key, value := range p1.Inventory {
+			fmt.Printf("%s: %d \n", key, value)
+
+		}
+		fmt.Println("\nQue voulez-vous faire ?")
+		fmt.Println("1. Sélectionner une potion de soin")
+		fmt.Println("2. Sélectionner une potion de poison")
+		fmt.Println("3. Sélectionner une potion de mana")
+		fmt.Println("4. Consulter les sorts acquis")
+		fmt.Println("5. Equipements")
+		fmt.Println("6. Retourner en arrière")
+
+		var input int
+		fmt.Scan(&input)
+
+		switch input {
+		case 1:
+			if count, ok := p1.Inventory["Potion de soin"]; ok && count > 0 {
+				TakePot(p1)
+			} else {
+				fmt.Println("Vous n'avez pas de Potion de soin dans votre inventaire.")
+			}
+		case 2:
+			if count, ok := p1.Inventory["Potion de poison"]; ok && count > 0 {
+				poisonPot(p1, m1)
+			} else {
+				fmt.Println("Vous n'avez pas de Potion de poison dans votre inventaire.")
+			}
+		case 3:
+			if count, ok := p1.Inventory["Potion de mana"]; ok && count > 0 {
+				ManaPot(p1)
+			} else {
+				fmt.Println("Vous n'avez pas de Potion de mana dans votre inventaire.")
+			}
+		case 4:
+			p1.ShowSpells()
+
 		case 5:
 			fmt.Println("Voulez-vous 1.équiper ou 2.désequiper un equipement ? (3. retour)")
 			var input int
