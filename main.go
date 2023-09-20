@@ -26,6 +26,7 @@ func main() {
 	fmt.Println("Bienvenue dans le jeu RPG !")
 	m := utility.NewMarchand(nil)
 	var startChoice int
+	var spells *game.Spell
 	var personnage *game.Personnage // Declare the personnage variable outside of the switch
 	for {                           // Start menu
 		ClearConsole()
@@ -38,6 +39,7 @@ func main() {
 		case 1:
 			character := game.CharCreation()
 			goblin := game.InitGoblin()
+
 			if character == nil {
 				fmt.Println("Mauvais choix de race")
 			} else {
@@ -54,7 +56,7 @@ func main() {
 			switch choice {
 			case 1:
 
-				game.Tutorial(personnage, goblin)
+				game.Tutorial(personnage, goblin, spells)
 
 			case 2:
 				break
@@ -81,7 +83,7 @@ func main() {
 				case 1:
 					personnage.DisplayInfo()
 				case 2:
-					personnage.AccessInventory(goblin)
+					personnage.AccessInventory(goblin, spells)
 				case 3:
 					var merchantChoice string
 					fmt.Print("Veux-tu acheter ou vendre un objet ? (Acheter/Vendre): ")
@@ -99,7 +101,7 @@ func main() {
 				case 4:
 					utility.Forgeron(personnage)
 				case 5:
-					game.TrainFight(personnage, goblin)
+					game.TrainFight(personnage, goblin, spells)
 				case 9:
 					utility.QuiSontIls()
 				case 0:
