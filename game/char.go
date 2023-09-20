@@ -67,10 +67,13 @@ func isValidName(name string, maxLetters int) bool {
 }
 func CharCreation() *Personnage {
 	equipement := Equipment{
-		Head:    false,
-		Body:    false,
-		Leg:     false,
-		HPBonus: 0,
+		Head:            false,
+		Body:            false,
+		Leg:             false,
+		HPBonus:         0,
+		AtkBonus:        0,
+		DefBonus:        0,
+		InitiativeBonus: 0,
 	}
 	var name string
 	var race string
