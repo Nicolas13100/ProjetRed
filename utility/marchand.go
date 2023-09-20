@@ -8,10 +8,13 @@ import (
 type Marchand struct {
 	inventory map[string]int
 	prices    map[string]int
+	Gold      int
 }
 
 func NewMarchand(personnage *game.Personnage) *Marchand {
 	return &Marchand{
+
+		Gold: 200,
 		inventory: map[string]int{
 			"Augmentation d'inventaire":    3,
 			"Potion de soin":               3,
@@ -159,29 +162,122 @@ func (m *Marchand) Buy(personnage *game.Personnage) {
 		fmt.Println("Désolé, je n'ai pas cet objet en stock.")
 	}
 }
-func (m *Marchand) Sell(Personnage *game.Personnage, item string, price int) {
-	fmt.Println("Les objets disponibles à l'achat sont :")
-	for key, value := range m.inventory {
-		fmt.Println(key, ": ", value)
+func (m *Marchand) Sell(Personnage *game.Personnage, item string) {
+	fmt.Println("Les objets disponibles à la vente sont :")
+	for key, value := range Personnage.Inventory {
+		fmt.Println(key, value)
 	}
 
-	fmt.Println("Que voulez-vous vendre ? (Entrez le nom de l'objet)")
-	var itemToBuy string
-	if _, err := fmt.Scan(&itemToBuy); err != nil {
+	fmt.Println("Quel type d'objet voulez-vous vendre ?(Potion / Sort / Loot)")
+	var itemToSell string
+	if _, err := fmt.Scan(&itemToSell); err != nil {
 		fmt.Println("Erreur lors de la saisie.")
 		return
 	}
+	var price int
+	switch itemToSell {
+	case "Potion":
+		fmt.Println("Quel type de potion voulez-vous vendre ? (soin/poison)")
+		var potionType string
+		if _, err := fmt.Scan(&potionType); err != nil {
+			fmt.Println("Erreur lors de la saisie.")
+			return
+		}
+		itemToSell = "Potion de " + potionType
 
-	if quantity, ok := m.inventory[itemToBuy]; ok && quantity > 0 {
-		if Personnage.Gold >= price {
-			m.inventory[itemToBuy]--
-			Personnage.Gold -= price
-			Personnage.Inventory[itemToBuy]++
-			fmt.Println("Vous avez acheté une", itemToBuy)
+	case "Sort":
+		fmt.Println("Quel type de sort voulez-vous vendre ? (feu/autre)")
+		var spellType string
+		if _, err := fmt.Scan(&spellType); err != nil {
+			fmt.Println("Erreur lors de la saisie.")
+			return
+		}
+		itemToSell = "Livre de sort : Boule de " + spellType
+
+	case "Loot":
+		fmt.Println("Quel type de loot souhaitez-vous vendre ? (1 : Loup/ 2 : Troll/ 3 : Sanglier/ 4 : Corbeau)")
+		var loot int
+		if _, err := fmt.Scan(&loot); err != nil {
+			fmt.Println("Erreur lors de la saisie.")
+			return
+		}
+
+		switch loot {
+		case 1:
+			fmt.Println("Vous souhaitez vendre une Fourrure de Loup ?(Oui/Non)")
+			var lootype string
+			if _, err := fmt.Scan(&lootype); err != nil {
+				fmt.Println("Erreur lors de la saisie.")
+				return
+			}
+			if lootype == "Oui" {
+				itemToSell = "Fourrure de Loup"
+			} else {
+				fmt.Println("Achat annulé.")
+				return
+			}
+		case 2:
+			fmt.Println("Vous souhaitez vendre une Peau de Troll ?")
+			var lootype string
+			if _, err := fmt.Scan(&lootype); err != nil {
+				fmt.Println("Erreur lors de la saisie.")
+				return
+			}
+			if lootype == "Oui" {
+				itemToSell = "Peau de Troll"
+			} else {
+				fmt.Println("Achat annulé.")
+				return
+			}
+		case 3:
+			fmt.Println("Vous souhaitez vendre un Cuir de Sanglier ?")
+			var lootype string
+			if _, err := fmt.Scan(&lootype); err != nil {
+				fmt.Println("Erreur lors de la saisie.")
+				return
+			}
+			if lootype == "Oui" {
+				itemToSell = "Cuir de Sanglier"
+			} else {
+				fmt.Println("Achat annulé.")
+				return
+			}
+		case 4:
+			fmt.Println("Vous souhaitez vendre une Plume de Corbeau ?")
+			var lootype string
+			if _, err := fmt.Scan(&lootype); err != nil {
+				fmt.Println("Erreur lors de la saisie.")
+				return
+			}
+			if lootype == "Oui" {
+				itemToSell = "Plume de Corbeau"
+			} else {
+				fmt.Println("Achat annulé.")
+				return
+			}
+		default:
+			fmt.Println("Type de loot invalide.")
+			return
+		}
+
+	}
+	price, exists := m.prices[itemToSell]
+	if !exists {
+		fmt.Println("Désolé, le prix de vente de cet objet n'est pas défini.")
+		return
+	}
+	if quantity, ok := Personnage.Inventory[itemToSell]; ok && quantity > 0 {
+		// Vérifier si le marchand a assez d'argent pour acheter l'objet
+		if m.Gold >= price {
+			m.inventory[itemToSell]++
+			m.Gold -= price
+			Personnage.Gold += price
+			Personnage.Inventory[itemToSell]--
+			fmt.Println("Vous avez vendu un(e)", itemToSell, "pour", price, "pièces d'or.")
 		} else {
-			fmt.Println("Vous n'avez pas assez d'argent pour acheter cet objet.")
+			fmt.Println("Le marchand n'a pas assez d'argent pour acheter cet objet.")
 		}
 	} else {
-		fmt.Println("Désolé, je n'ai pas cet objet en stock.")
+		fmt.Println("Désolé, vous n'avez pas cet objet en stock.")
 	}
 }

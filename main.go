@@ -89,10 +89,7 @@ func main() {
 					case "Acheter":
 						m.Buy(personnage)
 					case "Vendre":
-						// Handle selling to the merchant if needed
-						fmt.Println("Que veux-tu vendre ?")
-					default:
-						fmt.Println("Choix invalide.")
+						m.Sell(personnage, "")
 					}
 
 					// Wait for user to press Enter to continue
