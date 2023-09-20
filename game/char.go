@@ -28,7 +28,6 @@ type Personnage struct {
 	Mana         int
 	ManaMax      int
 	Atk          int
-	AtkSpe       int
 	Defense      int
 	Initiative   int
 }
@@ -143,7 +142,6 @@ func CharCreation() *Personnage {
 				},
 				Mana:       10,
 				ManaMax:    100,
-				AtkSpe:     5,
 				Atk:        5,
 				Defense:    0,
 				Initiative: 10,
@@ -169,7 +167,6 @@ func CharCreation() *Personnage {
 				},
 				Mana:       15,
 				ManaMax:    100,
-				AtkSpe:     10,
 				Atk:        5,
 				Defense:    0,
 				Initiative: 20,
@@ -195,7 +192,6 @@ func CharCreation() *Personnage {
 				},
 				Mana:       10,
 				ManaMax:    90,
-				AtkSpe:     5,
 				Atk:        5,
 				Defense:    0,
 				Initiative: 5,
@@ -220,7 +216,6 @@ func CharCreation() *Personnage {
 				},
 				Mana:       999,
 				ManaMax:    999,
-				AtkSpe:     999,
 				Atk:        999,
 				Defense:    999,
 				Initiative: 999,
