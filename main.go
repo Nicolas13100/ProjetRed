@@ -10,7 +10,7 @@ import (
 	"runtime"
 )
 
-func clearConsole() {
+func ClearConsole() {
 	if runtime.GOOS == "windows" {
 		cmd := exec.Command("cmd", "/c", "cls")
 		cmd.Stdout = os.Stdout
@@ -28,7 +28,7 @@ func main() {
 	var startChoice int
 	var personnage *game.Personnage // Declare the personnage variable outside of the switch
 	for {                           // Start menu
-
+		ClearConsole()
 		fmt.Println("1. Commencer le jeu")
 		fmt.Println("2. Quitter")
 		fmt.Print("Entrez votre choix : ")
@@ -67,7 +67,8 @@ func main() {
 				fmt.Println("3. Marchand")
 				fmt.Println("4. Forgeron")
 				fmt.Println("5. Entrainement")
-				fmt.Println("6. Quitter")
+				fmt.Println("6. Qui sont-ils ? ")
+				fmt.Println("0. Quitter")
 
 				var choice int
 				fmt.Print("Entrez votre choix : ")
@@ -100,6 +101,8 @@ func main() {
 				case 5:
 					game.TrainFight(personnage, goblin)
 				case 6:
+					utility.QuiSontIls()
+				case 0:
 					fmt.Println("Au revoir !")
 					return
 				default:
