@@ -17,6 +17,8 @@ type Personnage struct {
 	Race         string
 	Equipement   Equipment
 	Level        int
+	Xp           int
+	XpMax        int
 	HpMax        int
 	Hp           int
 	Inventory    map[string]int
@@ -112,6 +114,8 @@ func CharCreation() *Personnage {
 				Race:         race,
 				Equipement:   equipement,
 				Level:        1,
+				Xp:           0,
+				XpMax:        100,
 				HpMax:        100,
 				Hp:           50,
 				Gold:         100,
@@ -133,6 +137,8 @@ func CharCreation() *Personnage {
 				Race:         race,
 				Equipement:   equipement,
 				Level:        1,
+				Xp:           0,
+				XpMax:        100,
 				HpMax:        80,
 				Hp:           40,
 				Gold:         100,
@@ -154,6 +160,8 @@ func CharCreation() *Personnage {
 				Race:         race,
 				Equipement:   equipement,
 				Level:        1,
+				Xp:           0,
+				XpMax:        100,
 				HpMax:        120,
 				Hp:           60,
 				Gold:         100,

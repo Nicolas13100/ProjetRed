@@ -32,6 +32,7 @@ func TrainFight(p1 *Personnage, m1 *Monstre) {
 		// Vérifier si le Monstre est toujours en vie
 		if m1.Hp <= 0 {
 			fmt.Printf("%s est vaincu!\n", m1.name)
+			GagnerXp(p1, m1)
 			break
 		}
 
@@ -118,5 +119,19 @@ func charTurn(p1 *Personnage, m1 *Monstre) {
 		fmt.Println("Attaque basic")
 	case 2:
 		p1.AccessInventory(m1)
+	}
+}
+func GagnerXp(p1 *Personnage, m1 *Monstre) {
+	p1.Xp += m1.XpDrop
+	fmt.Printf("Vous avez gagné %d points d'XP \n", m1.XpDrop)
+	fmt.Printf("Vous avez %d points d'XP / %d points d'XP avant le prochain niveau \n", p1.Xp, p1.XpMax)
+	if p1.Xp >= p1.XpMax {
+		p1.Level += 1
+		surplusxp := p1.Xp - p1.XpMax
+		p1.Xp = 0
+		p1.XpMax += 10
+		p1.Xp += surplusxp
+		fmt.Printf("Vous avez gagné un niveau et êtes au niveau : %d \n", p1.Level)
+		fmt.Printf("Vous avez %d points d'XP / %d points d'XP avant le prochain niveau \n", p1.Xp, p1.XpMax)
 	}
 }

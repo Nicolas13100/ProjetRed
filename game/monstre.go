@@ -7,6 +7,7 @@ type Monstre struct {
 	Atk        int
 	Defense    int
 	Initiative int
+	XpDrop     int
 }
 
 func InitGoblin() *Monstre {
@@ -15,6 +16,7 @@ func InitGoblin() *Monstre {
 		name:       "Goblin",
 		HpMax:      40,
 		Hp:         40,
+		XpDrop:     110,
 		Atk:        5,
 		Defense:    0,
 		Initiative: 10,
