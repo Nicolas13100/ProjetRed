@@ -93,17 +93,24 @@ func CharCreation() *Personnage {
 			fmt.Println("Le nom doit contenir uniquement des lettres.")
 			continue
 		}
-		if isValidName(name, maxLetters) && OnlyLetters(name) {
+
+		// Confirm the name
+		fmt.Printf("Votre nom est %s, est-ce correct ? (1.Oui/2.Non) ", name)
+		var confirmation int
+		fmt.Scan(&confirmation)
+
+		if confirmation == 1 {
 			// Create a Title case converter
 			tc := cases.Title(language.English)
 
 			// Convert the name to Title case
 			name = tc.String(strings.ToLower(name))
 			break
+		} else if confirmation == 2 {
+			// If user chooses "no", restart the loop
+			continue
 		}
-		continue
 	}
-	// Mettre la première lettre en majuscule et le reste en minuscule
 
 	for {
 		ClearConsole()
