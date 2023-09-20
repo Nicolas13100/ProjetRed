@@ -303,13 +303,13 @@ func (p1 *Personnage) AccessInventory(m1 *Monstre, spells *Spell) {
 			}
 		case 3:
 			if count, ok := p1.Inventory["Potion de mana"]; ok && count > 0 {
-				ManaPot(p1, m1)
+				ManaPot(p1)
 			} else {
 				fmt.Println("Vous n'avez pas de Potion de mana dans votre inventaire.")
 			}
 		case 4:
 			if count, ok := p1.Inventory["Livre de sort : Boule de feu"]; ok && count > 0 {
-				SpellBook(p1, spells[])
+				SpellBook(p1, spells)
 			}
 		case 5:
 			fmt.Println("Voulez-vous 1.équiper ou 2.désequiper un equipement ? (3. retour)")
