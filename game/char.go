@@ -264,7 +264,7 @@ func (p1 *Personnage) DisplayInfo() {
 	}
 }
 
-func (p1 *Personnage) AccessInventory(m1 *Monstre) {
+func (p1 *Personnage) AccessInventory(m1 *Monstre, spells *Spell) {
 	for {
 		ClearConsole()
 		fmt.Println("\nInventaire:")
@@ -298,7 +298,7 @@ func (p1 *Personnage) AccessInventory(m1 *Monstre) {
 			}
 		case 3:
 			if count, ok := p1.Inventory["Livre de sort : Boule de feu"]; ok && count > 0 {
-				SpellBook(p1)
+				SpellBook(p1, spells)
 			}
 		case 4:
 			fmt.Println("Voulez-vous 1.équiper ou 2.désequiper un equipement ? (3. retour)")
