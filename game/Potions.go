@@ -40,7 +40,7 @@ func TakePot(p1 *Personnage) {
 }
 func poisonPot(p1 *Personnage, m1 *Monstre) {
 	var choice int
-	fmt.Println("Voulez-vous utiliser une potion ? (1.Oui/2.Non) ")
+	fmt.Println("Voulez-vous utiliser une Potion de poison ? (1.Oui/2.Non) ")
 	fmt.Scan(&choice)
 
 	switch choice {

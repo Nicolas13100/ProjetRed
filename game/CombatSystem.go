@@ -50,6 +50,7 @@ func TrainFight(p1 *Personnage, m1 *Monstre, spells *Spell) {
 			// Reset goblin's attack back to its original value
 			m1.Atk /= 2
 		}
+		fmt.Println("-----------------------------------------------------------------------------")
 
 		// Vérifier si le Joueur est toujours en vie
 		if p1.Hp <= 0 {
