@@ -67,7 +67,7 @@ func main() {
 				fmt.Println("3. Marchand")
 				fmt.Println("4. Forgeron")
 				fmt.Println("5. Entrainement")
-				fmt.Println("6. Qui sont-ils ? ")
+				fmt.Println("9. Qui sont-ils ? ")
 				fmt.Println("0. Quitter")
 
 				var choice int
@@ -100,7 +100,7 @@ func main() {
 					utility.Forgeron(personnage)
 				case 5:
 					game.TrainFight(personnage, goblin)
-				case 6:
+				case 9:
 					utility.QuiSontIls()
 				case 0:
 					fmt.Println("Au revoir !")
