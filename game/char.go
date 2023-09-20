@@ -255,14 +255,15 @@ func (p1 *Personnage) DisplayInfo() {
 		fmt.Println("Cash:", p1.Gold)
 		fmt.Println("Sorts", p1.Skills)
 		// Affichage de l'inventaire
-		fmt.Println("\nType 'return' to come back to main menu")
+		fmt.Println("\nType 0 to come back to main menu")
 
 		// Read user input
-		var input string
+		var input int
+
 		fmt.Scan(&input)
 
 		// Check if the user wants to return to the main menu
-		if input == "return" {
+		if input == 0 {
 			break
 		}
 	}

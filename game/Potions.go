@@ -40,7 +40,7 @@ func TakePot(p1 *Personnage) {
 }
 func poisonPot(p1 *Personnage, m1 *Monstre) {
 	var choice int
-	fmt.Println("Voulez-vous utiliser une potion ? (1.Oui/2.Non) ")
+	fmt.Println("Voulez-vous utiliser une Potion de poison ? (1.Oui/2.Non) ")
 	fmt.Scan(&choice)
 
 	switch choice {
@@ -50,7 +50,7 @@ func poisonPot(p1 *Personnage, m1 *Monstre) {
 			p1.RemoveZeroValueItems()
 			fmt.Println("Vous avez utilisé une potion de poison.")
 			duration := 3 * time.Second
-			fmt.Printf("Vous perdez 10 PV chaque seconde pendant %s\n", duration)
+			fmt.Printf("L'ennemi touché perd 10 PV chaque seconde pendant %s\n", duration)
 			for start := time.Now(); time.Since(start) < duration; {
 				m1.Hp -= 10
 				fmt.Printf("%d PV restants sur %d PV\n", m1.Hp, m1.HpMax)

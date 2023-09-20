@@ -3,7 +3,6 @@ package main
 import (
 	"ProjectRed/game"
 	"ProjectRed/utility"
-	"bufio"
 	"fmt"
 	"os"
 	"os/exec"
@@ -23,13 +22,15 @@ func ClearConsole() {
 }
 
 func main() {
+
 	fmt.Println("Bienvenue dans le jeu RPG !")
+
 	m := utility.NewMarchand(nil)
 	var startChoice int
 	var spells *game.Spell
 	var personnage *game.Personnage // Declare the personnage variable outside of the switch
 	for {                           // Start menu
-		ClearConsole()
+
 		fmt.Println("1. Commencer le jeu")
 		fmt.Println("2. Quitter")
 		fmt.Print("Entrez votre choix : ")
@@ -41,6 +42,7 @@ func main() {
 			goblin := game.InitGoblin()
 
 			if character == nil {
+				ClearConsole()
 				fmt.Println("Mauvais choix de race")
 			} else {
 				personnage = character
@@ -61,7 +63,7 @@ func main() {
 			case 2:
 				break
 			}
-
+			ClearConsole()
 			for {
 				fmt.Println("Que voulez-vous faire ?")
 				fmt.Println("1. Afficher les informations du personnage")
@@ -85,19 +87,16 @@ func main() {
 				case 2:
 					personnage.AccessInventory(goblin, spells)
 				case 3:
-					var merchantChoice string
-					fmt.Print("Veux-tu acheter ou vendre un objet ? (Acheter/Vendre): ")
+					var merchantChoice int
+					fmt.Print("Veux-tu acheter ou vendre un objet ? (1.Acheter/2.Vendre): ")
 					fmt.Scan(&merchantChoice)
 					switch merchantChoice {
-					case "Acheter":
+					case 1:
 						m.Buy(personnage)
-					case "Vendre":
+					case 2:
 						m.Sell(personnage, "")
 					}
 
-					// Wait for user to press Enter to continue
-					fmt.Print("Taper Entrer pour continuer...")
-					bufio.NewReader(os.Stdin).ReadBytes('\n')
 				case 4:
 					utility.Forgeron(personnage)
 				case 5:
