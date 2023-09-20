@@ -47,7 +47,7 @@ func (m *Marchand) Buy(personnage *game.Personnage) {
 	for key, value := range m.inventory {
 		fmt.Println(key, ": ", value)
 	}
-	fmt.Println("Que voulez-vous acheter ? (potion/sort/loot)")
+	fmt.Println("Que voulez-vous acheter ? (1.Potion/2.sort/3.Objet)")
 	var itemToBuy string
 	if _, err := fmt.Scan(&itemToBuy); err != nil {
 		fmt.Println("Erreur lors de la saisie.")
