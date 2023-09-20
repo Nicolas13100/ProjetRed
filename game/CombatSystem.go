@@ -121,6 +121,7 @@ func charTurn(p1 *Personnage, m1 *Monstre) {
 		p1.AccessInventory(m1)
 	}
 }
+
 func GagnerXp(p1 *Personnage, m1 *Monstre) {
 	p1.Xp += m1.XpDrop
 	fmt.Printf("Vous avez gagné %d points d'XP \n", m1.XpDrop)
