@@ -2,12 +2,12 @@ package game
 
 import "fmt"
 
-func (p1 *Personnage) FightInventory(m1 *Monstre, spells *Spell) {
+func (P1 *Personnage) FightInventory(Monstre1 *Monstre, Spells *Spell) {
 	for {
 		ClearConsole()
 		fmt.Println("\nInventaire:")
-		fmt.Println("Cash :", p1.Gold)
-		for key, value := range p1.Inventory {
+		fmt.Println("Cash :", P1.Gold)
+		for key, value := range P1.Inventory {
 			fmt.Printf("%s: %d \n", key, value)
 		}
 		fmt.Println("\nQue voulez-vous faire ?")
@@ -21,20 +21,20 @@ func (p1 *Personnage) FightInventory(m1 *Monstre, spells *Spell) {
 
 		switch input {
 		case 1:
-			if count, ok := p1.Inventory["Potion de soin"]; ok && count > 0 {
-				TakePot(p1)
+			if count, ok := P1.Inventory["Potion de soin"]; ok && count > 0 {
+				TakePot(P1)
 			} else {
 				fmt.Println("Vous n'avez pas de Potion de soin dans votre inventaire.")
 			}
 		case 2:
-			if count, ok := p1.Inventory["Potion de poison"]; ok && count > 0 {
-				poisonPot(p1, m1)
+			if count, ok := P1.Inventory["Potion de poison"]; ok && count > 0 {
+				poisonPot(P1, Monstre1)
 			} else {
 				fmt.Println("Vous n'avez pas de Potion de poison dans votre inventaire.")
 			}
 		case 3:
-			if count, ok := p1.Inventory["Potion de mana"]; ok && count > 0 {
-				ManaPot(p1)
+			if count, ok := P1.Inventory["Potion de mana"]; ok && count > 0 {
+				ManaPot(P1)
 			} else {
 				fmt.Println("Vous n'avez pas de Potion de mana dans votre inventaire.")
 			}
@@ -45,12 +45,12 @@ func (p1 *Personnage) FightInventory(m1 *Monstre, spells *Spell) {
 	}
 }
 
-func (p1 *Personnage) BaseInventory(m1 *Monstre, spells *Spell) {
+func (P1 *Personnage) BaseInventory(Monstre1 *Monstre, Spells *Spell) {
 	for {
 		ClearConsole()
 		fmt.Println("\nInventaire:")
-		fmt.Println("Cash :", p1.Gold)
-		for key, value := range p1.Inventory {
+		fmt.Println("Cash :", P1.Gold)
+		for key, value := range P1.Inventory {
 			fmt.Printf("%s: %d \n", key, value)
 
 		}
@@ -67,25 +67,25 @@ func (p1 *Personnage) BaseInventory(m1 *Monstre, spells *Spell) {
 
 		switch input {
 		case 1:
-			if count, ok := p1.Inventory["Potion de soin"]; ok && count > 0 {
-				TakePot(p1)
+			if count, ok := P1.Inventory["Potion de soin"]; ok && count > 0 {
+				TakePot(P1)
 			} else {
 				fmt.Println("Vous n'avez pas de Potion de soin dans votre inventaire.")
 			}
 		case 2:
-			if count, ok := p1.Inventory["Potion de poison"]; ok && count > 0 {
-				poisonPot(p1, m1)
+			if count, ok := P1.Inventory["Potion de poison"]; ok && count > 0 {
+				poisonPot(P1, Monstre1)
 			} else {
 				fmt.Println("Vous n'avez pas de Potion de poison dans votre inventaire.")
 			}
 		case 3:
-			if count, ok := p1.Inventory["Potion de mana"]; ok && count > 0 {
-				ManaPot(p1)
+			if count, ok := P1.Inventory["Potion de mana"]; ok && count > 0 {
+				ManaPot(P1)
 			} else {
 				fmt.Println("Vous n'avez pas de Potion de mana dans votre inventaire.")
 			}
 		case 4:
-			p1.ShowSpells()
+			P1.ShowSpells()
 
 		case 5:
 			fmt.Println("Voulez-vous 1.équiper ou 2.désequiper un equipement ? (3. retour)")
@@ -98,11 +98,11 @@ func (p1 *Personnage) BaseInventory(m1 *Monstre, spells *Spell) {
 				fmt.Scan(&input)
 				switch input {
 				case 1:
-					p1.EquiperHead()
+					P1.EquiperHead()
 				case 2:
-					p1.EquiperBody()
+					P1.EquiperBody()
 				case 3:
-					p1.EquiperLeg()
+					P1.EquiperLeg()
 				case 4:
 					continue
 
@@ -113,11 +113,11 @@ func (p1 *Personnage) BaseInventory(m1 *Monstre, spells *Spell) {
 				fmt.Scan(&input)
 				switch input {
 				case 1:
-					p1.DesequiperHead()
+					P1.DesequiperHead()
 				case 2:
-					p1.DesequiperBody()
+					P1.DesequiperBody()
 				case 3:
-					p1.DesequiperLeg()
+					P1.DesequiperLeg()
 				case 4:
 					continue
 				}
@@ -132,25 +132,25 @@ func (p1 *Personnage) BaseInventory(m1 *Monstre, spells *Spell) {
 	}
 }
 
-func (p1 *Personnage) LimiteInventory() bool {
+func (P1 *Personnage) LimiteInventory() bool {
 	totalQuantity := 0
-	for _, count := range p1.Inventory {
+	for _, count := range P1.Inventory {
 		totalQuantity += count
 	}
-	return totalQuantity < p1.InventoryCap
+	return totalQuantity < P1.InventoryCap
 }
 
-func (p1 *Personnage) UpgradeInventorySlot() {
-	if p1.InventoryCap < 30 {
-		p1.InventoryCap += 10
+func (P1 *Personnage) UpgradeInventorySlot() {
+	if P1.InventoryCap < 30 {
+		P1.InventoryCap += 10
 		return
 	}
 }
 
-func (p1 *Personnage) RemoveZeroValueItems() {
-	for key, value := range p1.Inventory {
+func (P1 *Personnage) RemoveZeroValueItems() {
+	for key, value := range P1.Inventory {
 		if value == 0 {
-			delete(p1.Inventory, key)
+			delete(P1.Inventory, key)
 		}
 	}
 }
