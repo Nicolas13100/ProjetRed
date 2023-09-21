@@ -285,7 +285,7 @@ func (p1 *Personnage) FightInventory(m1 *Monstre, spells *Spell) {
 		fmt.Println("3. Sélectionner une potion de mana")
 		fmt.Println("4. Sélectionnez un sort à utiliser")
 		fmt.Println("5. Equipements")
-		fmt.Println("6. Retourner en arrière")
+		fmt.Println("0. Retourner en arrière")
 
 		var input int
 		fmt.Scan(&input)
@@ -349,7 +349,7 @@ func (p1 *Personnage) FightInventory(m1 *Monstre, spells *Spell) {
 			case 3:
 				continue
 			}
-		case 6:
+		case 0:
 			return
 		default:
 			fmt.Println("Choix invalide.")
@@ -372,7 +372,7 @@ func (p1 *Personnage) BaseInventory(m1 *Monstre, spells *Spell) {
 		fmt.Println("3. Sélectionner une potion de mana")
 		fmt.Println("4. Consulter les sorts acquis")
 		fmt.Println("5. Equipements")
-		fmt.Println("6. Retourner en arrière")
+		fmt.Println("0. Retourner en arrière")
 
 		var input int
 		fmt.Scan(&input)
@@ -436,7 +436,7 @@ func (p1 *Personnage) BaseInventory(m1 *Monstre, spells *Spell) {
 			case 3:
 				continue
 			}
-		case 6:
+		case 0:
 			return
 		default:
 			fmt.Println("Choix invalide.")
