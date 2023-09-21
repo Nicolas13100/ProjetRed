@@ -9,7 +9,8 @@ func Menu() {
 
 	var startChoice int
 	var Spells Spell
-	var Personnage Personnage
+	var P1 Personnage
+	Personnage := P1
 	var Marchand Marchand
 	var Monstre Monstre
 	for { // Start menu
@@ -22,14 +23,14 @@ func Menu() {
 
 		switch startChoice {
 		case 1:
-
+			CharCreation()
 			var choice1 int
 			fmt.Print("voulez-vous un tutoriel ? 1.Oui / 2.Non ")
 			fmt.Scan(&choice1)
 			switch choice1 {
 			case 1:
 				{
-					Tutorial(&Personnage, &Monstre, &Spells)
+					Tutorial(&P1, &Monstre, &Spells)
 				}
 			case 2:
 				break
@@ -57,7 +58,7 @@ func Menu() {
 
 				switch choice {
 				case 1:
-					Personnage.DisplayInfo()
+					DisplayInfo(P1)
 				case 2:
 					Personnage.BaseInventory(&Monstre, &Spells)
 				case 3:
@@ -66,9 +67,9 @@ func Menu() {
 					fmt.Scan(&merchantChoice)
 					switch merchantChoice {
 					case 1:
-						Buy(&Personnage, &Marchand)
+						Buy(&P1, &Marchand)
 					case 2:
-						Sell(&Personnage, &Marchand)
+						Sell(&P1, &Marchand)
 					}
 
 				case 4:
