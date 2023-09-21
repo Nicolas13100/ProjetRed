@@ -73,7 +73,7 @@ func CharCreation() *Personnage {
 		// Confirm the name
 		tc := cases.Title(language.English)
 		name = tc.String(strings.ToLower(name))
-		fmt.Printf("Votre nom est %s, est-ce correct ? (1.Oui/2.Non) ", name)
+		fmt.Printf("Votre nom sera %s, est-ce correct ? (1.Oui/2.Non) ", name)
 		var confirmation int
 		fmt.Scan(&confirmation)
 
