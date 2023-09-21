@@ -23,14 +23,13 @@ func ClearConsole() {
 
 func main() {
 
-	fmt.Println("Bienvenue dans le jeu RPG !")
-
 	m := npc.NewMarchand(nil)
 	var startChoice int
 	var spells *game.Spell
-	var personnage *game.Personnage // Declare the personnage variable outside of the switch
-	for {                           // Start menu
-
+	var personnage *game.Personnage
+	for { // Start menu
+		ClearConsole()
+		fmt.Println("Bienvenue dans le jeu RPG !")
 		fmt.Println("1. Commencer le jeu")
 		fmt.Println("2. Quitter")
 		fmt.Print("Entrez votre choix : ")
@@ -49,9 +48,10 @@ func main() {
 				// Handle the character creation success
 			}
 
-			var choice int
+			var choice1 int
 			fmt.Print("voulez-vous un tutoriel ? 1.Oui / 2.Non ")
-			switch choice {
+			fmt.Scan(&choice1)
+			switch choice1 {
 			case 1:
 				{
 					game.Tutorial(personnage, goblin, spells)
@@ -116,7 +116,8 @@ func main() {
 
 		default:
 			fmt.Println("Choix invalide.")
-			continue
+			fmt.Println("bug")
+			return
 		}
 	}
 }

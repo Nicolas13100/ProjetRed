@@ -54,8 +54,10 @@ func CharCreation() *Personnage {
 	for {
 		ClearConsole()
 		fmt.Println("Création de votre personnage :")
+		fmt.Println("Seulement des lettres de l'alphabet latin et 10 lettres max")
 		// Demander à l'utilisateur de choisir son nom
 		fmt.Print("Entrez votre nom : ")
+
 		fmt.Scan(&name)
 		maxLetters := 10
 		if !IsValidName(name, maxLetters) {

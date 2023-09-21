@@ -2,20 +2,22 @@ package game
 
 import "fmt"
 
+var Tours1 int
+
 func Fight(p1 *Personnage, m1 *Monstre, spells *Spell) bool {
 	ClearConsole()
-	fmt.Println("Voulez-vous commencer un entrainement ? (1 : Oui / 2 : Non)")
-	var choice int
-	fmt.Scan(&choice)
 	CombatStarted := false
-	switch choice {
+
+	var choice2 int
+	fmt.Println("Voulez-vous commencer un entrainement ? (1 : Oui / 2 : Non)")
+	fmt.Scan(&choice2)
+
+	switch choice2 {
 	case 1:
 		fmt.Println("Début du combat d'entrainement")
 
 		for (p1.Hp > 0 && m1.Hp > 0 && Tours == 1 && p1.Initiative >= m1.Initiative) || (Tours > 1 && p1.Hp > 0 && m1.Hp > 0) {
-
 			CombatStarted = true
-
 			fmt.Printf("Vous etes au tour %d\n", Tours)
 			goblinPatternActivated := GoblinPattern(m1)
 			// Tour du Joueur 1
@@ -59,9 +61,7 @@ func Fight(p1 *Personnage, m1 *Monstre, spells *Spell) bool {
 			}
 		}
 		for (p1.Hp > 0 && m1.Hp > 0 && Tours == 1 && p1.Initiative < m1.Initiative) || (Tours > 1 && p1.Hp > 0 && m1.Hp > 0) {
-
 			CombatStarted = true
-
 			fmt.Printf("Vous etes au tour %d\n", Tours)
 			goblinPatternActivated := GoblinPattern(m1)
 
@@ -111,4 +111,7 @@ func Fight(p1 *Personnage, m1 *Monstre, spells *Spell) bool {
 		fmt.Println("Retour au menu principal")
 	}
 	return CombatStarted
+}
+func GetTours1() int {
+	return Tours1 + 1
 }
