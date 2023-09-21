@@ -28,11 +28,11 @@ func TrainFight(P1 *Personnage, Monstre1 *Monstre, Spells *Spell) {
 		}
 		Monstre1.Hp -= attaqueJoueur
 
-		fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", P1.Name, Monstre1.name, attaqueJoueur)
+		fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", P1.Name, Monstre1.Name, attaqueJoueur)
 
 		// Vérifier si le Monstre est toujours en vie
 		if Monstre1.Hp <= 0 {
-			fmt.Printf("%s est vaincu!\n", Monstre1.name)
+			fmt.Printf("%s est vaincu!\n", Monstre1.Name)
 			GagnerXp(P1, Monstre1)
 			break
 		}
@@ -44,7 +44,7 @@ func TrainFight(P1 *Personnage, Monstre1 *Monstre, Spells *Spell) {
 		}
 		P1.Hp -= attaqueJoueur2
 
-		fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", Monstre1.name, P1.Name, attaqueJoueur2)
+		fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", Monstre1.Name, P1.Name, attaqueJoueur2)
 		Tours++
 		// Apply goblin's attack pattern if it was activated
 		if goblinPatternActivated {
@@ -71,7 +71,7 @@ func TrainFight(P1 *Personnage, Monstre1 *Monstre, Spells *Spell) {
 		}
 		P1.Hp -= attaqueJoueur2
 
-		fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", Monstre1.name, P1.Name, attaqueJoueur2)
+		fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", Monstre1.Name, P1.Name, attaqueJoueur2)
 		Tours++
 		// Apply goblin's attack pattern if it was activated
 		if goblinPatternActivated {
@@ -92,11 +92,11 @@ func TrainFight(P1 *Personnage, Monstre1 *Monstre, Spells *Spell) {
 		}
 		Monstre1.Hp -= attaqueJoueur
 
-		fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", P1.Name, Monstre1.name, attaqueJoueur)
+		fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", P1.Name, Monstre1.Name, attaqueJoueur)
 
 		// Vérifier si le Monstre est toujours en vie
 		if Monstre1.Hp <= 0 {
-			fmt.Printf("%s est vaincu!\n", Monstre1.name)
+			fmt.Printf("%s est vaincu!\n", Monstre1.Name)
 			break
 		}
 	}

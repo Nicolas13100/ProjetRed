@@ -53,7 +53,7 @@ type Marchand struct {
 }
 
 type Monstre struct {
-	name       string
+	Name       string
 	HpMax      int
 	Hp         int
 	Atk        int
