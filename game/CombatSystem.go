@@ -5,6 +5,7 @@ import "fmt"
 var Tours int
 
 func Tutorial(p1 *Personnage, m1 *Monstre, spells *Spell) {
+	ClearConsole()
 	fmt.Println("Bienvenue dans le tutoriel")
 	fmt.Println("Nous allons vous apprendre les bases du combat en tour par tour")
 	fmt.Println("Vous allez vous battre contre un goblin d'entrainement")

@@ -39,6 +39,9 @@ func (p1 *Personnage) FightInventory(m1 *Monstre, spells *Spell) {
 			} else {
 				fmt.Println("Vous n'avez pas de Potion de mana dans votre inventaire.")
 			}
+
+		case 0:
+			break
 		default:
 			fmt.Println("Choix invalide.")
 		}
