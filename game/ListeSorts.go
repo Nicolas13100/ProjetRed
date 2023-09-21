@@ -47,43 +47,43 @@ func InitSpells() *Spell {
 
 }
 
-func SpellBook(P1 *Personnage, Spell *Spell) {
+func SpellBook(p1 *Personnage, s *Spell) {
 
-	spell1 := "Livre de sort : " + Spell.name
-	for _, skill := range P1.Spells {
+	spell1 := "Livre de sort : " + s.name
+	for _, skill := range p1.Spells {
 		if skill == spell1 {
-			fmt.Printf("Vous avez déjà appris le sort %s \n", Spell.name)
+			fmt.Printf("Vous avez déjà appris le sort %s \n", s.name)
 			return
 		}
 	}
-	P1.Spells = append(P1.Spells, spell1)
+	p1.Spells = append(p1.Spells, spell1)
 	fmt.Println("Sort appris :", spell1)
 
-	spell2 := "Livre de sort : " + Spell.name
-	for _, skill := range P1.Spells {
+	spell2 := "Livre de sort : " + s.name
+	for _, skill := range p1.Spells {
 		if skill == spell2 {
-			fmt.Printf("Vous avez déjà appris le %s \n", Spell.name)
+			fmt.Printf("Vous avez déjà appris le %s \n", s.name)
 			return
 		}
 	}
-	P1.Spells = append(P1.Spells, spell2)
+	p1.Spells = append(p1.Spells, spell2)
 	fmt.Println("Sort appris :", spell2)
 
-	spellD := "Livre de sort : " + Spell.name
-	for _, skill := range P1.Spells {
+	spellD := "Livre de sort : " + s.name
+	for _, skill := range p1.Spells {
 		if skill == spellD {
-			fmt.Printf("Vous avez déjà appris le %s \n", Spell.name)
+			fmt.Printf("Vous avez déjà appris le %s \n", s.name)
 			return
 		}
 	}
-	P1.Spells = append(P1.Spells, spellD)
+	p1.Spells = append(p1.Spells, spellD)
 	fmt.Println("Sort appris :", spellD)
 
 }
 
-func (P1 Personnage) ShowSpells() {
+func (p1 Personnage) ShowSpells() {
 	fmt.Println("Sort Disponible:")
-	for i, spell := range P1.Spells {
+	for i, spell := range p1.Spells {
 		fmt.Printf("%d. %s\n", i+1, spell)
 	}
 }
