@@ -51,17 +51,16 @@ func main() {
 
 			var choice int
 			fmt.Print("voulez-vous un tutoriel ? 1.Oui / 2.Non ")
-			if _, err := fmt.Scan(&choice); err != nil {
-				fmt.Println("Erreur lors de la saisie.")
-				return
-			}
 			switch choice {
 			case 1:
-
-				game.Tutorial(personnage, goblin, spells)
-
+				{
+					game.Tutorial(personnage, goblin, spells)
+				}
 			case 2:
 				break
+			default:
+				fmt.Println("Il faut répondre par 1 ou 2, je ne comprend en dehors de cette selection")
+				continue
 			}
 			ClearConsole()
 			for {
