@@ -16,7 +16,7 @@ func Fight(p1 *Personnage, m1 *Monstre, spells *Spell) bool {
 	case 1:
 		fmt.Println("Début du combat d'entrainement")
 
-		for (p1.Hp > 0 && m1.Hp > 0 && Tours == 1 && p1.Initiative >= m1.Initiative) || (Tours > 1 && p1.Hp > 0 && m1.Hp > 0) {
+		for (p1.Hp > 0 && m1.Hp > 0 && Tours1 == 1 && p1.Initiative >= m1.Initiative) || (Tours1 > 1 && p1.Hp > 0 && m1.Hp > 0) {
 			CombatStarted = true
 			fmt.Printf("Vous etes au tour %d\n", Tours)
 			goblinPatternActivated := GoblinPattern(m1)
@@ -60,7 +60,7 @@ func Fight(p1 *Personnage, m1 *Monstre, spells *Spell) bool {
 				break
 			}
 		}
-		for (p1.Hp > 0 && m1.Hp > 0 && Tours == 1 && p1.Initiative < m1.Initiative) || (Tours > 1 && p1.Hp > 0 && m1.Hp > 0) {
+		for (p1.Hp > 0 && m1.Hp > 0 && Tours1 == 1 && p1.Initiative < m1.Initiative) || (Tours1 > 1 && p1.Hp > 0 && m1.Hp > 0) {
 			CombatStarted = true
 			fmt.Printf("Vous etes au tour %d\n", Tours)
 			goblinPatternActivated := GoblinPattern(m1)
