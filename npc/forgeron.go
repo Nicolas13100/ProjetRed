@@ -1,4 +1,4 @@
-package utility
+package npc
 
 import (
 	"ProjectRed/game"

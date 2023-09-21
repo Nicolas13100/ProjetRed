@@ -3,6 +3,7 @@ package game
 import "fmt"
 
 func Fight(p1 *Personnage, m1 *Monstre, spells *Spell) bool {
+	ClearConsole()
 	fmt.Println("Voulez-vous commencer un entrainement ? (1 : Oui / 2 : Non)")
 	var choice int
 	fmt.Scan(&choice)

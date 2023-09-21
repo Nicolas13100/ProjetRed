@@ -2,7 +2,7 @@ package main
 
 import (
 	"ProjectRed/game"
-	"ProjectRed/utility"
+	"ProjectRed/npc"
 	"fmt"
 	"os"
 	"os/exec"
@@ -25,7 +25,7 @@ func main() {
 
 	fmt.Println("Bienvenue dans le jeu RPG !")
 
-	m := utility.NewMarchand(nil)
+	m := npc.NewMarchand(nil)
 	var startChoice int
 	var spells *game.Spell
 	var personnage *game.Personnage // Declare the personnage variable outside of the switch
@@ -98,11 +98,11 @@ func main() {
 					}
 
 				case 4:
-					utility.Forgeron(personnage)
+					npc.Forgeron(personnage)
 				case 5:
 					game.Fight(personnage, goblin, spells)
 				case 9:
-					utility.QuiSontIls()
+					npc.QuiSontIls()
 				case 0:
 					fmt.Println("Au revoir !")
 					return
