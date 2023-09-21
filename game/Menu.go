@@ -5,14 +5,15 @@ import (
 	"os"
 )
 
+var Spells Spell
+var P1 Personnage
+var Monstre1 Monstre
+var Marchand1 Marchand
+
 func Menu() {
 
 	var startChoice int
-	var Spells Spell
-	var P1 Personnage
-	Personnage := P1
-	var Marchand Marchand
-	var Monstre Monstre
+
 	for { // Start menu
 		ClearConsole()
 		fmt.Println("Bienvenue dans le jeu RPG !")
@@ -23,14 +24,17 @@ func Menu() {
 
 		switch startChoice {
 		case 1:
-			CharCreation()
+			P1 := CharCreation()
+			Monstre1 := InitGoblin()
+			Spells := InitSpells()
+			Marchand1 := NewMarchand()
 			var choice1 int
 			fmt.Print("voulez-vous un tutoriel ? 1.Oui / 2.Non ")
 			fmt.Scan(&choice1)
 			switch choice1 {
 			case 1:
 				{
-					Tutorial(&P1, &Monstre, &Spells)
+					Tutorial(P1, Monstre1, Spells)
 				}
 			case 2:
 				break
@@ -58,24 +62,24 @@ func Menu() {
 
 				switch choice {
 				case 1:
-					DisplayInfo(P1)
+					P1.DisplayInfo()
 				case 2:
-					Personnage.BaseInventory(&Monstre, &Spells)
+					P1.BaseInventory(Monstre1, Spells)
 				case 3:
 					var merchantChoice int
 					fmt.Print("Veux-tu acheter ou vendre un objet ? (1.Acheter/2.Vendre): ")
 					fmt.Scan(&merchantChoice)
 					switch merchantChoice {
 					case 1:
-						Buy(&P1, &Marchand)
+						Buy(P1, Marchand1)
 					case 2:
-						Sell(&P1, &Marchand)
+						Sell(P1, Marchand1)
 					}
 
 				case 4:
 
 				case 5:
-					Fight(&Personnage, &Monstre, &Spells)
+					Fight(P1, Monstre1, Spells)
 				case 9:
 
 				case 0:

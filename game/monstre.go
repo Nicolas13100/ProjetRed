@@ -14,9 +14,9 @@ func InitGoblin() *Monstre {
 	return Monstre1
 }
 
-func GoblinPattern(m1 *Monstre) bool {
+func GoblinPattern(Monstre1 *Monstre) bool {
 	if GetTours()%3 == 0 || GetTours1()%3 == 0 {
-		m1.Atk = m1.Atk * 2
+		Monstre1.Atk = Monstre1.Atk * 2
 		return true
 	}
 	return false

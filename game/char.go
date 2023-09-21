@@ -176,7 +176,7 @@ func CharCreation() *Personnage {
 	}
 }
 
-func DisplayInfo(P1 Personnage) {
+func (P1 Personnage) DisplayInfo() {
 	// Affichage des informations du Personnage p1
 
 	for {
