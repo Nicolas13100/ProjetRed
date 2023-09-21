@@ -333,7 +333,7 @@ func (p1 *Personnage) FightInventory(m1 *Monstre, spells *Spell) {
 
 				}
 			case 2:
-				fmt.Println("Que souhaitez-vous déquiper ? 1. Casque / 2. Armure / 3. Pied / 4. retour ")
+				fmt.Println("Que souhaitez-vous désequiper ? 1. Casque / 2. Armure / 3. Pied / 4. retour ")
 				var input int
 				fmt.Scan(&input)
 				switch input {
