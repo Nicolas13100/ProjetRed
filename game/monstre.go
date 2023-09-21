@@ -3,7 +3,7 @@ package game
 func InitGoblin() *Monstre {
 
 	Monstre1 := &Monstre{
-		name:       "Goblin",
+		Name:       "Goblin",
 		HpMax:      40,
 		Hp:         40,
 		XpDrop:     110,

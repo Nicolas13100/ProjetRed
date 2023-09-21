@@ -4,7 +4,7 @@ import "fmt"
 
 var Tours1 int
 
-func Fight(p1 *Personnage, m1 *Monstre, spells *Spell) bool {
+func Fight(Personnag1 *Personnage, Monster1 *Monstre, spells *Spell) bool {
 	ClearConsole()
 	CombatStarted := false
 	Tours1 = 1
@@ -16,92 +16,92 @@ func Fight(p1 *Personnage, m1 *Monstre, spells *Spell) bool {
 	switch choice2 {
 	case 1:
 		fmt.Println("Début du combat d'entrainement")
-		for (p1.Hp > 0 && m1.Hp > 0 && Tours1 == 1 && p1.Initiative >= m1.Initiative) || (Tours1 > 1 && p1.Hp > 0 && m1.Hp > 0) {
+		for (Personnag1.Hp > 0 && Monster1.Hp > 0 && Tours1 == 1 && Personnag1.Initiative >= Monster1.Initiative) || (Tours1 > 1 && Personnag1.Hp > 0 && Monster1.Hp > 0) {
 			CombatStarted = true
 			fmt.Printf("Vous etes au tour %d\n", Tours)
-			goblinPatternActivated := GoblinPattern(m1)
+			goblinPatternActivated := GoblinPattern(Monster1)
 			// Tour du Joueur 1
-			charTurn(p1, m1, spells)
-			attaqueJoueur := p1.Atk - m1.Defense
+			charTurn(Personnag1, Monster1, spells)
+			attaqueJoueur := Personnag1.Atk - Monster1.Defense
 			if attaqueJoueur < 0 {
 				attaqueJoueur = 0
 			}
-			m1.Hp -= attaqueJoueur
+			Monster1.Hp -= attaqueJoueur
 
-			fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", p1.Name, m1.name, attaqueJoueur)
+			fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", Personnag1.Name, Monster1.Name, attaqueJoueur)
 
 			// Vérifier si le Monstre est toujours en vie
-			if m1.Hp <= 0 {
-				fmt.Printf("%s est vaincu!\n", m1.name)
-				GagnerXp(p1, m1)
+			if Monster1.Hp <= 0 {
+				fmt.Printf("%s est vaincu!\n", Monster1.Name)
+				GagnerXp(Personnag1, Monster1)
 				break
 			}
 
 			// Tour du Monstre
-			attaqueJoueur2 := m1.Atk - p1.Defense
+			attaqueJoueur2 := Monster1.Atk - Personnag1.Defense
 			if attaqueJoueur2 < 0 {
 				attaqueJoueur2 = 0
 			}
-			p1.Hp -= attaqueJoueur2
+			Personnag1.Hp -= attaqueJoueur2
 
-			fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", m1.name, p1.Name, attaqueJoueur2)
+			fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", Monster1.Name, Personnag1.Name, attaqueJoueur2)
 			Tours++
 			// Apply goblin's attack pattern if it was activated
 			if goblinPatternActivated {
 				// Reset goblin's attack back to its original value
-				m1.Atk /= 2
+				Monster1.Atk /= 2
 			}
 			fmt.Println("-----------------------------------------------------------------------------")
 
 			// Vérifier si le Joueur est toujours en vie
-			if p1.Hp <= 0 {
-				fmt.Printf("%s est vaincu!\n", p1.Name)
-				p1.Dead()
+			if Personnag1.Hp <= 0 {
+				fmt.Printf("%s est vaincu!\n", Personnag1.Name)
+				Personnag1.Dead()
 				break
 			}
 		}
-		for (p1.Hp > 0 && m1.Hp > 0 && Tours1 == 1 && p1.Initiative < m1.Initiative) || (Tours1 > 1 && p1.Hp > 0 && m1.Hp > 0) {
+		for (Personnag1.Hp > 0 && Monster1.Hp > 0 && Tours1 == 1 && Personnag1.Initiative < Monster1.Initiative) || (Tours1 > 1 && Personnag1.Hp > 0 && Monster1.Hp > 0) {
 			CombatStarted = true
 			fmt.Printf("Vous etes au tour %d\n", Tours)
-			goblinPatternActivated := GoblinPattern(m1)
+			goblinPatternActivated := GoblinPattern(Monster1)
 
 			// Tour du Monstre
-			attaqueJoueur2 := m1.Atk - p1.Defense
+			attaqueJoueur2 := Monster1.Atk - Personnag1.Defense
 			if attaqueJoueur2 < 0 {
 				attaqueJoueur2 = 0
 			}
-			p1.Hp -= attaqueJoueur2
+			Personnag1.Hp -= attaqueJoueur2
 
-			fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", m1.name, p1.Name, attaqueJoueur2)
+			fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", Monster1.Name, Personnag1.Name, attaqueJoueur2)
 			Tours++
 			// Apply goblin's attack pattern if it was activated
 			if goblinPatternActivated {
 				// Reset goblin's attack back to its original value
-				m1.Atk /= 2
+				Monster1.Atk /= 2
 			}
 			fmt.Println("-----------------------------------------------------------------------------")
 
 			// Vérifier si le Joueur est toujours en vie
-			if p1.Hp <= 0 {
-				fmt.Printf("%s est vaincu!\n", p1.Name)
-				p1.Dead()
+			if Personnag1.Hp <= 0 {
+				fmt.Printf("%s est vaincu!\n", Personnag1.Name)
+				Personnag1.Dead()
 				break
 			}
 
 			// Tour du Joueur 1
-			charTurn(p1, m1, spells)
-			attaqueJoueur := p1.Atk - m1.Defense
+			charTurn(Personnag1, Monster1, spells)
+			attaqueJoueur := Personnag1.Atk - Monster1.Defense
 			if attaqueJoueur < 0 {
 				attaqueJoueur = 0
 			}
-			m1.Hp -= attaqueJoueur
+			Monster1.Hp -= attaqueJoueur
 
-			fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", p1.Name, m1.name, attaqueJoueur)
+			fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", Personnag1.Name, Monster1.Name, attaqueJoueur)
 
 			// Vérifier si le Monstre est toujours en vie
-			if m1.Hp <= 0 {
-				fmt.Printf("%s est vaincu!\n", m1.name)
-				GagnerXp(p1, m1)
+			if Monster1.Hp <= 0 {
+				fmt.Printf("%s est vaincu!\n", Monster1.Name)
+				GagnerXp(Personnag1, Monster1)
 				break
 			}
 

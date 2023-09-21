@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func Forgeron(personnage *Personnage) {
+func Forgeron(P1 *Personnage) {
 	var choice int
 	fmt.Println("Bienvenue dans la forge, en quoi puis-je vous etres utile ? (1. Forge / 2. Autre)")
 	fmt.Scan(&choice)
@@ -22,15 +22,15 @@ func Forgeron(personnage *Personnage) {
 			fmt.Scan(&choice)
 			switch choice {
 			case 1:
-				if count, ok := personnage.Inventory["Plume de Corbeau"]; ok && count > 0 {
-					if count, ok := personnage.Inventory["Cuir de Sanglier"]; ok && count > 0 {
-						if personnage.Gold >= 5 {
-							if personnage.LimiteInventory() {
-								personnage.Inventory["Chapeau de l'aventurier"]++
-								personnage.Inventory["Plume de Corbeau"]--
-								personnage.Inventory["Cuir de Sanglier"]--
-								personnage.Gold = -5
-								personnage.RemoveZeroValueItems()
+				if count, ok := P1.Inventory["Plume de Corbeau"]; ok && count > 0 {
+					if count, ok := P1.Inventory["Cuir de Sanglier"]; ok && count > 0 {
+						if P1.Gold >= 5 {
+							if P1.LimiteInventory() {
+								P1.Inventory["Chapeau de l'aventurier"]++
+								P1.Inventory["Plume de Corbeau"]--
+								P1.Inventory["Cuir de Sanglier"]--
+								P1.Gold = -5
+								P1.RemoveZeroValueItems()
 							}
 						} else {
 							fmt.Println("Vous n'avez pas asser d'argent")
@@ -53,15 +53,15 @@ func Forgeron(personnage *Personnage) {
 			fmt.Scan(&choice)
 			switch choice {
 			case 1:
-				if count, ok := personnage.Inventory["Fourrure de loup"]; ok && count > 1 {
-					if count, ok := personnage.Inventory["Peau de Troll"]; ok && count > 0 {
-						if personnage.Gold >= 5 {
-							if personnage.LimiteInventory() {
-								personnage.Inventory["Tunique de l'aventurier"]++
-								personnage.Inventory["Fourrure de loup"] = -2
-								personnage.Inventory["Peau de Troll"]--
-								personnage.Gold = -5
-								personnage.RemoveZeroValueItems()
+				if count, ok := P1.Inventory["Fourrure de loup"]; ok && count > 1 {
+					if count, ok := P1.Inventory["Peau de Troll"]; ok && count > 0 {
+						if P1.Gold >= 5 {
+							if P1.LimiteInventory() {
+								P1.Inventory["Tunique de l'aventurier"]++
+								P1.Inventory["Fourrure de loup"] = -2
+								P1.Inventory["Peau de Troll"]--
+								P1.Gold = -5
+								P1.RemoveZeroValueItems()
 							}
 						} else {
 							fmt.Println("Vous n'avez pas asser d'argent")
@@ -84,15 +84,15 @@ func Forgeron(personnage *Personnage) {
 			fmt.Scan(&choice)
 			switch choice {
 			case 1:
-				if count, ok := personnage.Inventory["Fourrure de loup"]; ok && count > 0 {
-					if count, ok := personnage.Inventory["Cuir de Sanglier"]; ok && count > 0 {
-						if personnage.Gold >= 5 {
-							if personnage.LimiteInventory() {
-								personnage.Inventory["Bottes de l'aventurier"]++
-								personnage.Inventory["Fourrure de loup"]--
-								personnage.Inventory["Cuir de Sanglier"]--
-								personnage.Gold = -5
-								personnage.RemoveZeroValueItems()
+				if count, ok := P1.Inventory["Fourrure de loup"]; ok && count > 0 {
+					if count, ok := P1.Inventory["Cuir de Sanglier"]; ok && count > 0 {
+						if P1.Gold >= 5 {
+							if P1.LimiteInventory() {
+								P1.Inventory["Bottes de l'aventurier"]++
+								P1.Inventory["Fourrure de loup"]--
+								P1.Inventory["Cuir de Sanglier"]--
+								P1.Gold = -5
+								P1.RemoveZeroValueItems()
 							}
 						} else {
 							fmt.Println("Vous n'avez pas asser d'argent")
