@@ -61,3 +61,8 @@ type Monstre struct {
 	Initiative int
 	XpDrop     int
 }
+type Spell struct {
+	name    string
+	damage  int
+	useMana int
+}

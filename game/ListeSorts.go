@@ -1,8 +1,10 @@
 package game
 
-import "fmt"
+import (
+	"fmt"
+)
 
-func SpellBook(P1 *Personnage, Spell *Spells) {
+func InitSpell(P1 *Personnage, Spells Spell) string {
 	s1 := Spell{
 		"Boule de Feu Suprême", 18, 6,
 	}
@@ -13,11 +15,12 @@ func SpellBook(P1 *Personnage, Spell *Spells) {
 	s3 := Spell{
 		"Hakaï", 999, 99,
 	}
+
 	spell1 := "Livre de sort : " + s1.name
 	for _, skill := range P1.Spells {
 		if skill == spell1 {
 			fmt.Printf("Vous avez déjà appris le sort %s \n", s1.name)
-			return
+			return spell1
 		}
 	}
 	P1.Spells = append(P1.Spells, spell1)
@@ -27,7 +30,7 @@ func SpellBook(P1 *Personnage, Spell *Spells) {
 	for _, skill := range P1.Spells {
 		if skill == spell2 {
 			fmt.Printf("Vous avez déjà appris le %s \n", s2.name)
-			return
+			return spell2
 		}
 	}
 	P1.Spells = append(P1.Spells, spell2)
@@ -37,11 +40,33 @@ func SpellBook(P1 *Personnage, Spell *Spells) {
 	for _, skill := range P1.Spells {
 		if skill == spellD {
 			fmt.Printf("Vous avez déjà appris le %s \n", s3.name)
-			return
+			return spellD
 		}
 	}
 	P1.Spells = append(P1.Spells, spellD)
 	fmt.Println("Sort appris :", spellD)
+
+	return (Spells.name)
+}
+
+func FightSpell(P1 *Personnage, s1 Spell, s2 Spell, s3 Spell) {
+	fmt.Println("Choisissez quel sort vous souhaitez utiliser :")
+	fmt.Printf("Vous possédez %s comme sorts", P1.Skills[0:])
+	var spell int
+	fmt.Scan(&spell)
+
+	switch spell {
+
+	case 1:
+		fmt.Printf("Vous avez utilisé %s et infligé %d dégâts à l'adversaire", s1.name, s1.damage)
+		fmt.Printf("Vous avez utilisé %d de Mana", s1.useMana)
+	case 2:
+		fmt.Printf("Vous avez utilisé %s et infligé %d dégâts à l'adversaire", s2.name, s2.damage)
+		fmt.Printf("Vous avez utilisé %d de Mana", s2.useMana)
+	case 3:
+		fmt.Printf("Vous avez utilisé %s et infligé %d dégâts à l'adversaire", s3.name, s3.damage)
+		fmt.Printf("Vous avez utilisé %d de Mana", s3.useMana)
+	}
 
 }
 

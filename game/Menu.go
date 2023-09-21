@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-var Spells Spell
+var S Spell
 var P1 Personnage
 var Monstre1 Monstre
 var Marchand1 Marchand
@@ -26,7 +26,7 @@ func Menu() {
 		case 1:
 			P1 := CharCreation()
 			Monstre1 := InitGoblin()
-			Spells := InitSpells()
+
 			Marchand1 := NewMarchand()
 			var choice1 int
 			fmt.Print("voulez-vous un tutoriel ? 1.Oui / 2.Non ")
@@ -34,7 +34,7 @@ func Menu() {
 			switch choice1 {
 			case 1:
 				{
-					Tutorial(P1, Monstre1, Spells)
+					Tutorial(P1, Monstre1)
 				}
 			case 2:
 				break
@@ -64,7 +64,7 @@ func Menu() {
 				case 1:
 					P1.DisplayInfo()
 				case 2:
-					P1.BaseInventory(Monstre1, Spells)
+					P1.BaseInventory(Monstre1)
 				case 3:
 					var merchantChoice int
 					fmt.Print("Veux-tu acheter ou vendre un objet ? (1.Acheter/2.Vendre): ")
@@ -79,7 +79,7 @@ func Menu() {
 				case 4:
 
 				case 5:
-					Fight(P1, Monstre1, Spells)
+					Fight(P1, Monstre1)
 				case 9:
 
 				case 0:

@@ -41,30 +41,13 @@ func (P1 *Personnage) FightInventory(Monstre1 *Monstre) {
 			}
 
 		case 4:
-			fmt.Println("Choisissez quel sort vous souhaitez utiliser :")
-			fmt.Printf("Vous possédez %s comme sorts", P1.Skills[0:])
-			var spell int
-			fmt.Scan(&spell)
-			switch spell {
-			case 1:
-				s1 := Spell{
-					"Boule de Feu Suprême", 18, 6,
-				}
-			case 2:
-				s2 := Spell{
-					"Coup de poing vénère", 8, 6,
-				}
-			case 3:
-				s3 := Spell{
-					"Hakaï", 999, 99,
-				}
+			FightSpell(P1, S, S, S)
 
-			case 0:
-				return
+		case 0:
+			return
 
-			default:
-				fmt.Println("Choix invalide.")
-			}
+		default:
+			fmt.Println("Choix invalide.")
 		}
 	}
 }
