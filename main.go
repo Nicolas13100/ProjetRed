@@ -3,7 +3,6 @@ package main
 import (
 	"ProjectRed/game"
 	"ProjectRed/utility"
-	"bufio"
 	"fmt"
 	"os"
 	"os/exec"
@@ -86,7 +85,7 @@ func main() {
 				case 1:
 					personnage.DisplayInfo()
 				case 2:
-					personnage.AccessInventory(goblin, spells)
+					personnage.BaseInventory(goblin, spells)
 				case 3:
 					var merchantChoice int
 					fmt.Print("Veux-tu acheter ou vendre un objet ? (1.Acheter/2.Vendre): ")
@@ -98,13 +97,10 @@ func main() {
 						m.Sell(personnage, "")
 					}
 
-					// Wait for user to press Enter to continue
-					fmt.Print("Taper Entrer pour continuer...")
-					bufio.NewReader(os.Stdin).ReadBytes('\n')
 				case 4:
 					utility.Forgeron(personnage)
 				case 5:
-					game.TrainFight(personnage, goblin, spells)
+					game.Fight(personnage, goblin, spells)
 				case 9:
 					utility.QuiSontIls()
 				case 0:

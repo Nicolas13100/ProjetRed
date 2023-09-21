@@ -15,6 +15,7 @@ func Tutorial(p1 *Personnage, m1 *Monstre, spells *Spell) {
 }
 
 func TrainFight(p1 *Personnage, m1 *Monstre, spells *Spell) {
+	fmt.Println("Début du combat d'entrainement")
 	for (p1.Hp > 0 && m1.Hp > 0 && Tours == 1 && p1.Initiative >= m1.Initiative) || (Tours > 1 && p1.Hp > 0 && m1.Hp > 0) {
 		fmt.Printf("Vous etes au tour %d\n", Tours)
 		goblinPatternActivated := GoblinPattern(m1)
@@ -119,7 +120,7 @@ func charTurn(p1 *Personnage, m1 *Monstre, spells *Spell) {
 	case 1:
 		fmt.Println("Attaque basic")
 	case 2:
-		p1.AccessInventory(m1, spells)
+		p1.FightInventory(m1, spells)
 	}
 }
 
