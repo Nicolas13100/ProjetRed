@@ -18,8 +18,8 @@ func CharCreation() *Personnage {
 		DefBonus:        0,
 		InitiativeBonus: 0,
 	}
-	var name string
-	var race string
+	var Name string
+	var Race string
 	for {
 		ClearConsole()
 		fmt.Println("Création de votre personnage :")
@@ -27,22 +27,22 @@ func CharCreation() *Personnage {
 		// Demander à l'utilisateur de choisir son nom
 		fmt.Print("Entrez votre nom : ")
 
-		fmt.Scan(&name)
+		fmt.Scan(&Name)
 		maxLetters := 10
-		if !IsValidName(name, maxLetters) {
+		if !IsValidName(Name, maxLetters) {
 			fmt.Printf("Le nom doit contenir uniquement des lettres et avoir au maximum %d caractères.\n", maxLetters)
 			continue
 		}
 		// Vérifier si le nom contient uniquement des lettres
-		if !OnlyLetters(name) {
+		if !OnlyLetters(Name) {
 			fmt.Println("Le nom doit contenir uniquement des lettres.")
 			continue
 		}
 
 		// Confirm the name
 		tc := cases.Title(language.English)
-		name = tc.String(strings.ToLower(name))
-		fmt.Printf("Votre nom sera %s, est-ce correct ? (1.Oui/2.Non) ", name)
+		P1.Name = tc.String(strings.ToLower(P1.Name))
+		fmt.Printf("Votre nom sera %s, est-ce correct ? (1.Oui/2.Non) ", P1.Name)
 		var confirmation int
 		fmt.Scan(&confirmation)
 
@@ -51,7 +51,7 @@ func CharCreation() *Personnage {
 			tc := cases.Title(language.English)
 
 			// Convert the name to Title case
-			name = tc.String(strings.ToLower(name))
+			Name = tc.String(strings.ToLower(Name))
 			break
 		} else if confirmation == 2 {
 			// If user chooses "no", restart the loop
@@ -66,12 +66,12 @@ func CharCreation() *Personnage {
 		fmt.Print("Humain : Vous commencez avec 100 PV Max\n")
 		fmt.Print("Elfe : Vous commencez avec 80 PV Max\n")
 		fmt.Println("Nain : Vous commencez avec 120 PV Max")
-		fmt.Scan(&race)
-		switch race {
+		fmt.Scan(&Race)
+		switch Race {
 		case "Humain":
-			p1 := &Personnage{
-				Name:         name,
-				Race:         race,
+			P1 := &Personnage{
+				Name:         Name,
+				Race:         Race,
 				Equipement:   equipement,
 				Level:        1,
 				Xp:           0,
@@ -92,12 +92,12 @@ func CharCreation() *Personnage {
 				Defense:    0,
 				Initiative: 10,
 			}
-			return p1
+			return P1
 
 		case "Elfe":
-			p1 := &Personnage{
-				Name:         name,
-				Race:         race,
+			P1 := &Personnage{
+				Name:         Name,
+				Race:         Race,
 				Equipement:   equipement,
 				Level:        1,
 				Xp:           0,
@@ -118,12 +118,12 @@ func CharCreation() *Personnage {
 				Defense:    0,
 				Initiative: 20,
 			}
-			return p1
+			return P1
 
 		case "Nain":
-			p1 := &Personnage{
-				Name:         name,
-				Race:         race,
+			P1 := &Personnage{
+				Name:         Name,
+				Race:         Race,
 				Equipement:   equipement,
 				Level:        1,
 				Xp:           0,
@@ -144,13 +144,13 @@ func CharCreation() *Personnage {
 				Defense:    0,
 				Initiative: 5,
 			}
-			fmt.Printf("Bienvenue à toi : %s\n", name)
-			return p1
+			fmt.Printf("Bienvenue à toi : %s\n", Name)
+			return P1
 
 		case "Dieu":
-			p1 := &Personnage{
-				Name:         name,
-				Race:         race,
+			P1 := &Personnage{
+				Name:         Name,
+				Race:         Race,
 				Equipement:   equipement,
 				Level:        99,
 				HpMax:        999999,
@@ -169,27 +169,27 @@ func CharCreation() *Personnage {
 				Defense:    999,
 				Initiative: 999,
 			}
-			fmt.Printf("Bienvenue à toi : %s\n", name)
-			return p1
+			fmt.Printf("Bienvenue à toi : %s\n", Name)
+			return P1
 		default:
-			fmt.Printf("Race inconnue : %s\n", race)
+			fmt.Printf("Race inconnue : %s\n", Race)
 			continue
 		}
 	}
 }
 
-func (p1 *Personnage) DisplayInfo() {
+func (P1 Personnage) DisplayInfo() {
 	// Affichage des informations du Personnage p1
 
 	for {
 		ClearConsole()
-		fmt.Println("Nom:", p1.Name)
-		fmt.Println("Classe:", p1.Race)
-		fmt.Println("Niveau:", p1.Level)
-		fmt.Println("Points de vie maximum:", p1.HpMax+p1.Equipement.HPBonus)
-		fmt.Println("Points de vie actuels:", p1.Hp+p1.Equipement.HPBonus)
-		fmt.Println("Cash:", p1.Gold)
-		fmt.Println("Sorts", p1.Skills)
+		fmt.Println("Nom:", P1.Name)
+		fmt.Println("Classe:", P1.Race)
+		fmt.Println("Niveau:", P1.Level)
+		fmt.Println("Points de vie maximum:", P1.HpMax+P1.Equipement.HPBonus)
+		fmt.Println("Points de vie actuels:", P1.Hp+P1.Equipement.HPBonus)
+		fmt.Println("Cash:", P1.Gold)
+		fmt.Println("Sorts", P1.Skills)
 		// Affichage de l'inventaire
 		fmt.Println("\nType 0 to come back to main menu")
 

@@ -21,8 +21,6 @@ func ClearConsole() {
 
 func main() {
 	// init perso, init item, init skill
-	game.NewMarchand()
-	game.CharCreation()
-	game.InitGoblin()
 	game.Menu()
+
 }
