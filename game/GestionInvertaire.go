@@ -92,6 +92,7 @@ func (P1 *Personnage) BaseInventory(Monstre1 *Monstre) {
 				fmt.Println("Vous n'avez pas de Potion de mana dans votre inventaire.")
 			}
 		case 4:
+
 			P1.ShowSpells()
 
 		case 5:
@@ -126,7 +127,7 @@ func (P1 *Personnage) BaseInventory(Monstre1 *Monstre) {
 				case 3:
 					P1.DesequiperLeg()
 				case 4:
-					continue
+
 				}
 			case 3:
 				continue

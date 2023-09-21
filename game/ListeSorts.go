@@ -71,8 +71,19 @@ func FightSpell(P1 *Personnage, s1 Spell, s2 Spell, s3 Spell) {
 }
 
 func (P1 Personnage) ShowSpells() {
-	fmt.Println("Sort Disponible:")
-	for i, spell := range P1.Spells {
-		fmt.Printf("%d. %s\n", i+1, spell)
+	fmt.Println("Souhaitez-vous continuer ou retourner en arriere (1 : Oui / 2 : Non)")
+	var choix int
+	fmt.Scan(&choix)
+	switch choix {
+	case 1:
+
+		fmt.Println("Sort Disponible:")
+		for i, spell := range P1.Spells {
+			fmt.Printf("%d. %s\n", i+1, spell)
+		}
+	case 2:
+
+		fmt.Println("Aucun sort disponible")
+		return
 	}
 }
