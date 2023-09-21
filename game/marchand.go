@@ -1,21 +1,25 @@
-package npc
+package game
 
 import (
-	"ProjectRed/game"
 	"fmt"
 )
 
-type Marchand struct {
-	inventory map[string]int
-	prices    map[string]int
-	Gold      int
-}
-
-func NewMarchand(personnage *game.Personnage) *Marchand {
-	return &Marchand{
-
-		Gold: 200,
-		inventory: map[string]int{
+func NewMarchand() *Marchand {
+	m1 := Marchand{
+		Name:       "John",
+		Race:       "Humain",
+		Level:      1,
+		Xp:         0,
+		XpMax:      100,
+		HpMax:      100,
+		Hp:         100,
+		Gold:       200,
+		Mana:       40,
+		ManaMax:    100,
+		Atk:        5,
+		Defense:    0,
+		Initiative: 10,
+		Inventory: map[string]int{
 			"Augmentation d'inventaire":    3,
 			"Potion de soin":               3,
 			"Potion de poison":             3,
@@ -26,7 +30,7 @@ func NewMarchand(personnage *game.Personnage) *Marchand {
 			"Cuir de Sanglier":             1,
 			"Plume de Corbeau":             1,
 		},
-		prices: map[string]int{
+		Prices: map[string]int{
 			"Potion de soin":   3,
 			"Potion de poison": 6,
 			"Potion de mana":   8,
@@ -40,12 +44,13 @@ func NewMarchand(personnage *game.Personnage) *Marchand {
 			"Plume de Corbeau":             1,
 		},
 	}
+	return &m1
 }
 
-func (m *Marchand) Buy(personnage *game.Personnage) {
+func Buy(personnage *Personnage, m1 *Marchand) {
 	fmt.Println("Les objets disponibles à l'achat sont :")
 	var itemToBuy string
-	for key, value := range m.inventory {
+	for key, value := range m1.Inventory {
 		fmt.Println(key, ": ", value)
 	}
 	fmt.Println("Que voulez-vous acheter ? (1.Potion/2.sort/3.Objet)")
@@ -150,11 +155,11 @@ func (m *Marchand) Buy(personnage *game.Personnage) {
 		return
 	}
 
-	switch quantity := m.inventory[itemToBuy]; {
+	switch quantity := m1.Inventory[itemToBuy]; {
 	case quantity > 0:
 		if personnage.LimiteInventory() {
-			m.inventory[itemToBuy]--
-			price, exists := m.prices[itemToBuy]
+			m1.Inventory[itemToBuy]--
+			price, exists := m1.Prices[itemToBuy]
 			if exists {
 				personnage.Gold -= price // Deduct the price from character's gold
 				personnage.Inventory[itemToBuy]++
@@ -169,7 +174,7 @@ func (m *Marchand) Buy(personnage *game.Personnage) {
 		fmt.Println("Désolé, je n'ai pas cet objet en stock.")
 	}
 }
-func (m *Marchand) Sell(Personnage *game.Personnage, item string) {
+func Sell(Personnage *Personnage, m1 *Marchand) {
 	fmt.Println("Les objets disponibles à la vente sont :")
 	for key, value := range Personnage.Inventory {
 		fmt.Println(key, value)
@@ -267,16 +272,16 @@ func (m *Marchand) Sell(Personnage *game.Personnage, item string) {
 		}
 
 	}
-	price, exists := m.prices[itemToSell]
+	price, exists := m1.Prices[itemToSell]
 	if !exists {
 		fmt.Println("Désolé, le prix de vente de cet objet n'est pas défini.")
 		return
 	}
 	if quantity, ok := Personnage.Inventory[itemToSell]; ok && quantity > 0 {
 		// Vérifier si le marchand a assez d'argent pour acheter l'objet
-		if m.Gold >= price {
-			m.inventory[itemToSell]++
-			m.Gold -= price
+		if m1.Gold >= price {
+			m1.Inventory[itemToSell]++
+			m1.Gold -= price
 			Personnage.Gold += price
 			Personnage.Inventory[itemToSell]--
 			fmt.Println("Vous avez vendu un(e)", itemToSell, "pour", price, "pièces d'or.")

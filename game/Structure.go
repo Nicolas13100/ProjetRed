@@ -30,3 +30,34 @@ type Equipment struct {
 	DefBonus        int
 	InitiativeBonus int
 }
+
+type Marchand struct {
+	Name         string
+	Race         string
+	Level        int
+	Xp           int
+	XpMax        int
+	HpMax        int
+	Hp           int
+	Spells       []string
+	Inventory    map[string]int
+	Skills       []string
+	Gold         int
+	InventoryCap int
+	Mana         int
+	ManaMax      int
+	Atk          int
+	Defense      int
+	Initiative   int
+	Prices       map[string]int
+}
+
+type Monstre struct {
+	name       string
+	HpMax      int
+	Hp         int
+	Atk        int
+	Defense    int
+	Initiative int
+	XpDrop     int
+}
