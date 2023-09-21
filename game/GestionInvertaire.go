@@ -40,7 +40,8 @@ func (p1 *Personnage) FightInventory(m1 *Monstre, spells *Spell) {
 			}
 
 		case 0:
-			break
+			return
+
 		default:
 			fmt.Println("Choix invalide.")
 		}
@@ -128,7 +129,7 @@ func (p1 *Personnage) BaseInventory(m1 *Monstre, spells *Spell) {
 				continue
 			}
 		case 0:
-			continue
+			return
 		default:
 			fmt.Println("Choix invalide.")
 		}
