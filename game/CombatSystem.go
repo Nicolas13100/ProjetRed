@@ -4,12 +4,8 @@ import "fmt"
 
 var Tours int
 
-<<<<<<< HEAD
-func Tutorial(p1 *Personnage, m1 *Monstre, spells *Spell) {
-	ClearConsole()
-=======
 func Tutorial(P1 *Personnage, Monstre1 *Monstre, Spells *Spell) {
->>>>>>> 0388fe029279a2edeb5e34bb5fa836b880afb02c
+	ClearConsole()
 	fmt.Println("Bienvenue dans le tutoriel")
 	fmt.Println("Nous allons vous apprendre les bases du combat en tour par tour")
 	fmt.Println("Vous allez vous battre contre un goblin d'entrainement")
