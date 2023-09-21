@@ -113,6 +113,7 @@ func charTurn(p1 *Personnage, m1 *Monstre, spells *Spell) {
 	fmt.Println("C'est votre tour, que voulez vous faire ?")
 	fmt.Println("1 : Attaquer")
 	fmt.Println("2 : Ouvrir l'inventaire")
+	fmt.Println("3 : Utilisé un sort")
 	var choice int
 	fmt.Scan(&choice)
 
@@ -121,6 +122,7 @@ func charTurn(p1 *Personnage, m1 *Monstre, spells *Spell) {
 		fmt.Println("Attaque basic")
 	case 2:
 		p1.FightInventory(m1, spells)
+	case 3:
 	}
 }
 
