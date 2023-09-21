@@ -2,7 +2,7 @@ package game
 
 import "fmt"
 
-func (P1 *Personnage) FightInventory(Monstre1 *Monstre, Spells *Spell) {
+func (P1 *Personnage) FightInventory(Monstre1 *Monstre) {
 	for {
 		ClearConsole()
 		fmt.Println("\nInventaire:")
@@ -14,6 +14,7 @@ func (P1 *Personnage) FightInventory(Monstre1 *Monstre, Spells *Spell) {
 		fmt.Println("1. Utiliser une potion de soin")
 		fmt.Println("2. Utiliser une potion de poison")
 		fmt.Println("3. Utiliser une potion de mana")
+		fmt.Println("4. Utiliser un sort")
 		fmt.Println("0. Retourner en arrière")
 
 		var input int
@@ -39,17 +40,36 @@ func (P1 *Personnage) FightInventory(Monstre1 *Monstre, Spells *Spell) {
 				fmt.Println("Vous n'avez pas de Potion de mana dans votre inventaire.")
 			}
 
-		case 0:
-			return
+		case 4:
+			fmt.Println("Choisissez quel sort vous souhaitez utiliser :")
+			fmt.Printf("Vous possédez %s comme sorts", P1.Skills[0:])
+			var spell int
+			fmt.Scan(&spell)
+			switch spell {
+			case 1:
+				s1 := Spell{
+					"Boule de Feu Suprême", 18, 6,
+				}
+			case 2:
+				s2 := Spell{
+					"Coup de poing vénère", 8, 6,
+				}
+			case 3:
+				s3 := Spell{
+					"Hakaï", 999, 99,
+				}
 
-		default:
-			fmt.Println("Choix invalide.")
+			case 0:
+				return
+
+			default:
+				fmt.Println("Choix invalide.")
+			}
 		}
-		continue
 	}
 }
 
-func (P1 *Personnage) BaseInventory(Monstre1 *Monstre, Spells *Spell) {
+func (P1 *Personnage) BaseInventory(Monstre1 *Monstre) {
 	for {
 		ClearConsole()
 		fmt.Println("\nInventaire:")

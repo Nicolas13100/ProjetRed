@@ -4,25 +4,25 @@ import "fmt"
 
 var Tours int
 
-func Tutorial(P1 *Personnage, Monstre1 *Monstre, Spells *Spell) {
+func Tutorial(P1 *Personnage, Monstre1 *Monstre) {
 	ClearConsole()
 	fmt.Println("Bienvenue dans le tutoriel")
 	fmt.Println("Nous allons vous apprendre les bases du combat en tour par tour")
 	fmt.Println("Vous allez vous battre contre un goblin d'entrainement")
 	fmt.Println("Bonne chance")
 	Tours = 1
-	TrainFight(P1, Monstre1, Spells)
+	TrainFight(P1, Monstre1)
 
 }
 
-func TrainFight(P1 *Personnage, Monstre1 *Monstre, Spells *Spell) {
+func TrainFight(P1 *Personnage, Monstre1 *Monstre) {
 	fmt.Println("Début du combat d'entrainement")
 	for (P1.Hp > 0 && Monstre1.Hp > 0 && Tours == 1 && P1.Initiative >= Monstre1.Initiative) || (Tours > 1 && P1.Hp > 0 && Monstre1.Hp > 0) {
 		fmt.Printf("Vous etes au tour %d\n", Tours)
 		goblinPatternActivated := GoblinPattern(Monstre1)
 
 		// Tour du Joueur 1
-		charTurn(P1, Monstre1, Spells)
+		charTurn(P1, Monstre1)
 		attaqueJoueur := P1.Atk - Monstre1.Defense
 		if attaqueJoueur < 0 {
 			attaqueJoueur = 0
@@ -86,7 +86,7 @@ func TrainFight(P1 *Personnage, Monstre1 *Monstre, Spells *Spell) {
 			P1.Dead()
 			break
 		} // Tour du Joueur 1
-		charTurn(P1, Monstre1, Spells)
+		charTurn(P1, Monstre1)
 		attaqueJoueur := P1.Atk - Monstre1.Defense
 		if attaqueJoueur < 0 {
 			attaqueJoueur = 0
@@ -107,7 +107,7 @@ func GetTours() int {
 	return Tours + 1
 }
 
-func charTurn(P1 *Personnage, Monstre1 *Monstre, Spells *Spell) {
+func charTurn(P1 *Personnage, Monstre1 *Monstre) {
 	fmt.Printf("Vous avez %d Pv / %d Pv \n", P1.Hp, P1.HpMax)
 	fmt.Printf("Il reste %d Pv / %d Pv à l'ennemi \n", Monstre1.Hp, Monstre1.HpMax)
 
@@ -122,10 +122,10 @@ func charTurn(P1 *Personnage, Monstre1 *Monstre, Spells *Spell) {
 	case 1:
 		fmt.Println("Attaque basic")
 	case 2:
-		P1.FightInventory(Monstre1, Spells)
+		P1.FightInventory(Monstre1)
 	case 3:
 		P1.ShowSpells()
-		InitSpells()
+
 	}
 }
 
