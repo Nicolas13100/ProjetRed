@@ -9,7 +9,6 @@ func (p1 *Personnage) FightInventory(m1 *Monstre, spells *Spell) {
 		fmt.Println("Cash :", p1.Gold)
 		for key, value := range p1.Inventory {
 			fmt.Printf("%s: %d \n", key, value)
-
 		}
 		fmt.Println("\nQue voulez-vous faire ?")
 		fmt.Println("1. Utiliser une potion de soin")
@@ -129,7 +128,7 @@ func (p1 *Personnage) BaseInventory(m1 *Monstre, spells *Spell) {
 				continue
 			}
 		case 0:
-			return
+			continue
 		default:
 			fmt.Println("Choix invalide.")
 		}

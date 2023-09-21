@@ -1,11 +1,10 @@
-package npc
+package game
 
 import (
-	"ProjectRed/game"
 	"fmt"
 )
 
-func Forgeron(personnage *game.Personnage) {
+func Forgeron(personnage *Personnage) {
 	var choice int
 	fmt.Println("Bienvenue dans la forge, en quoi puis-je vous etres utile ? (1. Forge / 2. Autre)")
 	fmt.Scan(&choice)

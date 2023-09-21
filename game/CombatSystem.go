@@ -124,6 +124,8 @@ func charTurn(p1 *Personnage, m1 *Monstre, spells *Spell) {
 	case 2:
 		p1.FightInventory(m1, spells)
 	case 3:
+		p1.ShowSpells()
+		InitSpells()
 	}
 }
 
