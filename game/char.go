@@ -2,6 +2,7 @@ package game
 
 import (
 	"fmt"
+	"math/rand"
 	"strings"
 
 	"golang.org/x/text/cases"
@@ -91,6 +92,8 @@ func CharCreation() *Personnage {
 				Atk:        5,
 				Defense:    0,
 				Initiative: 10,
+				x:          rand.Intn(gridSize),
+				y:          rand.Intn(gridSize),
 			}
 			return P1
 
@@ -117,6 +120,8 @@ func CharCreation() *Personnage {
 				Atk:        5,
 				Defense:    0,
 				Initiative: 20,
+				x:          rand.Intn(gridSize),
+				y:          rand.Intn(gridSize),
 			}
 			return P1
 
@@ -143,6 +148,8 @@ func CharCreation() *Personnage {
 				Atk:        5,
 				Defense:    0,
 				Initiative: 5,
+				x:          rand.Intn(gridSize),
+				y:          rand.Intn(gridSize),
 			}
 			fmt.Printf("Bienvenue à toi : %s\n", Name)
 			return P1
@@ -172,6 +179,8 @@ func CharCreation() *Personnage {
 				Atk:        999,
 				Defense:    999,
 				Initiative: 999,
+				x:          rand.Intn(gridSize),
+				y:          rand.Intn(gridSize),
 			}
 			fmt.Printf("Bienvenue à toi : %s\n", Name)
 			return P1
