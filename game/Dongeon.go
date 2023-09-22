@@ -82,7 +82,10 @@ func Dongeon(P1 *Personnage) {
 			fmt.Println("Invalid direction. Try again.")
 			continue
 		}
-
+		if nextRoom == nil {
+			fmt.Println("La sortie est bloquée. Choisissez une autre direction.")
+			continue
+		}
 		// Déplacez le joueur vers la nouvelle salle
 		currentRoom = nextRoom
 	}
