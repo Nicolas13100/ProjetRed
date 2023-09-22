@@ -1,15 +1,20 @@
 package game
 
-import "fmt"
+import (
+	"fmt"
+	"math/rand"
+	"time"
+)
 
-func NewRoom(name, description string, hasMonster bool) *Room {
+func NewRoom(name, description string, exits map[string]*Room) *Room {
 	return &Room{
 		Name:        name,
 		Description: description,
-		Exits:       make(map[string]*Room),
-		HasMonster:  hasMonster,
+		Exits:       exits,
+		HasMonster:  randomBool(),
 	}
 }
+
 func (r *Room) AddExit(direction string, room *Room) {
 	r.Exits[direction] = room
 	room.Exits[reverseDirection(direction)] = r
@@ -30,11 +35,11 @@ func reverseDirection(direction string) string {
 	}
 }
 
-func Dongeon(P1 *Personnage) {
-	forest := NewRoom("Forêt", "Vous arrivé dans une forêt dense et mystérieuse", true)
-	entrance := NewRoom("Entrée", "Vous êtes à l'entrée du dongeon", false)
-	hall := NewRoom("Hall", "Vous êtes dans un long hall", true)
-	treasureRoom := NewRoom("Salle au trésor", "Vous êtes dans une pièce remplie de trésors.", false)
+func Dungeon(P1 *Personnage) {
+	forest := NewRoom("Forêt", "Vous arrivez dans une forêt dense et mystérieuse", nil)
+	entrance := NewRoom("Entrée", "Vous êtes à l'entrée du donjon", nil)
+	hall := NewRoom("Hall", "Vous êtes dans un long hall", nil)
+	treasureRoom := NewRoom("Salle au trésor", "Vous êtes dans une pièce remplie de trésors.", nil)
 	directions := []string{"nord", "sud", "est", "ouest"}
 	currentRoom := forest
 	monsterRooms := map[*Room]bool{
@@ -89,4 +94,9 @@ func Dongeon(P1 *Personnage) {
 		// Déplacez le joueur vers la nouvelle salle
 		currentRoom = nextRoom
 	}
+}
+
+func randomBool() bool {
+	rand.Seed(time.Now().UnixNano())
+	return rand.Intn(2) == 1
 }

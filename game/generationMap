@@ -1,0 +1,126 @@
+package game
+
+import (
+	"fmt"
+	"math/rand"
+	"time"
+)
+
+type Tile int
+
+const (
+	Wall Tile = iota
+	OpenSpace
+	Stairs
+	SpecialItem
+)
+
+type Map [][]Tile
+
+type Position struct {
+	X, Y int
+}
+
+func generateRandomMap(width, height int) Map {
+	m := make(Map, height)
+	for i := range m {
+		m[i] = make([]Tile, width)
+		for j := range m[i] {
+			if i == 0 || i == height-1 || j == 0 || j == width-1 {
+				m[i][j] = Wall
+			} else {
+				if rand.Intn(100) < 70 {
+					m[i][j] = OpenSpace
+				} else {
+					m[i][j] = Wall
+				}
+			}
+		}
+	}
+	return m
+}
+
+func findStartingPosition(m Map) Position {
+	for i, row := range m {
+		for j, tile := range row {
+			if tile == OpenSpace {
+				return Position{X: j, Y: i}
+			}
+		}
+	}
+	return Position{}
+}
+
+func renderMap(m Map, playerPos Position) {
+	for i, row := range m {
+		for j, tile := range row {
+			if i == playerPos.Y && j == playerPos.X {
+				fmt.Print("P ")
+			} else {
+				switch tile {
+				case Wall:
+					fmt.Print("# ")
+				case OpenSpace:
+					fmt.Print(". ")
+				case Stairs:
+					fmt.Print("S ")
+				case SpecialItem:
+					fmt.Print("I ")
+				}
+			}
+		}
+		fmt.Println()
+	}
+}
+
+func handleStairs(m Map, playerPos Position) (Map, Position) {
+	return generateRandomMap(len(m[0]), len(m)), findStartingPosition(m)
+}
+
+func handleSpecialItem(m Map, playerPos Position) (Map, Position) {
+	return generateRandomMap(len(m[0]), len(m)), findStartingPosition(m)
+}
+
+func enterMap() (Map, Position) {
+	width, height := 10, 10
+	currentMap, playerPos := generateRandomMap(width, height), Position{}
+	return currentMap, findStartingPosition(currentMap)
+}
+
+func init() {
+	rand.Seed(time.Now().UnixNano())
+
+	currentMap, playerPos := enterMap()
+
+	for {
+		renderMap(currentMap, playerPos)
+		fmt.Println("Enter a direction (up, down, left, right): ")
+		var input string
+		fmt.Scan(&input)
+
+		switch input {
+		case "up":
+			if playerPos.Y > 0 && currentMap[playerPos.Y-1][playerPos.X] != Wall {
+				playerPos.Y--
+			}
+		case "down":
+			if playerPos.Y < len(currentMap)-1 && currentMap[playerPos.Y+1][playerPos.X] != Wall {
+				playerPos.Y++
+			}
+		case "left":
+			if playerPos.X > 0 && currentMap[playerPos.Y][playerPos.X-1] != Wall {
+				playerPos.X--
+			}
+		case "right":
+			if playerPos.X < len(currentMap[0])-1 && currentMap[playerPos.Y][playerPos.X+1] != Wall {
+				playerPos.X++
+			}
+		case "exit":
+			return
+		case "stairs":
+			currentMap, playerPos = handleStairs(currentMap, playerPos)
+		case "item":
+			currentMap, playerPos = handleSpecialItem(currentMap, playerPos)
+		}
+	}
+}
