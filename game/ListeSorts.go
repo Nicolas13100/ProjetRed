@@ -89,8 +89,13 @@ func (P1 Personnage) ShowSpells() {
 	case 1:
 
 		fmt.Println("Sort Disponible:")
+<<<<<<< HEAD
 		for i, spell := range P1.Skills {
 			fmt.Printf("%d. %s\n", i+1, spell)
+=======
+		for _, spell := range P1.Skills {
+			fmt.Printf("%d. %s\n", spell)
+>>>>>>> 178222bacf674eafa0ad8284ac9de0a21da04ddf
 		}
 	case 2:
 
