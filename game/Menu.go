@@ -76,7 +76,7 @@ func Menu() {
 				case 5:
 					Entrainement(P1)
 				case 6:
-					Dongeon(P1)
+					MapGeneration(P1)
 				case 9:
 					QuiSontIls()
 				case 0:
