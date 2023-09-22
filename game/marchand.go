@@ -4,8 +4,8 @@ import (
 	"fmt"
 )
 
-func NewMarchand() *Marchand {
-	m1 := Marchand{
+var (
+	Marchand1 = Marchand{
 		Name:       "John",
 		Race:       "Humain",
 		Level:      1,
@@ -44,8 +44,7 @@ func NewMarchand() *Marchand {
 			"Plume de Corbeau":             1,
 		},
 	}
-	return &m1
-}
+)
 
 func Buy(personnage *Personnage, m1 *Marchand) {
 	fmt.Println("Les objets disponibles à l'achat sont :")

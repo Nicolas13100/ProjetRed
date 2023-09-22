@@ -7,7 +7,6 @@ import (
 
 var P1 Personnage
 var Monstre1 Monstre
-var Marchand1 Marchand
 
 func Menu() {
 
@@ -24,7 +23,6 @@ func Menu() {
 		switch startChoice {
 		case 1:
 			P1 := CharCreation()
-			Marchand1 := NewMarchand()
 			var choice1 int
 			fmt.Print("voulez-vous un tutoriel ? 1.Oui / 2.Non ")
 			fmt.Scan(&choice1)
@@ -69,9 +67,9 @@ func Menu() {
 					fmt.Scan(&merchantChoice)
 					switch merchantChoice {
 					case 1:
-						Buy(P1, Marchand1)
+						Buy(P1, &Marchand1)
 					case 2:
-						Sell(P1, Marchand1)
+						Sell(P1, &Marchand1)
 					}
 				case 4:
 					Forgeron(P1)
