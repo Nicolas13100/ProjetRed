@@ -41,6 +41,18 @@ func (P1 *Personnage) FightInventory(Monstre1 *Monstre) {
 			}
 
 		case 4:
+			fmt.Println("Quel sort souhaitez vous utiliser ?")
+			var input int
+			fmt.Scan(&input)
+			switch input {
+			case 1:
+				Spell1(P1)
+			case 2:
+				Spell2(P1)
+			case 3:
+				Spell3(P1)
+
+			}
 
 		case 0:
 			return
@@ -91,9 +103,19 @@ func (P1 *Personnage) BaseInventory(Monstre1 *Monstre) {
 				fmt.Println("Vous n'avez pas de Potion de mana dans votre inventaire.")
 			}
 		case 4:
-
-			P1.ShowSpells()
-
+			fmt.Println("Souhaitez-vous continuer ?(1 : Oui / 2 : Non)")
+			var choix int
+			fmt.Scan(&choix)
+			switch choix {
+			case 1:
+				fmt.Println("Sort Disponible:")
+				for key, value := range P1.Skills {
+					fmt.Printf("%s. %d \n", key, value)
+					break
+				}
+			case 2:
+				return
+			}
 		case 5:
 			fmt.Println("Voulez-vous 1.équiper ou 2.désequiper un equipement ? (3. retour)")
 			var input int

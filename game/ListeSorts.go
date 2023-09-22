@@ -4,25 +4,66 @@ import (
 	"fmt"
 )
 
-func FightSpell(P1 *Personnage, s1 Spell, s2 Spell, s3 Spell) {
-	fmt.Println("Choisissez quel sort vous souhaitez utiliser :")
-	fmt.Printf("Vous possédez 1.%s")
-	var spell int
-	fmt.Scan(&spell)
+func Spell1(P1 *Personnage) {
+	var choice int
+	fmt.Println("Voulez-vous utiliser le sort Coup de poing vénère ? (1.Oui/2.Non) ")
+	fmt.Scan(&choice)
 
-	switch spell {
+	switch choice {
 
 	case 1:
-		fmt.Printf("Vous avez utilisé %s et infligé %d dégâts à l'adversaire", s1.name, s1.damage)
-		fmt.Printf("Vous avez utilisé %d de Mana", s1.useMana)
+		if P1.Mana <= 0 {
+			fmt.Println("Vous ne pouvez pas utiliser de sorts, vous n'avez pas de mana.")
+		} else if count, ok := P1.Skills["Coup de point vénère"]; ok && count > 0 {
+			Monstre1.Hp -= 8
+		}
 	case 2:
-		fmt.Printf("Vous avez utilisé %s et infligé %d dégâts à l'adversaire", s2.name, s2.damage)
-		fmt.Printf("Vous avez utilisé %d de Mana", s2.useMana)
-	case 3:
-		fmt.Printf("Vous avez utilisé %s et infligé %d dégâts à l'adversaire", s3.name, s3.damage)
-		fmt.Printf("Vous avez utilisé %d de Mana", s3.useMana)
+		{
+			fmt.Printf("Vous n'avez pas utilisé de sort.")
+			return
+		}
 	}
+}
 
+func Spell2(P1 *Personnage) {
+	var choice int
+	fmt.Println("Voulez-vous utiliser le sort boule de feu suprême ? (1.Oui/2.Non) ")
+	fmt.Scan(&choice)
+
+	switch choice {
+	case 1:
+		if P1.Mana <= 0 {
+			fmt.Println("Vous ne pouvez pas utiliser de sorts, vous n'avez pas de mana.")
+		} else if count, ok := P1.Skills["boule de feu suprême"]; ok && count > 0 {
+			Monstre1.Hp -= 18
+		}
+	case 2:
+		{
+			fmt.Printf("Vous n'avez pas utilisé de sort.")
+			return
+		}
+	}
+}
+
+func Spell3(P1 *Personnage) {
+	var choice int
+	fmt.Println("Voulez-vous utiliser le sort Hakaï ? (1.Oui/2.Non) ")
+	fmt.Scan(&choice)
+
+	switch choice {
+
+	case 1:
+		if P1.Mana <= 0 {
+			fmt.Println("Vous ne pouvez pas utiliser de sorts, vous n'avez pas de mana.")
+		} else if count, ok := P1.Skills["Hakaï"]; ok && count > 0 {
+			Monstre1.Hp -= 9999
+		}
+	case 2:
+		{
+			fmt.Printf("Vous n'avez pas utilisé de sort.")
+			return
+		}
+	}
 }
 
 func (P1 Personnage) ShowSpells() {
@@ -33,8 +74,8 @@ func (P1 Personnage) ShowSpells() {
 	case 1:
 
 		fmt.Println("Sort Disponible:")
-		for _, spell := range P1.Skills {
-			fmt.Printf("%d. %s\n", spell)
+		for key, value := range P1.Skills {
+			fmt.Printf("%s. %d \n", key, value)
 		}
 	case 2:
 
