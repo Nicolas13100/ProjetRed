@@ -87,14 +87,6 @@ func TrainFight(P1 *Personnage, Monstre1 *Monstre) {
 			break
 		} // Tour du Joueur 1
 		charTurn(P1, Monstre1)
-		attaqueJoueur := P1.Atk - Monstre1.Defense
-		if attaqueJoueur < 0 {
-			attaqueJoueur = 0
-		}
-		Monstre1.Hp -= attaqueJoueur
-
-		fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", P1.Name, Monstre1.Name, attaqueJoueur)
-
 		// Vérifier si le Monstre est toujours en vie
 		if Monstre1.Hp <= 0 {
 			fmt.Printf("%s est vaincu!\n", Monstre1.Name)
@@ -121,11 +113,24 @@ func charTurn(P1 *Personnage, Monstre1 *Monstre) {
 	switch choice {
 	case 1:
 		fmt.Println("Attaque basic")
+		fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", P1.Name, Monstre1.Name, P1.Atk-Monstre1.Defense)
 	case 2:
 		P1.FightInventory(Monstre1)
 	case 3:
-		P1.ShowSpells()
-
+		fmt.Println("Select a spell:")
+		for i, spell := range P1.Spells {
+			fmt.Printf("%d. %s (Type: %s, Damage: %d, Mana Cost: %d)\n", i+1, spell.Name, spell.Type, spell.Damage, spell.ManaCost)
+		}
+		var selectedSpellIndex int
+		fmt.Print("Enter the number of the spell you want to cast: ")
+		fmt.Scan(&selectedSpellIndex)
+		if selectedSpellIndex >= 1 && selectedSpellIndex <= len(P1.Spells) {
+			selectedSpell := P1.Spells[selectedSpellIndex-1]
+			P1.CastSpell(selectedSpell, Monstre1)
+			fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", P1.Name, Monstre1.Name, selectedSpell.Damage)
+		} else {
+			fmt.Println("Invalid spell selection.")
+		}
 	}
 }
 

@@ -10,7 +10,7 @@ type Personnage struct {
 	HpMax        int
 	Hp           int
 	Inventory    map[string]int
-	Skills       map[string]int
+	Spells       []Spell
 	Gold         int
 	InventoryCap int
 	Mana         int
@@ -60,8 +60,10 @@ type Monstre struct {
 	Initiative int
 	XpDrop     int
 }
+
 type Spell struct {
-	name    string
-	damage  int
-	useMana int
+	Name     string
+	Type     string
+	Damage   int
+	ManaCost int
 }

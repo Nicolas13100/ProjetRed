@@ -7,7 +7,7 @@ import (
 
 func TakePot(P1 *Personnage) {
 	var choice int
-	fmt.Println("Voulez-vous prendre une potion ? (1.Oui/2.Non) ")
+	fmt.Println("Voulez-vous prendre une potion de soin? (1.Oui/2.Non) ")
 	fmt.Scan(&choice)
 
 	switch choice {

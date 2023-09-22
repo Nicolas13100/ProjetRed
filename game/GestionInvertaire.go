@@ -14,7 +14,6 @@ func (P1 *Personnage) FightInventory(Monstre1 *Monstre) {
 		fmt.Println("1. Utiliser une potion de soin")
 		fmt.Println("2. Utiliser une potion de poison")
 		fmt.Println("3. Utiliser une potion de mana")
-		fmt.Println("4. Utiliser un sort")
 		fmt.Println("0. Retourner en arrière")
 
 		var input int
@@ -39,9 +38,6 @@ func (P1 *Personnage) FightInventory(Monstre1 *Monstre) {
 			} else {
 				fmt.Println("Vous n'avez pas de Potion de mana dans votre inventaire.")
 			}
-
-		case 4:
-			FightSpell(P1, S, S, S)
 
 		case 0:
 			return
@@ -92,8 +88,6 @@ func (P1 *Personnage) BaseInventory(Monstre1 *Monstre) {
 				fmt.Println("Vous n'avez pas de Potion de mana dans votre inventaire.")
 			}
 		case 4:
-
-			P1.ShowSpells()
 
 		case 5:
 			fmt.Println("Voulez-vous 1.équiper ou 2.désequiper un equipement ? (3. retour)")

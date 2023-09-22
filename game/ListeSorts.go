@@ -1,44 +1,29 @@
 package game
 
-import (
-	"fmt"
-)
+import "fmt"
 
-func FightSpell(P1 *Personnage, s1 Spell, s2 Spell, s3 Spell) {
-	fmt.Println("Choisissez quel sort vous souhaitez utiliser :")
-	fmt.Printf("Vous possédez %s comme sorts")
-	var spell int
-	fmt.Scan(&spell)
-
-	switch spell {
-
-	case 1:
-		fmt.Printf("Vous avez utilisé %s et infligé %d dégâts à l'adversaire", s1.name, s1.damage)
-		fmt.Printf("Vous avez utilisé %d de Mana", s1.useMana)
-	case 2:
-		fmt.Printf("Vous avez utilisé %s et infligé %d dégâts à l'adversaire", s2.name, s2.damage)
-		fmt.Printf("Vous avez utilisé %d de Mana", s2.useMana)
-	case 3:
-		fmt.Printf("Vous avez utilisé %s et infligé %d dégâts à l'adversaire", s3.name, s3.damage)
-		fmt.Printf("Vous avez utilisé %d de Mana", s3.useMana)
+var (
+	fireball = Spell{
+		Name:     "Fireball",
+		Type:     "Fire",
+		Damage:   20,
+		ManaCost: 10,
 	}
 
-}
+	iceBlast = Spell{
+		Name:     "Ice Blast",
+		Type:     "Ice",
+		Damage:   15,
+		ManaCost: 8,
+	}
+)
 
-func (P1 Personnage) ShowSpells() {
-	fmt.Println("Souhaitez-vous continuer ou retourner en arriere (1 : Oui / 2 : Non)")
-	var choix int
-	fmt.Scan(&choix)
-	switch choix {
-	case 1:
-
-		fmt.Println("Sort Disponible:")
-		for _, spell := range P1.Skills {
-			fmt.Printf("%d. %s\n", spell)
-		}
-	case 2:
-
-		fmt.Println("Aucun sort disponible")
-		return
+func (P1 *Personnage) CastSpell(spell Spell, target *Monstre) {
+	if P1.Mana >= spell.ManaCost {
+		P1.Mana -= spell.ManaCost
+		target.Hp -= spell.Damage
+		fmt.Printf("%s casts %s on %s for %d damage!\n", P1.Name, spell.Name, target.Name, spell.Damage)
+	} else {
+		fmt.Printf("%s doesn't have enough mana to cast %s!\n", P1.Name, spell.Name)
 	}
 }
