@@ -80,8 +80,7 @@ func CharCreation() *Personnage {
 				Hp:           50,
 				Gold:         100,
 				InventoryCap: 10,
-				Skills: map[string]int{
-					"coup de poing": 1},
+				Spells:       []Spell{fireball, iceBlast},
 				Inventory: map[string]int{
 					"Potion de soin":   3,
 					"Potion de poison": 3,
@@ -107,8 +106,7 @@ func CharCreation() *Personnage {
 				Hp:           40,
 				Gold:         100,
 				InventoryCap: 10,
-				Skills: map[string]int{
-					"coup de poing": 1},
+				Spells:       []Spell{fireball, iceBlast},
 				Inventory: map[string]int{
 					"Potion de soin":   3,
 					"Potion de poison": 3,
@@ -134,8 +132,7 @@ func CharCreation() *Personnage {
 				Hp:           60,
 				Gold:         100,
 				InventoryCap: 10,
-				Skills: map[string]int{
-					"coup de poing": 1},
+				Spells:       []Spell{fireball, iceBlast},
 				Inventory: map[string]int{
 					"Potion de soin":   3,
 					"Potion de poison": 3,
@@ -160,8 +157,7 @@ func CharCreation() *Personnage {
 				Hp:           999999,
 				Gold:         99999999,
 				InventoryCap: 99999999,
-				Skills: map[string]int{
-					"coup de poing": 1},
+				Spells:       []Spell{fireball, iceBlast},
 				Inventory: map[string]int{
 					"Potion de soin":   99,
 					"Potion de poison": 99,
@@ -193,7 +189,7 @@ func (P1 Personnage) DisplayInfo() {
 		fmt.Println("Points de vie maximum:", P1.HpMax+P1.Equipement.HPBonus)
 		fmt.Println("Points de vie actuels:", P1.Hp+P1.Equipement.HPBonus)
 		fmt.Println("Cash:", P1.Gold)
-		fmt.Println("Sorts", P1.Skills)
+		fmt.Println("Sorts", P1.Spells)
 		// Affichage de l'inventaire
 		fmt.Println("\nType 0 to come back to main menu")
 

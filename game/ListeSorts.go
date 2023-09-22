@@ -1,85 +1,29 @@
 package game
 
-import (
-	"fmt"
+import "fmt"
+
+var (
+	fireball = Spell{
+		Name:     "Fireball",
+		Type:     "Fire",
+		Damage:   20,
+		ManaCost: 10,
+	}
+
+	iceBlast = Spell{
+		Name:     "Ice Blast",
+		Type:     "Ice",
+		Damage:   15,
+		ManaCost: 8,
+	}
 )
 
-func Spell1(P1 *Personnage) {
-	var choice int
-	fmt.Println("Voulez-vous utiliser le sort Coup de poing vénère ? (1.Oui/2.Non) ")
-	fmt.Scan(&choice)
-
-	switch choice {
-
-	case 1:
-		if P1.Mana <= 0 {
-			fmt.Println("Vous ne pouvez pas utiliser de sorts, vous n'avez pas de mana.")
-		} else if count, ok := P1.Skills["Coup de point vénère"]; ok && count > 0 {
-			Monstre1.Hp -= 8
-		}
-	case 2:
-		{
-			fmt.Printf("Vous n'avez pas utilisé de sort.")
-			return
-		}
-	}
-}
-
-func Spell2(P1 *Personnage) {
-	var choice int
-	fmt.Println("Voulez-vous utiliser le sort boule de feu suprême ? (1.Oui/2.Non) ")
-	fmt.Scan(&choice)
-
-	switch choice {
-	case 1:
-		if P1.Mana <= 0 {
-			fmt.Println("Vous ne pouvez pas utiliser de sorts, vous n'avez pas de mana.")
-		} else if count, ok := P1.Skills["boule de feu suprême"]; ok && count > 0 {
-			Monstre1.Hp -= 18
-		}
-	case 2:
-		{
-			fmt.Printf("Vous n'avez pas utilisé de sort.")
-			return
-		}
-	}
-}
-
-func Spell3(P1 *Personnage) {
-	var choice int
-	fmt.Println("Voulez-vous utiliser le sort Hakaï ? (1.Oui/2.Non) ")
-	fmt.Scan(&choice)
-
-	switch choice {
-
-	case 1:
-		if P1.Mana <= 0 {
-			fmt.Println("Vous ne pouvez pas utiliser de sorts, vous n'avez pas de mana.")
-		} else if count, ok := P1.Skills["Hakaï"]; ok && count > 0 {
-			Monstre1.Hp -= 9999
-		}
-	case 2:
-		{
-			fmt.Printf("Vous n'avez pas utilisé de sort.")
-			return
-		}
-	}
-}
-
-func (P1 Personnage) ShowSpells() {
-	fmt.Println("Souhaitez-vous continuer ou retourner en arriere (1 : Oui / 2 : Non)")
-	var choix int
-	fmt.Scan(&choix)
-	switch choix {
-	case 1:
-
-		fmt.Println("Sort Disponible:")
-		for key, value := range P1.Skills {
-			fmt.Printf("%s. %d \n", key, value)
-		}
-	case 2:
-
-		fmt.Println("Aucun sort disponible")
-		return
+func (P1 *Personnage) CastSpell(spell Spell, target *Monstre) {
+	if P1.Mana >= spell.ManaCost {
+		P1.Mana -= spell.ManaCost
+		target.Hp -= spell.Damage
+		fmt.Printf("%s casts %s on %s for %d damage!\n", P1.Name, spell.Name, target.Name, spell.Damage)
+	} else {
+		fmt.Printf("%s n'a pas assez de mana pour lancer %s !\n", P1.Name, spell.Name)
 	}
 }

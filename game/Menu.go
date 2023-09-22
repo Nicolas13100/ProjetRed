@@ -24,7 +24,6 @@ func Menu() {
 		switch startChoice {
 		case 1:
 			P1 := CharCreation()
-			Monstre1 := InitGoblin()
 			Marchand1 := NewMarchand()
 			var choice1 int
 			fmt.Print("voulez-vous un tutoriel ? 1.Oui / 2.Non ")
@@ -32,7 +31,7 @@ func Menu() {
 			switch choice1 {
 			case 1:
 				{
-					Tutorial(P1, Monstre1)
+					Tutorial(P1)
 				}
 			case 2:
 				break
@@ -62,7 +61,7 @@ func Menu() {
 				case 1:
 					P1.DisplayInfo()
 				case 2:
-					P1.BaseInventory(Monstre1)
+					P1.BaseInventory()
 				case 3:
 					var merchantChoice int
 					fmt.Print("Veux-tu acheter ou vendre un objet ? (1.Acheter/2.Vendre): ")
@@ -73,13 +72,12 @@ func Menu() {
 					case 2:
 						Sell(P1, Marchand1)
 					}
-
 				case 4:
-
+					Forgeron(P1)
 				case 5:
-					Fight(P1, Monstre1)
+					Entrainement(P1)
 				case 9:
-
+					QuiSontIls()
 				case 0:
 					fmt.Println("Au revoir !")
 					return

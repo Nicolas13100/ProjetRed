@@ -2,7 +2,7 @@ package game
 
 import "fmt"
 
-func (P1 *Personnage) FightInventory(Monstre1 *Monstre) {
+func (P1 *Personnage) FightInventory() {
 	for {
 		ClearConsole()
 		fmt.Println("\nInventaire:")
@@ -14,7 +14,6 @@ func (P1 *Personnage) FightInventory(Monstre1 *Monstre) {
 		fmt.Println("1. Utiliser une potion de soin")
 		fmt.Println("2. Utiliser une potion de poison")
 		fmt.Println("3. Utiliser une potion de mana")
-		fmt.Println("4. Utiliser un sort")
 		fmt.Println("0. Retourner en arrière")
 
 		var input int
@@ -29,7 +28,7 @@ func (P1 *Personnage) FightInventory(Monstre1 *Monstre) {
 			}
 		case 2:
 			if count, ok := P1.Inventory["Potion de poison"]; ok && count > 0 {
-				poisonPot(P1, Monstre1)
+				poisonPot(P1)
 			} else {
 				fmt.Println("Vous n'avez pas de Potion de poison dans votre inventaire.")
 			}
@@ -38,20 +37,6 @@ func (P1 *Personnage) FightInventory(Monstre1 *Monstre) {
 				ManaPot(P1)
 			} else {
 				fmt.Println("Vous n'avez pas de Potion de mana dans votre inventaire.")
-			}
-
-		case 4:
-			fmt.Println("Quel sort souhaitez vous utiliser ?")
-			var input int
-			fmt.Scan(&input)
-			switch input {
-			case 1:
-				Spell1(P1)
-			case 2:
-				Spell2(P1)
-			case 3:
-				Spell3(P1)
-
 			}
 
 		case 0:
@@ -63,7 +48,7 @@ func (P1 *Personnage) FightInventory(Monstre1 *Monstre) {
 	}
 }
 
-func (P1 *Personnage) BaseInventory(Monstre1 *Monstre) {
+func (P1 *Personnage) BaseInventory() {
 	for {
 		ClearConsole()
 		fmt.Println("\nInventaire:")
@@ -92,7 +77,7 @@ func (P1 *Personnage) BaseInventory(Monstre1 *Monstre) {
 			}
 		case 2:
 			if count, ok := P1.Inventory["Potion de poison"]; ok && count > 0 {
-				poisonPot(P1, Monstre1)
+				poisonPot(P1)
 			} else {
 				fmt.Println("Vous n'avez pas de Potion de poison dans votre inventaire.")
 			}
@@ -103,19 +88,6 @@ func (P1 *Personnage) BaseInventory(Monstre1 *Monstre) {
 				fmt.Println("Vous n'avez pas de Potion de mana dans votre inventaire.")
 			}
 		case 4:
-			fmt.Println("Souhaitez-vous continuer ?(1 : Oui / 2 : Non)")
-			var choix int
-			fmt.Scan(&choix)
-			switch choix {
-			case 1:
-				fmt.Println("Sort Disponible:")
-				for key, value := range P1.Skills {
-					fmt.Printf("%s. %d \n", key, value)
-					break
-				}
-			case 2:
-				return
-			}
 		case 5:
 			fmt.Println("Voulez-vous 1.équiper ou 2.désequiper un equipement ? (3. retour)")
 			var input int
