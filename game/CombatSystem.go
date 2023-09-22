@@ -43,41 +43,6 @@ func Entrainement(P1 *Personnage) {
 }
 
 func Fight(P1 *Personnage, Monstre1 *Monstre) {
-	fmt.Println("Début du combat d'entrainement")
-
-	for P1.Hp > 0 && Monstre1.Hp > 0 {
-		fmt.Printf("Vous etes au tour %d\n", Tours)
-
-		if P1.Initiative >= Monstre1.Initiative {
-			// Player's turn
-			charTurn(P1, Monstre1)
-		} else {
-			// Monster's turn
-			attaqueMonstre := Monstre1.Atk - P1.Defense
-			if attaqueMonstre < 0 {
-				attaqueMonstre = 0
-			}
-			P1.Hp -= attaqueMonstre
-
-			fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", Monstre1.Name, P1.Name, attaqueMonstre)
-
-			// Check if the Player is defeated
-			if P1.Hp <= 0 {
-				fmt.Printf("%s est vaincu!\n", P1.Name)
-				P1.Dead()
-				break
-			}
-
-			// Player's turn
-			charTurn(P1, Monstre1)
-		}
-
-		Tours++
-		fmt.Println("-----------------------------------------------------------------------------")
-	}
-}
-
-func DungeonFight(P1 *Personnage, Monstre1 *Monstre) {
 	fmt.Println("Début du combat")
 
 	for P1.Hp > 0 && Monstre1.Hp > 0 {
@@ -106,7 +71,6 @@ func DungeonFight(P1 *Personnage, Monstre1 *Monstre) {
 			// Player's turn
 			charTurn(P1, Monstre1)
 		}
-
 		Tours++
 		fmt.Println("-----------------------------------------------------------------------------")
 	}

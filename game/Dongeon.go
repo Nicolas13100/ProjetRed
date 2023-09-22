@@ -35,7 +35,7 @@ func Dongeon(P1 *Personnage) {
 	entrance := NewRoom("Entrée", "Vous êtes à l'entrée du dongeon", false)
 	hall := NewRoom("Hall", "Vous êtes dans un long hall", true)
 	treasureRoom := NewRoom("Salle au trésor", "Vous êtes dans une pièce remplie de trésors.", false)
-
+	directions := []string{"nord", "sud", "est", "ouest"}
 	currentRoom := forest
 	monsterRooms := map[*Room]bool{
 		forest:       true,
@@ -48,7 +48,11 @@ func Dongeon(P1 *Personnage) {
 		if monster, ok := monsterRooms[currentRoom]; ok && monster {
 			fmt.Println("Un monstre est apparu, préparez vous au combat !")
 			Fight(P1, &Goblin)
+		}
 
+		if len(currentRoom.Exits) == 0 {
+			fmt.Println("Vous êtes bloqués, il n'y a aucune sortie de ce côté.")
+			continue
 		}
 		fmt.Print("Vous avez trouvé la sortie : ")
 		for direction := range currentRoom.Exits {
@@ -57,26 +61,23 @@ func Dongeon(P1 *Personnage) {
 		fmt.Println()
 
 		var chosenDirection int
-		fmt.Print("Choisissez une direction : (1 : Nord, 2 : Sud, 3 : Est, 4 : ouest ")
-		fmt.Scanln(&chosenDirection)
-		var direction string
-		switch chosenDirection {
-		case 1:
-			direction = "nord"
-		case 2:
-			direction = "sud"
-		case 3:
-			direction = "est"
-		case 4:
-			direction = "ouest"
-			if chosenDirection < 1 || chosenDirection > 4 {
-				fmt.Println("Direction invalide. Veuillez réessayer.")
-				continue
-			}
+		fmt.Print("Choisissez une direction : 1.Nord, 2.Sud, 3.Est, 4.Ouest ")
+		_, err := fmt.Scanln(&chosenDirection)
+
+		if err != nil {
+			fmt.Println("Invalid input. Please enter a number.")
+			continue
 		}
 
-		// Vérifiez si la direction choisie est une sortie valide
-		nextRoom, ok := currentRoom.Exits[direction]
+		// Check if the chosen direction is valid
+		nextRoom, ok := currentRoom.Exits[directions[chosenDirection-1]]
+		if !ok {
+			fmt.Println("Invalid direction. Try again.")
+			continue
+		}
+
+		// Move the player to the new room
+		currentRoom = nextRoom
 		if !ok {
 			fmt.Println("Invalid direction. Try again.")
 			continue
