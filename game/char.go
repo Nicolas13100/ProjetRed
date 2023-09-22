@@ -155,7 +155,7 @@ func CharCreation() *Personnage {
 				Level:        99,
 				HpMax:        999999,
 				Hp:           999999,
-				Gold:         99999999,
+				Gold:         9999999,
 				InventoryCap: 99999999,
 				Spells:       []Spell{fireball, iceBlast},
 				Inventory: map[string]int{
