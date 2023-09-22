@@ -62,23 +62,23 @@ func printMap() {
 
 func movePlayer() {
 	var direction int
-	fmt.Print("Enter direction (1.Nord/2.Ouest/3.Sud/4.Est): ")
+	fmt.Print("Enter direction (5.Nord/1.Ouest/2.Sud/3.Est): ")
 	fmt.Scan(&direction)
 
 	switch direction {
-	case 1:
+	case 5:
 		if P1.y > 0 {
 			P1.y--
 		}
-	case 2:
+	case 1:
 		if P1.x > 0 {
 			P1.x--
 		}
-	case 3:
+	case 2:
 		if P1.y < gridSize-1 {
 			P1.y++
 		}
-	case 4:
+	case 3:
 		if P1.x < gridSize-1 {
 			P1.x++
 		}
@@ -122,12 +122,12 @@ func encounterMonster() {
 
 	switch choice {
 	case 1:
-		// Call the fight function
+
 		Fight(&P1, &monster)
 	case 2:
-		// Add logic for fleeing (e.g., move player to a random position)
+
 		fmt.Println("vous fuyez !")
-		// Optionally, you can implement logic to move the player to a random position
+
 	default:
 		fmt.Println("Choix unconnue, vous êtes pris de peure !")
 	}
