@@ -124,7 +124,6 @@ func charTurn(P1 *Personnage, Monstre1 *Monstre) {
 	case 2:
 		P1.FightInventory(Monstre1)
 	case 3:
-		FightSpell(P1, s1, s2, s3)
 
 	}
 }

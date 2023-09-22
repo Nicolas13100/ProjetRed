@@ -25,7 +25,6 @@ func Menu() {
 		case 1:
 			P1 := CharCreation()
 			Monstre1 := InitGoblin()
-			S1 := InitSpell(P1, S1)
 			Marchand1 := NewMarchand()
 			var choice1 int
 			fmt.Print("voulez-vous un tutoriel ? 1.Oui / 2.Non ")

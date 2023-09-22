@@ -9,9 +9,8 @@ type Personnage struct {
 	XpMax        int
 	HpMax        int
 	Hp           int
-	Spells       []string
 	Inventory    map[string]int
-	Skills       []string
+	Skills       map[string]int
 	Gold         int
 	InventoryCap int
 	Mana         int

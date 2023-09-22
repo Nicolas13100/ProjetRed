@@ -41,7 +41,6 @@ func (P1 *Personnage) FightInventory(Monstre1 *Monstre) {
 			}
 
 		case 4:
-			FightSpell(P1, S, S, S)
 
 		case 0:
 			return
