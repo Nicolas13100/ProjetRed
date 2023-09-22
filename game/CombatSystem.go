@@ -114,7 +114,7 @@ func charTurn(P1 *Personnage, Monstre1 *Monstre) {
 	fmt.Println("C'est votre tour, que voulez vous faire ?")
 	fmt.Println("1 : Attaquer")
 	fmt.Println("2 : Ouvrir l'inventaire")
-	fmt.Println("3 : Utilisé un sort")
+	fmt.Println("3 : Utiliser un sort")
 	var choice int
 	fmt.Scan(&choice)
 
@@ -124,7 +124,7 @@ func charTurn(P1 *Personnage, Monstre1 *Monstre) {
 	case 2:
 		P1.FightInventory(Monstre1)
 	case 3:
-		P1.ShowSpells()
+		FightSpell(P1, s1, s2, s3)
 
 	}
 }
