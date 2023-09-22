@@ -64,6 +64,8 @@ type Monstre struct {
 	Initiative int
 	XpDrop     int
 	Spells     []Spell
+	x, y       int
+	Type       string
 }
 
 type Spell struct {
@@ -78,4 +80,12 @@ type Room struct {
 	Description string
 	Exits       map[string]*Room
 	HasMonster  bool
+}
+
+type Carte struct {
+	x, y       int
+	hasExit    bool
+	floor      int
+	HasMonster bool
+	Monsters   []Monstre
 }

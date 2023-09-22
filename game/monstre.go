@@ -6,6 +6,7 @@ var (
 		HpMax: 50,
 		Hp:    50,
 		Mana:  20,
+		Type:  "Goblin",
 	}
 
 	Orc = Monstre{
@@ -13,6 +14,7 @@ var (
 		HpMax: 75,
 		Hp:    75,
 		Mana:  30,
+		Type:  "Orc",
 	}
 
 	HamsterGeant = Monstre{
@@ -20,5 +22,6 @@ var (
 		HpMax: 100,
 		Hp:    100,
 		Mana:  40,
+		Type:  "Boss",
 	}
 )
