@@ -6,15 +6,18 @@ import (
 	"time"
 )
 
-type room struct {
+type Carte struct {
 	x, y    int
 	hasExit bool
+	floor   int
 }
 
 var gridSize = 5
-var currentRoom room
+var currentRoom Carte
+var currentFloor = 1
 
-func InitMap(name string, description string) room {
+func InitMap(name string, description string) Carte {
+	fmt.Println(name, description)
 	rand.Seed(time.Now().UnixNano())
 
 	initializeGame()
@@ -25,17 +28,18 @@ func InitMap(name string, description string) room {
 
 		if currentRoom.hasExit && P1.x == currentRoom.x && P1.y == currentRoom.y {
 			fmt.Println("You found stairs! Moving to a new map...")
+			currentFloor++
 			initializeNewMap()
 		}
 	}
 }
 
 func initializeGame() {
-	currentRoom = room{x: rand.Intn(gridSize), y: rand.Intn(gridSize), hasExit: rand.Intn(4) == 0}
+	currentRoom = Carte{x: rand.Intn(gridSize), y: rand.Intn(gridSize), hasExit: true, floor: currentFloor}
 }
 
 func initializeNewMap() {
-	currentRoom = room{x: rand.Intn(gridSize), y: rand.Intn(gridSize), hasExit: rand.Intn(4) == 0}
+	currentRoom = Carte{x: rand.Intn(gridSize), y: rand.Intn(gridSize), hasExit: true, floor: currentFloor}
 	P1.x = rand.Intn(gridSize)
 	P1.y = rand.Intn(gridSize)
 }
