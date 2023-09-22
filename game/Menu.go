@@ -95,8 +95,7 @@ func Menu() {
 
 		default:
 			fmt.Println("Choix invalide.")
-			fmt.Println("bug")
-			return
+			continue
 		}
 	}
 }
