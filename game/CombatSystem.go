@@ -42,7 +42,7 @@ func Entrainement(P1 *Personnage) {
 
 }
 
-func Fight(P1 *Personnage, Monstre1 *Monstre) bool {
+func Fight(P1 *Personnage, Monstre1 *Monstre) {
 	fmt.Println("Début du combat")
 
 	for P1.Hp > 0 && Monstre1.Hp > 0 {
@@ -65,7 +65,7 @@ func Fight(P1 *Personnage, Monstre1 *Monstre) bool {
 			if P1.Hp <= 0 {
 				fmt.Printf("%s est vaincu!\n", P1.Name)
 				P1.Dead()
-				return false
+				break
 			}
 
 			// Player's turn
@@ -74,7 +74,6 @@ func Fight(P1 *Personnage, Monstre1 *Monstre) bool {
 		Tours++
 		fmt.Println("-----------------------------------------------------------------------------")
 	}
-	return true
 }
 
 func GetTours() int {
