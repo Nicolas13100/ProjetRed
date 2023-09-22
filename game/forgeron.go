@@ -29,7 +29,7 @@ func Forgeron(P1 *Personnage) {
 								P1.Inventory["Chapeau de l'aventurier"]++
 								P1.Inventory["Plume de Corbeau"]--
 								P1.Inventory["Cuir de Sanglier"]--
-								P1.Gold = -5
+								P1.Gold -= 5
 								P1.RemoveZeroValueItems()
 							}
 						} else {
@@ -60,7 +60,7 @@ func Forgeron(P1 *Personnage) {
 								P1.Inventory["Tunique de l'aventurier"]++
 								P1.Inventory["Fourrure de loup"] = -2
 								P1.Inventory["Peau de Troll"]--
-								P1.Gold = -5
+								P1.Gold -= 5
 								P1.RemoveZeroValueItems()
 							}
 						} else {
@@ -91,7 +91,7 @@ func Forgeron(P1 *Personnage) {
 								P1.Inventory["Bottes de l'aventurier"]++
 								P1.Inventory["Fourrure de loup"]--
 								P1.Inventory["Cuir de Sanglier"]--
-								P1.Gold = -5
+								P1.Gold -= 5
 								P1.RemoveZeroValueItems()
 							}
 						} else {

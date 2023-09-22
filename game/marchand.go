@@ -13,7 +13,7 @@ func NewMarchand() *Marchand {
 		XpMax:      100,
 		HpMax:      100,
 		Hp:         100,
-		Gold:       200,
+		Gold:       1000,
 		Mana:       40,
 		ManaMax:    100,
 		Atk:        5,
@@ -56,10 +56,6 @@ func Buy(personnage *Personnage, m1 *Marchand) {
 	selectitem, err := getInput("Que voulez-vous acheter ? (1.Potion/2.sort/3.Objet) ")
 	if err != nil {
 		fmt.Println("Erreur lors de la saisie. Veuillez entrer un nombre.")
-		return
-	}
-	if _, err := fmt.Scan(&selectitem); err != nil {
-		fmt.Println("Erreur lors de la saisie.")
 		return
 	}
 
