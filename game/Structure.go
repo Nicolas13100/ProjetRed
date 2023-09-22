@@ -18,6 +18,7 @@ type Personnage struct {
 	Atk          int
 	Defense      int
 	Initiative   int
+	x, y         int
 }
 
 type Equipment struct {
