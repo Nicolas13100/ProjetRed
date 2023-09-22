@@ -12,10 +12,9 @@ type room struct {
 }
 
 var gridSize = 5
-var player Personnage
 var currentRoom room
 
-func InitMap() {
+func InitMap(name string, description string) room {
 	rand.Seed(time.Now().UnixNano())
 
 	initializeGame()
@@ -37,14 +36,14 @@ func initializeGame() {
 
 func initializeNewMap() {
 	currentRoom = room{x: rand.Intn(gridSize), y: rand.Intn(gridSize), hasExit: rand.Intn(4) == 0}
-	player.x = rand.Intn(gridSize)
-	player.y = rand.Intn(gridSize)
+	P1.x = rand.Intn(gridSize)
+	P1.y = rand.Intn(gridSize)
 }
 
 func printMap() {
 	for i := 0; i < gridSize; i++ {
 		for j := 0; j < gridSize; j++ {
-			if i == player.y && j == player.x {
+			if i == P1.y && j == P1.x {
 				fmt.Print("P ")
 			} else if i == currentRoom.y && j == currentRoom.x && currentRoom.hasExit {
 				fmt.Print("E ")
@@ -57,24 +56,24 @@ func printMap() {
 }
 
 func movePlayer() {
-	var direction string
-	fmt.Print("Enter direction (w/a/s/d): ")
+	var direction int
+	fmt.Print("Enter direction (1.Nord/2.Ouest/3.Sud/4.Est): ")
 	fmt.Scan(&direction)
 
 	switch direction {
-	case "w":
+	case 1:
 		if P1.y > 0 {
 			P1.y--
 		}
-	case "a":
+	case 2:
 		if P1.x > 0 {
 			P1.x--
 		}
-	case "s":
+	case 3:
 		if P1.y < gridSize-1 {
 			P1.y++
 		}
-	case "d":
+	case 4:
 		if P1.x < gridSize-1 {
 			P1.x++
 		}
