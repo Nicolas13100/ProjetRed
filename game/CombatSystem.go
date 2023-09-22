@@ -77,15 +77,51 @@ func Fight(P1 *Personnage, Monstre1 *Monstre) {
 	}
 }
 
+func DungeonFight(P1 *Personnage, Monstre1 *Monstre) {
+	fmt.Println("Début du combat")
+
+	for P1.Hp > 0 && Monstre1.Hp > 0 {
+		fmt.Printf("Vous etes au tour %d\n", Tours)
+
+		if P1.Initiative >= Monstre1.Initiative {
+			// Player's turn
+			charTurn(P1, Monstre1)
+		} else {
+			// Monster's turn
+			attaqueMonstre := Monstre1.Atk - P1.Defense
+			if attaqueMonstre < 0 {
+				attaqueMonstre = 0
+			}
+			P1.Hp -= attaqueMonstre
+
+			fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", Monstre1.Name, P1.Name, attaqueMonstre)
+
+			// Check if the Player is defeated
+			if P1.Hp <= 0 {
+				fmt.Printf("%s est vaincu!\n", P1.Name)
+				P1.Dead()
+				break
+			}
+			if Monstre1.
+
+			// Player's turn
+			charTurn(P1, Monstre1)
+		}
+
+		Tours++
+		fmt.Println("-----------------------------------------------------------------------------")
+	}
+}
+
 func GetTours() int {
 	return Tours + 1
 }
 
 func charTurn(P1 *Personnage, Monstre1 *Monstre) {
 	fmt.Printf("Vous avez %d Pv / %d Pv \n", P1.Hp, P1.HpMax)
-	fmt.Printf("Vous avez %d Pv / %d Pv \n", P1.Mana, P1.ManaMax)
+	fmt.Printf("Vous avez %d de mana restant / %d mana \n", P1.Mana, P1.ManaMax)
 	fmt.Printf("Il reste %d Pv / %d Pv à l'ennemi \n", Monstre1.Hp, Monstre1.HpMax)
-	fmt.Printf("Il reste %d Pv / %d Pv à l'ennemi \n", Monstre1.Mana, Monstre1.ManaMax)
+	fmt.Printf("Il reste %d de mana restant / %d mana à l'ennemi \n", Monstre1.Mana, Monstre1.ManaMax)
 
 	fmt.Println("C'est votre tour, que voulez vous faire ?")
 	fmt.Println("1 : Attaquer")

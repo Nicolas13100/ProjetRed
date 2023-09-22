@@ -47,6 +47,7 @@ func Menu() {
 				fmt.Println("3. Marchand")
 				fmt.Println("4. Forgeron")
 				fmt.Println("5. Entrainement")
+				fmt.Println("6. Dongeon")
 				fmt.Println("9. Qui sont-ils ? ")
 				fmt.Println("0. Quitter")
 
@@ -76,6 +77,8 @@ func Menu() {
 					Forgeron(P1)
 				case 5:
 					Entrainement(P1)
+				case 6:
+					Dongeon(P1)
 				case 9:
 					QuiSontIls()
 				case 0:

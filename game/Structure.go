@@ -71,3 +71,10 @@ type Spell struct {
 	Damage   int
 	ManaCost int
 }
+
+type Room struct {
+	Name        string
+	Description string
+	Exits       map[string]*Room
+	HasMonster  bool
+}
