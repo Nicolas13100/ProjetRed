@@ -80,7 +80,8 @@ func CharCreation() *Personnage {
 				Hp:           50,
 				Gold:         100,
 				InventoryCap: 10,
-				Skills:       []string{"coup de poing"},
+				Skills: map[string]int{
+					"coup de poing": 1},
 				Inventory: map[string]int{
 					"Potion de soin":   3,
 					"Potion de poison": 3,
@@ -106,7 +107,8 @@ func CharCreation() *Personnage {
 				Hp:           40,
 				Gold:         100,
 				InventoryCap: 10,
-				Skills:       []string{"coup de poing"},
+				Skills: map[string]int{
+					"coup de poing": 1},
 				Inventory: map[string]int{
 					"Potion de soin":   3,
 					"Potion de poison": 3,
@@ -132,7 +134,8 @@ func CharCreation() *Personnage {
 				Hp:           60,
 				Gold:         100,
 				InventoryCap: 10,
-				Skills:       []string{"coup de poing"},
+				Skills: map[string]int{
+					"coup de poing": 1},
 				Inventory: map[string]int{
 					"Potion de soin":   3,
 					"Potion de poison": 3,
@@ -157,7 +160,8 @@ func CharCreation() *Personnage {
 				Hp:           999999,
 				Gold:         99999999,
 				InventoryCap: 99999999,
-				Skills:       []string{"coup de poing"},
+				Skills: map[string]int{
+					"coup de poing": 1},
 				Inventory: map[string]int{
 					"Potion de soin":   99,
 					"Potion de poison": 99,
