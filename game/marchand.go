@@ -60,8 +60,11 @@ func Buy(personnage *Personnage, m1 *Marchand) {
 
 	switch selectitem {
 	case 1:
-		fmt.Println("Quel type de potion voulez-vous acheter ? (1.Soin/2.Poison/3.Mana)")
-		var potionType int
+		potionType, err := getInput("Quel type de potion voulez-vous acheter ? (1.Soin/2.Poison/3.Mana) ")
+		if err != nil {
+			fmt.Println("Erreur lors de la saisie. Veuillez entrer un nombre.")
+			return
+		}
 		switch potionType {
 		case 1:
 			itemToBuy = "Potion de soin"
@@ -72,10 +75,9 @@ func Buy(personnage *Personnage, m1 *Marchand) {
 		}
 
 	case 2:
-		fmt.Println("Quel sort voulez-vous acheter ? (1. Boule de Feu /)")
-		var spellType int
-		if _, err := fmt.Scan(&spellType); err != nil {
-			fmt.Println("Erreur lors de la saisie.")
+		spellType, err := getInput("Quel sort voulez-vous acheter ? (1. Boule de Feu /)")
+		if err != nil {
+			fmt.Println("Erreur lors de la saisie. Veuillez entrer un nombre.")
 			return
 		}
 		switch spellType {
@@ -84,13 +86,11 @@ func Buy(personnage *Personnage, m1 *Marchand) {
 		}
 
 	case 3:
-		fmt.Println("Quel type de loot souhaitez-vous acheter ? (1 : Loup/ 2 : Troll/ 3 : Sanglier/ 4 : Corbeau)")
-		var loot int
-		if _, err := fmt.Scan(&loot); err != nil {
-			fmt.Println("Erreur lors de la saisie.")
+		loot, err := getInput("Quel type de loot souhaitez-vous acheter ? (1 : Loup/ 2 : Troll/ 3 : Sanglier/ 4 : Corbeau)")
+		if err != nil {
+			fmt.Println("Erreur lors de la saisie. Veuillez entrer un nombre.")
 			return
 		}
-
 		switch loot {
 		case 1:
 			if askYesNo("Vous souhaitez acheter une Fourrure de Loup ?") {
