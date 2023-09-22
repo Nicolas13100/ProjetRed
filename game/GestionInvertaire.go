@@ -2,7 +2,7 @@ package game
 
 import "fmt"
 
-func (P1 *Personnage) FightInventory(Monstre1 *Monstre) {
+func (P1 *Personnage) FightInventory() {
 	for {
 		ClearConsole()
 		fmt.Println("\nInventaire:")
@@ -28,7 +28,7 @@ func (P1 *Personnage) FightInventory(Monstre1 *Monstre) {
 			}
 		case 2:
 			if count, ok := P1.Inventory["Potion de poison"]; ok && count > 0 {
-				poisonPot(P1, Monstre1)
+				poisonPot(P1)
 			} else {
 				fmt.Println("Vous n'avez pas de Potion de poison dans votre inventaire.")
 			}
@@ -48,7 +48,7 @@ func (P1 *Personnage) FightInventory(Monstre1 *Monstre) {
 	}
 }
 
-func (P1 *Personnage) BaseInventory(Monstre1 *Monstre) {
+func (P1 *Personnage) BaseInventory() {
 	for {
 		ClearConsole()
 		fmt.Println("\nInventaire:")
@@ -77,7 +77,7 @@ func (P1 *Personnage) BaseInventory(Monstre1 *Monstre) {
 			}
 		case 2:
 			if count, ok := P1.Inventory["Potion de poison"]; ok && count > 0 {
-				poisonPot(P1, Monstre1)
+				poisonPot(P1)
 			} else {
 				fmt.Println("Vous n'avez pas de Potion de poison dans votre inventaire.")
 			}

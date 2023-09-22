@@ -52,13 +52,17 @@ type Marchand struct {
 }
 
 type Monstre struct {
+	Niveau     int
 	Name       string
 	HpMax      int
 	Hp         int
+	ManaMax    int
+	Mana       int
 	Atk        int
 	Defense    int
 	Initiative int
 	XpDrop     int
+	Spells     []Spell
 }
 
 type Spell struct {

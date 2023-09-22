@@ -24,6 +24,6 @@ func (P1 *Personnage) CastSpell(spell Spell, target *Monstre) {
 		target.Hp -= spell.Damage
 		fmt.Printf("%s casts %s on %s for %d damage!\n", P1.Name, spell.Name, target.Name, spell.Damage)
 	} else {
-		fmt.Printf("%s doesn't have enough mana to cast %s!\n", P1.Name, spell.Name)
+		fmt.Printf("%s n'a pas assez de mana pour lancer %s !\n", P1.Name, spell.Name)
 	}
 }

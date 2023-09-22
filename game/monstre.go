@@ -1,23 +1,24 @@
 package game
 
-func InitGoblin() *Monstre {
-
-	Monstre1 := &Monstre{
-		Name:       "Goblin",
-		HpMax:      40,
-		Hp:         40,
-		XpDrop:     110,
-		Atk:        5,
-		Defense:    0,
-		Initiative: 10,
+var (
+	Goblin = Monstre{
+		Name:  "Goblin",
+		HpMax: 50,
+		Hp:    50,
+		Mana:  20,
 	}
-	return Monstre1
-}
 
-func GoblinPattern(Monstre1 *Monstre) bool {
-	if GetTours()%3 == 0 || GetTours1()%3 == 0 {
-		Monstre1.Atk = Monstre1.Atk * 2
-		return true
+	Orc = Monstre{
+		Name:  "Orc",
+		HpMax: 75,
+		Hp:    75,
+		Mana:  30,
 	}
-	return false
-}
+
+	HamsterGeant = Monstre{
+		Name:  "HamsterGeant",
+		HpMax: 100,
+		Hp:    100,
+		Mana:  40,
+	}
+)
