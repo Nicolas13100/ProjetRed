@@ -113,9 +113,9 @@ func encounterMonster() {
 		randomIndex := rand.Intn(len(monsters))
 		monster = monsters[randomIndex]
 	}
-	fmt.Println("You encountered a monster! What do you want to do?")
-	fmt.Println("1. Fight")
-	fmt.Println("2. Flee")
+	fmt.Println("Vous rencontez un monster ! Qu'allez-vous faire?")
+	fmt.Println("1. Combatre")
+	fmt.Println("2. Fuir")
 
 	var choice int
 	fmt.Scan(&choice)
@@ -126,9 +126,9 @@ func encounterMonster() {
 		Fight(&P1, &monster)
 	case 2:
 		// Add logic for fleeing (e.g., move player to a random position)
-		fmt.Println("You chose to flee!")
+		fmt.Println("vous fuyez !")
 		// Optionally, you can implement logic to move the player to a random position
 	default:
-		fmt.Println("Invalid choice. You freeze in fear!")
+		fmt.Println("Choix unconnue, vous êtes pris de peure !")
 	}
 }
