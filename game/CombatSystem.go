@@ -102,7 +102,6 @@ func DungeonFight(P1 *Personnage, Monstre1 *Monstre) {
 				P1.Dead()
 				break
 			}
-			if Monstre1.
 
 			// Player's turn
 			charTurn(P1, Monstre1)
