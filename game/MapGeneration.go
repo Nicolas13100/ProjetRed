@@ -113,7 +113,7 @@ func encounterMonster() {
 		randomIndex := rand.Intn(len(monsters))
 		monster = monsters[randomIndex]
 	}
-	fmt.Println("Vous rencontez un monster ! Qu'allez-vous faire?")
+	fmt.Println("Vous rencontez un monstre ! Qu'allez-vous faire?")
 	fmt.Println("1. Combatre")
 	fmt.Println("2. Fuir")
 
@@ -124,11 +124,13 @@ func encounterMonster() {
 	case 1:
 
 		Fight(&P1, &monster)
+
 	case 2:
 
-		fmt.Println("vous fuyez !")
+		fmt.Println("Vous fuyez !")
+		return
 
 	default:
-		fmt.Println("Choix unconnue, vous êtes pris de peure !")
+		fmt.Println("Choix unconnue, vous êtes pris de peur !")
 	}
 }

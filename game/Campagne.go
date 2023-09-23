@@ -20,18 +20,21 @@ func Campain(P1 *Personnage) {
 			case 2:
 				mechant := NewSanglier()
 				Fight(P1, &mechant)
+				return
 			case 3:
 				mechant := NewLoup()
 				Fight(P1, &mechant)
+				return
 			case 4:
 				mechant := NewTroll()
 				Fight(P1, &mechant)
+				return
 			}
 		case 2:
 			return
 		}
 	} else if P1.Level >= 5 {
-		fmt.Println("Vous avez les capacités nécessaires pour aller dans la montagne, continuer (1 : Oui / 2 : Non)")
+		fmt.Println("Vous avez les capacités nécessaires pour aller dans la montagne, continuer ?(1 : Oui / 2 : Non)")
 		var choix int
 		fmt.Scan(&choix)
 		switch choix {
