@@ -53,21 +53,20 @@ type Marchand struct {
 }
 
 type Monstre struct {
-	Niveau          int
-	Name            string
-	HpMax           int
-	Hp              int
-	ManaMax         int
-	Mana            int
-	Atk             int
-	Defense         int
-	Initiative      int
-	XpDrop          int
-	Spells          []Spell
-	x, y            int
-	Type            string
-	AlreadyDefeated bool
-	ItemDrop        string
+	Niveau     int
+	Name       string
+	HpMax      int
+	Hp         int
+	ManaMax    int
+	Mana       int
+	Atk        int
+	Defense    int
+	Initiative int
+	XpDrop     int
+	Spells     []Spell
+	x, y       int
+	Type       string
+	ItemDrop   map[string]int
 }
 
 type Spell struct {
@@ -90,4 +89,8 @@ type Carte struct {
 	floor      int
 	HasMonster bool
 	Monsters   []Monstre
+}
+type Item struct {
+	Name     string
+	Quantity int
 }

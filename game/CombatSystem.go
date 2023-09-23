@@ -163,7 +163,6 @@ func charTurn(P1 *Personnage, Monstre1 *Monstre) {
 		} else {
 			fmt.Println("Sélection de sort invalide.")
 		}
-
 	}
 }
 
