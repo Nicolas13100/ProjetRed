@@ -59,7 +59,6 @@ func Fight(P1 *Personnage, Monstre1 *Monstre) {
 			// Check if the Monster is defeated
 			if Monstre1.Hp <= 0 {
 				Monstre1.DeadMonstre(P1)
-				break
 			}
 
 			// Monster's turn
@@ -74,7 +73,6 @@ func Fight(P1 *Personnage, Monstre1 *Monstre) {
 			// Check if the Player is defeated
 			if P1.Hp <= 0 {
 				P1.Dead()
-				break
 			}
 		} else {
 			if Tours == 1 {
@@ -93,7 +91,6 @@ func Fight(P1 *Personnage, Monstre1 *Monstre) {
 			if P1.Hp <= 0 {
 				fmt.Printf("%s est vaincu!\n", P1.Name)
 				P1.Dead()
-				break
 			}
 
 			// Player's turn
@@ -106,7 +103,6 @@ func Fight(P1 *Personnage, Monstre1 *Monstre) {
 				DropsToInventory(P1, Monstre1.ItemDrop)
 				for itemName, quantity := range Monstre1.ItemDrop {
 					fmt.Printf("Item: %s, Quantity: %d\n", itemName, quantity)
-					break
 				}
 			}
 		}
