@@ -23,27 +23,31 @@ func CharCreation() *Personnage {
 	var Race string
 	for {
 		ClearConsole()
-		fmt.Println("Création de votre personnage :")
-		fmt.Println("Seulement des lettres de l'alphabet latin et 10 lettres max")
-		// Demander à l'utilisateur de choisir son nom
-		fmt.Print("Entrez votre nom : ")
-
+		text := "Création de votre personnage :\n Seulement des lettres de l'alphabet latin sont accepté, 10 lettres maximum\nEntrez votre nom : \n"
+		centeredText := CenterText(text)
+		fmt.Println(centeredText)
 		fmt.Scan(&Name)
 		maxLetters := 10
 		if !IsValidName(Name, maxLetters) {
-			fmt.Printf("Le nom doit contenir uniquement des lettres et avoir au maximum %d caractères.\n", maxLetters)
+			text := "Le nom doit contenir uniquement des lettres et avoir au maximum %d caractères.\n"
+			centeredText := CenterText(text)
+			fmt.Printf(centeredText, maxLetters)
 			continue
 		}
 		// Vérifier si le nom contient uniquement des lettres
 		if !OnlyLetters(Name) {
-			fmt.Println("Le nom doit contenir uniquement des lettres.")
+			text := "Le nom doit contenir uniquement des lettres.\n"
+			centeredText := CenterText(text)
+			fmt.Println(centeredText)
 			continue
 		}
 
 		// Confirm the name
 		tc := cases.Title(language.English)
 		Name = tc.String(strings.ToLower(Name))
-		fmt.Printf("Votre nom sera %s, est-ce correct ? (1.Oui/2.Non) ", Name)
+		text1 := "Votre nom sera %s, est-ce correct ? (1.Oui/2.Non) \n"
+		centeredText1 := CenterText(text1)
+		fmt.Printf(centeredText1, Name)
 		var confirmation int
 		fmt.Scan(&confirmation)
 
@@ -63,10 +67,10 @@ func CharCreation() *Personnage {
 	for {
 		ClearConsole()
 		// Demander à l'utilisateur de choisir sa race (vous pouvez adapter cette partie selon vos besoins)
+		text := "Choisissez votre race : \nHumain : Vous commencez avec 100 PV Max, initiative moyenne\n Elfe : Vous commencez avec 80 PV Max, initiative elevé\nNain : Vous commencez avec 120 PV Max, initiative basse\n"
+		centeredText := CenterText(text)
+		fmt.Println(centeredText)
 		fmt.Print("Choisissez votre race : \n")
-		fmt.Print("Humain : Vous commencez avec 100 PV Max\n")
-		fmt.Print("Elfe : Vous commencez avec 80 PV Max\n")
-		fmt.Println("Nain : Vous commencez avec 120 PV Max")
 		fmt.Scan(&Race)
 		switch Race {
 		case "Humain":
@@ -151,7 +155,6 @@ func CharCreation() *Personnage {
 				x:          rand.Intn(gridSize),
 				y:          rand.Intn(gridSize),
 			}
-			fmt.Printf("Bienvenue à toi : %s\n", Name)
 			return P1
 
 		case "Dieu":
@@ -182,7 +185,6 @@ func CharCreation() *Personnage {
 				x:          rand.Intn(gridSize),
 				y:          rand.Intn(gridSize),
 			}
-			fmt.Printf("Bienvenue à toi : %s\n", Name)
 			return P1
 		default:
 			fmt.Printf("Race inconnue : %s\n", Race)
@@ -205,15 +207,13 @@ func (P1 Personnage) DisplayInfo() {
 		fmt.Println("Points de d'XP avant le prochain niveau :", P1.XpMax)
 		fmt.Println("Cash :", P1.Gold)
 		fmt.Println("Sorts :", P1.Spells)
-		// Affichage de l'inventaire
-		fmt.Println("\nType 0 to come back to main menu")
 
-		// Read user input
+		text := "\nType 0 to come back to main menu"
+		centeredText := CenterText(text)
+		fmt.Println(centeredText)
+
 		var input int
-
 		fmt.Scan(&input)
-
-		// Check if the user wants to return to the main menu
 		if input == 0 {
 			break
 		}
@@ -222,9 +222,9 @@ func (P1 Personnage) DisplayInfo() {
 
 func (p1 *Personnage) Dead() {
 	if p1.Hp <= 0 {
-		fmt.Printf("Vous avez perdu connaissance ! \n")
-		fmt.Println("Vous vous retrouve face a une ombre, impossible de savoir de quoi il s'agit")
-		fmt.Println("L'ombre vous propose un marché, 5% de vos pièce d'Or en enchange de votre resurection en pleine santé.")
+		text := "Vous avez perdu connaissance !\nVous vous retrouve face a une ombre, impossible de savoir de quoi il s'agit\nL'ombre vous propose un marché, 5% de vos pièce d'Or en enchange de votre resurection en pleine santé.\n"
+		centeredText := CenterText(text)
+		fmt.Println(centeredText)
 		if askYesNo("Acceptez-vous ?") && p1.Gold > 0 {
 			p1.Hp = p1.HpMax
 			p1.Mana = p1.ManaMax
