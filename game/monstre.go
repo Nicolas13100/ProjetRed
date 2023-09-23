@@ -324,9 +324,10 @@ func NewTroll2() Monstre {
 func (Monstre1 *Monstre) DeadMonstre() {
 	if Monstre1.Hp <= 0 {
 		fmt.Printf("%s a vaincu un(e) %s !\n", P1.Name, Monstre1.Name)
-		Monstre1.AlreadyDefeated = true
-		P1.Inventory[Monstre1.ItemDrop]++
-		fmt.Printf("Vous avez récupéré %s sur un(e) %s !\n", Monstre1.ItemDrop, Monstre1.Name)
+		DropsToInventory(&P1, Monstre1.ItemDrop)
+		for itemName, quantity := range Monstre1.ItemDrop {
+			fmt.Printf("Objet obtenu: %s, Quantité: %d\n", itemName, quantity)
+		}
 
 		// Display XP gained
 		xpGained := Monstre1.XpDrop
@@ -336,11 +337,12 @@ func (Monstre1 *Monstre) DeadMonstre() {
 		// Display end fight screen
 		fmt.Println("Fin du combat")
 		fmt.Printf("Expérience gagnée: %d\n", xpGained)
-		fmt.Printf("Objet obtenu: %s\n", Monstre1.ItemDrop)
-		waitForUserInput("")
+		for itemName, quantity := range Monstre1.ItemDrop {
+			fmt.Printf("Objet obtenu: %s, Quantité: %d\n", itemName, quantity)
+			waitForUserInput("")
+		}
 	}
 }
-
 func waitForUserInput(message string) {
 	fmt.Println(message)
 	fmt.Print("Press Enter to continue...")
