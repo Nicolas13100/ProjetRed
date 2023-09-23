@@ -321,6 +321,7 @@ func NewTroll2() Monstre {
 		},
 	}
 }
+
 func (Monstre1 *Monstre) DeadMonstre(P1 *Personnage) {
 	if Monstre1.Hp <= 0 {
 		fmt.Printf("%s a vaincu un(e) %s !\n", P1.Name, Monstre1.Name)
@@ -330,11 +331,18 @@ func (Monstre1 *Monstre) DeadMonstre(P1 *Personnage) {
 		for itemName, quantity := range Monstre1.ItemDrop {
 			fmt.Printf("Objet obtenu: %s, Quantité: %d\n", itemName, quantity)
 		}
-
+		waitForUserInput("Entrer 0 pour continuer ...")
 	}
 }
+
 func waitForUserInput(message string) {
+	var choice int
 	fmt.Println(message)
-	fmt.Print("Press Enter to continue...")
-	fmt.Scan()
+	fmt.Scan(&choice)
+	switch choice {
+	case 0:
+		break
+	default:
+		break
+	}
 }

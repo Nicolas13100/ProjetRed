@@ -90,6 +90,7 @@ type Carte struct {
 	HasMonster bool
 	Monsters   []Monstre
 }
+
 type Item struct {
 	Name     string
 	Quantity int
