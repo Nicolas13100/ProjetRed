@@ -24,7 +24,7 @@ func Menu() {
 		case 1:
 			P1 := CharCreation()
 			var choice1 int
-			fmt.Print("voulez-vous un tutoriel ? 1.Oui / 2.Non ")
+			fmt.Print("Voulez-vous un tutoriel ? ( 1 : Oui / 2 : Non ")
 			fmt.Scan(&choice1)
 			switch choice1 {
 			case 1:
@@ -45,7 +45,8 @@ func Menu() {
 				fmt.Println("3. Marchand")
 				fmt.Println("4. Forgeron")
 				fmt.Println("5. Entrainement")
-				fmt.Println("6. Dongeon")
+				fmt.Println("6. Donjon")
+				fmt.Println("7. Campagne")
 				fmt.Println("9. Qui sont-ils ? ")
 				fmt.Println("0. Quitter")
 
@@ -76,6 +77,7 @@ func Menu() {
 				case 5:
 					Entrainement(P1)
 				case 6:
+				case 7:
 					Campain(P1)
 				case 9:
 					QuiSontIls()
