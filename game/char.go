@@ -203,7 +203,7 @@ func (P1 Personnage) DisplayInfo() {
 
 		fmt.Println("Sorts:")
 		for _, spell := range P1.Spells {
-			fmt.Printf("			Spell Name: %s	Type: %s	Damage: %d	Mana Cost: %d\n", spell.Name, spell.Type, spell.Damage, spell.ManaCost)
+			fmt.Printf("						Spell Name: %s	Type: %s	Damage: %d	Mana Cost: %d\n", spell.Name, spell.Type, spell.Damage, spell.ManaCost)
 		}
 
 		text := "\nType 0 to come back to main menu"
