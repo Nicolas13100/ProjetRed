@@ -103,17 +103,11 @@ func Fight(P1 *Personnage, Monstre1 *Monstre) {
 			if Monstre1.Hp <= 0 {
 				Monstre1.DeadMonstre(P1)
 				break
-				fmt.Printf("%s a vaincu un(e) %s !\n", P1.Name, Monstre1.Name)
-				GagnerXp(P1, Monstre1)
-				DropsToInventory(P1, Monstre1.ItemDrop)
-				for itemName, quantity := range Monstre1.ItemDrop {
-					fmt.Printf("Item: %s, Quantity: %d\n", itemName, quantity)
-				}
 			}
 		}
-		Tours++
-		fmt.Println("-----------------------------------------------------------------------------")
 	}
+	Tours++
+	fmt.Println("-----------------------------------------------------------------------------")
 }
 
 func GetTours() int {
