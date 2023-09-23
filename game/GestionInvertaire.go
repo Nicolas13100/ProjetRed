@@ -155,3 +155,15 @@ func (P1 *Personnage) RemoveZeroValueItems() {
 		}
 	}
 }
+func DropsToInventory(P1 *Personnage, itemDrop map[string]int) {
+	for itemName, quantityDropped := range itemDrop {
+
+		if existingQuantity, exists := P1.Inventory[itemName]; exists {
+
+			P1.Inventory[itemName] = existingQuantity + quantityDropped
+		} else {
+
+			P1.Inventory[itemName] = quantityDropped
+		}
+	}
+}

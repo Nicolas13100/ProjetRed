@@ -66,18 +66,20 @@ func Fight(P1 *Personnage, Monstre1 *Monstre) {
 				fmt.Printf("%s est vaincu!\n", P1.Name)
 				P1.Dead()
 				break
-			} else if Monstre1.Hp <= 0 {
-				fmt.Printf("%s a vaincu %s !\n", P1.Name, Monstre1.Name)
-				Monstre1.AlreadyDefeated = true
-				return
 			}
-
-			// Player's turn
-			charTurn(P1, Monstre1)
+		}
+		if Monstre1.Hp <= 0 {
+			fmt.Printf("%s a vaincu un(e) %s !\n", P1.Name, Monstre1.Name)
+			DropsToInventory(P1, Monstre1.ItemDrop)
+			for itemName, quantity := range Monstre1.ItemDrop {
+				fmt.Printf("Item: %s, Quantity: %d\n", itemName, quantity)
+			}
+			break
 		}
 		Tours++
 		fmt.Println("-----------------------------------------------------------------------------")
 	}
+
 }
 
 func GetTours() int {
@@ -106,6 +108,13 @@ func charTurn(P1 *Personnage, Monstre1 *Monstre) {
 		}
 		Monstre1.Hp -= attaqueJoueur
 		fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", P1.Name, Monstre1.Name, attaqueJoueur)
+
+		attaqueMonstre := Monstre1.Atk - P1.Defense
+		if attaqueMonstre < 0 {
+			attaqueMonstre = 0
+		}
+		P1.Hp -= attaqueMonstre
+		fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", Monstre1.Name, P1.Name, attaqueMonstre)
 	case 2:
 		P1.FightInventory()
 	case 3:
