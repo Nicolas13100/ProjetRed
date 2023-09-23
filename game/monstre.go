@@ -337,7 +337,7 @@ func (Monstre1 *Monstre) DeadMonstre(P1 *Personnage) {
 
 func waitForUserInput(message string) {
 	var choice int
-	fmt.Println(message)
+	fmt.Print(message)
 	fmt.Scan(&choice)
 	switch choice {
 	case 0:

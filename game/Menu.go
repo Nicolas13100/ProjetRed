@@ -6,14 +6,14 @@ import (
 	"strings"
 
 	"github.com/mattn/go-runewidth"
-	"golang.org/x/crypto/ssh/terminal"
+	"golang.org/x/term"
 )
 
 var P1 Personnage
 var Monstre1 Monstre
 
 func GetConsoleWidth() int {
-	width, _, err := terminal.GetSize(int(os.Stdout.Fd()))
+	width, _, err := term.GetSize(int(os.Stdout.Fd()))
 	if err != nil {
 		panic(err)
 	}
@@ -69,9 +69,9 @@ func Menu() {
 			}
 			ClearConsole()
 			for {
-				text := "Que voulez-vous faire ?\n1. Afficher les informations du personnage \n2. Accéder au contenu de l'inventaire\n3. Marchand \n4. Forgeron\n5. Entrainement \n6. Dongeon\n 9. Qui sont-ils ?\n0. Quitter\nEntrer votre choix"
+				text := "Bienvenue à toi:%s\n\nQue voulez-vous faire ?\n1. Afficher les informations du personnage \n2. Accéder au contenu de l'inventaire\n3. Marchand \n4. Forgeron\n5. Entrainement \n6. Dongeon\n 9. Qui sont-ils ?\n0. Quitter\nEntrer votre choix :\n"
 				centeredText := CenterText(text)
-				fmt.Println(centeredText)
+				fmt.Printf(centeredText, P1.Name)
 
 				var choice int
 
