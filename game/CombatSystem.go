@@ -102,10 +102,11 @@ func Fight(P1 *Personnage, Monstre1 *Monstre) {
 			// Check if the Monster is defeated
 			if Monstre1.Hp <= 0 {
 				fmt.Printf("%s a vaincu un(e) %s !\n", P1.Name, Monstre1.Name)
-				Monstre1.AlreadyDefeated = true
-				P1.Inventory[Monstre1.ItemDrop]++
-				fmt.Printf("Vous avez récupéré %s sur un(e) %s !\n", Monstre1.ItemDrop, Monstre1.Name)
-				break
+				DropsToInventory(P1, Monstre1.ItemDrop)
+				for itemName, quantity := range Monstre1.ItemDrop {
+					fmt.Printf("Item: %s, Quantity: %d\n", itemName, quantity)
+					break
+				}
 			}
 		}
 		Tours++
