@@ -70,7 +70,6 @@ func CharCreation() *Personnage {
 		text := "Choisissez votre race : \nHumain : Vous commencez avec 100 PV Max, initiative moyenne\n Elfe : Vous commencez avec 80 PV Max, initiative elevé\nNain : Vous commencez avec 120 PV Max, initiative basse\n"
 		centeredText := CenterText(text)
 		fmt.Println(centeredText)
-		fmt.Print("Choisissez votre race : \n")
 		fmt.Scan(&Race)
 		switch Race {
 		case "Humain":
@@ -198,15 +197,14 @@ func (P1 Personnage) DisplayInfo() {
 
 	for {
 		ClearConsole()
-		fmt.Println("Nom :", P1.Name)
-		fmt.Println("Classe :", P1.Race)
-		fmt.Println("Niveau :", P1.Level)
-		fmt.Println("Points de vie actuels :", P1.Hp+P1.Equipement.HPBonus)
-		fmt.Println("Points de vie maximum :", P1.HpMax+P1.Equipement.HPBonus)
-		fmt.Println("Points de d'XP actuels :", P1.Xp)
-		fmt.Println("Points de d'XP avant le prochain niveau :", P1.XpMax)
-		fmt.Println("Cash :", P1.Gold)
-		fmt.Println("Sorts :", P1.Spells)
+		text1 := "Nom : %s\nRace :%s\nNiveau : %d\nPoints de vie actuels : %d\nPoints de vie maximum : %d\nPoints de d'XP actuels : %d\nPoints de d'XP avant le prochain niveau : %d\nCash : %d\n"
+		centeredText1 := CenterText(text1)
+		fmt.Printf(centeredText1, P1.Name, P1.Race, P1.Level, P1.Hp+P1.Equipement.HPBonus, P1.HpMax+P1.Equipement.HPBonus, P1.Xp, P1.XpMax, P1.Gold)
+
+		fmt.Println("Sorts:")
+		for _, spell := range P1.Spells {
+			fmt.Printf("			Spell Name: %s	Type: %s	Damage: %d	Mana Cost: %d\n", spell.Name, spell.Type, spell.Damage, spell.ManaCost)
+		}
 
 		text := "\nType 0 to come back to main menu"
 		centeredText := CenterText(text)
