@@ -321,7 +321,7 @@ func NewTroll2() Monstre {
 		},
 	}
 }
-func (Monstre1 *Monstre) DeadMonstre() {
+func (Monstre1 *Monstre) DeadMonstre(P1 *Personnage) {
 	if Monstre1.Hp <= 0 {
 		fmt.Printf("%s a vaincu un(e) %s !\n", P1.Name, Monstre1.Name)
 		fmt.Println("Fin du combat")
@@ -336,5 +336,5 @@ func (Monstre1 *Monstre) DeadMonstre() {
 func waitForUserInput(message string) {
 	fmt.Println(message)
 	fmt.Print("Press Enter to continue...")
-	fmt.Scanln()
+	fmt.Scan()
 }
