@@ -196,13 +196,15 @@ func (P1 Personnage) DisplayInfo() {
 
 	for {
 		ClearConsole()
-		fmt.Println("Nom:", P1.Name)
-		fmt.Println("Classe:", P1.Race)
-		fmt.Println("Niveau:", P1.Level)
-		fmt.Println("Points de vie maximum:", P1.HpMax+P1.Equipement.HPBonus)
-		fmt.Println("Points de vie actuels:", P1.Hp+P1.Equipement.HPBonus)
-		fmt.Println("Cash:", P1.Gold)
-		fmt.Println("Sorts", P1.Spells)
+		fmt.Println("Nom :", P1.Name)
+		fmt.Println("Classe :", P1.Race)
+		fmt.Println("Niveau :", P1.Level)
+		fmt.Println("Points de vie actuels :", P1.Hp+P1.Equipement.HPBonus)
+		fmt.Println("Points de vie maximum :", P1.HpMax+P1.Equipement.HPBonus)
+		fmt.Println("Points de d'XP actuels :", P1.Xp)
+		fmt.Println("Points de d'XP avant le prochain niveau :", P1.XpMax)
+		fmt.Println("Cash :", P1.Gold)
+		fmt.Println("Sorts :", P1.Spells)
 		// Affichage de l'inventaire
 		fmt.Println("\nType 0 to come back to main menu")
 

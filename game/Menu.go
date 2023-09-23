@@ -104,6 +104,7 @@ func Menu() {
 				case 5:
 					Entrainement(P1)
 				case 6:
+				case 7:
 					Campain(P1)
 				case 9:
 					QuiSontIls()
