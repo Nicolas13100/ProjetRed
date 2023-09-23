@@ -91,7 +91,7 @@ func movePlayer() {
 }
 
 func addMonsters() {
-	monsterCount := rand.Intn(4) // Generate a random number of monsters (0 to 3)
+	monsterCount := rand.Intn(6) // Generate a random number of monsters (0 to 5)
 	for i := 0; i < monsterCount; i++ {
 		room := Carte{x: rand.Intn(gridSize), y: rand.Intn(gridSize)}
 		// Ensure the room doesn't already have a monster or player

@@ -1,5 +1,7 @@
 package game
 
+import "fmt"
+
 var (
 	Goblin = Monstre{
 		Name:       "Goblin",
@@ -318,4 +320,29 @@ func NewTroll2() Monstre {
 			"Morceau de Gourdin": 1,
 		},
 	}
+}
+func (Monstre1 *Monstre) DeadMonstre() {
+	if Monstre1.Hp <= 0 {
+		fmt.Printf("%s a vaincu un(e) %s !\n", P1.Name, Monstre1.Name)
+		Monstre1.AlreadyDefeated = true
+		P1.Inventory[Monstre1.ItemDrop]++
+		fmt.Printf("Vous avez récupéré %s sur un(e) %s !\n", Monstre1.ItemDrop, Monstre1.Name)
+
+		// Display XP gained
+		xpGained := Monstre1.XpDrop
+		P1.Xp += xpGained
+		fmt.Printf("Vous avez gagné %d points d'expérience !\n", xpGained)
+
+		// Display end fight screen
+		fmt.Println("Fin du combat")
+		fmt.Printf("Expérience gagnée: %d\n", xpGained)
+		fmt.Printf("Objet obtenu: %s\n", Monstre1.ItemDrop)
+		waitForUserInput("")
+	}
+}
+
+func waitForUserInput(message string) {
+	fmt.Println(message)
+	fmt.Print("Press Enter to continue...")
+	fmt.Scanln()
 }
