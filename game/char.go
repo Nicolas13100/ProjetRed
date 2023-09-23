@@ -70,7 +70,6 @@ func CharCreation() *Personnage {
 		text := "Choisissez votre race : \nHumain : Vous commencez avec 100 PV Max, initiative moyenne\n Elfe : Vous commencez avec 80 PV Max, initiative elevé\nNain : Vous commencez avec 120 PV Max, initiative basse\n"
 		centeredText := CenterText(text)
 		fmt.Println(centeredText)
-		fmt.Print("Choisissez votre race : \n")
 		fmt.Scan(&Race)
 		switch Race {
 		case "Humain":

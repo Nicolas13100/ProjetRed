@@ -27,9 +27,9 @@ func Tutorial(P1 *Personnage) {
 
 func Entrainement(P1 *Personnage) {
 	ClearConsole()
-	fmt.Println("Bienvenue dans la zone d'entrainement")
-	fmt.Println("Amusez-vous a tapé le mannequin d'entrainement")
-	fmt.Println("-----------------------------------------------------------------------------")
+	text := "Bienvenue dans la zone d'entrainement\nAmusez-vous a tapé le mannequin d'entrainement\n-----------------------------------------------------------------------------\n"
+	centeredText := CenterText(text)
+	fmt.Println(centeredText)
 
 	mannequin := Monstre{
 		Name:       "Mannequin d'entrainement",
