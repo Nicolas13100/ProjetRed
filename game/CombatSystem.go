@@ -66,19 +66,18 @@ func Fight(P1 *Personnage, Monstre1 *Monstre) {
 				fmt.Printf("%s est vaincu!\n", P1.Name)
 				P1.Dead()
 				break
+			} else if Monstre1.Hp <= 0 {
+				fmt.Printf("%s a vaincu %s !\n", P1.Name, Monstre1.Name)
+				Monstre1.AlreadyDefeated = true
+				return
 			}
-		}
-		if Monstre1.Hp <= 0 {
-			fmt.Printf("%s a vaincu un(e) %s !\n", P1.Name, Monstre1.Name)
-			Monstre1.AlreadyDefeated = true
-			P1.Inventory[Monstre1.ItemDrop]++
-			fmt.Printf("Vous avez récuperé %s sur un(e) %s !\n", Monstre1.ItemDrop, Monstre1.Name)
-			break
+
+			// Player's turn
+			charTurn(P1, Monstre1)
 		}
 		Tours++
 		fmt.Println("-----------------------------------------------------------------------------")
 	}
-
 }
 
 func GetTours() int {
@@ -107,13 +106,6 @@ func charTurn(P1 *Personnage, Monstre1 *Monstre) {
 		}
 		Monstre1.Hp -= attaqueJoueur
 		fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", P1.Name, Monstre1.Name, attaqueJoueur)
-
-		attaqueMonstre := Monstre1.Atk - P1.Defense
-		if attaqueMonstre < 0 {
-			attaqueMonstre = 0
-		}
-		P1.Hp -= attaqueMonstre
-		fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", Monstre1.Name, P1.Name, attaqueMonstre)
 	case 2:
 		P1.FightInventory()
 	case 3:
@@ -130,7 +122,6 @@ func charTurn(P1 *Personnage, Monstre1 *Monstre) {
 		} else {
 			fmt.Println("Sélection de sort invalide.")
 		}
-
 	}
 }
 
