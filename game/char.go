@@ -229,18 +229,18 @@ func (p1 *Personnage) Dead() {
 			p1.Gold -= p1.Gold * 5 / 100
 			fmt.Printf("Vous avez été ressuscité avec %d PV et %d Mana\n", p1.Hp, p1.Mana)
 			fmt.Printf("Vous avez été ressuscité avec %d pièce d'Or\n", p1.Gold)
-			waitForUserInput("")
+			waitForUserInput("Entrer 0 pour continuer ...")
 		} else if askYesNo("Acceptez-vous ?") && p1.Gold < 0 {
 			p1.Hp = p1.HpMax / 2
 			p1.Mana = p1.ManaMax / 2
 			fmt.Printf("Vous n'aviez pas de pièce d'Or")
 			fmt.Printf("Vous avez été ressuscité avec %d PV et %d Mana\n", p1.Hp, p1.Mana)
-			waitForUserInput("")
+			waitForUserInput("Entrer 0 pour continuer ...")
 		} else {
 			p1.Hp = p1.HpMax / 2
 			p1.Mana = p1.ManaMax / 2
 			fmt.Printf("Vous avez été ressuscité avec %d PV et %d Mana\n", p1.Hp, p1.Mana)
-			waitForUserInput("")
+			waitForUserInput("Entrer 0 pour continuer ...")
 		}
 	}
 
