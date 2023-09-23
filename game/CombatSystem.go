@@ -10,7 +10,8 @@ func Tutorial(P1 *Personnage) {
 	fmt.Println("Nous allons vous apprendre les bases du combat en tour par tour")
 	fmt.Println("Vous allez vous battre contre un goblin d'entrainement")
 	fmt.Println("Bonne chance")
-	Tours = 1
+	fmt.Println("-----------------------------------------------------------------------------")
+
 	goblin := Monstre{
 		Name:       "Goblin d'entrainement",
 		HpMax:      30,
@@ -28,13 +29,14 @@ func Entrainement(P1 *Personnage) {
 	ClearConsole()
 	fmt.Println("Bienvenue dans la zone d'entrainement")
 	fmt.Println("Amusez-vous a tapé le mannequin d'entrainement")
-	Tours = 1
+	fmt.Println("-----------------------------------------------------------------------------")
+
 	mannequin := Monstre{
 		Name:       "Mannequin d'entrainement",
 		Niveau:     1,
 		HpMax:      30,
 		Hp:         30,
-		Defense:    10,
+		Defense:    5,
 		Initiative: 0,
 		XpDrop:     20,
 	}
@@ -43,15 +45,41 @@ func Entrainement(P1 *Personnage) {
 }
 
 func Fight(P1 *Personnage, Monstre1 *Monstre) {
+	Tours = 1
 	fmt.Println("Début du combat")
-
 	for P1.Hp > 0 && Monstre1.Hp > 0 {
-		fmt.Printf("Vous etes au tour %d\n", Tours)
-
+		fmt.Printf("Vous êtes au tour %d\n", Tours)
 		if P1.Initiative >= Monstre1.Initiative {
+			if Tours == 1 {
+				fmt.Println("Vous avez l'initiative et attaqué en premier !")
+			}
 			// Player's turn
 			charTurn(P1, Monstre1)
+
+			// Check if the Monster is defeated
+			if Monstre1.Hp <= 0 {
+				Monstre1.DeadMonstre()
+				break
+			}
+
+			// Monster's turn
+			attaqueMonstre := Monstre1.Atk - P1.Defense
+			if attaqueMonstre < 0 {
+				attaqueMonstre = 0
+			}
+			P1.Hp -= attaqueMonstre
+
+			fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", Monstre1.Name, P1.Name, attaqueMonstre)
+
+			// Check if the Player is defeated
+			if P1.Hp <= 0 {
+				P1.Dead()
+				break
+			}
 		} else {
+			if Tours == 1 {
+				fmt.Println("Le monstre est plus rapide que vous et attaque en premier !")
+			}
 			// Monster's turn
 			attaqueMonstre := Monstre1.Atk - P1.Defense
 			if attaqueMonstre < 0 {
@@ -67,18 +95,22 @@ func Fight(P1 *Personnage, Monstre1 *Monstre) {
 				P1.Dead()
 				break
 			}
-		}
-		if Monstre1.Hp <= 0 {
-			fmt.Printf("%s a vaincu un(e) %s !\n", P1.Name, Monstre1.Name)
-			Monstre1.AlreadyDefeated = true
-			P1.Inventory[Monstre1.ItemDrop]++
-			fmt.Printf("Vous avez récuperé %s sur un(e) %s !\n", Monstre1.ItemDrop, Monstre1.Name)
-			break
+
+			// Player's turn
+			charTurn(P1, Monstre1)
+
+			// Check if the Monster is defeated
+			if Monstre1.Hp <= 0 {
+				fmt.Printf("%s a vaincu un(e) %s !\n", P1.Name, Monstre1.Name)
+				Monstre1.AlreadyDefeated = true
+				P1.Inventory[Monstre1.ItemDrop]++
+				fmt.Printf("Vous avez récupéré %s sur un(e) %s !\n", Monstre1.ItemDrop, Monstre1.Name)
+				break
+			}
 		}
 		Tours++
 		fmt.Println("-----------------------------------------------------------------------------")
 	}
-
 }
 
 func GetTours() int {
@@ -107,13 +139,14 @@ func charTurn(P1 *Personnage, Monstre1 *Monstre) {
 		}
 		Monstre1.Hp -= attaqueJoueur
 		fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", P1.Name, Monstre1.Name, attaqueJoueur)
-
-		attaqueMonstre := Monstre1.Atk - P1.Defense
-		if attaqueMonstre < 0 {
-			attaqueMonstre = 0
+		if Monstre1.Hp > 0 {
+			attaqueMonstre := Monstre1.Atk - P1.Defense
+			if attaqueMonstre < 0 {
+				attaqueMonstre = 0
+			}
+			P1.Hp -= attaqueMonstre
+			fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", Monstre1.Name, P1.Name, attaqueMonstre)
 		}
-		P1.Hp -= attaqueMonstre
-		fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", Monstre1.Name, P1.Name, attaqueMonstre)
 	case 2:
 		P1.FightInventory()
 	case 3:
