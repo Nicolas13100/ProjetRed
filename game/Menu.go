@@ -50,7 +50,7 @@ func Menu() {
 		case 1:
 			P1 := CharCreation()
 			var choice1 int
-			text := "Voulez-vous un tutoriel ? 1.Oui / 2.Non"
+			text := "Voulez-vous un tutoriel ? 1.Oui / 2.Non\n"
 			centeredText := CenterText(text)
 			fmt.Println(centeredText)
 			fmt.Scan(&choice1)
