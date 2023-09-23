@@ -6,14 +6,14 @@ import (
 	"strings"
 
 	"github.com/mattn/go-runewidth"
-	"golang.org/x/crypto/ssh/terminal"
+	"golang.org/x/term"
 )
 
 var P1 Personnage
 var Monstre1 Monstre
 
 func GetConsoleWidth() int {
-	width, _, err := terminal.GetSize(int(os.Stdout.Fd()))
+	width, _, err := term.GetSize(int(os.Stdout.Fd()))
 	if err != nil {
 		panic(err)
 	}
