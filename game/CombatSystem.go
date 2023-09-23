@@ -58,7 +58,7 @@ func Fight(P1 *Personnage, Monstre1 *Monstre) {
 
 			// Check if the Monster is defeated
 			if Monstre1.Hp <= 0 {
-				Monstre1.DeadMonstre()
+				Monstre1.DeadMonstre(P1)
 				break
 			}
 
