@@ -321,10 +321,10 @@ func NewTroll2() Monstre {
 		},
 	}
 }
-func (Monstre1 *Monstre) DeadMonstre() {
+func (Monstre1 *Monstre) DeadMonstre(P1 *Personnage) {
 	if Monstre1.Hp <= 0 {
 		fmt.Printf("%s a vaincu un(e) %s !\n", P1.Name, Monstre1.Name)
-		DropsToInventory(&P1, Monstre1.ItemDrop)
+		DropsToInventory(P1, Monstre1.ItemDrop)
 		for itemName, quantity := range Monstre1.ItemDrop {
 			fmt.Printf("Objet obtenu: %s, Quantité: %d\n", itemName, quantity)
 		}
