@@ -331,7 +331,7 @@ func (Monstre1 *Monstre) DeadMonstre(P1 *Personnage) {
 		for itemName, quantity := range Monstre1.ItemDrop {
 			fmt.Printf("Objet obtenu: %s, Quantité: %d\n", itemName, quantity)
 		}
-
+		waitForUserInput("Entrer 0 pour continuer ...")
 	}
 }
 
