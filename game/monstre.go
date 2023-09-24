@@ -41,6 +41,7 @@ var (
 
 	Loup = Monstre{
 		Name:       "Loup",
+		Type:       "Loup",
 		Atk:        10,
 		HpMax:      50,
 		Hp:         50,
@@ -55,6 +56,7 @@ var (
 
 	Loup2 = Monstre{
 		Name:       "Loup ténébreux",
+		Type:       "Loup",
 		Atk:        16,
 		HpMax:      70,
 		Hp:         70,
@@ -70,6 +72,7 @@ var (
 
 	Renard = Monstre{
 		Name:       "Maître Renard",
+		Type:       "renard",
 		Atk:        16,
 		HpMax:      70,
 		Hp:         70,
@@ -85,6 +88,7 @@ var (
 
 	Troll = Monstre{
 		Name:       "Troll",
+		Type:       "Troll",
 		Atk:        15,
 		HpMax:      75,
 		Hp:         75,
@@ -99,6 +103,7 @@ var (
 
 	Troll2 = Monstre{
 		Name:       "Troll des montagnes",
+		Type:       "Troll",
 		Atk:        35,
 		HpMax:      150,
 		Hp:         150,
@@ -115,6 +120,7 @@ var (
 
 	Corbeau = Monstre{
 		Name:       "Corbeau",
+		Type:       "Corbeau",
 		Atk:        4,
 		HpMax:      10,
 		Hp:         10,
@@ -129,6 +135,7 @@ var (
 
 	Corbeau2 = Monstre{
 		Name:       "Maître Corbeau",
+		Type:       "Corbeau",
 		Atk:        8,
 		HpMax:      20,
 		Hp:         20,
@@ -144,6 +151,7 @@ var (
 
 	Sanglier = Monstre{
 		Name:       "Sanglier",
+		Type:       "Sanglier",
 		Atk:        8,
 		HpMax:      30,
 		Hp:         30,
@@ -158,6 +166,7 @@ var (
 
 	Sanglier2 = Monstre{
 		Name:       "Sanglier enragé",
+		Type:       "Sanglier",
 		Atk:        16,
 		HpMax:      60,
 		Hp:         60,
