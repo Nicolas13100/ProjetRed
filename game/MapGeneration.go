@@ -44,11 +44,35 @@ func InitMap(name string, description string) Carte {
 				continue
 			}
 		}
+	}
+}
 
-		if currentRoom.HasMonster && P1.x == currentRoom.x && P1.y == currentRoom.y {
-			fmt.Println("You encountered a monster!")
-			// Add logic to handle the encounter (e.g., fight or escape)
-			Fight(&P1, &Monstre1)
+func movePlayer() {
+	var direction int
+	fmt.Print("Enter direction (5.Nord/1.Ouest/2.Sud/3.Est): ")
+	fmt.Scan(&direction)
+
+	switch direction {
+	case 5:
+		if P1.y > 0 {
+			P1.y--
+		}
+	case 1:
+		if P1.x > 0 {
+			P1.x--
+		}
+	case 2:
+		if P1.y < gridSize-1 {
+			P1.y++
+		}
+	case 3:
+		if P1.x < gridSize-1 {
+			P1.x++
+		}
+	}
+	for _, monster := range currentRoom.Monsters {
+		if P1.x == monster.x && P1.y == monster.y {
+			encounterMonster()
 		}
 	}
 }
@@ -85,36 +109,6 @@ func printMap() {
 	}
 }
 
-func movePlayer() {
-	var direction int
-	fmt.Print("Enter direction (5.Nord/1.Ouest/2.Sud/3.Est): ")
-	fmt.Scan(&direction)
-
-	switch direction {
-	case 5:
-		if P1.y > 0 {
-			P1.y--
-		}
-	case 1:
-		if P1.x > 0 {
-			P1.x--
-		}
-	case 2:
-		if P1.y < gridSize-1 {
-			P1.y++
-		}
-	case 3:
-		if P1.x < gridSize-1 {
-			P1.x++
-		}
-	}
-	for _, monster := range currentRoom.Monsters {
-		if P1.x == monster.x && P1.y == monster.y {
-			encounterMonster()
-		}
-	}
-}
-
 func addMonsters() {
 	monsterCount := rand.Intn(6) // Generate a random number of monsters (0 to 5)
 	for i := 0; i < monsterCount; i++ {
@@ -147,11 +141,8 @@ func encounterMonster() {
 
 	switch choice {
 	case 1:
-
 		Fight(&P1, &monster)
-
 	case 2:
-
 		fmt.Println("Vous fuyez !")
 		return
 
