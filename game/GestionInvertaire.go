@@ -23,23 +23,31 @@ func (P1 *Personnage) FightInventory() {
 		case 1:
 			if count, ok := P1.Inventory["Potion de soin"]; ok && count > 0 {
 				TakePot(P1)
+				P1.InventoryUsed = true
+				P1.AtkUsed = false
 			} else {
 				fmt.Println("Vous n'avez pas de Potion de soin dans votre inventaire.")
 			}
 		case 2:
 			if count, ok := P1.Inventory["Potion de poison"]; ok && count > 0 {
 				poisonPot(P1)
+				P1.InventoryUsed = true
+				P1.AtkUsed = false
 			} else {
 				fmt.Println("Vous n'avez pas de Potion de poison dans votre inventaire.")
 			}
 		case 3:
 			if count, ok := P1.Inventory["Potion de mana"]; ok && count > 0 {
 				ManaPot(P1)
+				P1.InventoryUsed = true
+				P1.AtkUsed = false
 			} else {
 				fmt.Println("Vous n'avez pas de Potion de mana dans votre inventaire.")
 			}
 
 		case 0:
+			P1.InventoryUsed = false
+			P1.AtkUsed = false
 			return
 
 		default:

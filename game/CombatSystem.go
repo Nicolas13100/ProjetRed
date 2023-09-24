@@ -51,7 +51,7 @@ func Fight(P1 *Personnage, Monstre1 *Monstre) {
 		fmt.Printf("Vous êtes au tour %d\n", Tours)
 		if P1.Initiative >= Monstre1.Initiative {
 			if Tours == 1 {
-				fmt.Println("Vous avez l'initiative et attaqué en premier !")
+				fmt.Println("Vous avez l'initiative et attaquez en premier !")
 			}
 			// Player's turn
 			charTurn(P1, Monstre1)
@@ -61,20 +61,23 @@ func Fight(P1 *Personnage, Monstre1 *Monstre) {
 				Monstre1.DeadMonstre(P1)
 				break
 			}
+			if !P1.InventoryUsed || P1.AtkUsed {
+				// Monster's turn
+				attaqueMonstre := Monstre1.Atk - P1.Defense
+				if attaqueMonstre < 0 {
+					attaqueMonstre = 0
+				}
+				P1.Hp -= attaqueMonstre
 
-			// Monster's turn
-			attaqueMonstre := Monstre1.Atk - P1.Defense
-			if attaqueMonstre < 0 {
-				attaqueMonstre = 0
-			}
-			P1.Hp -= attaqueMonstre
+				fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", Monstre1.Name, P1.Name, attaqueMonstre)
 
-			fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", Monstre1.Name, P1.Name, attaqueMonstre)
-
-			// Check if the Player is defeated
-			if P1.Hp <= 0 {
-				P1.Dead()
-				break
+				// Check if the Player is defeated
+				if P1.Hp <= 0 {
+					P1.Dead()
+					break
+				}
+			} else {
+				return
 			}
 		} else {
 			if Tours == 1 {
@@ -95,7 +98,6 @@ func Fight(P1 *Personnage, Monstre1 *Monstre) {
 				P1.Dead()
 				break
 			}
-
 			// Player's turn
 			charTurn(P1, Monstre1)
 
@@ -129,6 +131,7 @@ func charTurn(P1 *Personnage, Monstre1 *Monstre) {
 
 	switch choice {
 	case 1:
+		P1.AtkUsed = true
 		fmt.Println("Attaque basique")
 		attaqueJoueur := P1.Atk - Monstre1.Defense
 		if attaqueJoueur < 0 {
@@ -146,10 +149,13 @@ func charTurn(P1 *Personnage, Monstre1 *Monstre) {
 		}
 	case 2:
 		P1.FightInventory()
+
 	case 3:
+		P1.AtkUsed = true
 		fmt.Println("Sélectionnez un sort :")
 		for i, spell := range P1.Spells {
 			fmt.Printf("%d. %s (Type: %s, Dommages: %d, Coût en Mana: %d)\n", i+1, spell.Name, spell.Type, spell.Damage, spell.ManaCost)
+
 		}
 		var selectedSpellIndex int
 		fmt.Print("Entrez le numéro du sort que vous souhaitez lancer : ")
@@ -157,8 +163,10 @@ func charTurn(P1 *Personnage, Monstre1 *Monstre) {
 		if selectedSpellIndex >= 1 && selectedSpellIndex <= len(P1.Spells) {
 			selectedSpell := P1.Spells[selectedSpellIndex-1]
 			P1.CastSpell(selectedSpell, Monstre1)
+
 		} else {
 			fmt.Println("Sélection de sort invalide.")
+			return
 		}
 	}
 }

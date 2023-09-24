@@ -1,24 +1,26 @@
 package game
 
 type Personnage struct {
-	Name         string
-	Race         string
-	Equipement   Equipment
-	Level        int
-	Xp           int
-	XpMax        int
-	HpMax        int
-	Hp           int
-	Inventory    map[string]int
-	Spells       []Spell
-	Gold         int
-	InventoryCap int
-	Mana         int
-	ManaMax      int
-	Atk          int
-	Defense      int
-	Initiative   int
-	x, y         int
+	Name          string
+	Race          string
+	Equipement    Equipment
+	Level         int
+	Xp            int
+	XpMax         int
+	HpMax         int
+	Hp            int
+	Inventory     map[string]int
+	InventoryUsed bool
+	AtkUsed       bool
+	Spells        []Spell
+	Gold          int
+	InventoryCap  int
+	Mana          int
+	ManaMax       int
+	Atk           int
+	Defense       int
+	Initiative    int
+	x, y          int
 }
 
 type Equipment struct {

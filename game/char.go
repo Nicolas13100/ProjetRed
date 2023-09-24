@@ -90,13 +90,15 @@ func CharCreation() *Personnage {
 					"Potion de poison": 3,
 					"Potion de mana":   3,
 				},
-				Mana:       40,
-				ManaMax:    100,
-				Atk:        5,
-				Defense:    0,
-				Initiative: 10,
-				x:          rand.Intn(gridSize),
-				y:          rand.Intn(gridSize),
+				InventoryUsed: false,
+				AtkUsed:       false,
+				Mana:          40,
+				ManaMax:       100,
+				Atk:           5,
+				Defense:       0,
+				Initiative:    10,
+				x:             rand.Intn(gridSize),
+				y:             rand.Intn(gridSize),
 			}
 			return P1
 
