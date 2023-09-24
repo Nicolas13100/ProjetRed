@@ -121,6 +121,7 @@ func addMonsters() {
 		currentRoom.Monsters = append(currentRoom.Monsters, Monstre{x: room.x, y: room.y})
 	}
 }
+
 func encounterMonster() {
 	var monster Monstre
 	if currentFloor >= 1 && currentFloor <= 4 {
