@@ -76,16 +76,10 @@ type Spell struct {
 	ManaCost int
 }
 
-type Room struct {
-	Name        string
-	Description string
-	Exits       map[string]*Room
-	HasMonster  bool
-}
-
 type Carte struct {
 	x, y       int
 	hasExit    bool
+	hasReturn  bool
 	floor      int
 	HasMonster bool
 	Monsters   []Monstre
