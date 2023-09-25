@@ -77,6 +77,7 @@ func CharCreation() *Personnage {
 				Name:         Name,
 				Race:         Race,
 				Equipement:   equipement,
+				Equipements:  []Equipment{Chapeau, Tunique},
 				Level:        1,
 				Xp:           0,
 				XpMax:        100,

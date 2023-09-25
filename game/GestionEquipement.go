@@ -10,20 +10,6 @@ func NewEquipement(P1 *Personnage) *Equipment {
 	}
 }
 
-func (P1 *Personnage) ShowEquipBonus(index int) {
-	equipment, found := P1.Equipements[index]
-	if !found {
-		fmt.Println("Équipement non trouvé.")
-		return
-	}
-
-	fmt.Printf("Équipement choisi : %s\n", equipment.Name)
-	fmt.Printf("- Bonus d'attaque : %d\n", equipment.AtkBonus)
-	fmt.Printf("- Bonus de défense : %d\n", equipment.DefBonus)
-	fmt.Printf("- Bonus de santé : %d\n", equipment.HPBonus)
-	fmt.Printf("- Bonus d'initiative : %d\n", equipment.InitiativeBonus)
-}
-
 func (P1 *Personnage) EquiperHead() {
 	if P1.Inventory["Chapeau de l'aventurier"] > 0 {
 		if P1.Equipement.Head {
@@ -79,6 +65,22 @@ func (P1 *Personnage) DesequiperLeg() {
 		P1.Inventory["Bottes de l'aventurier"]++
 		P1.Equipement.HPBonus -= 15
 		P1.Equipement.Leg = false
+	}
+}
+func (P1 *Personnage) ShowEquipBonus(index int) {
+	if index < 0 || index >= len(P1.Equipements) {
+		fmt.Println("Index invalide.")
+		return
+	}
+	equipment := P1.Equipements[index]
+	if equipment != (Equipment{}) {
+		fmt.Printf("Équipement choisi : %s\n", equipment.Name)
+		fmt.Printf("- Bonus d'attaque : %d\n", equipment.AtkBonus)
+		fmt.Printf("- Bonus de défense : %d\n", equipment.DefBonus)
+		fmt.Printf("- Bonus de santé : %d\n", equipment.HPBonus)
+		fmt.Printf("- Bonus d'initiative : %d\n", equipment.InitiativeBonus)
+	} else {
+		fmt.Println("Équipement non trouvé.")
 	}
 }
 
