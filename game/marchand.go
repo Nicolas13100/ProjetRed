@@ -140,6 +140,7 @@ func Buy(personnage *Personnage, m1 *Marchand) {
 		case quantity > 0:
 			if personnage.LimiteInventory() {
 				m1.Inventory[itemToBuy]--
+				personnage.RemoveZeroValueItems()
 				price, exists := m1.Prices[itemToBuy]
 				if exists {
 					personnage.Gold -= price // Deduct the price from character's gold
@@ -243,6 +244,7 @@ func Sell(personnage *Personnage, m1 *Marchand) {
 			m1.Gold -= price
 			personnage.Gold += price
 			personnage.Inventory[itemToSell]--
+			personnage.RemoveZeroValueItems()
 			fmt.Printf("Vous avez vendu un(e) %s pour %d pièces d'or.\n", itemToSell, price)
 			if askYesNo("Voulez-vous vendre autrechose ?") {
 				continue
