@@ -3,6 +3,13 @@ package game
 import "fmt"
 
 var (
+	CoupdePoing = Spell{
+		Name:     "Coup de Poing",
+		Type:     "Physic",
+		Damage:   5,
+		ManaCost: 0,
+	}
+
 	fireball = Spell{
 		Name:     "Fireball",
 		Type:     "Fire",
