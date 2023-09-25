@@ -67,13 +67,14 @@ func (P1 *Personnage) DesequiperLeg() {
 		P1.Equipement.Leg = false
 	}
 }
-func (P1 *Personnage) ShowEquipBonus(index int) {
-	if index < 0 || index >= len(P1.Equipements) {
-		fmt.Println("Index invalide.")
-		return
-	}
-	equipment := P1.Equipements[index]
-	if equipment != (Equipment{}) {
+
+func (P1 *Personnage) ChangeEquipment(newEquipment Equipment) {
+	P1.Equipement = newEquipment
+}
+
+func (P1 *Personnage) ShowEquipBonus() {
+	if P1.Equipement != (Equipment{}) {
+		equipment := P1.Equipement
 		fmt.Printf("Équipement choisi : %s\n", equipment.Name)
 		fmt.Printf("- Bonus d'attaque : %d\n", equipment.AtkBonus)
 		fmt.Printf("- Bonus de défense : %d\n", equipment.DefBonus)

@@ -115,6 +115,7 @@ func (P1 *Personnage) BaseInventory() {
 				case 3:
 					P1.EquiperLeg()
 				case 4:
+					fmt.Println("Vous n'avez pas d'équipement sur cet emplacement.")
 					continue
 
 				}
@@ -146,11 +147,11 @@ func (P1 *Personnage) BaseInventory() {
 				fmt.Scan(&input)
 				switch input {
 				case 1:
-					P1.ShowEquipBonus(input)
+					P1.ShowEquipBonus()
 				case 2:
-					P1.ShowEquipBonus(input)
+					P1.ShowEquipBonus()
 				case 3:
-					P1.ShowEquipBonus(input)
+					P1.ShowEquipBonus()
 
 				}
 			case 4:
