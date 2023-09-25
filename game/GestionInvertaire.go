@@ -62,10 +62,9 @@ func (P1 *Personnage) BaseInventory() {
 		}
 		fmt.Println("\nQue voulez-vous faire ?")
 		fmt.Println("1. Sélectionner une potion de soin")
-		fmt.Println("2. Sélectionner une potion de poison")
-		fmt.Println("3. Sélectionner une potion de mana")
-		fmt.Println("4. Consulter les sorts acquis")
-		fmt.Println("5. Equipements")
+		fmt.Println("2. Sélectionner une potion de mana")
+		fmt.Println("3. Consulter les sorts acquis")
+		fmt.Println("4. Equipements")
 		fmt.Println("0. Retourner en arrière")
 
 		var input int
@@ -78,20 +77,20 @@ func (P1 *Personnage) BaseInventory() {
 			} else {
 				fmt.Println("Vous n'avez pas de Potion de soin dans votre inventaire.")
 			}
+
 		case 2:
-			if count, ok := P1.Inventory["Potion de poison"]; ok && count > 0 {
-				poisonPot(P1)
-			} else {
-				fmt.Println("Vous n'avez pas de Potion de poison dans votre inventaire.")
-			}
-		case 3:
 			if count, ok := P1.Inventory["Potion de mana"]; ok && count > 0 {
 				ManaPot(P1)
 			} else {
 				fmt.Println("Vous n'avez pas de Potion de mana dans votre inventaire.")
 			}
+		case 3:
+			fmt.Println("Sort appris :")
+			for i, spell := range P1.Spells {
+				fmt.Printf("%d. %s (Type: %s, Dommages: %d, Coût en Mana: %d)\n", i+1, spell.Name, spell.Type, spell.Damage, spell.ManaCost)
+			}
+			waitForUserInput("Entrer 0 pour continuer")
 		case 4:
-		case 5:
 			fmt.Println("Que voulez-vous faire ?")
 			fmt.Println("1. Equiper de l'équipement")
 			fmt.Println("2. Désequiper de l'équipement")

@@ -85,7 +85,7 @@ func CharCreation() *Personnage {
 				Hp:           50,
 				Gold:         100,
 				InventoryCap: 10,
-				Spells:       []Spell{fireball, iceBlast},
+				Spells:       []Spell{CoupdePoing},
 				Inventory: map[string]int{
 					"Potion de soin":   3,
 					"Potion de poison": 3,
@@ -115,7 +115,7 @@ func CharCreation() *Personnage {
 				Hp:           40,
 				Gold:         100,
 				InventoryCap: 10,
-				Spells:       []Spell{fireball, iceBlast},
+				Spells:       []Spell{CoupdePoing},
 				Inventory: map[string]int{
 					"Potion de soin":   3,
 					"Potion de poison": 3,
@@ -143,7 +143,7 @@ func CharCreation() *Personnage {
 				Hp:           60,
 				Gold:         100,
 				InventoryCap: 10,
-				Spells:       []Spell{fireball, iceBlast},
+				Spells:       []Spell{CoupdePoing},
 				Inventory: map[string]int{
 					"Potion de soin":   3,
 					"Potion de poison": 3,
@@ -169,7 +169,7 @@ func CharCreation() *Personnage {
 				Hp:           999999,
 				Gold:         9999999,
 				InventoryCap: 99999999,
-				Spells:       []Spell{fireball, iceBlast},
+				Spells:       []Spell{CoupdePoing, fireball, iceBlast},
 				Inventory: map[string]int{
 					"Potion de soin":   99,
 					"Potion de poison": 99,

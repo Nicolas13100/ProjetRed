@@ -46,7 +46,7 @@ func poisonPot(P1 *Personnage) {
 
 	switch choice {
 	case 1:
-		if count, ok := P1.Inventory["Potion de poison"]; ok && count > 0 {
+		if count, ok := P1.Inventory["Potion de poison"]; ok && count > 0 && Monstre1.Hp > 0 {
 			P1.Inventory["Potion de poison"]--
 			P1.RemoveZeroValueItems()
 			fmt.Println("Vous avez utilisé une potion de poison.")
