@@ -95,3 +95,9 @@ type Item struct {
 	Name     string
 	Quantity int
 }
+
+type SaveData struct {
+	Level     int
+	Stats     Personnage
+	Equipment Equipment
+}

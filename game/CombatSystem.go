@@ -3,6 +3,7 @@ package game
 import "fmt"
 
 var Tours int
+var PlayerTurnTaken = false
 
 func Tutorial(P1 *Personnage) {
 	ClearConsole()
@@ -53,33 +54,34 @@ func Fight(P1 *Personnage, Monstre1 *Monstre) {
 			if Tours == 1 {
 				fmt.Println("Vous avez l'initiative et attaquez en premier !")
 			}
-			// Player's turn
-			charTurn(P1, Monstre1)
-
+			for { // Player's turn
+				charTurn(P1, Monstre1)
+				if PlayerTurnTaken {
+					PlayerTurnTaken = false // Reset playerTurnTaken for the next turn
+					break
+				}
+			}
 			// Check if the Monster is defeated
 			if Monstre1.Hp <= 0 {
 				Monstre1.DeadMonstre(P1)
 				break
 			}
-			if !P1.InventoryUsed || P1.AtkUsed {
-				// Monster's turn
-				attaqueMonstre := Monstre1.Atk - P1.Defense
-				if attaqueMonstre < 0 {
-					attaqueMonstre = 0
-				}
-				P1.Hp -= attaqueMonstre
 
-				fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", Monstre1.Name, P1.Name, attaqueMonstre)
-
-				// Check if the Player is defeated
-				if P1.Hp <= 0 {
-					P1.Dead()
-					break
-				}
-			} else {
-				return
+			attaqueMonstre := Monstre1.Atk - P1.Defense
+			if attaqueMonstre < 0 {
+				attaqueMonstre = 0
 			}
-		} else {
+			P1.Hp -= attaqueMonstre
+
+			fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", Monstre1.Name, P1.Name, attaqueMonstre)
+
+			// Check if the Player is defeated
+			if P1.Hp <= 0 {
+				P1.Dead()
+				break
+			}
+		}
+		if P1.Initiative < Monstre1.Initiative {
 			if Tours == 1 {
 				fmt.Println("Le monstre est plus rapide que vous et attaque en premier !")
 			}
@@ -96,20 +98,24 @@ func Fight(P1 *Personnage, Monstre1 *Monstre) {
 			if P1.Hp <= 0 {
 				fmt.Printf("%s est vaincu!\n", P1.Name)
 				P1.Dead()
-				break
 			}
-			// Player's turn
-			charTurn(P1, Monstre1)
+			for { // Player's turn
+				charTurn(P1, Monstre1)
+				if PlayerTurnTaken {
+					PlayerTurnTaken = false // Reset playerTurnTaken for the next turn
+					break
+				}
+			}
 
 			// Check if the Monster is defeated
 			if Monstre1.Hp <= 0 {
 				Monstre1.DeadMonstre(P1)
-				break
 			}
+
+			Tours++
+			fmt.Println("-----------------------------------------------------------------------------")
 		}
 	}
-	Tours++
-	fmt.Println("-----------------------------------------------------------------------------")
 }
 
 func GetTours() int {
@@ -139,19 +145,11 @@ func charTurn(P1 *Personnage, Monstre1 *Monstre) {
 		}
 		Monstre1.Hp -= attaqueJoueur
 		fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", P1.Name, Monstre1.Name, attaqueJoueur)
-		if Monstre1.Hp > 0 {
-			attaqueMonstre := Monstre1.Atk - P1.Defense
-			if attaqueMonstre < 0 {
-				attaqueMonstre = 0
-			}
-			P1.Hp -= attaqueMonstre
-			fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", Monstre1.Name, P1.Name, attaqueMonstre)
-		}
+		PlayerTurnTaken = true
 	case 2:
 		P1.FightInventory()
 
 	case 3:
-		P1.AtkUsed = true
 		fmt.Println("Sélectionnez un sort :")
 		for i, spell := range P1.Spells {
 			fmt.Printf("%d. %s (Type: %s, Dommages: %d, Coût en Mana: %d)\n", i+1, spell.Name, spell.Type, spell.Damage, spell.ManaCost)
@@ -163,6 +161,7 @@ func charTurn(P1 *Personnage, Monstre1 *Monstre) {
 		if selectedSpellIndex >= 1 && selectedSpellIndex <= len(P1.Spells) {
 			selectedSpell := P1.Spells[selectedSpellIndex-1]
 			P1.CastSpell(selectedSpell, Monstre1)
+			PlayerTurnTaken = true
 
 		} else {
 			fmt.Println("Sélection de sort invalide.")
