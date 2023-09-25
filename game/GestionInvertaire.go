@@ -147,11 +147,11 @@ func (P1 *Personnage) BaseInventory() {
 				fmt.Scan(&input)
 				switch input {
 				case 1:
-					P1.ShowEquipBonus()
+					P1.ShowEquipBonus(P1.Equipement)
 				case 2:
-					P1.ShowEquipBonus()
+					P1.ShowEquipBonus(P1.Equipement)
 				case 3:
-					P1.ShowEquipBonus()
+					P1.ShowEquipBonus(P1.Equipement)
 
 				}
 			case 4:

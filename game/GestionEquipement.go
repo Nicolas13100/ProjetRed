@@ -72,15 +72,22 @@ func (P1 *Personnage) ChangeEquipment(newEquipment Equipment) {
 	P1.Equipement = newEquipment
 }
 
-func (P1 *Personnage) ShowEquipBonus() {
-	if P1.Equipement != (Equipment{}) {
-		equipment := P1.Equipement
-		fmt.Printf("Équipement choisi : %s\n", equipment.Name)
-		fmt.Printf("- Bonus d'attaque : %d\n", equipment.AtkBonus)
-		fmt.Printf("- Bonus de défense : %d\n", equipment.DefBonus)
-		fmt.Printf("- Bonus de santé : %d\n", equipment.HPBonus)
-		fmt.Printf("- Bonus d'initiative : %d\n", equipment.InitiativeBonus)
-	} else {
+func (P1 *Personnage) ShowEquipBonus(EquipmentToDisplay Equipment) {
+	found := false
+	for _, equipment := range P1.Equipements {
+		if equipment == EquipmentToDisplay {
+			found = true
+			fmt.Printf("Équipement choisi : %s\n", equipment.Name)
+			fmt.Printf("- Bonus d'attaque : %d\n", equipment.AtkBonus)
+			fmt.Printf("- Bonus de défense : %d\n", equipment.DefBonus)
+			fmt.Printf("- Bonus de santé : %d\n", equipment.HPBonus)
+			fmt.Printf("- Bonus d'initiative : %d\n", equipment.InitiativeBonus)
+		} else {
+			fmt.Println("Équipement non trouvé.")
+			break
+		}
+	}
+	if !found {
 		fmt.Println("Équipement non trouvé.")
 	}
 }
