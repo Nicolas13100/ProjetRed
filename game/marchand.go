@@ -52,105 +52,116 @@ func Buy(personnage *Personnage, m1 *Marchand) {
 	for key, value := range m1.Inventory {
 		fmt.Println(key, ": ", value)
 	}
-	selectitem, err := getInput("Que voulez-vous acheter ? (1.Potion/2.sort/3.Objet) ")
-	if err != nil {
-		fmt.Println("Erreur lors de la saisie. Veuillez entrer un nombre.")
-		return
-	}
-
-	switch selectitem {
-	case 1:
-		potionType, err := getInput("Quel type de potion voulez-vous acheter ? (1.Soin/2.Poison/3.Mana) ")
+	for {
+		selectitem, err := getInput("Que voulez-vous acheter ? (1.Potion/2.sort/3.Objet/0.Rien, je me suis trompé) ")
 		if err != nil {
 			fmt.Println("Erreur lors de la saisie. Veuillez entrer un nombre.")
 			return
 		}
-		switch potionType {
-		case 1:
-			itemToBuy = "Potion de soin"
-		case 2:
-			itemToBuy = "Potion de poison"
-		case 3:
-			itemToBuy = "Potion de mana"
-		}
 
-	case 2:
-		spellType, err := getInput("Quel sort voulez-vous acheter ? (1. Boule de Feu /)")
-		if err != nil {
-			fmt.Println("Erreur lors de la saisie. Veuillez entrer un nombre.")
-			return
-		}
-		switch spellType {
+		switch selectitem {
 		case 1:
-			itemToBuy = "Livre de sort : Boule de feu"
-		}
-
-	case 3:
-		loot, err := getInput("Quel type de loot souhaitez-vous acheter ? (1 : Loup/ 2 : Troll/ 3 : Sanglier/ 4 : Corbeau)")
-		if err != nil {
-			fmt.Println("Erreur lors de la saisie. Veuillez entrer un nombre.")
-			return
-		}
-		switch loot {
-		case 1:
-			if askYesNo("Vous souhaitez acheter une Fourrure de Loup ?") {
-				itemToBuy = "Fourrure de Loup"
-			} else {
-				fmt.Println("Achat annulé.")
+			potionType, err := getInput("Quel type de potion voulez-vous acheter ? (1.Soin/2.Poison/3.Mana) ")
+			if err != nil {
+				fmt.Println("Erreur lors de la saisie. Veuillez entrer un nombre.")
 				return
+			}
+			switch potionType {
+			case 1:
+				itemToBuy = "Potion de soin"
+			case 2:
+				itemToBuy = "Potion de poison"
+			case 3:
+				itemToBuy = "Potion de mana"
 			}
 
 		case 2:
-			if askYesNo("Vous souhaitez acheter une Peau de Troll ?") {
-				itemToBuy = "Peau de Troll"
-			} else {
-				fmt.Println("Achat annulé.")
+			spellType, err := getInput("Quel sort voulez-vous acheter ? (1. Boule de Feu /)")
+			if err != nil {
+				fmt.Println("Erreur lors de la saisie. Veuillez entrer un nombre.")
 				return
+			}
+			switch spellType {
+			case 1:
+				itemToBuy = "Livre de sort : Boule de feu"
 			}
 
 		case 3:
-			if askYesNo("Vous souhaitez acheter une Cuir de Sanglier ?") {
-				itemToBuy = "Cuir de Sanglier"
-			} else {
-				fmt.Println("Achat annulé.")
+			loot, err := getInput("Quel type de loot souhaitez-vous acheter ? (1 : Loup/ 2 : Troll/ 3 : Sanglier/ 4 : Corbeau)")
+			if err != nil {
+				fmt.Println("Erreur lors de la saisie. Veuillez entrer un nombre.")
 				return
 			}
+			switch loot {
+			case 1:
+				if askYesNo("Vous souhaitez acheter une Fourrure de Loup ?") {
+					itemToBuy = "Fourrure de Loup"
+				} else {
+					fmt.Println("Achat annulé.")
+					return
+				}
 
-		case 4:
-			if askYesNo("Vous souhaitez acheter une Plume de Corbeau ?") {
-				itemToBuy = "Plume de Corbeau"
-			} else {
-				fmt.Println("Achat annulé.")
+			case 2:
+				if askYesNo("Vous souhaitez acheter une Peau de Troll ?") {
+					itemToBuy = "Peau de Troll"
+				} else {
+					fmt.Println("Achat annulé.")
+					return
+				}
+
+			case 3:
+				if askYesNo("Vous souhaitez acheter une Cuir de Sanglier ?") {
+					itemToBuy = "Cuir de Sanglier"
+				} else {
+					fmt.Println("Achat annulé.")
+					return
+				}
+
+			case 4:
+				if askYesNo("Vous souhaitez acheter une Plume de Corbeau ?") {
+					itemToBuy = "Plume de Corbeau"
+
+				} else {
+					fmt.Println("Achat annulé.")
+					return
+				}
+			case 0:
+				break
+			default:
+				fmt.Println("Type de loot invalide.")
 				return
 			}
 		default:
-			fmt.Println("Type de loot invalide.")
+			fmt.Println("Type d'objet invalide.")
 			return
 		}
-	default:
-		fmt.Println("Type d'objet invalide.")
-		return
-	}
 
-	switch quantity := m1.Inventory[itemToBuy]; {
-	case quantity > 0:
-		if personnage.LimiteInventory() {
-			m1.Inventory[itemToBuy]--
-			price, exists := m1.Prices[itemToBuy]
-			if exists {
-				personnage.Gold -= price // Deduct the price from character's gold
-				personnage.Inventory[itemToBuy]++
-				fmt.Println("Vous avez acheté ", itemToBuy)
+		switch quantity := m1.Inventory[itemToBuy]; {
+		case quantity > 0:
+			if personnage.LimiteInventory() {
+				m1.Inventory[itemToBuy]--
+				price, exists := m1.Prices[itemToBuy]
+				if exists {
+					personnage.Gold -= price // Deduct the price from character's gold
+					personnage.Inventory[itemToBuy]++
+					fmt.Println("Vous avez acheté ", itemToBuy)
+					if askYesNo("Voulez-vous acheter autrechose ?") {
+						break
+					} else {
+						return
+					}
+				} else {
+					fmt.Println("Désolé, je ne connais pas le prix de cet objet.")
+				}
 			} else {
-				fmt.Println("Désolé, je ne connais pas le prix de cet objet.")
+				fmt.Println("L'inventaire est plein, vous ne pouvez pas acheter cet objet.")
 			}
-		} else {
-			fmt.Println("L'inventaire est plein, vous ne pouvez pas acheter cet objet.")
+		default:
+			fmt.Println("Désolé, je n'ai pas cet objet en stock.")
 		}
-	default:
-		fmt.Println("Désolé, je n'ai pas cet objet en stock.")
 	}
 }
+
 func Sell(personnage *Personnage, m1 *Marchand) {
 	fmt.Println("Les objets disponibles à la vente sont :")
 
@@ -158,81 +169,89 @@ func Sell(personnage *Personnage, m1 *Marchand) {
 		fmt.Println(key, value)
 	}
 
-	selectItemType, err := getInput("Quel type d'objet voulez-vous vendre ? (1.Potion /2.Loot): ")
-	if err != nil {
-		fmt.Println("Erreur lors de la saisie. Veuillez entrer un nombre.")
-		return
-	}
-
-	var itemToSell string
-	var price int
-
-	switch selectItemType {
-	case 1:
-		potionType, err := getInput("Quel type de potion voulez-vous vendre ? (1.soin/2.poison/3.mana): ")
+	for {
+		selectItemType, err := getInput("Quel type d'objet voulez-vous vendre ? (1.Potion /2.Loot/0.Rien, je me suis trompé): ")
 		if err != nil {
 			fmt.Println("Erreur lors de la saisie. Veuillez entrer un nombre.")
 			return
 		}
 
-		switch potionType {
+		var itemToSell string
+		var price int
+
+		switch selectItemType {
 		case 1:
-			itemToSell = "Potion de soin"
+			potionType, err := getInput("Quel type de potion voulez-vous vendre ? (1.soin/2.poison/3.mana): ")
+			if err != nil {
+				fmt.Println("Erreur lors de la saisie. Veuillez entrer un nombre.")
+				return
+			}
+
+			switch potionType {
+			case 1:
+				itemToSell = "Potion de soin"
+			case 2:
+				itemToSell = "Potion de poison"
+			case 3:
+				itemToSell = "Potion de mana"
+			default:
+				fmt.Println("Type de potion invalide.")
+				return
+			}
+
 		case 2:
-			itemToSell = "Potion de poison"
-		case 3:
-			itemToSell = "Potion de mana"
+			lootType, err := getInput("Quel type de loot souhaitez-vous vendre ? (1 : Loup/ 2 : Troll/ 3 : Sanglier/ 4 : Corbeau): ")
+			if err != nil {
+				fmt.Println("Erreur lors de la saisie. Veuillez entrer un nombre.")
+				return
+			}
+
+			switch lootType {
+			case 1:
+				itemToSell = "Fourrure de Loup"
+			case 2:
+				itemToSell = "Peau de Troll"
+			case 3:
+				itemToSell = "Cuir de Sanglier"
+			case 4:
+				itemToSell = "Plume de Corbeau"
+			default:
+				fmt.Println("Type de loot invalide.")
+				return
+			}
+		case 0:
+			break
 		default:
-			fmt.Println("Type de potion invalide.")
+			fmt.Println("Type d'objet invalide.")
 			return
 		}
 
-	case 2:
-		lootType, err := getInput("Quel type de loot souhaitez-vous vendre ? (1 : Loup/ 2 : Troll/ 3 : Sanglier/ 4 : Corbeau): ")
-		if err != nil {
-			fmt.Println("Erreur lors de la saisie. Veuillez entrer un nombre.")
+		price, exists := m1.Prices[itemToSell]
+		if !exists {
+			fmt.Println("Désolé, le prix de vente de cet objet n'est pas défini.")
 			return
 		}
 
-		switch lootType {
-		case 1:
-			itemToSell = "Fourrure de Loup"
-		case 2:
-			itemToSell = "Peau de Troll"
-		case 3:
-			itemToSell = "Cuir de Sanglier"
-		case 4:
-			itemToSell = "Plume de Corbeau"
-		default:
-			fmt.Println("Type de loot invalide.")
+		quantity, ok := personnage.Inventory[itemToSell]
+		if !ok || quantity <= 0 {
+			fmt.Println("Désolé, vous n'avez pas cet objet en stock.")
 			return
 		}
 
-	default:
-		fmt.Println("Type d'objet invalide.")
-		return
-	}
-
-	price, exists := m1.Prices[itemToSell]
-	if !exists {
-		fmt.Println("Désolé, le prix de vente de cet objet n'est pas défini.")
-		return
-	}
-
-	quantity, ok := personnage.Inventory[itemToSell]
-	if !ok || quantity <= 0 {
-		fmt.Println("Désolé, vous n'avez pas cet objet en stock.")
-		return
-	}
-
-	if m1.Gold >= price {
-		m1.Inventory[itemToSell]++
-		m1.Gold -= price
-		personnage.Gold += price
-		personnage.Inventory[itemToSell]--
-		fmt.Printf("Vous avez vendu un(e) %s pour %d pièces d'or.\n", itemToSell, price)
-	} else {
-		fmt.Println("Le marchand n'a pas assez d'argent pour acheter cet objet.")
+		if m1.Gold >= price {
+			m1.Inventory[itemToSell]++
+			m1.Gold -= price
+			personnage.Gold += price
+			personnage.Inventory[itemToSell]--
+			fmt.Printf("Vous avez vendu un(e) %s pour %d pièces d'or.\n", itemToSell, price)
+			if askYesNo("Voulez-vous vendre autrechose ?") {
+				continue
+			} else {
+				return
+			}
+		} else {
+			fmt.Println("Le marchand n'a pas assez d'argent pour acheter cet objet.")
+		}
 	}
 }
 func getInput(prompt string) (int, error) {
