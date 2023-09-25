@@ -25,10 +25,13 @@ var (
 			"Potion de poison":             3,
 			"Potion de mana":               3,
 			"Livre de sort : Boule de feu": 1,
-			"Fourrure de Loup":             4,
-			"Peau de Troll":                1,
-			"Cuir de Sanglier":             1,
-			"Plume de Corbeau":             1,
+			"Fourrure de Loup":             3,
+			"Peau de Troll":                6,
+			"Cuir de Sanglier":             4,
+			"Plume de Corbeau":             2,
+			"Chapeau de l’aventurier":      13,
+			"Tunique de l’aventurier":      19,
+			"Bottes de l’aventurier":       15,
 		},
 		Prices: map[string]int{
 			"Potion de soin":   3,
@@ -178,10 +181,13 @@ func Sell(personnage *Personnage, m1 *Marchand) {
 		switch potionType {
 		case 1:
 			itemToSell = "Potion de soin"
+			P1.RemoveZeroValueItems()
 		case 2:
 			itemToSell = "Potion de poison"
+			P1.RemoveZeroValueItems()
 		case 3:
 			itemToSell = "Potion de mana"
+			P1.RemoveZeroValueItems()
 		default:
 			fmt.Println("Type de potion invalide.")
 			return
@@ -197,12 +203,16 @@ func Sell(personnage *Personnage, m1 *Marchand) {
 		switch lootType {
 		case 1:
 			itemToSell = "Fourrure de Loup"
+			P1.RemoveZeroValueItems()
 		case 2:
 			itemToSell = "Peau de Troll"
+			P1.RemoveZeroValueItems()
 		case 3:
 			itemToSell = "Cuir de Sanglier"
+			P1.RemoveZeroValueItems()
 		case 4:
 			itemToSell = "Plume de Corbeau"
+			P1.RemoveZeroValueItems()
 		default:
 			fmt.Println("Type de loot invalide.")
 			return

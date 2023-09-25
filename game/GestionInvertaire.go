@@ -97,12 +97,20 @@ func (P1 *Personnage) BaseInventory() {
 			}
 		case 4:
 		case 5:
-			fmt.Println("Voulez-vous 1.équiper ou 2.désequiper un equipement ? (3. retour)")
+			fmt.Println("Que voulez-vous faire ?")
+			fmt.Println("1. Equiper de l'équipement")
+			fmt.Println("2. Désequiper de l'équipement")
+			fmt.Println("3. Afficher les bonus d'équipements")
+			fmt.Println("4.Quitter")
 			var input int
 			fmt.Scan(&input)
 			switch input {
 			case 1:
-				fmt.Println("Que souhaitez-vous équiper ? 1. Casque / 2. Armure / 3. Pied / 4. retour ")
+				fmt.Println("Que souhaitez-vous équiper ?")
+				fmt.Println("1. Casque")
+				fmt.Println("2. Armure")
+				fmt.Println("3. Pied")
+				fmt.Println("4. Retour ")
 				var input int
 				fmt.Scan(&input)
 				switch input {
@@ -117,7 +125,11 @@ func (P1 *Personnage) BaseInventory() {
 
 				}
 			case 2:
-				fmt.Println("Que souhaitez-vous déquiper ? 1. Casque / 2. Armure / 3. Pied / 4. retour ")
+				fmt.Println("Que souhaitez-vous désequiper ?")
+				fmt.Println("1. Casque")
+				fmt.Println("2. Armure")
+				fmt.Println("3. Pied")
+				fmt.Println("4. Retour ")
 				var input int
 				fmt.Scan(&input)
 				switch input {
@@ -128,9 +140,26 @@ func (P1 *Personnage) BaseInventory() {
 				case 3:
 					P1.DesequiperLeg()
 				case 4:
+				}
+
+			case 3:
+				fmt.Println("Quel équipement souhaitez-vous afficher ?")
+				fmt.Println("1. Casque")
+				fmt.Println("2. Armure")
+				fmt.Println("3. Pied")
+				fmt.Println("4. Retour ")
+				var input int
+				fmt.Scan(&input)
+				switch input {
+				case 1:
+					P1.ShowEquipBonus(input)
+				case 2:
+					P1.ShowEquipBonus(input)
+				case 3:
+					P1.ShowEquipBonus(input)
 
 				}
-			case 3:
+			case 4:
 				continue
 			}
 		case 0:

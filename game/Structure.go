@@ -4,6 +4,7 @@ type Personnage struct {
 	Name          string
 	Race          string
 	Equipement    Equipment
+	Equipements   map[int]Equipment
 	Level         int
 	Xp            int
 	XpMax         int
@@ -24,9 +25,12 @@ type Personnage struct {
 }
 
 type Equipment struct {
+	Name            string
+	Type            string
 	Head            bool
 	Body            bool
 	Leg             bool
+	Weapon          bool
 	HPBonus         int
 	AtkBonus        int
 	DefBonus        int

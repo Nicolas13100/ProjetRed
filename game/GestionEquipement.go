@@ -1,11 +1,27 @@
 package game
 
+import "fmt"
+
 func NewEquipement(P1 *Personnage) *Equipment {
 	return &Equipment{
 		Head: false,
 		Body: false,
 		Leg:  false,
 	}
+}
+
+func (P1 *Personnage) ShowEquipBonus(index int) {
+	equipment, found := P1.Equipements[index]
+	if !found {
+		fmt.Println("Équipement non trouvé.")
+		return
+	}
+
+	fmt.Printf("Équipement choisi : %s\n", equipment.Name)
+	fmt.Printf("- Bonus d'attaque : %d\n", equipment.AtkBonus)
+	fmt.Printf("- Bonus de défense : %d\n", equipment.DefBonus)
+	fmt.Printf("- Bonus de santé : %d\n", equipment.HPBonus)
+	fmt.Printf("- Bonus d'initiative : %d\n", equipment.InitiativeBonus)
 }
 
 func (P1 *Personnage) EquiperHead() {
@@ -65,3 +81,44 @@ func (P1 *Personnage) DesequiperLeg() {
 		P1.Equipement.Leg = false
 	}
 }
+
+var (
+	Chapeau = Equipment{
+		Name:            "Chapeau de l'aventurier",
+		Type:            "Chapeau",
+		Head:            true,
+		HPBonus:         4,
+		DefBonus:        2,
+		InitiativeBonus: 2,
+	}
+	Tunique = Equipment{
+		Name:            "Tunique de l'aventurier",
+		Type:            "Tunique",
+		Body:            true,
+		HPBonus:         7,
+		DefBonus:        7,
+		InitiativeBonus: 2,
+	}
+	Bottes = Equipment{
+		Name:            "Bottes de l'aventurier",
+		Type:            "Bottes",
+		Leg:             true,
+		HPBonus:         5,
+		DefBonus:        2,
+		InitiativeBonus: 2,
+	}
+
+	Epée = Equipment{
+		Name:     "Epée de l'aventurier",
+		Weapon:   true,
+		AtkBonus: 5,
+		DefBonus: 2,
+	}
+
+	Arc = Equipment{
+		Name:            "Arc de l'aventurier",
+		Weapon:          true,
+		AtkBonus:        5,
+		InitiativeBonus: 2,
+	}
+)
