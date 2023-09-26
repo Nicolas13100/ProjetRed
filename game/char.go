@@ -101,6 +101,7 @@ RestartLoop:
 			Race:          Race,
 			Equipement:    equipement,
 			EquipementMap: map[string]Equipment{},
+			WeaponInHand:  map[int]Equipment{},
 			Level:         1,
 			Xp:            0,
 			XpMax:         100,
@@ -132,6 +133,7 @@ RestartLoop:
 			Race:          Race,
 			Equipement:    equipement,
 			EquipementMap: map[string]Equipment{},
+			WeaponInHand:  map[int]Equipment{},
 			Level:         1,
 			Xp:            0,
 			XpMax:         100,
@@ -161,6 +163,7 @@ RestartLoop:
 			Race:          Race,
 			Equipement:    equipement,
 			EquipementMap: map[string]Equipment{},
+			WeaponInHand:  map[int]Equipment{},
 			Level:         1,
 			Xp:            0,
 			XpMax:         100,
@@ -190,6 +193,7 @@ RestartLoop:
 			Race:          Race,
 			Equipement:    equipement,
 			EquipementMap: map[string]Equipment{},
+			WeaponInHand:  map[int]Equipment{},
 			Level:         99,
 			HpMax:         999999,
 			Hp:            999999,
@@ -206,6 +210,8 @@ RestartLoop:
 				"Plume de Corbeau":     99,
 				"Epée de l'aventurier": 1,
 				"Arc de l'aventurier":  1,
+				"Failure":              1,
+				"Wadô Ichimonji":       1,
 			},
 			Mana:       999,
 			ManaMax:    999,
@@ -229,7 +235,7 @@ func (P1 Personnage) DisplayInfo() {
 
 	for {
 		ClearConsole()
-		text1 := "\nNom : %s\nRace : %s\n\nNiveau : %d\n\nPoints de d'XP actuels : %d\nPoints de d'XP avant le prochain niveau : %d\n\nPoints de vie actuels : %d\nPoints de vie maximum : %d\nCash : %d\n \n"
+		text1 := "\nNom : %s\nRace : %s\nNiveau : %d\nPoints de d'XP actuels : %d\nPoints de d'XP avant le prochain niveau : %d\n\nPoints de vie actuels : %d\nPoints de vie maximum : %d\n ATK : %d\n DEF : %d\nCash : %d\n"
 		centeredText1 := CenterText(text1)
 		fmt.Printf(centeredText1, P1.Name, P1.Race, P1.Level, P1.Xp, P1.XpMax, P1.Hp+P1.Equipement.HPBonus, P1.HpMax+P1.Equipement.HPBonus, P1.Atk+P1.Equipement.AtkBonus, P1.Defense+P1.Equipement.DefBonus, P1.Gold)
 

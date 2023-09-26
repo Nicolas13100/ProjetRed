@@ -131,7 +131,7 @@ func (P1 *Personnage) BaseInventory() {
 				}
 
 			case 3:
-
+				printEquipmentMap(P1.EquipementMap)
 				waitForUserInput("Entrer 0  pour revenir au menu principal")
 				continue
 
@@ -179,5 +179,12 @@ func DropsToInventory(P1 *Personnage, itemDrop map[string]int) {
 
 			P1.Inventory[itemName] = quantityDropped
 		}
+	}
+}
+
+func printEquipmentMap(equipmentMap map[string]Equipment) {
+	for key, value := range equipmentMap {
+		fmt.Printf("Key: %s\n", key)
+		fmt.Printf("Value: %+v\n", value)
 	}
 }
