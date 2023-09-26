@@ -72,7 +72,6 @@ func CharCreation() *Personnage {
 		fmt.Println(centeredText)
 		fmt.Scan(&Race)
 
-
 		tc := cases.Title(language.English)
 		Race = tc.String(strings.ToLower(Race))
 		text1 := "Votre race sera %s, est-ce correct ? (1.Oui/2.Non) \n"
@@ -92,9 +91,6 @@ func CharCreation() *Personnage {
 			// If user chooses "no", restart the loop
 			continue
 		}
-	}
-
-
 
 		switch Race {
 		case "Humain":
@@ -218,6 +214,7 @@ func CharCreation() *Personnage {
 			continue
 		}
 	}
+	return &P1
 }
 
 func (P1 Personnage) DisplayInfo() {
