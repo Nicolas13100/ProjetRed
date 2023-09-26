@@ -153,6 +153,7 @@ func (P1 *Personnage) BaseInventory() {
 		}
 	}
 }
+
 func (P1 *Personnage) LimiteInventory() bool {
 	totalQuantity := 0
 	for _, count := range P1.Inventory {
@@ -175,6 +176,7 @@ func (P1 *Personnage) RemoveZeroValueItems() {
 		}
 	}
 }
+
 func DropsToInventory(P1 *Personnage, itemDrop map[string]int) {
 	for itemName, quantityDropped := range itemDrop {
 
