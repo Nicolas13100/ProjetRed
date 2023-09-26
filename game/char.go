@@ -71,6 +71,31 @@ func CharCreation() *Personnage {
 		centeredText := CenterText(text)
 		fmt.Println(centeredText)
 		fmt.Scan(&Race)
+
+
+		tc := cases.Title(language.English)
+		Race = tc.String(strings.ToLower(Race))
+		text1 := "Votre race sera %s, est-ce correct ? (1.Oui/2.Non) \n"
+		centeredText1 := CenterText(text1)
+		fmt.Printf(centeredText1, Race)
+		var confirmation int
+		fmt.Scan(&confirmation)
+
+		if confirmation == 1 {
+			// Create a Title case converter
+			tc := cases.Title(language.English)
+
+			// Convert the name to Title case
+			Race = tc.String(strings.ToLower(Race))
+			break
+		} else if confirmation == 2 {
+			// If user chooses "no", restart the loop
+			continue
+		}
+	}
+
+
+
 		switch Race {
 		case "Humain":
 			P1 := &Personnage{
