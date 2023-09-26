@@ -10,6 +10,38 @@ func NewEquipement(P1 *Personnage) *Equipment {
 	}
 }
 
+func (P1 *Personnage) Equip(equipment Equipment) {
+	for i, equipped := range P1.Equipements {
+		if equipped.Type == equipment.Type {
+			P1.Unequip(i)
+			break
+		}
+	}
+
+	P1.Equipements = append(P1.Equipements, equipment)
+
+	P1.HpMax += equipment.HPBonus
+	P1.Atk += equipment.AtkBonus
+	P1.Defense += equipment.DefBonus
+	P1.Initiative += equipment.InitiativeBonus
+}
+
+func (P1 *Personnage) Unequip(index int) {
+	if index < 0 || index >= len(P1.Equipements) {
+		fmt.Println("Equipement incorrect")
+		return
+	}
+
+	equipmentToRemove := P1.Equipements[index]
+
+	P1.HpMax -= equipmentToRemove.HPBonus
+	P1.Atk -= equipmentToRemove.AtkBonus
+	P1.Defense -= equipmentToRemove.DefBonus
+	P1.Initiative -= equipmentToRemove.InitiativeBonus
+
+	P1.Equipements = append(P1.Equipements[:index], P1.Equipements[index+1:]...)
+}
+
 func (P1 *Personnage) EquiperHead() {
 	if P1.Inventory["Chapeau de l'aventurier"] > 0 {
 		if P1.Equipement.Head {
@@ -65,30 +97,6 @@ func (P1 *Personnage) DesequiperLeg() {
 		P1.Inventory["Bottes de l'aventurier"]++
 		P1.Equipement.HPBonus -= 15
 		P1.Equipement.Leg = false
-	}
-}
-
-func (P1 *Personnage) ChangeEquipment(newEquipment Equipment) {
-	P1.Equipement = newEquipment
-}
-
-func (P1 *Personnage) ShowEquipBonus(EquipmentToDisplay Equipment) {
-	found := false
-	for _, equipment := range P1.Equipements {
-		if equipment == EquipmentToDisplay {
-			found = true
-			fmt.Printf("Équipement choisi : %s\n", equipment.Name)
-			fmt.Printf("- Bonus d'attaque : %d\n", equipment.AtkBonus)
-			fmt.Printf("- Bonus de défense : %d\n", equipment.DefBonus)
-			fmt.Printf("- Bonus de santé : %d\n", equipment.HPBonus)
-			fmt.Printf("- Bonus d'initiative : %d\n", equipment.InitiativeBonus)
-		} else {
-			fmt.Println("Équipement non trouvé.")
-			break
-		}
-	}
-	if !found {
-		fmt.Println("Équipement non trouvé.")
 	}
 }
 

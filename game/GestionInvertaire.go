@@ -53,7 +53,7 @@ func (P1 *Personnage) FightInventory() {
 
 func (P1 *Personnage) BaseInventory() {
 	for {
-		ClearConsole()
+
 		fmt.Println("\nInventaire:")
 		fmt.Println("Cash :", P1.Gold)
 		for key, value := range P1.Inventory {
@@ -94,7 +94,7 @@ func (P1 *Personnage) BaseInventory() {
 			fmt.Println("Que voulez-vous faire ?")
 			fmt.Println("1. Equiper de l'équipement")
 			fmt.Println("2. Désequiper de l'équipement")
-			fmt.Println("3. Afficher les bonus d'équipements")
+			fmt.Println("3. Afficher les équipements")
 			fmt.Println("4.Quitter")
 			var input int
 			fmt.Scan(&input)
@@ -138,20 +138,8 @@ func (P1 *Personnage) BaseInventory() {
 				}
 
 			case 3:
-				fmt.Println("Quel équipement souhaitez-vous afficher ?")
-				fmt.Println("1. Casque")
-				fmt.Println("2. Armure")
-				fmt.Println("3. Pied")
-				fmt.Println("4. Retour ")
-				var input int
-				fmt.Scan(&input)
-				switch input {
-				case 1:
-					P1.ShowEquipBonus(P1.Equipement)
-				case 2:
-					P1.ShowEquipBonus(P1.Equipement)
-				case 3:
-					P1.ShowEquipBonus(P1.Equipement)
+				for i, equipements := range P1.Equipements {
+					fmt.Printf("\n%d. %s :\n \nType: %s\nPV Bonus: %d\nAttaque Bonus: %d\nDéfense Bonus : %d\nInitiative Bonus : %d\n", i+1, equipements.Name, equipements.Type, equipements.HPBonus, equipements.AtkBonus, equipements.DefBonus, equipements.InitiativeBonus)
 
 				}
 			case 4:
@@ -164,7 +152,6 @@ func (P1 *Personnage) BaseInventory() {
 		}
 	}
 }
-
 func (P1 *Personnage) LimiteInventory() bool {
 	totalQuantity := 0
 	for _, count := range P1.Inventory {
