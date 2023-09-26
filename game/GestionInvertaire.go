@@ -58,7 +58,6 @@ func (P1 *Personnage) BaseInventory() {
 		fmt.Println("Cash :", P1.Gold)
 		for key, value := range P1.Inventory {
 			fmt.Printf("%s: %d \n", key, value)
-
 		}
 		fmt.Println("\nQue voulez-vous faire ?")
 		fmt.Println("1. Sélectionner une potion de soin")
