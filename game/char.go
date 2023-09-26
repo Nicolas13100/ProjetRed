@@ -184,6 +184,7 @@ RestartLoop:
 			Name:         Name,
 			Race:         Race,
 			Equipement:   equipement,
+			Equipements:  []Equipment{Chapeau, Tunique},
 			Level:        99,
 			HpMax:        999999,
 			Hp:           999999,
