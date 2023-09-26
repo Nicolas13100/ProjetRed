@@ -200,13 +200,26 @@ func (P1 Personnage) DisplayInfo() {
 
 	for {
 		ClearConsole()
-		text1 := "Nom : %s\nRace :%s\nNiveau : %d\nPoints de vie actuels : %d\nPoints de vie maximum : %d\nPoints de d'XP actuels : %d\nPoints de d'XP avant le prochain niveau : %d\nCash : %d\n"
+		text1 := "\nNom : %s\nRace :%s\n\nNiveau : %d\n\nPoints de d'XP actuels : %d\nPoints de d'XP avant le prochain niveau : %d\n\nPoints de vie actuels : %d\nPoints de vie maximum : %d\nCash : %d\n \n"
 		centeredText1 := CenterText(text1)
 		fmt.Printf(centeredText1, P1.Name, P1.Race, P1.Level, P1.Hp+P1.Equipement.HPBonus, P1.HpMax+P1.Equipement.HPBonus, P1.Xp, P1.XpMax, P1.Gold)
 
-		fmt.Println("Sorts:")
-		for _, spell := range P1.Spells {
-			fmt.Printf("						Spell Name: %s	Type: %s	Damage: %d	Mana Cost: %d\n", spell.Name, spell.Type, spell.Damage, spell.ManaCost)
+		text11 := "\nSorts:"
+		centeredText11 := CenterText(text11)
+		fmt.Println(centeredText11)
+		text12 := "\n%d.Spell Name : %s\nType :   %s\nDamage :  %d\nMana Cost : %d\n"
+		centeredText12 := CenterText(text12)
+		for i, spell := range P1.Spells {
+			fmt.Printf(centeredText12, i+1, spell.Name, spell.Type, spell.Damage, spell.ManaCost)
+
+		}
+		text21 := "\nEquipements:"
+		centeredText21 := CenterText(text21)
+		fmt.Println(centeredText21)
+		text22 := "\n%d. %s :\n Type: %s\n"
+		centeredText22 := CenterText(text22)
+		for i, equipements := range P1.Equipements {
+			fmt.Printf(centeredText22, i+1, equipements.Name, equipements.Type)
 		}
 
 		text := "\nType 0 to come back to main menu"

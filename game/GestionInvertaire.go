@@ -109,11 +109,11 @@ func (P1 *Personnage) BaseInventory() {
 				fmt.Scan(&input)
 				switch input {
 				case 1:
-					P1.EquiperHead()
+					P1.Equip(P1.Equipement)
 				case 2:
-					P1.EquiperBody()
+					P1.Equip(P1.Equipement)
 				case 3:
-					P1.EquiperLeg()
+					P1.Equip(P1.Equipement)
 				case 4:
 					fmt.Println("Vous n'avez pas d'équipement sur cet emplacement.")
 					continue
@@ -129,18 +129,17 @@ func (P1 *Personnage) BaseInventory() {
 				fmt.Scan(&input)
 				switch input {
 				case 1:
-					P1.DesequiperHead()
+					P1.Unequip(1)
 				case 2:
-					P1.DesequiperBody()
+					P1.Unequip(2)
 				case 3:
-					P1.DesequiperLeg()
+					P1.Unequip(3)
 				case 4:
 				}
 
 			case 3:
 				for i, equipements := range P1.Equipements {
 					fmt.Printf("\n%d. %s :\n \nType: %s\nPV Bonus: %d\nAttaque Bonus: %d\nDéfense Bonus : %d\nInitiative Bonus : %d\n", i+1, equipements.Name, equipements.Type, equipements.HPBonus, equipements.AtkBonus, equipements.DefBonus, equipements.InitiativeBonus)
-
 				}
 			case 4:
 				continue

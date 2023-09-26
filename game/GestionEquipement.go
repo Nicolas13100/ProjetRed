@@ -42,7 +42,7 @@ func (P1 *Personnage) Unequip(index int) {
 	P1.Equipements = append(P1.Equipements[:index], P1.Equipements[index+1:]...)
 }
 
-func (P1 *Personnage) EquiperHead() {
+/*func (P1 *Personnage) EquiperHead() {
 	if P1.Inventory["Chapeau de l'aventurier"] > 0 {
 		if P1.Equipement.Head {
 			// Si le personnage a déjà un chapeau équipé, le remettre dans l'inventaire
@@ -99,7 +99,7 @@ func (P1 *Personnage) DesequiperLeg() {
 		P1.Equipement.Leg = false
 	}
 }
-
+*/
 var (
 	Chapeau = Equipment{
 		Name:            "Chapeau de l'aventurier",
