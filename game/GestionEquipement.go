@@ -14,19 +14,33 @@ func (p *Personnage) Equip(item Equipment) {
 	switch item.Type {
 	case "Head":
 		p.Equipement = item
+		p.Inventory[item.Name]--
+		p.Equipements = append(p.Equipements, item)
+		p.RemoveZeroValueItems()
 	case "Body":
 		p.Equipement = item
+		p.Inventory[item.Name]--
+		p.Equipements = append(p.Equipements, item)
+		p.RemoveZeroValueItems()
 	case "Legs":
 		p.Equipement = item
+		p.Inventory[item.Name]--
+		p.Equipements = append(p.Equipements, item)
+		p.RemoveZeroValueItems()
 	case "Boots":
 		p.Equipement = item
+		p.Inventory[item.Name]--
+		p.Equipements = append(p.Equipements, item)
+		p.RemoveZeroValueItems()
 	case "Weapon":
 		p.Equipement = item
+		p.Inventory[item.Name]--
+		p.Equipements = append(p.Equipements, item)
+		p.RemoveZeroValueItems()
 	default:
 		fmt.Println("Invalid equipment type")
 	}
 }
-
 func (P1 *Personnage) DesequiperHead() {
 	if P1.Equipement.Head {
 		P1.Inventory["Chapeau de l'aventurier"]++
