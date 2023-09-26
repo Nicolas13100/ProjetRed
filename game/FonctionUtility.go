@@ -1,6 +1,7 @@
 package game
 
 import (
+	"fmt"
 	"os"
 	"os/exec"
 	"runtime"
@@ -39,4 +40,14 @@ func IsValidName(name string, maxLetters int) bool {
 	}
 
 	return true
+}
+
+func AskForUserChoice(prompt string) int {
+	var choice int
+	fmt.Println(prompt)
+	_, err := fmt.Scan(&choice)
+	if err != nil {
+		fmt.Println("Error reading user input:", err)
+	}
+	return choice
 }

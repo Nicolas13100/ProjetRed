@@ -12,56 +12,17 @@ func NewEquipement(P1 *Personnage) *Equipment {
 
 func (p *Personnage) Equip(item Equipment) {
 	switch item.Type {
-	case "Head":
-		p.Equipement = item
-		p.Inventory[item.Name]--
-		p.Equipements = append(p.Equipements, item)
-		p.RemoveZeroValueItems()
-	case "Body":
-		p.Equipement = item
-		p.Inventory[item.Name]--
-		p.Equipements = append(p.Equipements, item)
-		p.RemoveZeroValueItems()
-	case "Legs":
-		p.Equipement = item
-		p.Inventory[item.Name]--
-		p.Equipements = append(p.Equipements, item)
-		p.RemoveZeroValueItems()
-	case "Boots":
+	case "Head", "Body", "Legs", "Boots":
 		p.Equipement = item
 		p.Inventory[item.Name]--
 		p.Equipements = append(p.Equipements, item)
 		p.RemoveZeroValueItems()
 	case "Weapon":
-		p.Equipement = item
-		p.Inventory[item.Name]--
-		p.Equipements = append(p.Equipements, item)
-		p.RemoveZeroValueItems()
+
+	case "2HandWeapon":
+
 	default:
 		fmt.Println("Invalid equipment type")
-	}
-}
-func (P1 *Personnage) DesequiperHead() {
-	if P1.Equipement.Head {
-		P1.Inventory["Chapeau de l'aventurier"]++
-		P1.Equipement.HPBonus -= 10
-		P1.Equipement.Head = false
-	}
-}
-
-func (P1 *Personnage) DesequiperBody() {
-	if P1.Equipement.Body {
-		P1.Inventory["Tunique de l'aventurier"]++
-		P1.Equipement.HPBonus -= 25
-		P1.Equipement.Body = false
-	}
-}
-
-func (P1 *Personnage) DesequiperLeg() {
-	if P1.Equipement.Leg {
-		P1.Inventory["Bottes de l'aventurier"]++
-		P1.Equipement.HPBonus -= 15
-		P1.Equipement.Leg = false
 	}
 }
 
@@ -100,18 +61,17 @@ var (
 	}
 
 	Epée1 = Equipment{
-		Name:     "Epée de l'aventurier",
-		Type:     "Weapon",
-		RHWeapon: true,
-		AtkBonus: 5,
+		Name:          "Epée de l'aventurier",
+		Type:          "Weapon",
+		OneHandWeapon: true,
+		AtkBonus:      5,
 	}
 
 	Arc1 = Equipment{
 		Name:            "Arc de l'aventurier",
-		Type:            "Weapon",
-		RHWeapon:        true,
-		LHWeapon:        true,
-		AtkBonus:        5,
+		Type:            "2HandWeapon",
+		TwoHandWeapon:   true,
+		AtkBonus:        10,
 		InitiativeBonus: 2,
 	}
 	Chapeau2 = Equipment{

@@ -5,6 +5,7 @@ type Personnage struct {
 	Race          string
 	Equipement    Equipment
 	Equipements   []Equipment
+	Weapons       []Equipment
 	Level         int
 	Xp            int
 	XpMax         int
@@ -35,8 +36,10 @@ type Equipment struct {
 	Rings1          bool
 	Ring2           bool
 	Necklace        bool
-	RHWeapon        bool
-	LHWeapon        bool
+	TwoHandWeapon   bool
+	OneHandWeapon   bool
+	Weapon1         bool
+	Weapon2         bool
 	HPBonus         int
 	AtkBonus        int
 	DefBonus        int
