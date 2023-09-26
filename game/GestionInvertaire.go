@@ -131,11 +131,10 @@ func (P1 *Personnage) BaseInventory() {
 				}
 
 			case 3:
-				for i, equipements := range P1.Equipements {
-					fmt.Printf("\n%d. %s :\n \nType: %s\nPV Bonus: %d\nAttaque Bonus: %d\nDéfense Bonus : %d\nInitiative Bonus : %d\n", i+1, equipements.Name, equipements.Type, equipements.HPBonus, equipements.AtkBonus, equipements.DefBonus, equipements.InitiativeBonus)
-					waitForUserInput("Entrer 0  pour revenir au menu principal")
-					continue
-				}
+
+				waitForUserInput("Entrer 0  pour revenir au menu principal")
+				continue
+
 			case 4:
 				continue
 			}

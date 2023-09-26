@@ -15,12 +15,61 @@ func (p *Personnage) Equip(item Equipment) {
 	case "Head", "Body", "Legs", "Boots":
 		p.Equipement = item
 		p.Inventory[item.Name]--
-		p.Equipements = append(p.Equipements, item)
+		p.EquipementMap[item.Type] = item
 		p.RemoveZeroValueItems()
 	case "Weapon":
 
-	case "2HandWeapon":
+		fmt.Println("Selectioné dans qu'elle main metre l'arme : (1. Droite/2. Gauche)")
+		var choice int
+		fmt.Scan(&choice)
 
+		if choice == 1 {
+			if p.Equipement.TwoHandWeapon {
+				p.RemoveEquipment(p.Equipement.Name)
+			}
+			if p.Equipement.Weapon1 {
+				p.RemoveEquipment(p.Equipement.Name)
+				p.Equipement.Weapon1 = false
+			}
+			p.Equipement = item
+			p.Inventory[item.Name]--
+			p.EquipementMap[item.Type] = item
+			p.Equipement.Weapon1 = true
+			p.RemoveZeroValueItems()
+		} else if choice == 2 {
+			if p.Equipement.TwoHandWeapon {
+				p.RemoveEquipment(p.Equipement.Name)
+			}
+			if p.Equipement.Weapon2 {
+				p.RemoveEquipment(p.Equipement.Name)
+				p.Equipement.Weapon2 = false
+			}
+			p.Equipement = item
+			p.Inventory[item.Name]--
+			p.EquipementMap[item.Type] = item
+			p.Equipement.Weapon2 = true
+			p.RemoveZeroValueItems()
+		} else {
+			fmt.Println("Invalid choice. No changes made.")
+		}
+
+	case "2HandWeapon":
+		if p.Equipement.Weapon1 {
+			p.RemoveEquipment(p.Equipement.Name)
+			p.Equipement.Weapon1 = false
+		}
+		if p.Equipement.Weapon2 {
+			p.RemoveEquipment(p.Equipement.Name)
+			p.Equipement.Weapon2 = false
+		}
+		if p.Equipement.TwoHandWeapon {
+			p.RemoveEquipment(p.Equipement.Name)
+		}
+		p.Equipement = item
+		p.Inventory[item.Name]--
+		p.EquipementMap[item.Type] = item
+		p.Equipement.Weapon2 = true
+		p.RemoveZeroValueItems()
 	default:
 		fmt.Println("Invalid equipment type")
 	}
@@ -123,4 +172,28 @@ func ListEquipableItems(inventory map[string]int) []Equipment {
 	}
 
 	return equipableItems
+}
+
+func (p *Personnage) RemoveEquipment(itemName string) {
+	if equippedItem, ok := p.EquipementMap[itemName]; ok {
+		p.Inventory[itemName]++
+		delete(p.EquipementMap, itemName)
+
+		switch equippedItem.Type {
+		case "Head":
+			p.Equipement.Head = false
+		case "Body":
+			p.Equipement.Body = false
+		case "Legs":
+			p.Equipement.Leg = false
+		case "Boots":
+			p.Equipement.Boots = false
+		case "Weapon":
+			p.Equipement.OneHandWeapon = false
+		case "2HandWeapon":
+			p.Equipement.TwoHandWeapon = false
+		default:
+			// Handle any other equipment types if needed
+		}
+	}
 }

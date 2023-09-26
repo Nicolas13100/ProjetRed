@@ -97,18 +97,18 @@ RestartLoop:
 	switch Race {
 	case "Humain":
 		P1 := Personnage{
-			Name:         Name,
-			Race:         Race,
-			Equipement:   equipement,
-			Equipements:  []Equipment{},
-			Level:        1,
-			Xp:           0,
-			XpMax:        100,
-			HpMax:        100,
-			Hp:           50,
-			Gold:         100,
-			InventoryCap: 10,
-			Spells:       []Spell{CoupdePoing},
+			Name:          Name,
+			Race:          Race,
+			Equipement:    equipement,
+			EquipementMap: map[string]Equipment{},
+			Level:         1,
+			Xp:            0,
+			XpMax:         100,
+			HpMax:         100,
+			Hp:            50,
+			Gold:          100,
+			InventoryCap:  10,
+			Spells:        []Spell{CoupdePoing},
 			Inventory: map[string]int{
 				"Potion de soin":   3,
 				"Potion de poison": 3,
@@ -128,18 +128,18 @@ RestartLoop:
 
 	case "Elfe":
 		P1 := Personnage{
-			Name:         Name,
-			Race:         Race,
-			Equipement:   equipement,
-			Equipements:  []Equipment{},
-			Level:        1,
-			Xp:           0,
-			XpMax:        100,
-			HpMax:        80,
-			Hp:           40,
-			Gold:         100,
-			InventoryCap: 10,
-			Spells:       []Spell{CoupdePoing},
+			Name:          Name,
+			Race:          Race,
+			Equipement:    equipement,
+			EquipementMap: map[string]Equipment{},
+			Level:         1,
+			Xp:            0,
+			XpMax:         100,
+			HpMax:         80,
+			Hp:            40,
+			Gold:          100,
+			InventoryCap:  10,
+			Spells:        []Spell{CoupdePoing},
 			Inventory: map[string]int{
 				"Potion de soin":   3,
 				"Potion de poison": 3,
@@ -157,18 +157,18 @@ RestartLoop:
 
 	case "Nain":
 		P1 := Personnage{
-			Name:         Name,
-			Race:         Race,
-			Equipement:   equipement,
-			Equipements:  []Equipment{},
-			Level:        1,
-			Xp:           0,
-			XpMax:        100,
-			HpMax:        120,
-			Hp:           60,
-			Gold:         100,
-			InventoryCap: 10,
-			Spells:       []Spell{CoupdePoing},
+			Name:          Name,
+			Race:          Race,
+			Equipement:    equipement,
+			EquipementMap: map[string]Equipment{},
+			Level:         1,
+			Xp:            0,
+			XpMax:         100,
+			HpMax:         120,
+			Hp:            60,
+			Gold:          100,
+			InventoryCap:  10,
+			Spells:        []Spell{CoupdePoing},
 			Inventory: map[string]int{
 				"Potion de soin":   3,
 				"Potion de poison": 3,
@@ -186,16 +186,16 @@ RestartLoop:
 
 	case "Mentor":
 		P1 := Personnage{
-			Name:         Name,
-			Race:         Race,
-			Equipement:   equipement,
-			Equipements:  []Equipment{Chapeau1, Tunique1},
-			Level:        99,
-			HpMax:        999999,
-			Hp:           999999,
-			Gold:         9999999,
-			InventoryCap: 99999999,
-			Spells:       []Spell{CoupdePoing, fireball, iceBlast},
+			Name:          Name,
+			Race:          Race,
+			Equipement:    equipement,
+			EquipementMap: map[string]Equipment{},
+			Level:         99,
+			HpMax:         999999,
+			Hp:            999999,
+			Gold:          9999999,
+			InventoryCap:  99999999,
+			Spells:        []Spell{CoupdePoing, fireball, iceBlast},
 			Inventory: map[string]int{
 				"Potion de soin":       99,
 				"Potion de poison":     99,
@@ -247,8 +247,8 @@ func (P1 Personnage) DisplayInfo() {
 		fmt.Println(centeredText21)
 		text22 := "\n%d. %s :\n Type: %s\n"
 		centeredText22 := CenterText(text22)
-		for i, equipements := range P1.Equipements {
-			fmt.Printf(centeredText22, i+1, equipements.Name, equipements.Type)
+		for key, value := range P1.EquipementMap {
+			fmt.Println(centeredText22, key, ": ", value)
 		}
 
 		text := "\nType 0 to come back to main menu"
