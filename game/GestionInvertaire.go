@@ -109,11 +109,11 @@ func (P1 *Personnage) BaseInventory() {
 				fmt.Scan(&input)
 				switch input {
 				case 1:
-					P1.Equip(P1.Equipement)
+					P1.EquiperHead()
 				case 2:
-					P1.Equip(P1.Equipement)
+					P1.EquiperBody()
 				case 3:
-					P1.Equip(P1.Equipement)
+					P1.EquiperLeg()
 				case 4:
 					fmt.Println("Vous n'avez pas d'équipement sur cet emplacement.")
 					continue
@@ -129,11 +129,11 @@ func (P1 *Personnage) BaseInventory() {
 				fmt.Scan(&input)
 				switch input {
 				case 1:
-					P1.Unequip(1)
+					P1.DesequiperHead()
 				case 2:
-					P1.Unequip(2)
+					P1.DesequiperBody()
 				case 3:
-					P1.Unequip(3)
+					P1.DesequiperBody()
 				case 4:
 				}
 
