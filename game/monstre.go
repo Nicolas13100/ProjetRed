@@ -3,6 +3,18 @@ package game
 import "fmt"
 
 var (
+	Jarpent = Monstre{
+		Name:       "Jarpent",
+		Atk:        10,
+		HpMax:      50,
+		Hp:         50,
+		Mana:       20,
+		Type:       "Jarpent",
+		Defense:    0,
+		Initiative: 0,
+		XpDrop:     20,
+	}
+
 	Goblin = Monstre{
 		Name:       "Goblin",
 		Atk:        10,

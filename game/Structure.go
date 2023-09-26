@@ -97,16 +97,37 @@ type Carte struct {
 	hasReturn  bool
 	floor      int
 	HasMonster bool
+	HasJar     bool
+	Jars       []Jar
 	Monsters   []Monstre
 }
 
+type Jar struct {
+	Contenu     []Item
+	ContentType ContentType
+	x, y        int
+	HasLoot     bool
+	HasMonster  bool
+	HasEvent    bool
+}
+type ContentType int
+
+const (
+	Loot ContentType = iota
+	Monster
+	Event
+)
+
 type Item struct {
-	Name     string
-	Quantity int
+	Name      string
+	Quantity  int
+	IsLoot    bool
+	IsMonster bool
+	IsEvent   bool
 }
 
 type SaveData struct {
 	Level     int
-	Stats     Personnage
+	Stats     *Personnage
 	Equipment Equipment
 }

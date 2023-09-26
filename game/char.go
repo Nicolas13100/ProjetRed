@@ -9,7 +9,7 @@ import (
 	"golang.org/x/text/language"
 )
 
-func CharCreation() *Personnage {
+func CharCreation() Personnage {
 	equipement := Equipment{
 		Head:            false,
 		Body:            false,
@@ -63,6 +63,7 @@ func CharCreation() *Personnage {
 			continue
 		}
 	}
+
 RestartLoop:
 	for {
 		ClearConsole()
@@ -91,10 +92,11 @@ RestartLoop:
 			// If user chooses "no", restart the loop
 			continue
 		}
+
 	}
 	switch Race {
 	case "Humain":
-		P1 := &Personnage{
+		P1 := Personnage{
 			Name:         Name,
 			Race:         Race,
 			Equipement:   equipement,
@@ -125,11 +127,11 @@ RestartLoop:
 		return P1
 
 	case "Elfe":
-		P1 := &Personnage{
+		P1 := Personnage{
 			Name:         Name,
 			Race:         Race,
 			Equipement:   equipement,
-			Equipements:  []Equipment{},
+			Equipements:  []Equipment{Chapeau, Tunique},
 			Level:        1,
 			Xp:           0,
 			XpMax:        100,
@@ -154,11 +156,11 @@ RestartLoop:
 		return P1
 
 	case "Nain":
-		P1 := &Personnage{
+		P1 := Personnage{
 			Name:         Name,
 			Race:         Race,
 			Equipement:   equipement,
-			Equipements:  []Equipment{},
+			Equipements:  []Equipment{Chapeau, Tunique},
 			Level:        1,
 			Xp:           0,
 			XpMax:        100,
@@ -183,7 +185,7 @@ RestartLoop:
 		return P1
 
 	case "Mentor":
-		P1 := &Personnage{
+		P1 := Personnage{
 			Name:         Name,
 			Race:         Race,
 			Equipement:   equipement,
@@ -227,7 +229,7 @@ func (P1 Personnage) DisplayInfo() {
 
 	for {
 		ClearConsole()
-		text1 := "\nNom : %s\nRace :%s\n\nNiveau : %d\nPoints de d'XP actuels : %d\nPoints de d'XP avant le prochain niveau : %d\nPoints de vie actuels : %d\nPoints de vie maximum : %d\nAttaque : %d\n Deffence : %d\nCash : %d\n"
+		text1 := "\nNom : %s\nRace : %s\n\nNiveau : %d\n\nPoints de d'XP actuels : %d\nPoints de d'XP avant le prochain niveau : %d\n\nPoints de vie actuels : %d\nPoints de vie maximum : %d\nCash : %d\n \n"
 		centeredText1 := CenterText(text1)
 		fmt.Printf(centeredText1, P1.Name, P1.Race, P1.Level, P1.Xp, P1.XpMax, P1.Hp+P1.Equipement.HPBonus, P1.HpMax+P1.Equipement.HPBonus, P1.Atk+P1.Equipement.AtkBonus, P1.Defense+P1.Equipement.DefBonus, P1.Gold)
 
