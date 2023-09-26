@@ -10,18 +10,36 @@ func NewEquipement(P1 *Personnage) *Equipment {
 	}
 }
 
-func (P1 *Personnage) ShowEquipBonus(index int) {
-	equipment, found := P1.Equipements[index]
-	if !found {
-		fmt.Println("Équipement non trouvé.")
+func (P1 *Personnage) Equip(equipment Equipment) {
+	for i, equipped := range P1.Equipements {
+		if equipped.Type == equipment.Type {
+			P1.Unequip(i)
+			break
+		}
+	}
+
+	P1.Equipements = append(P1.Equipements, equipment)
+
+	P1.HpMax += equipment.HPBonus
+	P1.Atk += equipment.AtkBonus
+	P1.Defense += equipment.DefBonus
+	P1.Initiative += equipment.InitiativeBonus
+}
+
+func (P1 *Personnage) Unequip(index int) {
+	if index < 0 || index >= len(P1.Equipements) {
+		fmt.Println("Equipement incorrect")
 		return
 	}
 
-	fmt.Printf("Équipement choisi : %s\n", equipment.Name)
-	fmt.Printf("- Bonus d'attaque : %d\n", equipment.AtkBonus)
-	fmt.Printf("- Bonus de défense : %d\n", equipment.DefBonus)
-	fmt.Printf("- Bonus de santé : %d\n", equipment.HPBonus)
-	fmt.Printf("- Bonus d'initiative : %d\n", equipment.InitiativeBonus)
+	equipmentToRemove := P1.Equipements[index]
+
+	P1.HpMax -= equipmentToRemove.HPBonus
+	P1.Atk -= equipmentToRemove.AtkBonus
+	P1.Defense -= equipmentToRemove.DefBonus
+	P1.Initiative -= equipmentToRemove.InitiativeBonus
+
+	P1.Equipements = append(P1.Equipements[:index], P1.Equipements[index+1:]...)
 }
 
 func (P1 *Personnage) EquiperHead() {
