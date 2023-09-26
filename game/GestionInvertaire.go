@@ -122,11 +122,11 @@ func (P1 *Personnage) BaseInventory() {
 				fmt.Scan(&input)
 				switch input {
 				case 1:
-					P1.DesequiperHead()
+
 				case 2:
-					P1.DesequiperBody()
+
 				case 3:
-					P1.DesequiperBody()
+
 				case 4:
 				}
 
