@@ -179,7 +179,7 @@ RestartLoop:
 		}
 		return P1
 
-	case "Dieu":
+	case "Mentor":
 		P1 := &Personnage{
 			Name:         Name,
 			Race:         Race,
