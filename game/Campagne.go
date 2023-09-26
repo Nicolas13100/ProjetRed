@@ -4,7 +4,7 @@ import "fmt"
 
 func Campain(P1 *Personnage) {
 	if P1.Level < 5 {
-		fmt.Println("Vous entrez un fôret remplie de monstres et d'animaux sauvages, continuer ? (1 : Oui / 2 : Non)")
+		fmt.Println("Vous entrez un fôret remplie de monstres et d'animaux sauvages, souhaitez-vous combattre ou vous ballader ? (1 : Combattre / 2 : Se ballader / 0 : Partir)")
 		var choix int
 		fmt.Scan(&choix)
 		switch choix {

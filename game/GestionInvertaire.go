@@ -93,7 +93,7 @@ func (P1 *Personnage) BaseInventory() {
 			fmt.Println("Que voulez-vous faire ?")
 			fmt.Println("1. Equiper de l'équipement")
 			fmt.Println("2. Désequiper de l'équipement")
-			fmt.Println("3. Afficher les équipements")
+			fmt.Println("3. Afficher équipements")
 			fmt.Println("4.Quitter")
 			var input int
 			fmt.Scan(&input)

@@ -48,7 +48,7 @@ func Menu() {
 
 		switch startChoice {
 		case 1:
-			P1 := CharCreation()
+			P1 = CharCreation()
 			var choice1 int
 			text := "Voulez-vous un tutoriel ? 1.Oui / 2.Non\n"
 			centeredText := CenterText(text)
@@ -56,7 +56,7 @@ func Menu() {
 			fmt.Scan(&choice1)
 			switch choice1 {
 			case 1:
-				Tutorial(P1)
+				Tutorial(&P1)
 			case 2:
 				break
 			default:
@@ -93,22 +93,23 @@ func Menu() {
 					fmt.Scan(&merchantChoice)
 					switch merchantChoice {
 					case 1:
-						Buy(P1, &Marchand1)
+						Buy(&P1, &Marchand1)
 					case 2:
-						Sell(P1, &Marchand1)
+						Sell(&P1, &Marchand1)
 					}
 				case 4:
-					Forgeron(P1)
+					Forgeron(&P1)
 				case 5:
-					Entrainement(P1)
+					Entrainement(&P1)
 				case 6:
+					fmt.Println("Vous entrez dans le donjon.")
 					InitMap("", "")
 				case 7:
-					Campain(P1)
+					Campain(&P1)
 				case 8: // Save the game
 					err := SaveGame(SaveData{
 						Level:     P1.Level,
-						Stats:     *P1,
+						Stats:     &P1,
 						Equipment: P1.Equipement,
 					}, "savefile.json")
 
@@ -139,7 +140,7 @@ func Menu() {
 				log.Fatal(err)
 			}
 
-			P1 = loadedData.Stats
+			P1 = *loadedData.Stats
 
 			text := "Jeu chargé avec succès!"
 			centeredText := CenterText(text)
@@ -188,7 +189,7 @@ func Menu() {
 				case 8: // Save the game
 					err := SaveGame(SaveData{
 						Level:     P1.Level,
-						Stats:     P1,
+						Stats:     &P1,
 						Equipment: P1.Equipement,
 					}, "savefile.json")
 

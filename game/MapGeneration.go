@@ -23,17 +23,16 @@ func InitMap(name string, description string) Carte {
 		movePlayer()
 
 		if currentRoom.hasExit && P1.x == currentRoom.x && P1.y == currentRoom.y {
-			fmt.Println("Vous avez trouvé les escaliers permettant de descendre, passage à l'étage inférieur.")
-			currentFloor--
-			initializeNewMap()
-		}
-		if currentRoom.hasReturn && P1.x == stairsX && P1.y == stairsY && currentFloor > 1 {
-			fmt.Println("Vous avez trouvé les escaliers permettant de remonter, retour à l'étage supérieur.")
+			fmt.Println("Vous avez trouvé les escaliers permettant de monter, passage à l'étage supérieur.")
 			currentFloor++
+			initializeNewMap()
+		} else if currentRoom.hasReturn && P1.x == stairsX && P1.y == stairsY && currentFloor > 1 {
+			fmt.Println("Vous avez trouvé les escaliers permettant de redescendre, retour à l'étage inférieur.")
+			currentFloor--
 			initializeNewMap()
 		} else if currentRoom.hasReturn && P1.x == stairsX && P1.y == stairsY && currentFloor <= 1 {
 			var choix int
-			fmt.Println("Vous êtes au premier étage, souhaitez-vous sortir du donjon ? (1 : Oui / 2 : Non)")
+			fmt.Println("Vous êtes au rez-de-chaussée, souhaitez-vous sortir du donjon ? (1 : Oui / 2 : Non)")
 			fmt.Scan(&choix)
 			switch choix {
 			case 1:
@@ -70,6 +69,14 @@ func movePlayer() {
 			P1.x++
 		}
 	}
+	for _, jar := range currentRoom.Jars {
+		if P1.x == jar.x && P1.y == jar.y {
+			var loot = Item{
+				Name: "Fourrure de Loup",
+			}
+			encounterJar(&P1, loot)
+		}
+	}
 	for _, monster := range currentRoom.Monsters {
 		if P1.x == monster.x && P1.y == monster.y {
 			encounterMonster()
@@ -78,13 +85,15 @@ func movePlayer() {
 }
 
 func initializeGame() {
-	currentRoom = Carte{x: rand.Intn(gridSize), y: rand.Intn(gridSize), hasExit: true, hasReturn: true, floor: currentFloor}
+	currentRoom = Carte{x: rand.Intn(gridSize), y: rand.Intn(gridSize), hasExit: true, hasReturn: true, HasJar: true, floor: currentFloor}
 	addMonsters()
+	addJar()
 }
 
 func initializeNewMap() {
-	currentRoom = Carte{x: rand.Intn(gridSize), y: rand.Intn(gridSize), hasExit: true, hasReturn: true, floor: currentFloor}
+	currentRoom = Carte{x: rand.Intn(gridSize), y: rand.Intn(gridSize), hasExit: true, hasReturn: true, HasJar: true, floor: currentFloor}
 	addMonsters()
+	addJar()
 	P1.x = rand.Intn(gridSize)
 	P1.y = rand.Intn(gridSize)
 	currentRoom.hasReturn = currentRoom.hasExit
@@ -106,6 +115,78 @@ func printMap() {
 			}
 		}
 		fmt.Println()
+	}
+}
+
+func addJar() {
+	JarCount := rand.Intn(8) // Generate a random number of jars (0 to 5)
+	for i := 0; i < JarCount; i++ {
+		room := Carte{x: rand.Intn(gridSize), y: rand.Intn(gridSize)}
+		// Ensure the room doesn't already have a jar or player
+		for room.HasJar || (room.x == P1.x && room.y == P1.y) {
+			room.x = rand.Intn(gridSize)
+			room.y = rand.Intn(gridSize)
+		}
+		currentRoom.Jars = append(currentRoom.Jars, Jar{x: room.x, y: room.y})
+	}
+}
+
+func newJar() *Jar {
+	jar := &Jar{}
+	randomContentType := ContentType(rand.Intn(3))
+	jar.ContentType = randomContentType
+
+	switch randomContentType {
+	case Loot:
+		jar.HasLoot = true
+		jar.Contenu = []Item{
+			{Name: "Fourrure de Loup", Quantity: 1},
+			{Name: "Epée", Quantity: 1},
+		}
+	case Monster:
+		jar.HasMonster = true
+	case Event:
+		jar.HasEvent = true
+	}
+	return jar
+}
+
+func (j *Jar) openJar() Item {
+	rand.Seed(time.Now().UnixNano())
+	index := rand.Intn(len(j.Contenu))
+	item := j.Contenu[index]
+	return item
+}
+
+func encounterJar(p *Personnage, item Item) {
+	//itemName := item.Name
+	rand.Seed(time.Now().UnixNano())
+	jar := newJar()
+
+	fmt.Println("Vous avez trouvé une jar ! Qu'allez-vous faire?")
+	fmt.Println("1. Ouvrir")
+	fmt.Println("2. Continuer votre route.")
+	var choice int
+	fmt.Scan(&choice)
+	switch choice {
+	case 1:
+		if jar.HasLoot {
+			loot := jar.openJar()
+			fmt.Printf("Vous avez obtenu un(e) %s!\n", loot.Name)
+			fmt.Println(p.Inventory)
+			p.Inventory[loot.Name] += 1
+		} else if jar.HasMonster {
+			fmt.Println("Vous êtes tombé sur un monstre !")
+			Fight(&P1, &Jarpent)
+		} else if jar.HasEvent {
+			// Traitez l'événement ici
+		} else {
+			fmt.Println("La jar est vide.")
+		}
+	case 2:
+		fmt.Println("Vous continuez votre route.")
+	default:
+		fmt.Println("Choix inconnu, vous êtes pris de peur !")
 	}
 }
 
@@ -151,3 +232,21 @@ func encounterMonster() {
 		fmt.Println("Choix unconnue, vous êtes pris de peur !")
 	}
 }
+
+var (
+	JarLoot = Jar{
+		HasLoot:    true,
+		HasMonster: false,
+		HasEvent:   false,
+	}
+	JarMonster = Jar{
+		HasLoot:    false,
+		HasMonster: false,
+		HasEvent:   false,
+	}
+	JarEvent = Jar{
+		HasLoot:    false,
+		HasMonster: false,
+		HasEvent:   true,
+	}
+)
