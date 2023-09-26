@@ -29,8 +29,14 @@ type Equipment struct {
 	Type            string
 	Head            bool
 	Body            bool
+	Belt            bool
 	Leg             bool
-	Weapon          bool
+	Boots           bool
+	Rings1          bool
+	Ring2           bool
+	Necklace        bool
+	RHWeapon        bool
+	LHWeapon        bool
 	HPBonus         int
 	AtkBonus        int
 	DefBonus        int

@@ -94,14 +94,14 @@ var (
 
 	Epée = Equipment{
 		Name:     "Epée de l'aventurier",
-		Weapon:   true,
+		RHWeapon: true,
 		AtkBonus: 5,
-		DefBonus: 2,
 	}
 
 	Arc = Equipment{
 		Name:            "Arc de l'aventurier",
-		Weapon:          true,
+		RHWeapon:        true,
+		LHWeapon:        true,
 		AtkBonus:        5,
 		InitiativeBonus: 2,
 	}
