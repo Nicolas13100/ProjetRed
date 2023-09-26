@@ -99,24 +99,18 @@ func (P1 *Personnage) BaseInventory() {
 			fmt.Scan(&input)
 			switch input {
 			case 1:
+				equipableItems := ListEquipableItems(P1.Inventory)
+				fmt.Println("Equipable Items:")
+				for i, item := range equipableItems {
+					fmt.Printf("%d. %s\n", i+1, item.Name)
+				}
 				fmt.Println("Que souhaitez-vous équiper ?")
-				fmt.Println("1. Casque")
-				fmt.Println("2. Armure")
-				fmt.Println("3. Pied")
-				fmt.Println("4. Retour ")
 				var input int
 				fmt.Scan(&input)
-				switch input {
-				case 1:
-					P1.EquiperHead()
-				case 2:
-					P1.EquiperBody()
-				case 3:
-					P1.EquiperLeg()
-				case 4:
+				if input >= 1 && input <= len(equipableItems) {
+					P1.Equip(equipableItems[input-1])
+				} else {
 					fmt.Println("Vous n'avez pas d'équipement sur cet emplacement.")
-					continue
-
 				}
 			case 2:
 				fmt.Println("Que souhaitez-vous désequiper ?")

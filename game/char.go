@@ -184,7 +184,7 @@ RestartLoop:
 			Name:         Name,
 			Race:         Race,
 			Equipement:   equipement,
-			Equipements:  []Equipment{Chapeau, Tunique},
+			Equipements:  []Equipment{Chapeau1, Tunique1},
 			Level:        99,
 			HpMax:        999999,
 			Hp:           999999,
@@ -192,13 +192,14 @@ RestartLoop:
 			InventoryCap: 99999999,
 			Spells:       []Spell{CoupdePoing, fireball, iceBlast},
 			Inventory: map[string]int{
-				"Potion de soin":   99,
-				"Potion de poison": 99,
-				"Potion de mana":   99,
-				"Fourrure de Loup": 99,
-				"Peau de Troll":    99,
-				"Cuir de Sanglier": 99,
-				"Plume de Corbeau": 99,
+				"Potion de soin":       99,
+				"Potion de poison":     99,
+				"Potion de mana":       99,
+				"Fourrure de Loup":     99,
+				"Peau de Troll":        99,
+				"Cuir de Sanglier":     99,
+				"Plume de Corbeau":     99,
+				"Epée de l'aventurier": 1,
 			},
 			Mana:       999,
 			ManaMax:    999,
@@ -222,9 +223,9 @@ func (P1 Personnage) DisplayInfo() {
 
 	for {
 		ClearConsole()
-		text1 := "\nNom : %s\nRace :%s\n\nNiveau : %d\n\nPoints de d'XP actuels : %d\nPoints de d'XP avant le prochain niveau : %d\n\nPoints de vie actuels : %d\nPoints de vie maximum : %d\nCash : %d\n \n"
+		text1 := "\nNom : %s\nRace :%s\n\nNiveau : %d\nPoints de d'XP actuels : %d\nPoints de d'XP avant le prochain niveau : %d\nPoints de vie actuels : %d\nPoints de vie maximum : %d\nAttaque : %d\n Deffence : %d\nCash : %d\n"
 		centeredText1 := CenterText(text1)
-		fmt.Printf(centeredText1, P1.Name, P1.Race, P1.Level, P1.Hp+P1.Equipement.HPBonus, P1.HpMax+P1.Equipement.HPBonus, P1.Xp, P1.XpMax, P1.Gold)
+		fmt.Printf(centeredText1, P1.Name, P1.Race, P1.Level, P1.Xp, P1.XpMax, P1.Hp+P1.Equipement.HPBonus, P1.HpMax+P1.Equipement.HPBonus, P1.Atk+P1.Equipement.AtkBonus, P1.Defense+P1.Equipement.DefBonus, P1.Gold)
 
 		text11 := "\nSorts:"
 		centeredText11 := CenterText(text11)
