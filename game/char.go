@@ -63,7 +63,7 @@ func CharCreation() *Personnage {
 			continue
 		}
 	}
-
+RestartLoop:
 	for {
 		ClearConsole()
 		// Demander à l'utilisateur de choisir sa race (vous pouvez adapter cette partie selon vos besoins)
@@ -91,130 +91,129 @@ func CharCreation() *Personnage {
 			// If user chooses "no", restart the loop
 			continue
 		}
-
-		switch Race {
-		case "Humain":
-			P1 := &Personnage{
-				Name:         Name,
-				Race:         Race,
-				Equipement:   equipement,
-				Equipements:  []Equipment{Chapeau, Tunique},
-				Level:        1,
-				Xp:           0,
-				XpMax:        100,
-				HpMax:        100,
-				Hp:           50,
-				Gold:         100,
-				InventoryCap: 10,
-				Spells:       []Spell{CoupdePoing},
-				Inventory: map[string]int{
-					"Potion de soin":   3,
-					"Potion de poison": 3,
-					"Potion de mana":   3,
-				},
-				InventoryUsed: false,
-				AtkUsed:       false,
-				Mana:          40,
-				ManaMax:       100,
-				Atk:           5,
-				Defense:       0,
-				Initiative:    10,
-				x:             rand.Intn(gridSize),
-				y:             rand.Intn(gridSize),
-			}
-			return P1
-
-		case "Elfe":
-			P1 := &Personnage{
-				Name:         Name,
-				Race:         Race,
-				Equipement:   equipement,
-				Level:        1,
-				Xp:           0,
-				XpMax:        100,
-				HpMax:        80,
-				Hp:           40,
-				Gold:         100,
-				InventoryCap: 10,
-				Spells:       []Spell{CoupdePoing},
-				Inventory: map[string]int{
-					"Potion de soin":   3,
-					"Potion de poison": 3,
-					"Potion de mana":   3,
-				},
-				Mana:       50,
-				ManaMax:    100,
-				Atk:        5,
-				Defense:    0,
-				Initiative: 20,
-				x:          rand.Intn(gridSize),
-				y:          rand.Intn(gridSize),
-			}
-			return P1
-
-		case "Nain":
-			P1 := &Personnage{
-				Name:         Name,
-				Race:         Race,
-				Equipement:   equipement,
-				Level:        1,
-				Xp:           0,
-				XpMax:        100,
-				HpMax:        120,
-				Hp:           60,
-				Gold:         100,
-				InventoryCap: 10,
-				Spells:       []Spell{CoupdePoing},
-				Inventory: map[string]int{
-					"Potion de soin":   3,
-					"Potion de poison": 3,
-					"Potion de mana":   3,
-				},
-				Mana:       40,
-				ManaMax:    90,
-				Atk:        5,
-				Defense:    0,
-				Initiative: 5,
-				x:          rand.Intn(gridSize),
-				y:          rand.Intn(gridSize),
-			}
-			return P1
-
-		case "Dieu":
-			P1 := &Personnage{
-				Name:         Name,
-				Race:         Race,
-				Equipement:   equipement,
-				Level:        99,
-				HpMax:        999999,
-				Hp:           999999,
-				Gold:         9999999,
-				InventoryCap: 99999999,
-				Spells:       []Spell{CoupdePoing, fireball, iceBlast},
-				Inventory: map[string]int{
-					"Potion de soin":   99,
-					"Potion de poison": 99,
-					"Potion de mana":   99,
-					"Fourrure de Loup": 99,
-					"Peau de Troll":    99,
-					"Cuir de Sanglier": 99,
-					"Plume de Corbeau": 99,
-				},
-				Mana:       999,
-				ManaMax:    999,
-				Atk:        999,
-				Defense:    999,
-				Initiative: 999,
-				x:          rand.Intn(gridSize),
-				y:          rand.Intn(gridSize),
-			}
-			return P1
-		default:
-			fmt.Printf("Race inconnue : %s\n", Race)
-			continue
-		}
 	}
-	return &P1
+	switch Race {
+	case "Humain":
+		P1 := &Personnage{
+			Name:         Name,
+			Race:         Race,
+			Equipement:   equipement,
+			Level:        1,
+			Xp:           0,
+			XpMax:        100,
+			HpMax:        100,
+			Hp:           50,
+			Gold:         100,
+			InventoryCap: 10,
+			Spells:       []Spell{CoupdePoing},
+			Inventory: map[string]int{
+				"Potion de soin":   3,
+				"Potion de poison": 3,
+				"Potion de mana":   3,
+			},
+			InventoryUsed: false,
+			AtkUsed:       false,
+			Mana:          40,
+			ManaMax:       100,
+			Atk:           5,
+			Defense:       0,
+			Initiative:    10,
+			x:             rand.Intn(gridSize),
+			y:             rand.Intn(gridSize),
+		}
+		return P1
+
+	case "Elfe":
+		P1 := &Personnage{
+			Name:         Name,
+			Race:         Race,
+			Equipement:   equipement,
+			Level:        1,
+			Xp:           0,
+			XpMax:        100,
+			HpMax:        80,
+			Hp:           40,
+			Gold:         100,
+			InventoryCap: 10,
+			Spells:       []Spell{CoupdePoing},
+			Inventory: map[string]int{
+				"Potion de soin":   3,
+				"Potion de poison": 3,
+				"Potion de mana":   3,
+			},
+			Mana:       50,
+			ManaMax:    100,
+			Atk:        5,
+			Defense:    0,
+			Initiative: 20,
+			x:          rand.Intn(gridSize),
+			y:          rand.Intn(gridSize),
+		}
+		return P1
+
+	case "Nain":
+		P1 := &Personnage{
+			Name:         Name,
+			Race:         Race,
+			Equipement:   equipement,
+			Level:        1,
+			Xp:           0,
+			XpMax:        100,
+			HpMax:        120,
+			Hp:           60,
+			Gold:         100,
+			InventoryCap: 10,
+			Spells:       []Spell{CoupdePoing},
+			Inventory: map[string]int{
+				"Potion de soin":   3,
+				"Potion de poison": 3,
+				"Potion de mana":   3,
+			},
+			Mana:       40,
+			ManaMax:    90,
+			Atk:        5,
+			Defense:    0,
+			Initiative: 5,
+			x:          rand.Intn(gridSize),
+			y:          rand.Intn(gridSize),
+		}
+		return P1
+
+	case "Dieu":
+		P1 := &Personnage{
+			Name:         Name,
+			Race:         Race,
+			Equipement:   equipement,
+			Level:        99,
+			HpMax:        999999,
+			Hp:           999999,
+			Gold:         9999999,
+			InventoryCap: 99999999,
+			Spells:       []Spell{CoupdePoing, fireball, iceBlast},
+			Inventory: map[string]int{
+				"Potion de soin":   99,
+				"Potion de poison": 99,
+				"Potion de mana":   99,
+				"Fourrure de Loup": 99,
+				"Peau de Troll":    99,
+				"Cuir de Sanglier": 99,
+				"Plume de Corbeau": 99,
+			},
+			Mana:       999,
+			ManaMax:    999,
+			Atk:        999,
+			Defense:    999,
+			Initiative: 999,
+			x:          rand.Intn(gridSize),
+			y:          rand.Intn(gridSize),
+		}
+		return P1
+
+	default:
+		fmt.Printf("Race inconnue : %s\n", Race)
+		waitForUserInput("Entrer 0 pour retourner au choix de race")
+		goto RestartLoop
+	}
 }
 
 func (P1 Personnage) DisplayInfo() {
