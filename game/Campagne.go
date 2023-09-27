@@ -14,19 +14,19 @@ func Campain(P1 *Personnage) {
 			fmt.Scan(&mechant)
 			switch mechant {
 			case 1:
-				mechant := NewCorbeau()
+				mechant := Corbeau
 				Fight(P1, &mechant)
 				return
 			case 2:
-				mechant := NewSanglier()
+				mechant := Sanglier
 				Fight(P1, &mechant)
 				return
 			case 3:
-				mechant := NewLoup()
+				mechant := Loup
 				Fight(P1, &mechant)
 				return
 			case 4:
-				mechant := NewTroll()
+				mechant := Troll
 				Fight(P1, &mechant)
 				return
 			}
@@ -45,22 +45,22 @@ func Campain(P1 *Personnage) {
 			switch mechant {
 			case 1:
 				fmt.Println("Vous avez choisi d'affronter le Maître Corbeau ! ")
-				mechant := NewCorbeau2()
+				mechant := Corbeau2
 				Fight(P1, &mechant)
 				return
 			case 2:
 				fmt.Println("Vous avez choisi d'affronter le Sanglier enragé ! ")
-				mechant := NewSanglier2()
+				mechant := Sanglier2
 				Fight(P1, &mechant)
 				return
 			case 3:
 				fmt.Println("Vous avez choisi d'affronter le Loup ténébreux ! ")
-				mechant := NewLoup2()
+				mechant := Loup2
 				Fight(P1, &mechant)
 				return
 			case 4:
 				fmt.Println("Vous avez choisi d'affronter le Troll des montagnes! ")
-				mechant := NewTroll2()
+				mechant := Troll2
 				Fight(P1, &mechant)
 				return
 			}
