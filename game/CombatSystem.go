@@ -66,7 +66,7 @@ func Fight(P1 *Personnage, Monstre1 *Monstre) {
 				Monstre1.DeadMonstre(P1)
 				break
 			}
-
+			MonsterPattern(Monstre1)
 			attaqueMonstre := Monstre1.Atk - P1.Defense
 			if attaqueMonstre < 0 {
 				attaqueMonstre = 0
@@ -85,6 +85,7 @@ func Fight(P1 *Personnage, Monstre1 *Monstre) {
 			if Tours == 1 {
 				fmt.Println("Le monstre est plus rapide que vous et attaque en premier !")
 			}
+			MonsterPattern(Monstre1)
 			// Monster's turn
 			attaqueMonstre := Monstre1.Atk - P1.Defense
 			if attaqueMonstre < 0 {
