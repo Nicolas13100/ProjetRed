@@ -208,6 +208,23 @@ func NewCorbeau() Monstre {
 		},
 	}
 }
+func NewJarpent() Monstre {
+	return Monstre{
+		Name:       "Jarpent",
+		Atk:        10,
+		HpMax:      50,
+		Hp:         50,
+		Mana:       20,
+		Type:       "Jarpent",
+		Defense:    0,
+		Initiative: 0,
+		XpDrop:     20,
+		ItemDrop: map[string]int{
+			"Crocs de Jarpent": 2,
+			"Mûe":              1,
+		},
+	}
+}
 
 func NewCorbeau2() Monstre {
 	return Monstre{

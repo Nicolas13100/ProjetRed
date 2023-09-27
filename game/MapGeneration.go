@@ -159,7 +159,7 @@ func (j *Jar) openJar() Item {
 }
 
 func encounterJar(p *Personnage, item Item) {
-	//itemName := item.Name
+
 	rand.Seed(time.Now().UnixNano())
 	jar := newJar()
 
@@ -229,7 +229,7 @@ func encounterMonster() {
 		return
 
 	default:
-		fmt.Println("Choix unconnue, vous êtes pris de peur !")
+		fmt.Println("Choix inconnue, vous êtes pris de peur !")
 	}
 }
 

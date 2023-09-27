@@ -29,7 +29,7 @@ func (P1 *Personnage) FightInventory() {
 			}
 		case 2:
 			if count, ok := P1.Inventory["Potion de poison"]; ok && count > 0 {
-				poisonPot(P1)
+				poisonPot(P1, Monstre1)
 				PlayerTurnTaken = true
 			} else {
 				fmt.Println("Vous n'avez pas de Potion de poison dans votre inventaire.")
