@@ -22,6 +22,8 @@ var (
 			"Cuir de Sanglier": 1,
 			"Plume de Corbeau": 1,
 		},
+		Durability:    30,
+		DurabilityMax: 30,
 	}
 	Tunique1 = Equipment{
 		Name:            "Tunique de l'aventurier",
@@ -34,7 +36,10 @@ var (
 			"Fourrure de Loup": 2,
 			"Peau de Troll":    1,
 		},
+		Durability:    50,
+		DurabilityMax: 50,
 	}
+
 	Jambe1 = Equipment{
 		Name:            "Jambiere de l'aventurier",
 		Type:            "Legs",
@@ -42,7 +47,10 @@ var (
 		HPBonus:         5,
 		DefBonus:        2,
 		InitiativeBonus: 2,
+		Durability:      30,
+		DurabilityMax:   30,
 	}
+
 	Bottes1 = Equipment{
 		Name:            "Bottes de l'aventurier",
 		Type:            "Boots",
@@ -50,23 +58,30 @@ var (
 		HPBonus:         5,
 		DefBonus:        2,
 		InitiativeBonus: 2,
+		Durability:      30,
+		DurabilityMax:   30,
 	}
 
 	Epée1 = Equipment{
-		Name:     "Epée de l'aventurier",
-		Type:     "Weapon",
-		Weapon:   true,
-		AtkBonus: 5,
+		Name:          "Epée de l'aventurier",
+		Type:          "Weapon",
+		Weapon:        true,
+		AtkBonus:      5,
+		Durability:    30,
+		DurabilityMax: 30,
 		Materials: map[string]int{
 			"Acier":            2,
 			"Cuir de Sanglier": 1,
 		},
 	}
+
 	ZoroBlade = Equipment{
-		Name:     "Wadô Ichimonji",
-		Type:     "Weapon",
-		Weapon:   true,
-		AtkBonus: 60,
+		Name:          "Wadô Ichimonji",
+		Type:          "Weapon",
+		Weapon:        true,
+		AtkBonus:      60,
+		Durability:    90,
+		DurabilityMax: 90,
 		Materials: map[string]int{
 			"Acier renforcé": 1,
 			"Peau de Troll":  2,
@@ -83,6 +98,8 @@ var (
 			"Cuir de Sanglier": 2,
 			"Fil de Spayder":   1,
 		},
+		Durability:    30,
+		DurabilityMax: 30,
 	}
 	Failure = Equipment{
 		Name:            "Failure",
@@ -90,6 +107,8 @@ var (
 		Weapon:          true,
 		AtkBonus:        100,
 		InitiativeBonus: -5,
+		Durability:      200,
+		DurabilityMax:   200,
 		Materials: map[string]int{
 			"Squelette de Rouquin": 1,
 			"Acier renforcé":       2,
@@ -102,6 +121,8 @@ var (
 		HPBonus:         4,
 		DefBonus:        2,
 		InitiativeBonus: 2,
+		Durability:      30,
+		DurabilityMax:   30,
 		Materials: map[string]int{
 			"Cuir de Sanglier": 1,
 			"Plume de Corbeau": 1,

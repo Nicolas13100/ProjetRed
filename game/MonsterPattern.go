@@ -2,7 +2,7 @@ package game
 
 var GoblinAttackIncreased bool
 
-func MonsterPattern(P1 *Personnage, Monstre1 *Monstre) {
+func MonsterPattern(Monstre1 *Monstre) {
 	// Check if the goblin's attack is currently increased
 	if GoblinAttackIncreased {
 		// Deactivate the increased attack
