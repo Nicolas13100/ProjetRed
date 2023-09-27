@@ -154,6 +154,11 @@ func (p *Personnage) EquipItemFromInventory(itemName string) {
 
 	// Equip the item
 	p.EquipementMap[itemToEquip.Type] = itemToEquip
+	// Update stats based on the equipped item
+	p.Hp += itemToEquip.HPBonus
+	p.Atk += itemToEquip.AtkBonus
+	p.Defense += itemToEquip.DefBonus
+	p.Initiative += itemToEquip.InitiativeBonus
 
 	// Remove the item from inventory
 	if p.Inventory[itemName] > 0 {
