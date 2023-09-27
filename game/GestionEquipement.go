@@ -18,6 +18,8 @@ var (
 		HPBonus:         4,
 		DefBonus:        2,
 		InitiativeBonus: 2,
+		Durability:      30,
+		DurabilityMax:   30,
 	}
 	Tunique1 = Equipment{
 		Name:            "Tunique de l'aventurier",
@@ -26,7 +28,10 @@ var (
 		HPBonus:         7,
 		DefBonus:        7,
 		InitiativeBonus: 2,
+		Durability:      50,
+		DurabilityMax:   50,
 	}
+
 	Jambe1 = Equipment{
 		Name:            "Jambiere de l'aventurier",
 		Type:            "Legs",
@@ -34,7 +39,10 @@ var (
 		HPBonus:         5,
 		DefBonus:        2,
 		InitiativeBonus: 2,
+		Durability:      30,
+		DurabilityMax:   30,
 	}
+
 	Bottes1 = Equipment{
 		Name:            "Bottes de l'aventurier",
 		Type:            "Boots",
@@ -42,19 +50,26 @@ var (
 		HPBonus:         5,
 		DefBonus:        2,
 		InitiativeBonus: 2,
+		Durability:      30,
+		DurabilityMax:   30,
 	}
 
 	Epée1 = Equipment{
-		Name:     "Epée de l'aventurier",
-		Type:     "Weapon",
-		Weapon:   true,
-		AtkBonus: 5,
+		Name:          "Epée de l'aventurier",
+		Type:          "Weapon",
+		Weapon:        true,
+		AtkBonus:      5,
+		Durability:    30,
+		DurabilityMax: 30,
 	}
+
 	ZoroBlade = Equipment{
-		Name:     "Wadô Ichimonji",
-		Type:     "Weapon",
-		Weapon:   true,
-		AtkBonus: 60,
+		Name:          "Wadô Ichimonji",
+		Type:          "Weapon",
+		Weapon:        true,
+		AtkBonus:      60,
+		Durability:    90,
+		DurabilityMax: 90,
 	}
 
 	Arc1 = Equipment{
@@ -63,6 +78,8 @@ var (
 		Weapon:          true,
 		AtkBonus:        10,
 		InitiativeBonus: 2,
+		Durability:      30,
+		DurabilityMax:   30,
 	}
 	Failure = Equipment{
 		Name:            "Failure",
@@ -70,6 +87,8 @@ var (
 		Weapon:          true,
 		AtkBonus:        100,
 		InitiativeBonus: -5,
+		Durability:      200,
+		DurabilityMax:   200,
 	}
 	Chapeau2 = Equipment{
 		Name:            "Chapeau de l'aventurier",
@@ -78,6 +97,8 @@ var (
 		HPBonus:         4,
 		DefBonus:        2,
 		InitiativeBonus: 2,
+		Durability:      30,
+		DurabilityMax:   30,
 	}
 )
 

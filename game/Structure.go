@@ -40,6 +40,8 @@ type Equipment struct {
 	AtkBonus        int
 	DefBonus        int
 	InitiativeBonus int
+	Durability      int
+	DurabilityMax   int
 }
 
 type Marchand struct {
