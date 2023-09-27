@@ -79,7 +79,7 @@ func movePlayer() {
 	}
 	for _, monster := range currentRoom.Monsters {
 		if P1.x == monster.x && P1.y == monster.y {
-			encounterMonster()
+			encounterMonster(Monstre1)
 		}
 	}
 }
@@ -203,16 +203,15 @@ func addMonsters() {
 	}
 }
 
-func encounterMonster() {
-	var monster Monstre
+func encounterMonster(Monstre1 Monstre) {
 	if currentFloor >= 1 && currentFloor <= 4 {
 		monsters := []Monstre{Goblin}
 		randomIndex := rand.Intn(len(monsters))
-		monster = monsters[randomIndex]
+		Monstre1 = monsters[randomIndex]
 	} else {
 		monsters := []Monstre{Goblin, Orc, HamsterGeant}
 		randomIndex := rand.Intn(len(monsters))
-		monster = monsters[randomIndex]
+		Monstre1 = monsters[randomIndex]
 	}
 	fmt.Println("Vous rencontez un monstre ! Qu'allez-vous faire?")
 	fmt.Println("1. Combatre")
@@ -223,7 +222,7 @@ func encounterMonster() {
 
 	switch choice {
 	case 1:
-		Fight(&P1, &monster)
+		Fight(&P1, &Monstre1)
 	case 2:
 		fmt.Println("Vous fuyez !")
 		return

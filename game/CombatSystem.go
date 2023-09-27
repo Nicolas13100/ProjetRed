@@ -99,6 +99,7 @@ func Fight(P1 *Personnage, Monstre1 *Monstre) {
 			if P1.Hp <= 0 {
 				fmt.Printf("%s est vaincu!\n", P1.Name)
 				P1.Dead()
+				break
 			}
 			for { // Player's turn
 				charTurn(P1, Monstre1)
@@ -111,6 +112,7 @@ func Fight(P1 *Personnage, Monstre1 *Monstre) {
 			// Check if the Monster is defeated
 			if Monstre1.Hp <= 0 {
 				Monstre1.DeadMonstre(P1)
+				break
 			}
 
 			Tours++
@@ -148,7 +150,7 @@ func charTurn(P1 *Personnage, Monstre1 *Monstre) {
 		fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", P1.Name, Monstre1.Name, attaqueJoueur)
 		PlayerTurnTaken = true
 	case 2:
-		P1.FightInventory()
+		P1.FightInventory(Monstre1)
 
 	case 3:
 		fmt.Println("Sélectionnez un sort :")

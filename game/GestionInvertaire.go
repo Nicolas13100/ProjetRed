@@ -2,7 +2,7 @@ package game
 
 import "fmt"
 
-func (P1 *Personnage) FightInventory() {
+func (P1 *Personnage) FightInventory(Monstre1 *Monstre) {
 	for {
 
 		fmt.Println("\nInventaire:")
@@ -22,16 +22,17 @@ func (P1 *Personnage) FightInventory() {
 		switch input {
 		case 1:
 			if count, ok := P1.Inventory["Potion de soin"]; ok && count > 0 {
-
 				TakePot(P1)
 				PlayerTurnTaken = true
+				return
 			} else {
 				fmt.Println("Vous n'avez pas de Potion de soin dans votre inventaire.")
 			}
 		case 2:
 			if count, ok := P1.Inventory["Potion de poison"]; ok && count > 0 {
-				poisonPot(P1, &Monstre1)
+				poisonPot(P1, Monstre1)
 				PlayerTurnTaken = true
+				return
 			} else {
 				fmt.Println("Vous n'avez pas de Potion de poison dans votre inventaire.")
 			}
@@ -39,6 +40,7 @@ func (P1 *Personnage) FightInventory() {
 			if count, ok := P1.Inventory["Potion de mana"]; ok && count > 0 {
 				ManaPot(P1)
 				PlayerTurnTaken = true
+				return
 			} else {
 				fmt.Println("Vous n'avez pas de Potion de mana dans votre inventaire.")
 			}
@@ -54,7 +56,6 @@ func (P1 *Personnage) FightInventory() {
 
 func (P1 *Personnage) BaseInventory() {
 	for {
-
 		fmt.Println("\nInventaire:")
 		fmt.Println("Cash :", P1.Gold)
 		for key, value := range P1.Inventory {
@@ -93,15 +94,14 @@ func (P1 *Personnage) BaseInventory() {
 		case 4:
 			fmt.Println("Que voulez-vous faire ?")
 			fmt.Println("1. Equiper de l'équipement")
-			fmt.Println("2. Désequiper de l'équipement")
-			fmt.Println("3. Afficher équipements")
-			fmt.Println("4.Quitter")
+			fmt.Println("2. Afficher équipements")
+			fmt.Println("3.Quitter")
 			var input int
 			fmt.Scan(&input)
 			switch input {
 			case 1:
 				equipableItems := ListEquipableItems(P1.Inventory)
-				fmt.Println("Equipable Items:")
+				fmt.Println("Objets équipables:")
 				for i, item := range equipableItems {
 					fmt.Printf("%d. %s\n", i+1, item.Name)
 				}
@@ -115,29 +115,10 @@ func (P1 *Personnage) BaseInventory() {
 					fmt.Println("Vous n'avez pas d'équipement sur cet emplacement.")
 				}
 			case 2:
-				fmt.Println("Que souhaitez-vous désequiper ?")
-				fmt.Println("1. Casque")
-				fmt.Println("2. Armure")
-				fmt.Println("3. Pied")
-				fmt.Println("4. Retour ")
-				var input int
-				fmt.Scan(&input)
-				switch input {
-				case 1:
-
-				case 2:
-
-				case 3:
-
-				case 4:
-				}
-
-			case 3:
 				printEquipmentMap(P1.EquipementMap)
 				waitForUserInput("Entrer 0  pour revenir au menu principal")
 				continue
-
-			case 4:
+			case 3:
 				continue
 			}
 		case 0:
