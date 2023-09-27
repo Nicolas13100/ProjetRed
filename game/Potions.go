@@ -27,6 +27,7 @@ func TakePot(P1 *Personnage) {
 					P1.Hp = P1.HpMax
 				} else if choice == 2 {
 					fmt.Printf("Vous n'avez pas pris une Potion de soin. Vous avez %d PV\n", P1.Hp)
+					P1.Hp -= 50
 					return
 				}
 			}
