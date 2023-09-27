@@ -251,10 +251,10 @@ func (P1 Personnage) DisplayInfo() {
 		text21 := "\nEquipements:"
 		centeredText21 := CenterText(text21)
 		fmt.Println(centeredText21)
-		text22 := "\n%d. %s :\n Type: %s\n"
+		text22 := "\n %s:\n Type: %s\n ATK: %d\n DEF: %d\n HP: %d\n Initiative: %d\n"
 		centeredText22 := CenterText(text22)
-		for key, value := range P1.EquipementMap {
-			fmt.Println(centeredText22, key, ": ", value)
+		for _, value := range P1.EquipementMap {
+			fmt.Printf(centeredText22, value.Name, value.Type, value.AtkBonus, value.DefBonus, value.HPBonus, value.InitiativeBonus)
 		}
 
 		text := "\nType 0 to come back to main menu"
