@@ -4,7 +4,7 @@ import "fmt"
 
 func (P1 *Personnage) FightInventory() {
 	for {
-		ClearConsole()
+
 		fmt.Println("\nInventaire:")
 		fmt.Println("Cash :", P1.Gold)
 		for key, value := range P1.Inventory {
@@ -22,6 +22,7 @@ func (P1 *Personnage) FightInventory() {
 		switch input {
 		case 1:
 			if count, ok := P1.Inventory["Potion de soin"]; ok && count > 0 {
+
 				TakePot(P1)
 				PlayerTurnTaken = true
 			} else {
@@ -29,7 +30,7 @@ func (P1 *Personnage) FightInventory() {
 			}
 		case 2:
 			if count, ok := P1.Inventory["Potion de poison"]; ok && count > 0 {
-				poisonPot(P1, Monstre1)
+				poisonPot(P1, &Monstre1)
 				PlayerTurnTaken = true
 			} else {
 				fmt.Println("Vous n'avez pas de Potion de poison dans votre inventaire.")

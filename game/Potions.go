@@ -39,13 +39,14 @@ func TakePot(P1 *Personnage) {
 	}
 }
 
-func poisonPot(P1 *Personnage, Monstre1 Monstre) {
+func poisonPot(P1 *Personnage, Monstre1 *Monstre) {
 	var choice int
 	fmt.Println("Voulez-vous utiliser une Potion de poison ? (1.Oui/2.Non) ")
 	fmt.Scan(&choice)
 
 	switch choice {
 	case 1:
+		fmt.Printf("Hpmonstre : %d", Monstre1.Hp)
 		if count, ok := P1.Inventory["Potion de poison"]; ok && count > 0 && Monstre1.Hp > 0 {
 			P1.Inventory["Potion de poison"]--
 			P1.RemoveZeroValueItems()
