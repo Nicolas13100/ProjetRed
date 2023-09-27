@@ -187,9 +187,9 @@ func printEquipmentMap(equipmentMap map[string]Equipment) {
 	text21 := "\nEquipements:"
 	centeredText21 := CenterText(text21)
 	fmt.Println(centeredText21)
-	text22 := "\n%d. %s:\n Type: %s\n ATK: %d\n DEF: %d\n HP: %d\n Initiative: %d\n"
+	text22 := "\n %s:\n Type: %s\n ATK: %d\n DEF: %d\n HP: %d\n Initiative: %d\n"
 	centeredText22 := CenterText(text22)
-	for key, value := range equipmentMap {
-		fmt.Printf(centeredText22, key, value.Name, value.Type, value.AtkBonus, value.DefBonus, value.HPBonus, value.InitiativeBonus)
+	for _, value := range equipmentMap {
+		fmt.Printf(centeredText22, value.Name, value.Type, value.AtkBonus, value.DefBonus, value.HPBonus, value.InitiativeBonus)
 	}
 }
