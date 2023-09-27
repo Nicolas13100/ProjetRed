@@ -18,6 +18,10 @@ var (
 		HPBonus:         4,
 		DefBonus:        2,
 		InitiativeBonus: 2,
+		Materials: map[string]int{
+			"Cuir de Sanglier": 1,
+			"Plume de Corbeau": 1,
+		},
 	}
 	Tunique1 = Equipment{
 		Name:            "Tunique de l'aventurier",
@@ -26,6 +30,10 @@ var (
 		HPBonus:         7,
 		DefBonus:        7,
 		InitiativeBonus: 2,
+		Materials: map[string]int{
+			"Fourrure de Loup": 2,
+			"Peau de Troll":    1,
+		},
 	}
 	Jambe1 = Equipment{
 		Name:            "Jambiere de l'aventurier",
@@ -49,12 +57,20 @@ var (
 		Type:     "Weapon",
 		Weapon:   true,
 		AtkBonus: 5,
+		Materials: map[string]int{
+			"Acier":            2,
+			"Cuir de Sanglier": 1,
+		},
 	}
 	ZoroBlade = Equipment{
 		Name:     "Wadô Ichimonji",
 		Type:     "Weapon",
 		Weapon:   true,
 		AtkBonus: 60,
+		Materials: map[string]int{
+			"Acier renforcé": 1,
+			"Peau de Troll":  2,
+		},
 	}
 
 	Arc1 = Equipment{
@@ -63,6 +79,10 @@ var (
 		Weapon:          true,
 		AtkBonus:        10,
 		InitiativeBonus: 2,
+		Materials: map[string]int{
+			"Cuir de Sanglier": 2,
+			"Fil de Spayder":   1,
+		},
 	}
 	Failure = Equipment{
 		Name:            "Failure",
@@ -70,6 +90,10 @@ var (
 		Weapon:          true,
 		AtkBonus:        100,
 		InitiativeBonus: -5,
+		Materials: map[string]int{
+			"Squelette de Rouquin": 1,
+			"Acier renforcé":       2,
+		},
 	}
 	Chapeau2 = Equipment{
 		Name:            "Chapeau de l'aventurier",
@@ -78,6 +102,10 @@ var (
 		HPBonus:         4,
 		DefBonus:        2,
 		InitiativeBonus: 2,
+		Materials: map[string]int{
+			"Cuir de Sanglier": 1,
+			"Plume de Corbeau": 1,
+		},
 	}
 )
 
@@ -89,7 +117,28 @@ func IsEquipable(itemName string) bool {
 		return false
 	}
 }
+func (P1 *Personnage) RemoveItem(itemName string) {
+	if P1.Inventory[itemName] > 1 {
+		P1.Inventory[itemName]--
+	} else {
+		// Si la quantité est de 1, supprimez complètement l'entrée de l'inventaire
+		delete(P1.Inventory, itemName)
+	}
+}
+func (P1 *Personnage) AddItem(itemName string) {
+	if P1.Inventory[itemName] >= 1 {
+		P1.Inventory[itemName]++
+	} else {
 
+		P1.Inventory[itemName] = 1
+	}
+}
+func GetMaterialsFromEquipment(equipment Equipment) map[string]int {
+	return equipment.Materials
+}
+func GetitemFromInventory(P1 Personnage) map[string]int {
+	return P1.Inventory
+}
 func GetEquipmentByName(itemName string) Equipment {
 	switch itemName {
 	case "Chapeau de l'aventurier":
@@ -110,6 +159,10 @@ func GetEquipmentByName(itemName string) Equipment {
 		// Handle the case where the item is not found
 		return Equipment{} // Assuming an empty Equipment struct here
 	}
+}
+
+func LootType(Monstre1 Monstre) map[string]int {
+	return Monstre1.ItemDrop
 }
 
 func ListEquipableItems(inventory map[string]int) []Equipment {

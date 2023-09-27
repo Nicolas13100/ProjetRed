@@ -27,6 +27,7 @@ type Personnage struct {
 type Equipment struct {
 	Name            string
 	Type            string
+	Materials       map[string]int
 	Head            bool
 	Body            bool
 	Belt            bool
@@ -61,6 +62,23 @@ type Marchand struct {
 	Defense      int
 	Initiative   int
 	Prices       map[string]int
+}
+
+type Forgeron struct {
+	Name       string
+	Race       string
+	Level      int
+	Xp         int
+	XpMax      int
+	HpMax      int
+	Hp         int
+	Inventory  map[string]int
+	Gold       int
+	Mana       int
+	ManaMax    int
+	Atk        int
+	Defense    int
+	Initiative int
 }
 
 type Monstre struct {

@@ -3,6 +3,38 @@ package game
 import "fmt"
 
 var (
+	Spayder = Monstre{
+		Name:       "Spayder",
+		Type:       "Araignée",
+		Atk:        20,
+		HpMax:      60,
+		Hp:         60,
+		Mana:       30,
+		Defense:    10,
+		Initiative: 0,
+		XpDrop:     40,
+		ItemDrop: map[string]int{
+			"Fil de Spayder": 1,
+		},
+	}
+
+	Lareinegnée = Monstre{
+		Name:       "La reinegnée",
+		Type:       "Araignée",
+		Atk:        20,
+		HpMax:      60,
+		Hp:         60,
+		Mana:       30,
+		Defense:    10,
+		Initiative: 0,
+		XpDrop:     40,
+		ItemDrop: map[string]int{
+			"Toile de la reignée": 1,
+			"Venin royal":         1,
+			"Fil de Spayder":      2,
+		},
+	}
+
 	Jarpent = Monstre{
 		Name:       "Jarpent",
 		Atk:        10,
