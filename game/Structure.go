@@ -4,8 +4,8 @@ type Personnage struct {
 	Name          string
 	Race          string
 	Equipement    Equipment
-	Equipements   []Equipment
-	Weapons       []Equipment
+	EquipementMap map[string]Equipment
+	WeaponInHand  map[int]Equipment
 	Level         int
 	Xp            int
 	XpMax         int

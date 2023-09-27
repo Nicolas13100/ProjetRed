@@ -108,7 +108,8 @@ func (P1 *Personnage) BaseInventory() {
 				var input int
 				fmt.Scan(&input)
 				if input >= 1 && input <= len(equipableItems) {
-					P1.Equip(equipableItems[input-1])
+					itemName := equipableItems[input-1].Name
+					P1.EquipItemFromInventory(itemName)
 				} else {
 					fmt.Println("Vous n'avez pas d'équipement sur cet emplacement.")
 				}
@@ -131,11 +132,10 @@ func (P1 *Personnage) BaseInventory() {
 				}
 
 			case 3:
-				for i, equipements := range P1.Equipements {
-					fmt.Printf("\n%d. %s :\n \nType: %s\nPV Bonus: %d\nAttaque Bonus: %d\nDéfense Bonus : %d\nInitiative Bonus : %d\n", i+1, equipements.Name, equipements.Type, equipements.HPBonus, equipements.AtkBonus, equipements.DefBonus, equipements.InitiativeBonus)
-					waitForUserInput("Entrer 0  pour revenir au menu principal")
-					continue
-				}
+				printEquipmentMap(P1.EquipementMap)
+				waitForUserInput("Entrer 0  pour revenir au menu principal")
+				continue
+
 			case 4:
 				continue
 			}
@@ -180,5 +180,12 @@ func DropsToInventory(P1 *Personnage, itemDrop map[string]int) {
 
 			P1.Inventory[itemName] = quantityDropped
 		}
+	}
+}
+
+func printEquipmentMap(equipmentMap map[string]Equipment) {
+	for key, value := range equipmentMap {
+		fmt.Printf("Key: %s\n", key)
+		fmt.Printf("Value: %+v\n", value)
 	}
 }
