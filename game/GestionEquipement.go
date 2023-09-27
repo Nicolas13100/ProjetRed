@@ -45,29 +45,29 @@ var (
 	}
 
 	Epée1 = Equipment{
-		Name:          "Epée de l'aventurier",
-		Type:          "1HandWeapon",
-		OneHandWeapon: true,
-		AtkBonus:      5,
+		Name:     "Epée de l'aventurier",
+		Type:     "Weapon",
+		Weapon:   true,
+		AtkBonus: 5,
 	}
 	ZoroBlade = Equipment{
-		Name:          "Wadô Ichimonji",
-		Type:          "1HandWeapon",
-		OneHandWeapon: true,
-		AtkBonus:      60,
+		Name:     "Wadô Ichimonji",
+		Type:     "Weapon",
+		Weapon:   true,
+		AtkBonus: 60,
 	}
 
 	Arc1 = Equipment{
 		Name:            "Arc de l'aventurier",
-		Type:            "2HandWeapon",
-		TwoHandWeapon:   true,
+		Type:            "Weapon",
+		Weapon:          true,
 		AtkBonus:        10,
 		InitiativeBonus: 2,
 	}
 	Failure = Equipment{
 		Name:            "Failure",
-		Type:            "2HandWeapon",
-		TwoHandWeapon:   true,
+		Type:            "Weapon",
+		Weapon:          true,
 		AtkBonus:        100,
 		InitiativeBonus: -5,
 	}
@@ -137,23 +137,19 @@ func (p *Personnage) EquipItemFromInventory(itemName string) {
 
 	// Check if there's already an item equipped of the same type/key
 	if existingItem, ok := p.EquipementMap[itemToEquip.Type]; ok {
-		// If equipping a one-handed weapon, remove the existing one
-		if itemToEquip.Type == "1HandWeapon" {
-			// Place the existing one-handed weapon back in the inventory
-			p.Inventory[existingItem.Name]++
-		}
+		// Put the existing item back in inventory
+		p.Inventory[existingItem.Name]++
+
+		// Update stats based on the unequipped item
+		p.Hp -= existingItem.HPBonus
+		p.Atk -= existingItem.AtkBonus
+		p.Defense -= existingItem.DefBonus
+		p.Initiative -= existingItem.InitiativeBonus
 	}
 
-	// If equipping a two-handed weapon, remove all weapons from hand
-	if itemToEquip.Type == "2HandWeapon" {
-		for _, weapon := range p.WeaponInHand {
-			p.Inventory[weapon.Name]++
-		}
-		p.WeaponInHand = make(map[int]Equipment)
-	}
-
-	// Equip the item
+	// Equip the new item
 	p.EquipementMap[itemToEquip.Type] = itemToEquip
+
 	// Update stats based on the equipped item
 	p.Hp += itemToEquip.HPBonus
 	p.Atk += itemToEquip.AtkBonus

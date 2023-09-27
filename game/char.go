@@ -101,15 +101,15 @@ RestartLoop:
 			Race:          Race,
 			Equipement:    equipement,
 			EquipementMap: map[string]Equipment{},
-			WeaponInHand:  map[int]Equipment{},
-			Level:         1,
-			Xp:            0,
-			XpMax:         100,
-			HpMax:         100,
-			Hp:            50,
-			Gold:          100,
-			InventoryCap:  10,
-			Spells:        []Spell{CoupdePoing},
+
+			Level:        1,
+			Xp:           0,
+			XpMax:        100,
+			HpMax:        100,
+			Hp:           50,
+			Gold:         100,
+			InventoryCap: 10,
+			Spells:       []Spell{CoupdePoing},
 			Inventory: map[string]int{
 				"Potion de soin":   3,
 				"Potion de poison": 3,
@@ -133,15 +133,15 @@ RestartLoop:
 			Race:          Race,
 			Equipement:    equipement,
 			EquipementMap: map[string]Equipment{},
-			WeaponInHand:  map[int]Equipment{},
-			Level:         1,
-			Xp:            0,
-			XpMax:         100,
-			HpMax:         80,
-			Hp:            40,
-			Gold:          100,
-			InventoryCap:  10,
-			Spells:        []Spell{CoupdePoing},
+
+			Level:        1,
+			Xp:           0,
+			XpMax:        100,
+			HpMax:        80,
+			Hp:           40,
+			Gold:         100,
+			InventoryCap: 10,
+			Spells:       []Spell{CoupdePoing},
 			Inventory: map[string]int{
 				"Potion de soin":   3,
 				"Potion de poison": 3,
@@ -163,15 +163,15 @@ RestartLoop:
 			Race:          Race,
 			Equipement:    equipement,
 			EquipementMap: map[string]Equipment{},
-			WeaponInHand:  map[int]Equipment{},
-			Level:         1,
-			Xp:            0,
-			XpMax:         100,
-			HpMax:         120,
-			Hp:            60,
-			Gold:          100,
-			InventoryCap:  10,
-			Spells:        []Spell{CoupdePoing},
+
+			Level:        1,
+			Xp:           0,
+			XpMax:        100,
+			HpMax:        120,
+			Hp:           60,
+			Gold:         100,
+			InventoryCap: 10,
+			Spells:       []Spell{CoupdePoing},
 			Inventory: map[string]int{
 				"Potion de soin":   3,
 				"Potion de poison": 3,
@@ -193,13 +193,13 @@ RestartLoop:
 			Race:          Race,
 			Equipement:    equipement,
 			EquipementMap: map[string]Equipment{},
-			WeaponInHand:  map[int]Equipment{},
-			Level:         99,
-			HpMax:         999999,
-			Hp:            999999,
-			Gold:          9999999,
-			InventoryCap:  99999999,
-			Spells:        []Spell{CoupdePoing, fireball, iceBlast},
+
+			Level:        99,
+			HpMax:        999999,
+			Hp:           999999,
+			Gold:         9999999,
+			InventoryCap: 99999999,
+			Spells:       []Spell{CoupdePoing, fireball, iceBlast},
 			Inventory: map[string]int{
 				"Potion de soin":       99,
 				"Potion de poison":     99,
@@ -251,10 +251,10 @@ func (P1 Personnage) DisplayInfo() {
 		text21 := "\nEquipements:"
 		centeredText21 := CenterText(text21)
 		fmt.Println(centeredText21)
-		text22 := "\n %s:\n Type: %s\n ATK: %d\n DEF: %d\n HP: %d\n Initiative: %d\n"
+		text22 := "\n%d. %s:\n Type: %s\n ATK: %d\n DEF: %d\n HP: %d\n Initiative: %d\n"
 		centeredText22 := CenterText(text22)
-		for _, value := range P1.EquipementMap {
-			fmt.Printf(centeredText22, value.Name, value.Type, value.AtkBonus, value.DefBonus, value.HPBonus, value.InitiativeBonus)
+		for key, value := range P1.EquipementMap {
+			fmt.Printf(centeredText22, key, value.Name, value.Type, value.AtkBonus, value.DefBonus, value.HPBonus, value.InitiativeBonus)
 		}
 
 		text := "\nType 0 to come back to main menu"
