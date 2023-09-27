@@ -10,110 +10,6 @@ func NewEquipement(P1 *Personnage) *Equipment {
 	}
 }
 
-func (p *Personnage) Equip(item Equipment) {
-	switch item.Type {
-	case "Head", "Body", "Legs", "Boots":
-		p.Equipement = item
-		p.Inventory[item.Name]--
-		p.EquipementMap[item.Type] = item
-		p.RemoveZeroValueItems()
-	case "Weapon":
-
-		fmt.Println("Selectioné dans qu'elle main metre l'arme : (1. Droite/2. Gauche)")
-		var choice int
-		fmt.Scan(&choice)
-
-		if choice == 1 {
-			if p.Equipement.TwoHandWeapon {
-				p.RemoveEquipment(p.Equipement)
-				p.Equipement.TwoHandWeapon = false
-				p.Equipement.Weapon1 = false
-				p.Equipement.Weapon2 = false
-			}
-			if weapon, ok := p.WeaponInHand[1]; ok {
-				p.RemoveEquipment(weapon)
-			}
-			p.WeaponInHand[1] = item
-			p.Equipement = item // Assuming you want to update Equipement as well
-			p.Inventory[item.Name]--
-			p.EquipementMap[item.Type] = item
-		} else if choice == 2 {
-			if p.Equipement.TwoHandWeapon {
-				p.RemoveEquipment(p.Equipement)
-				p.Equipement.TwoHandWeapon = false
-				p.Equipement.Weapon1 = false
-				p.Equipement.Weapon2 = false
-			}
-			if weapon, ok := p.WeaponInHand[2]; ok {
-				p.RemoveEquipment(weapon)
-			}
-			p.WeaponInHand[2] = item
-			p.Equipement = item // Assuming you want to update Equipement as well
-			p.Inventory[item.Name]--
-			p.EquipementMap[item.Type] = item
-		} else {
-			fmt.Println("Invalid choice. No changes made.")
-		}
-
-	case "2HandWeapon":
-		if p.Equipement.Weapon1 {
-			p.RemoveEquipment(p.Equipement)
-
-		}
-		if p.Equipement.Weapon2 {
-			p.RemoveEquipment(p.Equipement)
-
-		}
-		if p.Equipement.TwoHandWeapon {
-			p.RemoveEquipment(p.Equipement)
-		} else {
-			p.Equipement = item
-			p.Inventory[item.Name]--
-			p.EquipementMap[item.Type] = item
-			p.Equipement.TwoHandWeapon = true
-			p.Equipement.Weapon1 = true
-			p.Equipement.Weapon2 = true
-			p.RemoveZeroValueItems()
-		}
-	default:
-		fmt.Println("Invalid equipment type")
-	}
-}
-func (p *Personnage) RemoveEquipment(item Equipment) {
-	if equippedItem, ok := p.EquipementMap[item.Type]; ok {
-		p.Inventory[item.Name]++
-		delete(p.EquipementMap, item.Type)
-
-		switch equippedItem.Type {
-		case "Head":
-			p.Equipement.Head = false
-		case "Body":
-			p.Equipement.Body = false
-		case "Legs":
-			p.Equipement.Leg = false
-		case "Boots":
-			p.Equipement.Boots = false
-		case "Weapon":
-			p.Equipement.OneHandWeapon = false
-			p.Equipement.TwoHandWeapon = false
-		case "2HandWeapon":
-			p.Equipement.TwoHandWeapon = false
-		default:
-			// Handle any other equipment types if needed
-		}
-
-		// Remove from WeaponInHand if it's a weapon
-		if item.Type == "Weapon" {
-			for hand, weapon := range p.WeaponInHand {
-				if weapon == equippedItem {
-					delete(p.WeaponInHand, hand)
-					break
-				}
-			}
-		}
-	}
-}
-
 var (
 	Chapeau1 = Equipment{
 		Name:            "Chapeau de l'aventurier",
@@ -150,13 +46,13 @@ var (
 
 	Epée1 = Equipment{
 		Name:          "Epée de l'aventurier",
-		Type:          "Weapon",
+		Type:          "1HandWeapon",
 		OneHandWeapon: true,
 		AtkBonus:      5,
 	}
 	ZoroBlade = Equipment{
 		Name:          "Wadô Ichimonji",
-		Type:          "Weapon",
+		Type:          "1HandWeapon",
 		OneHandWeapon: true,
 		AtkBonus:      60,
 	}
@@ -228,4 +124,41 @@ func ListEquipableItems(inventory map[string]int) []Equipment {
 	}
 
 	return equipableItems
+}
+
+func (p *Personnage) EquipItemFromInventory(itemName string) {
+	itemToEquip := GetEquipmentByName(itemName)
+
+	// Check if the item is equipable
+	if !IsEquipable(itemName) {
+		fmt.Println("Item is not equipable")
+		return
+	}
+
+	// Check if there's already an item equipped of the same type/key
+	if existingItem, ok := p.EquipementMap[itemToEquip.Type]; ok {
+		// If equipping a one-handed weapon, remove the existing one
+		if itemToEquip.Type == "1HandWeapon" {
+			// Place the existing one-handed weapon back in the inventory
+			p.Inventory[existingItem.Name]++
+		}
+	}
+
+	// If equipping a two-handed weapon, remove all weapons from hand
+	if itemToEquip.Type == "2HandWeapon" {
+		for _, weapon := range p.WeaponInHand {
+			p.Inventory[weapon.Name]++
+		}
+		p.WeaponInHand = make(map[int]Equipment)
+	}
+
+	// Equip the item
+	p.EquipementMap[itemToEquip.Type] = itemToEquip
+
+	// Remove the item from inventory
+	if p.Inventory[itemName] > 0 {
+		p.Inventory[itemName]--
+	} else {
+		fmt.Println("Item not found in inventory")
+	}
 }

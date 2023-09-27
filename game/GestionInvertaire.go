@@ -108,7 +108,8 @@ func (P1 *Personnage) BaseInventory() {
 				var input int
 				fmt.Scan(&input)
 				if input >= 1 && input <= len(equipableItems) {
-					P1.Equip(equipableItems[input-1])
+					itemName := equipableItems[input-1].Name
+					P1.EquipItemFromInventory(itemName)
 				} else {
 					fmt.Println("Vous n'avez pas d'équipement sur cet emplacement.")
 				}
