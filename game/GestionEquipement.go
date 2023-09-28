@@ -6,7 +6,7 @@ func NewEquipement(P1 *Personnage) *Equipment {
 	return &Equipment{
 		Weapon:   false,
 		Head:     false,
-		Body:     false,
+		Armor:    false,
 		Hands:    false,
 		Legs:     false,
 		Boots:    false,
@@ -125,11 +125,11 @@ func (p *Personnage) EquipItem(item Equipment) {
 		p.Head[item.Name] = item
 		p.Equipement.Head = true
 	case "Armor":
-		if p.Equipement.Body {
+		if p.Equipement.Armor {
 			p.UnequipItem(p.Armors[item.Name])
 		}
 		p.Armors[item.Name] = item
-		p.Equipement.Body = true
+		p.Equipement.Armor = true
 	case "Legs":
 		if p.Equipement.Legs {
 			p.UnequipItem(p.Legs[item.Name])
@@ -238,28 +238,43 @@ func (p *Personnage) UnequipItem(item Equipment) {
 	switch item.Type {
 	case "Head":
 		if p.Equipement.Head {
+			deletedItem := p.Head[item.Name]
 			delete(p.Head, item.Name)
 			p.Equipement.Head = false
+			// Remove item from EquipementMap
+			delete(p.EquipementMap, deletedItem.Name)
 		}
 	case "Armor":
-		if p.Equipement.Body {
+		if p.Equipement.Armor {
+			deletedItem := p.Armors[item.Name]
 			delete(p.Armors, item.Name)
-			p.Equipement.Body = false
+			p.Equipement.Armor = false
+			// Remove item from EquipementMap
+			delete(p.EquipementMap, deletedItem.Name)
 		}
 	case "Legs":
 		if p.Equipement.Legs {
+			deletedItem := p.Legs[item.Name]
 			delete(p.Legs, item.Name)
 			p.Equipement.Legs = false
+			// Remove item from EquipementMap
+			delete(p.EquipementMap, deletedItem.Name)
 		}
 	case "Boots":
 		if p.Equipement.Boots {
+			deletedItem := p.Feets[item.Name]
 			delete(p.Feets, item.Name)
 			p.Equipement.Boots = false
+			// Remove item from EquipementMap
+			delete(p.EquipementMap, deletedItem.Name)
 		}
 	case "Weapon":
 		if p.Equipement.Weapon {
+			deletedItem := p.Weapons[item.Name]
 			delete(p.Weapons, item.Name)
 			p.Equipement.Weapon = false
+			// Remove item from EquipementMap
+			delete(p.EquipementMap, deletedItem.Name)
 		}
 	}
 
@@ -272,6 +287,4 @@ func (p *Personnage) UnequipItem(item Equipment) {
 
 	// Update inventory if necessary (add item back to inventory)
 	p.Inventory[item.Name]++
-	// Remove item from EquipementMap
-	delete(p.EquipementMap, item.Name)
 }

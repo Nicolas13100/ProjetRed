@@ -13,7 +13,7 @@ func CharCreation() Personnage {
 	equipement := Equipment{
 		Weapon:          false,
 		Head:            false,
-		Body:            false,
+		Armor:           false,
 		Hands:           false,
 		Legs:            false,
 		Boots:           false,

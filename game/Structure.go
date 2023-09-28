@@ -38,7 +38,7 @@ type Equipment struct {
 	Name            string
 	Type            string
 	Head            bool
-	Body            bool
+	Armor           bool
 	Hands           bool
 	Belt            bool
 	Legs            bool

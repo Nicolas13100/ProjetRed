@@ -154,7 +154,6 @@ func charTurn(p *Personnage, Monstre1 *Monstre) {
 		if p.Equipement.Weapon {
 			itemName := p.Weapons
 			fmt.Println(itemName)
-			fmt.Printf("Weapon durability: %d\n", p.Weapons)
 		}
 	case 2:
 		p.FightInventory(Monstre1)
