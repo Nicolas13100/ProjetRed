@@ -235,6 +235,7 @@ func (p *Personnage) EquipItemFromInventory() {
 }
 
 func (p *Personnage) UnequipItem(item Equipment) {
+	fmt.Println(item)
 	switch item.Type {
 	case "Head":
 		if p.Equipement.Head {

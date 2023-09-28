@@ -221,7 +221,7 @@ func askYesNo(question string) bool {
 	return choice == 1
 }
 
-func calculerMontantTotal(items []string, quantite int, prices map[string]int) int {
+func CalculerMontantTotal(items []string, quantite int, prices map[string]int) int {
 	montantTotal := 0
 
 	for _, itemName := range items {
