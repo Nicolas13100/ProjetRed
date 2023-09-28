@@ -163,99 +163,50 @@ func Buy(personnage *Personnage, m1 *Marchand) {
 	}
 }
 
-func Sell(personnage *Personnage, m1 *Marchand) {
-	fmt.Println("Les objets disponibles à la vente sont :")
-
-	for key, value := range personnage.Inventory {
-		fmt.Println(key, value)
-	}
+func Sell(P1 *Personnage, m1 *Marchand) {
 
 	for {
-		selectItemType, err := getInput("Quel type d'objet voulez-vous vendre ? (1.Potion /2.Loot/0.Rien, je me suis trompé): ")
-		if err != nil {
-			fmt.Println("Erreur lors de la saisie. Veuillez entrer un nombre.")
-			return
-		}
 
-		var itemToSell string
 		var price int
-
-		switch selectItemType {
-		case 1:
-			potionType, err := getInput("Quel type de potion voulez-vous vendre ? (1.soin/2.poison/3.mana): ")
-			if err != nil {
-				fmt.Println("Erreur lors de la saisie. Veuillez entrer un nombre.")
-				return
-			}
-
-			switch potionType {
-			case 1:
-				itemToSell = "Potion de soin"
-			case 2:
-				itemToSell = "Potion de poison"
-			case 3:
-				itemToSell = "Potion de mana"
-			default:
-				fmt.Println("Type de potion invalide.")
-				return
-			}
-
-		case 2:
-			lootType, err := getInput("Quel type de loot souhaitez-vous vendre ? (1 : Loup/ 2 : Troll/ 3 : Sanglier/ 4 : Corbeau): ")
-			if err != nil {
-				fmt.Println("Erreur lors de la saisie. Veuillez entrer un nombre.")
-				return
-			}
-
-			switch lootType {
-			case 1:
-				itemToSell = "Fourrure de Loup"
-			case 2:
-				itemToSell = "Peau de Troll"
-			case 3:
-				itemToSell = "Cuir de Sanglier"
-			case 4:
-				itemToSell = "Plume de Corbeau"
-			default:
-				fmt.Println("Type de loot invalide.")
-				return
-			}
-		case 0:
-			return
-		default:
-			fmt.Println("Type d'objet invalide.")
-			return
+		fmt.Println("Les objets disponibles à la vente sont :")
+		SelleableItem := inventorySlice(P1.Inventory)
+		for i, itemName := range SelleableItem {
+			fmt.Printf("%d. %s\n", i+1, itemName)
 		}
+		var choix int
+		fmt.Println("Quel objet souhaitez vous vendre ?")
+		fmt.Scan(&choix)
+		itemToSell := SelleableItem[choix-1]
 
-		price, exists := m1.Prices[itemToSell]
-		if !exists {
-			fmt.Println("Désolé, le prix de vente de cet objet n'est pas défini.")
-			return
-		}
-
-		quantity, ok := personnage.Inventory[itemToSell]
+		// Vérifiez si le personnage possède cet objet
+		quantity, ok := P1.Inventory[itemToSell]
 		if !ok || quantity <= 0 {
 			fmt.Println("Désolé, vous n'avez pas cet objet en stock.")
 			return
 		}
-
-		if m1.Gold >= price {
-			m1.Inventory[itemToSell]++
-			m1.Gold -= price
-			personnage.Gold += price
-			personnage.Inventory[itemToSell]--
-			personnage.RemoveZeroValueItems()
-			fmt.Printf("Vous avez vendu un(e) %s pour %d pièces d'or.\n", itemToSell, price)
-			if askYesNo("Voulez-vous vendre autrechose ?") {
-				continue
-			} else {
-				return
-			}
+		price, existePrix := Marchand1.Prices[itemToSell]
+		if !existePrix {
+			fmt.Printf("Désolé, nous n'achetons pas %s.\n", itemToSell)
+			continue
+		}
+		// Vendre l'objet et mettre à jour l'inventaire et l'or du personnage
+		P1.Inventory[itemToSell]--
+		m1.Inventory[itemToSell]++
+		Marchand1.Gold -= price
+		P1.Gold += price
+		P1.RemoveZeroValueItems()
+		fmt.Printf("Vous avez vendu un(e) %s pour %d pièces d'or.\n", itemToSell, price)
+		if askYesNo("Voulez-vous vendre autrechose ?") {
+			continue
 		} else {
 			fmt.Println("Le marchand n'a pas assez d'argent pour acheter cet objet.")
+			return
+
 		}
+
 	}
 }
+
 func getInput(prompt string) (int, error) {
 	var input int
 	fmt.Print(prompt)
@@ -268,4 +219,28 @@ func askYesNo(question string) bool {
 	fmt.Print(question + " (1.Oui/2.Non): ")
 	fmt.Scan(&choice)
 	return choice == 1
+}
+
+func calculerMontantTotal(items []string, quantite int, prices map[string]int) int {
+	montantTotal := 0
+
+	for _, itemName := range items {
+		price, existe := prices[itemName]
+		if !existe {
+			fmt.Printf("Le prix de l'objet %s n'est pas défini.\n", itemName)
+			continue
+		}
+
+		montantTotal += price * quantite
+	}
+
+	return montantTotal
+}
+func inventorySlice(inventory map[string]int) []string {
+	// Créez une tranche (slice) des objets de l'inventaire
+	var items []string
+	for itemName := range inventory {
+		items = append(items, itemName)
+	}
+	return items
 }

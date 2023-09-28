@@ -98,7 +98,7 @@ func Menu() {
 						Sell(&P1, &Marchand1)
 					}
 				case 4:
-					Forgeron(&P1)
+					Forge(&P1, &Forgeron1)
 				case 5:
 					Entrainement(&P1)
 				case 6:
@@ -179,7 +179,7 @@ func Menu() {
 						Sell(&P1, &Marchand1)
 					}
 				case 4:
-					Forgeron(&P1)
+					Forge(&P1, &Forgeron1)
 				case 5:
 					Entrainement(&P1)
 				case 6:
