@@ -19,14 +19,13 @@ func GetRandomEquippedItem(p *Personnage) (string, error) {
 func PickUpItem(itemKey string, p *Personnage) {
 	newItem, ok := p.EquipementMap[itemKey]
 	if !ok {
-		fmt.Println("No comprendo")
 		return
 	}
 	newItem.Durability -= 2
 	p.EquipementMap[itemKey] = newItem
 	if newItem.Durability <= 0 {
 		item := p.GetItemByName(itemKey)
-		fmt.Printf("Votre %s c'est brisé", itemKey)
+		fmt.Printf("Votre %s c'est brisé\n", itemKey)
 		switch item.Type {
 		case "Head":
 			if p.Equipement.Head {

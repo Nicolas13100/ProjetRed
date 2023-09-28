@@ -164,6 +164,10 @@ func charTurn(p *Personnage, Monstre1 *Monstre) {
 		equippedItem.Durability -= 1
 		p.EquipementMap[p.EquippedWeapon] = equippedItem
 		p.Weapon[p.EquippedWeapon] = equippedItem
+		if equippedItem.Durability <= 0 {
+			p.UnequipItem(p.Weapon)
+			fmt.Printf("Votre %s c'est brisé !\n", p.EquippedWeapon)
+		}
 		fmt.Println("Durabilité restante :", equippedItem.Durability)
 	case 2:
 		p.FightInventory(Monstre1)
