@@ -19,9 +19,12 @@ func GetRandomEquippedItem(p *Personnage) (string, error) {
 func PickUpItem(itemKey string, p *Personnage) {
 	newItem, ok := p.EquipementMap[itemKey]
 	if !ok {
-		fmt.Println("Item not found")
+		fmt.Println("No comprendo")
 		return
 	}
+	fmt.Println(newItem)
 	newItem.Durability -= 2
+	fmt.Println(newItem)
 	p.EquipementMap[itemKey] = newItem
+	fmt.Println(p.EquipementMap)
 }
