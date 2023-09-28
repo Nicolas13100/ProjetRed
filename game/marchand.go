@@ -98,12 +98,14 @@ func Buy(P1 *Personnage, m1 *Marchand) {
 			P1.Gold -= price
 			P1.RemoveZeroValueItems()
 			fmt.Printf("Vous avez acheté un(e) %s pour %d pièces d'or.\n", itemToBuy, price)
-			if askYesNo("Voulez-vous acheté autre-chose ?") {
-				continue
-			} else {
-				fmt.Println("Vous n'avez pas assez d'argent pour acheter cet objet.")
-				return
-			}
+		} else {
+			fmt.Println("Vous n'avez pas assez d'argent pour acheter cet objet.")
+			return
+		}
+		if askYesNo("Voulez-vous acheté autre-chose ?") {
+			continue
+		} else {
+			break
 		}
 	}
 }
@@ -151,14 +153,16 @@ func Sell(P1 *Personnage, m1 *Marchand) {
 
 				P1.RemoveZeroValueItems()
 				fmt.Printf("Vous avez vendu un(e) %s pour %d pièces d'or.\n", itemToSell, price)
-				if askYesNo("Voulez-vous vendre autrechose ?") {
-					continue
-				}
+
 				// Vendre l'objet et mettre à jour l'inventaire et l'or du personnage
 
 			} else {
 				fmt.Println("Le marchand n'a pas assez d'argent pour acheter cet objet.")
 				return
+
+			}
+			if askYesNo("Voulez-vous vendre autrechose ?") {
+				continue
 			}
 		}
 	}
@@ -166,12 +170,21 @@ func Sell(P1 *Personnage, m1 *Marchand) {
 
 func askYesNo(question string) bool {
 	var choice int
-	fmt.Print(question + " (1.Oui/2.Non): ")
-	fmt.Scan(&choice)
-	if choice != 12 {
+	for {
 
+		fmt.Print(question + " (1.Oui/2.Non): ")
+		fmt.Scan(&choice)
+
+		switch choice {
+		case 1:
+			return choice == 1
+		case 2:
+			return choice == 0
+		default:
+			fmt.Println("Je n'ai pas compris")
+			continue
+		}
 	}
-	return choice == 1
 }
 
 func CalculerMontantTotal(items []string, quantite int, prices map[string]int) int {
