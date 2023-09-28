@@ -22,9 +22,28 @@ func PickUpItem(itemKey string, p *Personnage) {
 		fmt.Println("No comprendo")
 		return
 	}
-	fmt.Println(newItem)
 	newItem.Durability -= 2
-	fmt.Println(newItem)
 	p.EquipementMap[itemKey] = newItem
-	fmt.Println(p.EquipementMap)
+	if newItem.Durability <= 0 {
+		item := p.GetItemByName(itemKey)
+		fmt.Printf("Votre %s c'est brisé", itemKey)
+		switch item.Type {
+		case "Head":
+			if p.Equipement.Head {
+				p.UnequipItem(p.Head)
+			}
+		case "Armor":
+			if p.Equipement.Armor {
+				p.UnequipItem(p.Armor)
+			}
+		case "Legs":
+			if p.Equipement.Legs {
+				p.UnequipItem(p.Legs)
+			}
+		case "Boots":
+			if p.Equipement.Boots {
+				p.UnequipItem(p.Feets)
+			}
+		}
+	}
 }
