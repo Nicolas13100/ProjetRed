@@ -96,7 +96,8 @@ func (P1 *Personnage) BaseInventory() {
 			fmt.Println("Que voulez-vous faire ?")
 			fmt.Println("1. Equiper de l'équipement")
 			fmt.Println("2. Afficher équipements")
-			fmt.Println("3.Quitter")
+			fmt.Println("3. Afficher équipements casé")
+			fmt.Println("0.Quitter")
 			var input int
 			fmt.Scan(&input)
 			switch input {
@@ -107,6 +108,8 @@ func (P1 *Personnage) BaseInventory() {
 				waitForUserInput("Entrer 0 retourner en arrière\n")
 				continue
 			case 3:
+				PrintEquipmentMap(P1.BrokenEquipementMap)
+			case 0:
 				continue
 			}
 		case 0:

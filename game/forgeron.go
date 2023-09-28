@@ -46,7 +46,7 @@ var (
 
 func Forge(P1 *Personnage, f1 *Forgeron) {
 	var choice int
-	fmt.Println("Bienvenue dans la forge, en quoi puis-je vous être utile ? (1. Forge / 2. Recycler un item / 3. Quitter)")
+	fmt.Println("Bienvenue dans la forge, en quoi puis-je vous être utile ? (1. Forge / 2. Recycler un item / 3. Réparation / 0. Quitter)")
 	fmt.Scan(&choice)
 	switch choice {
 
@@ -114,8 +114,17 @@ func Forge(P1 *Personnage, f1 *Forgeron) {
 		for material, quantity := range materials {
 			fmt.Printf("%s : %d\n", material, quantity)
 		}
-	}
 
+	case 3:
+		fmt.Println("1.Reparation de tous ce que tu as, 2.ou d'un equiement en particulier?")
+		fmt.Scan(&choice)
+		switch choice {
+		case 1:
+		}
+
+	case 0:
+		return
+	}
 }
 func (f *Forgeron) FListForgeableItems() []string {
 	equipableItems := []string{}

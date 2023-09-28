@@ -539,16 +539,22 @@ func (p *Personnage) UnequipItem(item map[string]Equipment) {
 		p.Defense -= equippedItem.DefBonus
 		p.Initiative -= equippedItem.InitiativeBonus
 		// ... add similar lines for other stats
-		// Update inventory if necessary (add item back to inventory)
-		p.Inventory[itemName]++
+		if equippedItem.Durability > 0 { // Update inventory if necessary (add item back to inventory)
+			p.Inventory[itemName]++
+		} else {
+			p.BrokenEquipementMap[itemName] = equippedItem
+		}
 	}
 }
+
 func GetMaterialsFromEquipment(equipment Equipment) map[string]int {
 	return equipment.Materials
 }
+
 func GetitemFromInventory(P1 Personnage) map[string]int {
 	return P1.Inventory
 }
+
 func (P1 *Personnage) RemoveItem(itemName string) {
 	if P1.Inventory[itemName] > 1 {
 		P1.Inventory[itemName]--
@@ -557,6 +563,7 @@ func (P1 *Personnage) RemoveItem(itemName string) {
 		delete(P1.Inventory, itemName)
 	}
 }
+
 func (P1 *Personnage) AddItem(itemName string) {
 	if quantity, ok := P1.Inventory[itemName]; ok {
 		P1.Inventory[itemName] = quantity + 1

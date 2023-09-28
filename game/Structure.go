@@ -5,6 +5,7 @@ type Personnage struct {
 	Race                   string
 	Equipement             Equipment
 	EquipementMap          map[string]Equipment
+	BrokenEquipementMap    map[string]Equipment
 	EquipementDurabilities map[string]int
 	EquippedItems          []string
 	Level                  int
