@@ -127,34 +127,35 @@ var (
 )
 
 func (p *Personnage) EquipItem(item Equipment) {
+	fmt.Println(item)
 	switch item.Type {
 	case "Head":
 		if p.Equipement.Head {
-			p.UnequipItem(p.Head[item.Name])
+			p.UnequipItem(item)
 		}
 		p.Head[item.Name] = item
 		p.Equipement.Head = true
 	case "Armor":
 		if p.Equipement.Armor {
-			p.UnequipItem(p.Armors[item.Name])
+			p.UnequipItem(item)
 		}
 		p.Armors[item.Name] = item
 		p.Equipement.Armor = true
 	case "Legs":
 		if p.Equipement.Legs {
-			p.UnequipItem(p.Legs[item.Name])
+			p.UnequipItem(item)
 		}
 		p.Legs[item.Name] = item
 		p.Equipement.Legs = true
 	case "Boots":
 		if p.Equipement.Boots {
-			p.UnequipItem(p.Feets[item.Name])
+			p.UnequipItem(item)
 		}
 		p.Feets[item.Name] = item
 		p.Equipement.Boots = true
 	case "Weapon":
 		if p.Equipement.Weapon {
-			p.UnequipItem(p.Weapons[item.Name])
+			p.UnequipItem(item)
 		}
 		p.Weapons[item.Name] = item
 		p.Equipement.Weapon = true
