@@ -87,6 +87,16 @@ var (
 			"Peau de Troll":  2,
 		},
 	}
+	CouronneSphinx = Equipment{
+		Name:            "Couronne du Sphinx",
+		Type:            "Couronne",
+		Necklace:        true,
+		AtkBonus:        30,
+		InitiativeBonus: 25,
+		HPBonus:         20,
+		Durability:      90,
+		DurabilityMax:   90,
+	}
 
 	Arc1 = Equipment{
 		Name:            "Arc de l'aventurier",
@@ -132,7 +142,7 @@ var (
 
 func IsEquipable(itemName string) bool {
 	switch itemName {
-	case "Failure", "Wadô Ichimonji", "Chapeau de l'aventurier", "Tunique de l'aventurier", "Bottes de l'aventurier", "Epée de l'aventurier", "Arc de l'aventurier":
+	case "Failure", "Wadô Ichimonji", "Chapeau de l'aventurier", "Tunique de l'aventurier", "Bottes de l'aventurier", "Epée de l'aventurier", "Arc de l'aventurier", "Couronne du Sphinx":
 		return true
 	default:
 		return false
@@ -200,7 +210,7 @@ func ListEquipableItems(inventory map[string]int) []Equipment {
 	return equipableItems
 }
 
-func (p *Personnage) EquipItemFromInventory(itemName string) {
+func (P1 *Personnage) EquipItemFromInventory(itemName string) {
 	itemToEquip := GetEquipmentByName(itemName)
 
 	// Check if the item is equipable
@@ -209,30 +219,28 @@ func (p *Personnage) EquipItemFromInventory(itemName string) {
 		return
 	}
 
-	// Check if there's already an item equipped of the same type/key
-	if existingItem, ok := p.EquipementMap[itemToEquip.Type]; ok {
-		// Put the existing item back in inventory
-		p.Inventory[existingItem.Name]++
+	if existingItem, ok := P1.EquipementMap[itemToEquip.Type]; ok {
 
-		// Update stats based on the unequipped item
-		p.Hp -= existingItem.HPBonus
-		p.Atk -= existingItem.AtkBonus
-		p.Defense -= existingItem.DefBonus
-		p.Initiative -= existingItem.InitiativeBonus
+		P1.Inventory[existingItem.Name]++
+
+		P1.Hp -= existingItem.HPBonus
+		P1.Atk -= existingItem.AtkBonus
+		P1.Defense -= existingItem.DefBonus
+		P1.Initiative -= existingItem.InitiativeBonus
 	}
 
 	// Equip the new item
-	p.EquipementMap[itemToEquip.Type] = itemToEquip
+	P1.EquipementMap[itemToEquip.Type] = itemToEquip
 
 	// Update stats based on the equipped item
-	p.Hp += itemToEquip.HPBonus
-	p.Atk += itemToEquip.AtkBonus
-	p.Defense += itemToEquip.DefBonus
-	p.Initiative += itemToEquip.InitiativeBonus
+	P1.Hp += itemToEquip.HPBonus
+	P1.Atk += itemToEquip.AtkBonus
+	P1.Defense += itemToEquip.DefBonus
+	P1.Initiative += itemToEquip.InitiativeBonus
 
 	// Remove the item from inventory
-	if p.Inventory[itemName] > 0 {
-		p.Inventory[itemName]--
+	if P1.Inventory[itemName] > 0 {
+		P1.Inventory[itemName]--
 	} else {
 		fmt.Println("Item not found in inventory")
 	}

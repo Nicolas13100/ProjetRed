@@ -74,7 +74,7 @@ func movePlayer() {
 			var loot = Item{
 				Name: "Fourrure de Loup",
 			}
-			encounterJar(&P1, loot)
+			encounterJar(P1, loot)
 		}
 	}
 	for _, monster := range currentRoom.Monsters {
@@ -119,7 +119,7 @@ func printMap() {
 }
 
 func addJar() {
-	JarCount := rand.Intn(8) // Generate a random number of jars (0 to 5)
+	JarCount := rand.Intn(4) // Generate a random number of jars (0 to 5)
 	for i := 0; i < JarCount; i++ {
 		room := Carte{x: rand.Intn(gridSize), y: rand.Intn(gridSize)}
 		// Ensure the room doesn't already have a jar or player
@@ -141,7 +141,7 @@ func newJar() *Jar {
 		jar.HasLoot = true
 		jar.Contenu = []Item{
 			{Name: "Fourrure de Loup", Quantity: 1},
-			{Name: "Epée", Quantity: 1},
+			{Name: "Epée de l'aventurier", Quantity: 1},
 		}
 	case Monster:
 		jar.HasMonster = true
@@ -158,7 +158,7 @@ func (j *Jar) openJar() Item {
 	return item
 }
 
-func encounterJar(p *Personnage, item Item) {
+func encounterJar(P1 Personnage, item Item) {
 
 	rand.Seed(time.Now().UnixNano())
 	jar := newJar()
@@ -173,13 +173,62 @@ func encounterJar(p *Personnage, item Item) {
 		if jar.HasLoot {
 			loot := jar.openJar()
 			fmt.Printf("Vous avez obtenu un(e) %s!\n", loot.Name)
-			fmt.Println(p.Inventory)
-			p.Inventory[loot.Name] += 1
+			fmt.Println(P1.Inventory)
+			P1.Inventory[loot.Name] += 1
 		} else if jar.HasMonster {
+			monsters := []Monstre{Jarpent}
+			Monstre1 := monsters[0]
 			fmt.Println("Vous êtes tombé sur un monstre !")
-			Fight(&P1, &Jarpent)
+			Fight(&P1, &Monstre1)
 		} else if jar.HasEvent {
-			// Traitez l'événement ici
+			var Question int
+			randomQuestion := rand.Intn(3)
+			Question = randomQuestion
+			switch Question {
+			case 1:
+				var choix string
+				fmt.Println("Quel être, pourvu d'une seule voix, a d'abord quatre jambes le matin, puis deux jambes à midi, et trois jambes le soir ? ")
+				fmt.Scan(&choix)
+				if choix == "Homme" || choix == "homme" {
+					fmt.Println("Comment ?!... Tu as trouvé la bonne réponse, voici ta récompense.")
+					P1.Inventory["Collier du Sphinx"]++
+					fmt.Println("Vous avez obtenu le Collier du Sphinx !")
+					return
+				} else {
+					fmt.Println("Non, ce n'est pas la bonne réponse, déguste ma papatate")
+					P1.Hp -= 25
+					fmt.Println("Vous avez perdu 25 PV.")
+					return
+				}
+			case 2:
+				var choix string
+				fmt.Println("On la reçoit sans la remercier. On en profite sans savoir pourquoi. On la donne à d'autres. On la perd sans s'en apercevoir. Qui suis-je ?")
+				fmt.Scan(&choix)
+				if choix == "La vie" || choix == "Vie" || choix == "vie" || choix == "la vie" {
+					fmt.Println("Ouiii, c'est la bonne réponse, voici ta récompense.")
+					P1.Inventory["La Clé"]++
+					fmt.Println("Vous avez obtenu La Clé !")
+					return
+				} else {
+					fmt.Println("Non, ce n'est pas la bonne réponse, la Boule t'amène à l'étage inférieur")
+					currentFloor -= 1
+					return
+				}
+			case 3:
+				var choix string
+				fmt.Println("On la reçoit sans la remercier. On en profite sans savoir pourquoi. On la donne à d'autres. On la perd sans s'en apercevoir. Qui suis-je ?")
+				fmt.Scan(&choix)
+				if choix == "La vie" || choix == "Vie" || choix == "vie" || choix == "la vie" {
+					fmt.Println("Ouiii, c'est la bonne réponse, voici ta récompense.")
+					P1.Inventory["La Clé"]++
+					fmt.Println("Vous avez obtenu La Clé !")
+					return
+				} else {
+					fmt.Println("Non, ce n'est pas la bonne réponse, la Boule t'amène à l'étage inférieur")
+					currentFloor -= 1
+					return
+				}
+			}
 		} else {
 			fmt.Println("La jar est vide.")
 		}

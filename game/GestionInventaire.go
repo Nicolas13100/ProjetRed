@@ -116,7 +116,7 @@ func (P1 *Personnage) BaseInventory() {
 				}
 			case 2:
 				printEquipmentMap(P1.EquipementMap)
-				waitForUserInput("Entrer 0  pour revenir au menu principal")
+				waitForUserInput("Entrer 0 retourner en arrière\n")
 				continue
 			case 3:
 				continue

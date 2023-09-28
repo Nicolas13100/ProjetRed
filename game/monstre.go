@@ -37,14 +37,18 @@ var (
 
 	Jarpent = Monstre{
 		Name:       "Jarpent",
-		Atk:        10,
-		HpMax:      50,
-		Hp:         50,
+		Atk:        12,
+		HpMax:      30,
+		Hp:         30,
 		Mana:       20,
 		Type:       "Jarpent",
 		Defense:    0,
 		Initiative: 0,
 		XpDrop:     20,
+		ItemDrop: map[string]int{
+			"Mûe de Jarpent": 1,
+			"Bout d'argile":  1,
+		},
 	}
 
 	Goblin = Monstre{
@@ -116,7 +120,7 @@ var (
 
 	Renard = Monstre{
 		Name:       "Maître Renard",
-		Type:       "renard",
+		Type:       "Renard",
 		Atk:        16,
 		HpMax:      70,
 		Hp:         70,
@@ -204,7 +208,7 @@ var (
 		Initiative: 0,
 		XpDrop:     20,
 		ItemDrop: map[string]int{
-			"Fourrure de Loup": 1,
+			"Cuir de Sanglier": 1,
 		},
 	}
 
