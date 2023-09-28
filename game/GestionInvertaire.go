@@ -100,7 +100,7 @@ func (P1 *Personnage) BaseInventory() {
 			fmt.Scan(&input)
 			switch input {
 			case 1:
-				P1.EquipItemFromInventory()
+
 			case 2:
 				printEquipmentMap(P1.EquipementMap)
 				waitForUserInput("Entrer 0  pour revenir au menu principal")

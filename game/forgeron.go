@@ -39,7 +39,7 @@ func Forge(P1 *Personnage, f1 *Forgeron) {
 	switch choice {
 
 	case 1:
-		ForgeableItems := ListEquipableItems(f1.Inventory)
+		ForgeableItems := f1.ListEquipableItems()
 		for i, item := range ForgeableItems {
 			fmt.Printf("%d. %s\n", i+1, item.Name)
 		}
