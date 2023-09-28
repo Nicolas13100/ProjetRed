@@ -325,7 +325,6 @@ func (p *Personnage) UnequipItem(item map[string]Equipment) {
 				for i, key := range p.EquippedItems {
 					if key == itemName {
 						p.EquippedItems = append(p.EquippedItems[:i], p.EquippedItems[i+1:]...)
-						return
 					}
 				}
 			}
@@ -339,7 +338,6 @@ func (p *Personnage) UnequipItem(item map[string]Equipment) {
 				for i, key := range p.EquippedItems {
 					if key == itemName {
 						p.EquippedItems = append(p.EquippedItems[:i], p.EquippedItems[i+1:]...)
-						return
 					}
 				}
 			}
@@ -353,7 +351,6 @@ func (p *Personnage) UnequipItem(item map[string]Equipment) {
 				for i, key := range p.EquippedItems {
 					if key == itemName {
 						p.EquippedItems = append(p.EquippedItems[:i], p.EquippedItems[i+1:]...)
-						return
 					}
 				}
 			}
@@ -367,7 +364,6 @@ func (p *Personnage) UnequipItem(item map[string]Equipment) {
 				for i, key := range p.EquippedItems {
 					if key == itemName {
 						p.EquippedItems = append(p.EquippedItems[:i], p.EquippedItems[i+1:]...)
-						return
 					}
 				}
 			}
@@ -380,14 +376,12 @@ func (p *Personnage) UnequipItem(item map[string]Equipment) {
 				delete(p.EquipementMap, deletedItem)
 			}
 		}
-
 		// Update character stats based on the unequipped item
 		p.HpMax -= equippedItem.HPBonus
 		p.Atk -= equippedItem.AtkBonus
 		p.Defense -= equippedItem.DefBonus
 		p.Initiative -= equippedItem.InitiativeBonus
 		// ... add similar lines for other stats
-
 		// Update inventory if necessary (add item back to inventory)
 		p.Inventory[itemName]++
 	}
