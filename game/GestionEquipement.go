@@ -168,6 +168,7 @@ func (p *Personnage) EquipItem(item Equipment) {
 		p.Head[item.Name] = item
 		p.Equipement.Head = true
 		p.EquippedHead = item.Name
+		p.EquippedItems = append(p.EquippedItems, item.Name)
 	case "Armor":
 		if p.Equipement.Armor {
 			p.UnequipItem(p.Armor)
@@ -175,6 +176,7 @@ func (p *Personnage) EquipItem(item Equipment) {
 		p.Armor[item.Name] = item
 		p.Equipement.Armor = true
 		p.EquippedArmor = item.Name
+		p.EquippedItems = append(p.EquippedItems, item.Name)
 	case "Legs":
 		if p.Equipement.Legs {
 			p.UnequipItem(p.Legs)
@@ -182,6 +184,7 @@ func (p *Personnage) EquipItem(item Equipment) {
 		p.Legs[item.Name] = item
 		p.Equipement.Legs = true
 		p.Equippedlegs = item.Name
+		p.EquippedItems = append(p.EquippedItems, item.Name)
 	case "Boots":
 		if p.Equipement.Boots {
 			p.UnequipItem(p.Feets)
@@ -189,6 +192,7 @@ func (p *Personnage) EquipItem(item Equipment) {
 		p.Feets[item.Name] = item
 		p.Equipement.Boots = true
 		p.EquippedFeets = item.Name
+		p.EquippedItems = append(p.EquippedItems, item.Name)
 	case "Weapon":
 		if p.Equipement.Weapon {
 			p.UnequipItem(p.Weapon)
@@ -292,6 +296,13 @@ func (p *Personnage) UnequipItem(item map[string]Equipment) {
 				p.Equipement.Head = false
 				// Remove item from EquipementMap
 				delete(p.EquipementMap, deletedItem)
+				for i, key := range p.EquippedItems {
+					if key == itemName {
+						p.EquippedItems = append(p.EquippedItems[:i], p.EquippedItems[i+1:]...)
+						return
+					}
+				}
+
 			}
 		case "Armor":
 			if p.Equipement.Armor {
@@ -300,6 +311,12 @@ func (p *Personnage) UnequipItem(item map[string]Equipment) {
 				p.Equipement.Armor = false
 				// Remove item from EquipementMap
 				delete(p.EquipementMap, deletedItem)
+				for i, key := range p.EquippedItems {
+					if key == itemName {
+						p.EquippedItems = append(p.EquippedItems[:i], p.EquippedItems[i+1:]...)
+						return
+					}
+				}
 			}
 		case "Legs":
 			if p.Equipement.Legs {
@@ -308,6 +325,12 @@ func (p *Personnage) UnequipItem(item map[string]Equipment) {
 				p.Equipement.Legs = false
 				// Remove item from EquipementMap
 				delete(p.EquipementMap, deletedItem)
+				for i, key := range p.EquippedItems {
+					if key == itemName {
+						p.EquippedItems = append(p.EquippedItems[:i], p.EquippedItems[i+1:]...)
+						return
+					}
+				}
 			}
 		case "Boots":
 			if p.Equipement.Boots {
@@ -316,6 +339,12 @@ func (p *Personnage) UnequipItem(item map[string]Equipment) {
 				p.Equipement.Boots = false
 				// Remove item from EquipementMap
 				delete(p.EquipementMap, deletedItem)
+				for i, key := range p.EquippedItems {
+					if key == itemName {
+						p.EquippedItems = append(p.EquippedItems[:i], p.EquippedItems[i+1:]...)
+						return
+					}
+				}
 			}
 		case "Weapon":
 			if p.Equipement.Weapon {

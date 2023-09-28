@@ -108,6 +108,7 @@ RestartLoop:
 			Equipement:             equipement,
 			EquipementMap:          map[string]Equipment{},
 			EquipementDurabilities: map[string]int{},
+			EquippedItems:          []string{},
 			Level:                  1,
 			Xp:                     0,
 			XpMax:                  100,
@@ -117,9 +118,12 @@ RestartLoop:
 			InventoryCap:           10,
 			Spells:                 []Spell{CoupdePoing},
 			Inventory: map[string]int{
-				"Potion de soin":   3,
-				"Potion de poison": 3,
-				"Potion de mana":   3,
+				"Potion de soin":          3,
+				"Potion de poison":        3,
+				"Potion de mana":          3,
+				"Head Test":               1,
+				"Test":                    1,
+				"Tunique de l'aventurier": 1,
 			},
 			InventoryUsed:    false,
 			AtkUsed:          false,
@@ -158,6 +162,7 @@ RestartLoop:
 			Equipement:             equipement,
 			EquipementMap:          map[string]Equipment{},
 			EquipementDurabilities: map[string]int{},
+			EquippedItems:          []string{},
 			Level:                  1,
 			Xp:                     0,
 			XpMax:                  100,
@@ -206,6 +211,7 @@ RestartLoop:
 			Equipement:             equipement,
 			EquipementMap:          map[string]Equipment{},
 			EquipementDurabilities: map[string]int{},
+			EquippedItems:          []string{},
 			Level:                  1,
 			Xp:                     0,
 			XpMax:                  100,
@@ -254,6 +260,7 @@ RestartLoop:
 			Equipement:             equipement,
 			EquipementMap:          map[string]Equipment{},
 			EquipementDurabilities: map[string]int{},
+			EquippedItems:          []string{},
 			Level:                  99,
 			HpMax:                  999999,
 			Hp:                     999999,
@@ -261,21 +268,19 @@ RestartLoop:
 			InventoryCap:           99999999,
 			Spells:                 []Spell{CoupdePoing, fireball, iceBlast},
 			Inventory: map[string]int{
-				"Potion de soin":       99,
-				"Potion de poison":     99,
-				"Potion de mana":       99,
-				"Fourrure de Loup":     99,
-				"Peau de Troll":        99,
-				"Cuir de Sanglier":     99,
-				"Plume de Corbeau":     99,
-				"Fil de Spayder":       99,
-				"Epée de l'aventurier": 1,
-				"Arc de l'aventurier":  1,
-				"Failure":              1,
-				"Wadô Ichimonji":       1,
-				"Head Test":            1,
-				"Test":                 1,
-				"Head Test2":           1,
+				"Potion de soin":          99,
+				"Potion de poison":        99,
+				"Potion de mana":          99,
+				"Fourrure de Loup":        99,
+				"Peau de Troll":           99,
+				"Cuir de Sanglier":        99,
+				"Plume de Corbeau":        99,
+				"Fil de Spayder":          99,
+				"Epée de l'aventurier":    1,
+				"Arc de l'aventurier":     1,
+				"Failure":                 1,
+				"Wadô Ichimonji":          1,
+				"Tunique de l'aventurier": 1,
 			},
 			Mana:             999,
 			ManaMax:          999,
@@ -333,9 +338,9 @@ func (P1 Personnage) DisplayInfo() {
 		text21 := "\nEquipements:"
 		centeredText21 := CenterText(text21)
 		fmt.Println(centeredText21)
-		text22 := "Weapon:\n%s:\n Type: %s\n ATK: %d\n DEF: %d\n HP: %d\n Initiative: %d\n Durability %d / %d \n"
+		text22 := "%s:\n Type: %s\n ATK: %d\n DEF: %d\n HP: %d\n Initiative: %d\n Durability %d / %d \n"
 		centeredText22 := CenterText(text22)
-		for _, value := range P1.Weapon {
+		for _, value := range P1.EquipementMap {
 			fmt.Printf(centeredText22, value.Name, value.Type, value.AtkBonus, value.DefBonus, value.HPBonus, value.InitiativeBonus, value.Durability, value.DurabilityMax)
 		}
 
