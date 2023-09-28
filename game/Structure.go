@@ -23,9 +23,9 @@ type Personnage struct {
 	Defense                int
 	Initiative             int
 	x, y                   int
-	Weapons                map[string]Equipment
+	Weapon                 map[string]Equipment
 	Head                   map[string]Equipment
-	Armors                 map[string]Equipment
+	Armor                  map[string]Equipment
 	Hands                  map[string]Equipment
 	Legs                   map[string]Equipment
 	Feets                  map[string]Equipment

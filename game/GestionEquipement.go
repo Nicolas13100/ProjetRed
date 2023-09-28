@@ -169,9 +169,9 @@ func (p *Personnage) EquipItem(item Equipment) {
 		p.Equipement.Head = true
 	case "Armor":
 		if p.Equipement.Armor {
-			p.UnequipItem(p.Armors)
+			p.UnequipItem(p.Armor)
 		}
-		p.Armors[item.Name] = item
+		p.Armor[item.Name] = item
 		p.Equipement.Armor = true
 	case "Legs":
 		if p.Equipement.Legs {
@@ -187,9 +187,9 @@ func (p *Personnage) EquipItem(item Equipment) {
 		p.Equipement.Boots = true
 	case "Weapon":
 		if p.Equipement.Weapon {
-			p.UnequipItem(p.Weapons)
+			p.UnequipItem(p.Weapon)
 		}
-		p.Weapons[item.Name] = item
+		p.Weapon[item.Name] = item
 		p.Equipement.Weapon = true
 	}
 
@@ -291,7 +291,7 @@ func (p *Personnage) UnequipItem(item map[string]Equipment) {
 		case "Armor":
 			if p.Equipement.Armor {
 				deletedItem := itemName
-				delete(p.Armors, deletedItem)
+				delete(p.Armor, deletedItem)
 				p.Equipement.Armor = false
 				// Remove item from EquipementMap
 				delete(p.EquipementMap, deletedItem)
@@ -315,7 +315,7 @@ func (p *Personnage) UnequipItem(item map[string]Equipment) {
 		case "Weapon":
 			if p.Equipement.Weapon {
 				deletedItem := itemName
-				delete(p.Weapons, deletedItem)
+				delete(p.Weapon, deletedItem)
 				p.Equipement.Weapon = false
 				// Remove item from EquipementMap
 				delete(p.EquipementMap, deletedItem)
@@ -352,17 +352,5 @@ func (P1 *Personnage) AddItem(itemName string) {
 		P1.Inventory[itemName] = quantity + 1
 	} else {
 		P1.Inventory[itemName] = 1
-	}
-}
-
-func (p *Personnage) UpdateDurability(item map[string]Equipment) {
-	for itemName, equipment := range item {
-		// Assuming 'Equipment' struct has a field named 'Durability'
-		if equipment.Durability > 0 {
-			equipment.Durability--
-			fmt.Printf("%s durability reduced to %d\n", itemName, equipment.Durability)
-		} else {
-			fmt.Printf("%s is already broken\n", itemName)
-		}
 	}
 }

@@ -148,15 +148,10 @@ func charTurn(p *Personnage, Monstre1 *Monstre) {
 		if attaqueJoueur < 0 {
 			attaqueJoueur = 0
 		}
-		fmt.Println(p.Weapons)
-		p.UpdateDurability(p.Weapons)
+
 		fmt.Printf("Vous avez infligé %d point de dégats\n", attaqueJoueur)
 		Monstre1.Hp -= attaqueJoueur
 		PlayerTurnTaken = true
-		if p.Equipement.Weapon {
-			itemName := p.Weapons
-			fmt.Println(itemName)
-		}
 	case 2:
 		p.FightInventory(Monstre1)
 
