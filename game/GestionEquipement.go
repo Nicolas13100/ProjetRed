@@ -160,7 +160,6 @@ var (
 )
 
 func (p *Personnage) EquipItem(item Equipment) {
-	fmt.Println(item)
 	switch item.Type {
 	case "Head":
 		if p.Equipement.Head {
@@ -188,12 +187,9 @@ func (p *Personnage) EquipItem(item Equipment) {
 		p.Equipement.Boots = true
 	case "Weapon":
 		if p.Equipement.Weapon {
-			oldItem := p.Weapons
-			fmt.Println(oldItem, ":")
 			p.UnequipItem(p.Weapons)
 		}
 		p.Weapons[item.Name] = item
-		fmt.Println(p.Weapons)
 		p.Equipement.Weapon = true
 	}
 
@@ -282,7 +278,6 @@ func (p *Personnage) EquipItemFromInventory() {
 }
 
 func (p *Personnage) UnequipItem(item map[string]Equipment) {
-	fmt.Println(item)
 	for itemName, equippedItem := range item {
 		switch equippedItem.Type {
 		case "Head":
@@ -357,5 +352,17 @@ func (P1 *Personnage) AddItem(itemName string) {
 		P1.Inventory[itemName] = quantity + 1
 	} else {
 		P1.Inventory[itemName] = 1
+	}
+}
+
+func (p *Personnage) UpdateDurability(item map[string]Equipment) {
+	for itemName, equipment := range item {
+		// Assuming 'Equipment' struct has a field named 'Durability'
+		if equipment.Durability > 0 {
+			equipment.Durability--
+			fmt.Printf("%s durability reduced to %d\n", itemName, equipment.Durability)
+		} else {
+			fmt.Printf("%s is already broken\n", itemName)
+		}
 	}
 }
