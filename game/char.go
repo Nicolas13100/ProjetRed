@@ -342,7 +342,7 @@ func (P1 Personnage) DisplayInfo() {
 		text21 := "\nEquipements:"
 		centeredText21 := CenterText(text21)
 		fmt.Println(centeredText21)
-		text22 := "Arme :\n%s:\n Type: %s\n Attaque: %d\n Défense: %d\n HP: %d\n Initiative: %d\n Durabilité %d / %d \n"
+		text22 := "\nArme :\n%s:\n Type: %s\n Attaque: %d\n Défense: %d\n HP: %d\n Initiative: %d\n Durabilité %d / %d \n"
 		centeredText22 := CenterText(text22)
 		for _, value := range P1.EquipementMap {
 			fmt.Printf(centeredText22, value.Name, value.Type, value.AtkBonus, value.DefBonus, value.HPBonus, value.InitiativeBonus, value.Durability, value.DurabilityMax)
