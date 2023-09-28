@@ -10,12 +10,12 @@ func ApplyDamage(r Reducible, amount int) {
 	r.ReduceDurability(amount)
 }
 
-func (w *Weapon) ReduceDurability(amount int) {
-	if w.Durability > 0 {
-		w.Durability -= amount
-		if w.Durability < 0 {
-			w.Durability = 0
-			fmt.Println("L'arme c'est brisée")
+func ReduceDurability(durability *int, amount int) {
+	if *durability > 0 {
+		*durability -= amount
+		if *durability < 0 {
+			*durability = 0
+			fmt.Println("L'arme s'est brisée") // Assuming this is French for "The weapon has broken"
 		}
 	}
 }
