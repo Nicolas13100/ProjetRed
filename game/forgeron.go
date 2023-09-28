@@ -51,7 +51,7 @@ func Forge(P1 *Personnage, f1 *Forgeron) {
 	switch choice {
 
 	case 1:
-		ForgeableItems := P1.ListEquipableItems()
+		ForgeableItems := f1.FListForgeableItems()
 		for i, item := range ForgeableItems {
 			fmt.Printf("%d. %s\n", i+1, item)
 		}
@@ -117,12 +117,12 @@ func Forge(P1 *Personnage, f1 *Forgeron) {
 	}
 
 }
-func (f *Forgeron) FListEquipableItems() []string {
+func (f *Forgeron) FListForgeableItems() []string {
 	equipableItems := []string{}
 
 	for item := range f.Inventory {
 		switch item {
-		case "Test", "Head Test2", "Head Test", "Failure", "Wadô Ichimonji", "Chapeau de l'aventurier", "Tunique de l'aventurier", "Jambiere de l'aventurier", "Bottes de l'aventurier", "Epée de l'aventurier", "Arc de l'aventurier":
+		case "Failure", "Wadô Ichimonji", "Chapeau de l'aventurier", "Tunique de l'aventurier", "Jambiere de l'aventurier", "Bottes de l'aventurier", "Epée de l'aventurier", "Arc de l'aventurier", "Heaume en cuir", "Plastron en cuir", "Pantalon en cuir", "Bottes en cuir", "Heaume en métal", "Plastron en métal", "Pantalon en métal", "Bottes en métal", "Katana", "Epée renforcé", "Katana supérieur", "Couronne du Sphinx", "Arc supérieur":
 			equipableItems = append(equipableItems, item)
 		}
 	}
