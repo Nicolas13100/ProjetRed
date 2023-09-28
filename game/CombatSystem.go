@@ -148,10 +148,19 @@ func charTurn(p *Personnage, Monstre1 *Monstre) {
 		if attaqueJoueur < 0 {
 			attaqueJoueur = 0
 		}
-
 		fmt.Printf("Vous avez infligé %d point de dégats\n", attaqueJoueur)
 		Monstre1.Hp -= attaqueJoueur
 		PlayerTurnTaken = true
+		// Reduce durability of the equipped weapon
+		equippedItem, ok := p.EquipementMap[p.EquippedWeapon]
+		if !ok {
+			fmt.Println("Pas de durabilité")
+			return
+		}
+		equippedItem.Durability -= 5
+		p.EquipementMap[p.EquippedWeapon] = equippedItem
+		p.Weapon[p.EquippedWeapon] = equippedItem
+		fmt.Println("Durabilité restante :", equippedItem.Durability)
 	case 2:
 		p.FightInventory(Monstre1)
 
