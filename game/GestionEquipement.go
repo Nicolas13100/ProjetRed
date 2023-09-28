@@ -160,7 +160,6 @@ var (
 )
 
 func (p *Personnage) EquipItem(item Equipment) {
-	fmt.Println(item)
 	switch item.Type {
 	case "Head":
 		if p.Equipement.Head {
@@ -168,33 +167,35 @@ func (p *Personnage) EquipItem(item Equipment) {
 		}
 		p.Head[item.Name] = item
 		p.Equipement.Head = true
+		p.EquippedHead = item.Name
 	case "Armor":
 		if p.Equipement.Armor {
-			p.UnequipItem(p.Armors)
+			p.UnequipItem(p.Armor)
 		}
-		p.Armors[item.Name] = item
+		p.Armor[item.Name] = item
 		p.Equipement.Armor = true
+		p.EquippedArmor = item.Name
 	case "Legs":
 		if p.Equipement.Legs {
 			p.UnequipItem(p.Legs)
 		}
 		p.Legs[item.Name] = item
 		p.Equipement.Legs = true
+		p.Equippedlegs = item.Name
 	case "Boots":
 		if p.Equipement.Boots {
 			p.UnequipItem(p.Feets)
 		}
 		p.Feets[item.Name] = item
 		p.Equipement.Boots = true
+		p.EquippedFeets = item.Name
 	case "Weapon":
 		if p.Equipement.Weapon {
-			oldItem := p.Weapons
-			fmt.Println(oldItem, ":")
-			p.UnequipItem(p.Weapons)
+			p.UnequipItem(p.Weapon)
 		}
-		p.Weapons[item.Name] = item
-		fmt.Println(p.Weapons)
+		p.Weapon[item.Name] = item
 		p.Equipement.Weapon = true
+		p.EquippedWeapon = item.Name
 	}
 
 	// Update character stats based on the equipped item
@@ -282,7 +283,6 @@ func (p *Personnage) EquipItemFromInventory() {
 }
 
 func (p *Personnage) UnequipItem(item map[string]Equipment) {
-	fmt.Println(item)
 	for itemName, equippedItem := range item {
 		switch equippedItem.Type {
 		case "Head":
@@ -296,7 +296,7 @@ func (p *Personnage) UnequipItem(item map[string]Equipment) {
 		case "Armor":
 			if p.Equipement.Armor {
 				deletedItem := itemName
-				delete(p.Armors, deletedItem)
+				delete(p.Armor, deletedItem)
 				p.Equipement.Armor = false
 				// Remove item from EquipementMap
 				delete(p.EquipementMap, deletedItem)
@@ -320,7 +320,7 @@ func (p *Personnage) UnequipItem(item map[string]Equipment) {
 		case "Weapon":
 			if p.Equipement.Weapon {
 				deletedItem := itemName
-				delete(p.Weapons, deletedItem)
+				delete(p.Weapon, deletedItem)
 				p.Equipement.Weapon = false
 				// Remove item from EquipementMap
 				delete(p.EquipementMap, deletedItem)
