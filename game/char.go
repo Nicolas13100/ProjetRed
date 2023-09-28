@@ -241,6 +241,7 @@ RestartLoop:
 				"Peau de Troll":        99,
 				"Cuir de Sanglier":     99,
 				"Plume de Corbeau":     99,
+				"Fil de Spayder":       99,
 				"Epée de l'aventurier": 1,
 				"Arc de l'aventurier":  1,
 				"Failure":              1,

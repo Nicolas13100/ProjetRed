@@ -20,21 +20,21 @@ var (
 		Defense:    0,
 		Initiative: 10,
 		Inventory: map[string]int{
-			"Arc de l'aventurier":          15,
-			"Epée de l'aventurier":         20,
-			"Heaume en cuir":               25,
-			"Plastron en cuir":             35,
-			"Pantalon en cuir":             30,
-			"Rangers":                      18,
+			"Arc de l'aventurier":          1,
+			"Epée de l'aventurier":         2,
+			"Heaume en cuir":               1,
+			"Plastron en cuir":             1,
+			"Pantalon en cuir":             1,
+			"Rangers":                      1,
 			"Augmentation d'inventaire":    3,
 			"Potion de soin":               3,
 			"Potion de poison":             3,
 			"Potion de mana":               3,
 			"Livre de sort : Boule de feu": 1,
-			"Fourrure de Loup":             4,
-			"Peau de Troll":                1,
-			"Cuir de Sanglier":             1,
-			"Plume de Corbeau":             1,
+			"Fourrure de Loup":             10,
+			"Peau de Troll":                10,
+			"Cuir de Sanglier":             10,
+			"Plume de Corbeau":             10,
 		},
 		Prices: map[string]int{
 			"Potion de soin":               3,
@@ -168,6 +168,9 @@ func askYesNo(question string) bool {
 	var choice int
 	fmt.Print(question + " (1.Oui/2.Non): ")
 	fmt.Scan(&choice)
+	if choice != 12 {
+
+	}
 	return choice == 1
 }
 

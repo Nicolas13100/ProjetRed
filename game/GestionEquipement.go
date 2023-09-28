@@ -25,6 +25,10 @@ var (
 		InitiativeBonus: 2,
 		Durability:      30,
 		DurabilityMax:   30,
+		Materials: map[string]int{
+			"Plume de Corbeau": 1,
+			"Cuir de Sanglier": 1,
+		},
 	}
 	Tunique1 = Equipment{
 		Name:            "Tunique de l'aventurier",
@@ -34,6 +38,11 @@ var (
 		InitiativeBonus: 2,
 		Durability:      50,
 		DurabilityMax:   50,
+		Materials: map[string]int{
+			"Peau de Troll":    1,
+			"Cuir de Sanglier": 2,
+			"Fourrure de Loup": 1,
+		},
 	}
 
 	Jambe1 = Equipment{
@@ -45,6 +54,10 @@ var (
 		InitiativeBonus: 2,
 		Durability:      30,
 		DurabilityMax:   30,
+		Materials: map[string]int{
+			"Cuir de Sanglier": 2,
+			"Fourrure de Loup": 1,
+		},
 	}
 
 	Bottes1 = Equipment{
@@ -56,6 +69,10 @@ var (
 		InitiativeBonus: 2,
 		Durability:      30,
 		DurabilityMax:   30,
+		Materials: map[string]int{
+			"Cuir de Sanglier": 1,
+			"Fourrure de Loup": 1,
+		},
 	}
 
 	Epée1 = Equipment{
@@ -64,6 +81,10 @@ var (
 		AtkBonus:      5,
 		Durability:    30,
 		DurabilityMax: 30,
+		Materials: map[string]int{
+			"Acier":            2,
+			"Cuir de Sanglier": 1,
+		},
 	}
 
 	ZoroBlade = Equipment{
@@ -72,6 +93,10 @@ var (
 		AtkBonus:      60,
 		Durability:    90,
 		DurabilityMax: 90,
+		Materials: map[string]int{
+			"Acier renforcé": 1,
+			"Peau de Troll":  2,
+		},
 	}
 	CouronneSphinx = Equipment{
 		Name:            "Couronne du Sphinx",
@@ -91,6 +116,10 @@ var (
 		InitiativeBonus: 2,
 		Durability:      30,
 		DurabilityMax:   30,
+		Materials: map[string]int{
+			"Cuir de Sanglier": 1,
+			"Fil de Spayder":   1,
+		},
 	}
 	Failure = Equipment{
 		Name:            "Failure",
@@ -99,6 +128,10 @@ var (
 		InitiativeBonus: -5,
 		Durability:      200,
 		DurabilityMax:   200,
+		Materials: map[string]int{
+			"Squelette de Rouquin": 1,
+			"Acier renforcé":       2,
+		},
 	}
 	Headtest = Equipment{
 		Name:            "Head Test",
@@ -298,4 +331,25 @@ func (p *Personnage) UnequipItem(item Equipment) {
 
 	// Update inventory if necessary (add item back to inventory)
 	p.Inventory[item.Name]++
+}
+func GetMaterialsFromEquipment(equipment Equipment) map[string]int {
+	return equipment.Materials
+}
+func GetitemFromInventory(P1 Personnage) map[string]int {
+	return P1.Inventory
+}
+func (P1 *Personnage) RemoveItem(itemName string) {
+	if P1.Inventory[itemName] > 1 {
+		P1.Inventory[itemName]--
+	} else {
+		// Si la quantité est de 1, supprimez complètement l'entrée de l'inventaire
+		delete(P1.Inventory, itemName)
+	}
+}
+func (P1 *Personnage) AddItem(itemName string) {
+	if quantity, ok := P1.Inventory[itemName]; ok {
+		P1.Inventory[itemName] = quantity + 1
+	} else {
+		P1.Inventory[itemName] = 1
+	}
 }
