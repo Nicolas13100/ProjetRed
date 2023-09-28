@@ -120,6 +120,10 @@ func Forge(P1 *Personnage, f1 *Forgeron) {
 		fmt.Scan(&choice)
 		switch choice {
 		case 1:
+			P1.RepairAll()
+		case 2:
+			fmt.Println("Cet espace est en renovation")
+			waitForUserInput("Entrer 0 pour continuer")
 		}
 
 	case 0:
