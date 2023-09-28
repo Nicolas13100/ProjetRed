@@ -100,20 +100,7 @@ func (P1 *Personnage) BaseInventory() {
 			fmt.Scan(&input)
 			switch input {
 			case 1:
-				equipableItems := ListEquipableItems(P1.Inventory)
-				fmt.Println("Objets équipables:")
-				for i, item := range equipableItems {
-					fmt.Printf("%d. %s\n", i+1, item.Name)
-				}
-				fmt.Println("Que souhaitez-vous équiper ?")
-				var input int
-				fmt.Scan(&input)
-				if input >= 1 && input <= len(equipableItems) {
-					itemName := equipableItems[input-1].Name
-					P1.EquipItemFromInventory(itemName)
-				} else {
-					fmt.Println("Vous n'avez pas d'équipement sur cet emplacement.")
-				}
+				P1.EquipItemFromInventory()
 			case 2:
 				printEquipmentMap(P1.EquipementMap)
 				waitForUserInput("Entrer 0 retourner en arrière\n")

@@ -4,9 +4,15 @@ import "fmt"
 
 func NewEquipement(P1 *Personnage) *Equipment {
 	return &Equipment{
-		Head: false,
-		Body: false,
-		Leg:  false,
+		Weapon:   false,
+		Head:     false,
+		Armor:    false,
+		Hands:    false,
+		Legs:     false,
+		Boots:    false,
+		Rings1:   false,
+		Ring2:    false,
+		Necklace: false,
 	}
 }
 
@@ -14,36 +20,26 @@ var (
 	Chapeau1 = Equipment{
 		Name:            "Chapeau de l'aventurier",
 		Type:            "Head",
-		Head:            true,
 		HPBonus:         4,
 		DefBonus:        2,
 		InitiativeBonus: 2,
-		Materials: map[string]int{
-			"Cuir de Sanglier": 1,
-			"Plume de Corbeau": 1,
-		},
-		Durability:    30,
-		DurabilityMax: 30,
+		Durability:      30,
+		DurabilityMax:   30,
 	}
 	Tunique1 = Equipment{
 		Name:            "Tunique de l'aventurier",
-		Type:            "Body",
-		Body:            true,
+		Type:            "Armor",
 		HPBonus:         7,
 		DefBonus:        7,
 		InitiativeBonus: 2,
-		Materials: map[string]int{
-			"Fourrure de Loup": 2,
-			"Peau de Troll":    1,
-		},
-		Durability:    50,
-		DurabilityMax: 50,
+		Durability:      50,
+		DurabilityMax:   50,
 	}
 
 	Jambe1 = Equipment{
-		Name:            "Jambiere de l'aventurier",
-		Type:            "Legs",
-		Leg:             true,
+		Name: "Jambiere de l'aventurier",
+		Type: "Legs",
+
 		HPBonus:         5,
 		DefBonus:        2,
 		InitiativeBonus: 2,
@@ -52,9 +48,9 @@ var (
 	}
 
 	Bottes1 = Equipment{
-		Name:            "Bottes de l'aventurier",
-		Type:            "Boots",
-		Leg:             true,
+		Name: "Bottes de l'aventurier",
+		Type: "Boots",
+
 		HPBonus:         5,
 		DefBonus:        2,
 		InitiativeBonus: 2,
@@ -65,27 +61,17 @@ var (
 	Epée1 = Equipment{
 		Name:          "Epée de l'aventurier",
 		Type:          "Weapon",
-		Weapon:        true,
 		AtkBonus:      5,
 		Durability:    30,
 		DurabilityMax: 30,
-		Materials: map[string]int{
-			"Acier":            2,
-			"Cuir de Sanglier": 1,
-		},
 	}
 
 	ZoroBlade = Equipment{
 		Name:          "Wadô Ichimonji",
 		Type:          "Weapon",
-		Weapon:        true,
 		AtkBonus:      60,
 		Durability:    90,
 		DurabilityMax: 90,
-		Materials: map[string]int{
-			"Acier renforcé": 1,
-			"Peau de Troll":  2,
-		},
 	}
 	CouronneSphinx = Equipment{
 		Name:            "Couronne du Sphinx",
@@ -101,147 +87,215 @@ var (
 	Arc1 = Equipment{
 		Name:            "Arc de l'aventurier",
 		Type:            "Weapon",
-		Weapon:          true,
 		AtkBonus:        10,
 		InitiativeBonus: 2,
-		Materials: map[string]int{
-			"Cuir de Sanglier": 2,
-			"Fil de Spayder":   1,
-		},
-		Durability:    30,
-		DurabilityMax: 30,
+		Durability:      30,
+		DurabilityMax:   30,
 	}
 	Failure = Equipment{
 		Name:            "Failure",
 		Type:            "Weapon",
-		Weapon:          true,
 		AtkBonus:        100,
 		InitiativeBonus: -5,
 		Durability:      200,
 		DurabilityMax:   200,
-		Materials: map[string]int{
-			"Squelette de Rouquin": 1,
-			"Acier renforcé":       2,
-		},
 	}
-	Chapeau2 = Equipment{
-		Name:            "Chapeau de l'aventurier",
+	Headtest = Equipment{
+		Name:            "Head Test",
 		Type:            "Head",
-		Head:            true,
 		HPBonus:         4,
 		DefBonus:        2,
 		InitiativeBonus: 2,
-		Durability:      30,
-		DurabilityMax:   30,
-		Materials: map[string]int{
-			"Cuir de Sanglier": 1,
-			"Plume de Corbeau": 1,
-		},
+		Durability:      3,
+		DurabilityMax:   3,
 	}
+	Headtest2 = Equipment{
+		Name:            "Head Test2",
+		Type:            "Head",
+		HPBonus:         4,
+		DefBonus:        2,
+		InitiativeBonus: 2,
+		Durability:      3,
+		DurabilityMax:   3,
+	}
+	Weapontest = Equipment{
+		Name:          "Test",
+		Type:          "Weapon",
+		AtkBonus:      1,
+		Durability:    3,
+		DurabilityMax: 3}
 )
 
-func IsEquipable(itemName string) bool {
-	switch itemName {
-	case "Failure", "Wadô Ichimonji", "Chapeau de l'aventurier", "Tunique de l'aventurier", "Bottes de l'aventurier", "Epée de l'aventurier", "Arc de l'aventurier", "Couronne du Sphinx":
-		return true
-	default:
-		return false
+func (p *Personnage) EquipItem(item Equipment) {
+	switch item.Type {
+	case "Head":
+		if p.Equipement.Head {
+			p.UnequipItem(p.Head[item.Name])
+		}
+		p.Head[item.Name] = item
+		p.Equipement.Head = true
+	case "Armor":
+		if p.Equipement.Armor {
+			p.UnequipItem(p.Armors[item.Name])
+		}
+		p.Armors[item.Name] = item
+		p.Equipement.Armor = true
+	case "Legs":
+		if p.Equipement.Legs {
+			p.UnequipItem(p.Legs[item.Name])
+		}
+		p.Legs[item.Name] = item
+		p.Equipement.Legs = true
+	case "Boots":
+		if p.Equipement.Boots {
+			p.UnequipItem(p.Feets[item.Name])
+		}
+		p.Feets[item.Name] = item
+		p.Equipement.Boots = true
+	case "Weapon":
+		if p.Equipement.Weapon {
+			p.UnequipItem(p.Weapons[item.Name])
+		}
+		p.Weapons[item.Name] = item
+		p.Equipement.Weapon = true
 	}
-}
-func (P1 *Personnage) RemoveItem(itemName string) {
-	if P1.Inventory[itemName] > 1 {
-		P1.Inventory[itemName]--
-	} else {
-		// Si la quantité est de 1, supprimez complètement l'entrée de l'inventaire
-		delete(P1.Inventory, itemName)
-	}
-}
-func (P1 *Personnage) AddItem(itemName string) {
-	if P1.Inventory[itemName] >= 1 {
-		P1.Inventory[itemName]++
-	} else {
 
-		P1.Inventory[itemName] = 1
-	}
-}
-func GetMaterialsFromEquipment(equipment Equipment) map[string]int {
-	return equipment.Materials
-}
-func GetitemFromInventory(P1 Personnage) map[string]int {
-	return P1.Inventory
-}
-func GetEquipmentByName(itemName string) Equipment {
-	switch itemName {
-	case "Chapeau de l'aventurier":
-		return Chapeau1
-	case "Tunique de l'aventurier":
-		return Tunique1
-	case "Bottes de l'aventurier":
-		return Bottes1
-	case "Epée de l'aventurier":
-		return Epée1
-	case "Arc de l'aventurier":
-		return Arc1
-	case "Failure":
-		return Failure
-	case "Wadô Ichimonji":
-		return ZoroBlade
-	default:
-		// Handle the case where the item is not found
-		return Equipment{} // Assuming an empty Equipment struct here
-	}
+	// Update character stats based on the equipped item
+	p.HpMax += item.HPBonus
+	p.Atk += item.AtkBonus
+	p.Defense += item.DefBonus
+	p.Initiative += item.InitiativeBonus
+	// ... add similar lines for other stats
+
+	// Update inventory if necessary (remove item from inventory)
+	delete(p.Inventory, item.Name)
+
+	// Add item to EquipementMap
+	p.EquipementMap[item.Name] = item
 }
 
-func LootType(Monstre1 Monstre) map[string]int {
-	return Monstre1.ItemDrop
-}
+func (p *Personnage) ListEquipableItems() []string {
+	equipableItems := []string{}
 
-func ListEquipableItems(inventory map[string]int) []Equipment {
-	equipableItems := []Equipment{}
-
-	for itemName, quantity := range inventory {
-		if IsEquipable(itemName) {
-			for i := 0; i < quantity; i++ {
-				equipableItems = append(equipableItems, GetEquipmentByName(itemName))
-			}
+	for item := range p.Inventory {
+		switch item {
+		case "Test", "Head Test2", "Head Test", "Failure", "Wadô Ichimonji", "Chapeau de l'aventurier", "Tunique de l'aventurier", "Jambiere de l'aventurier", "Bottes de l'aventurier", "Epée de l'aventurier", "Arc de l'aventurier":
+			equipableItems = append(equipableItems, item)
 		}
 	}
 
 	return equipableItems
 }
 
-func (P1 *Personnage) EquipItemFromInventory(itemName string) {
-	itemToEquip := GetEquipmentByName(itemName)
+func (p *Personnage) GetItemByName(name string) Equipment {
+	switch name {
+	case "Chapeau de l'aventurier":
+		return Chapeau1
+	case "Tunique de l'aventurier":
+		return Tunique1
+	case "Jambiere de l'aventurier":
+		return Jambe1
+	case "Bottes de l'aventurier":
+		return Bottes1
+	case "Epée de l'aventurier":
+		return Epée1
+	case "Wadô Ichimonji":
+		return ZoroBlade
+	case "Arc de l'aventurier":
+		return Arc1
+	case "Failure":
+		return Failure
+	case "Head Test":
+		return Headtest
+	case "Head Test2":
+		return Headtest2
+	case "Test":
+		return Weapontest
+	default:
+		return Equipment{}
+	}
+}
 
-	// Check if the item is equipable
-	if !IsEquipable(itemName) {
-		fmt.Println("Item is not equipable")
+func (p *Personnage) EquipItemFromInventory() {
+	// List equipable items
+	equipableItems := p.ListEquipableItems()
+
+	// Print the list of equipable items
+	for i, item := range equipableItems {
+		fmt.Printf("%d. %s\n", i+1, item)
+	}
+
+	// Prompt user for selection
+	fmt.Print("Enter the number of the item you want to equip: ")
+	var selection int
+	_, err := fmt.Scan(&selection)
+	if err != nil || selection < 1 || selection > len(equipableItems) {
+		fmt.Println("Invalid input. Please try again.")
 		return
 	}
 
-	if existingItem, ok := P1.EquipementMap[itemToEquip.Type]; ok {
+	// Get the selected item
+	selectedItemName := equipableItems[selection-1]
+	selectedItem := p.GetItemByName(selectedItemName)
 
-		P1.Inventory[existingItem.Name]++
+	// Equip the selected item
+	p.EquipItem(selectedItem)
 
-		P1.Hp -= existingItem.HPBonus
-		P1.Atk -= existingItem.AtkBonus
-		P1.Defense -= existingItem.DefBonus
-		P1.Initiative -= existingItem.InitiativeBonus
+	fmt.Printf("%s equipped!\n", selectedItemName)
+}
+
+func (p *Personnage) UnequipItem(item Equipment) {
+	fmt.Println(item)
+	switch item.Type {
+	case "Head":
+		if p.Equipement.Head {
+			deletedItem := p.Head[item.Name]
+			delete(p.Head, item.Name)
+			p.Equipement.Head = false
+			// Remove item from EquipementMap
+			delete(p.EquipementMap, deletedItem.Name)
+		}
+	case "Armor":
+		if p.Equipement.Armor {
+			deletedItem := p.Armors[item.Name]
+			delete(p.Armors, item.Name)
+			p.Equipement.Armor = false
+			// Remove item from EquipementMap
+			delete(p.EquipementMap, deletedItem.Name)
+		}
+	case "Legs":
+		if p.Equipement.Legs {
+			deletedItem := p.Legs[item.Name]
+			delete(p.Legs, item.Name)
+			p.Equipement.Legs = false
+			// Remove item from EquipementMap
+			delete(p.EquipementMap, deletedItem.Name)
+		}
+	case "Boots":
+		if p.Equipement.Boots {
+			deletedItem := p.Feets[item.Name]
+			delete(p.Feets, item.Name)
+			p.Equipement.Boots = false
+			// Remove item from EquipementMap
+			delete(p.EquipementMap, deletedItem.Name)
+		}
+	case "Weapon":
+		if p.Equipement.Weapon {
+			deletedItem := p.Weapons[item.Name]
+			delete(p.Weapons, item.Name)
+			p.Equipement.Weapon = false
+			// Remove item from EquipementMap
+			delete(p.EquipementMap, deletedItem.Name)
+		}
 	}
 
-	// Equip the new item
-	P1.EquipementMap[itemToEquip.Type] = itemToEquip
+	// Update character stats based on the unequipped item
+	p.HpMax -= item.HPBonus
+	p.Atk -= item.AtkBonus
+	p.Defense -= item.DefBonus
+	p.Initiative -= item.InitiativeBonus
+	// ... add similar lines for other stats
 
-	// Update stats based on the equipped item
-	P1.Hp += itemToEquip.HPBonus
-	P1.Atk += itemToEquip.AtkBonus
-	P1.Defense += itemToEquip.DefBonus
-	P1.Initiative += itemToEquip.InitiativeBonus
-
-	// Remove the item from inventory
-	if P1.Inventory[itemName] > 0 {
-		P1.Inventory[itemName]--
-	} else {
-		fmt.Println("Item not found in inventory")
-	}
+	// Update inventory if necessary (add item back to inventory)
+	p.Inventory[item.Name]++
 }

@@ -11,9 +11,15 @@ import (
 
 func CharCreation() Personnage {
 	equipement := Equipment{
+		Weapon:          false,
 		Head:            false,
-		Body:            false,
-		Leg:             false,
+		Armor:           false,
+		Hands:           false,
+		Legs:            false,
+		Boots:           false,
+		Rings1:          false,
+		Ring2:           false,
+		Necklace:        false,
 		HPBonus:         0,
 		AtkBonus:        0,
 		DefBonus:        0,
@@ -97,19 +103,19 @@ RestartLoop:
 	switch Race {
 	case "Humain":
 		P1 := Personnage{
-			Name:          Name,
-			Race:          Race,
-			Equipement:    equipement,
-			EquipementMap: map[string]Equipment{},
-
-			Level:        1,
-			Xp:           0,
-			XpMax:        100,
-			HpMax:        100,
-			Hp:           50,
-			Gold:         100,
-			InventoryCap: 10,
-			Spells:       []Spell{CoupdePoing},
+			Name:                   Name,
+			Race:                   Race,
+			Equipement:             equipement,
+			EquipementMap:          map[string]Equipment{},
+			EquipementDurabilities: map[string]int{},
+			Level:                  1,
+			Xp:                     0,
+			XpMax:                  100,
+			HpMax:                  100,
+			Hp:                     50,
+			Gold:                   100,
+			InventoryCap:           10,
+			Spells:                 []Spell{CoupdePoing},
 			Inventory: map[string]int{
 				"Potion de soin":   3,
 				"Potion de poison": 3,
@@ -124,24 +130,33 @@ RestartLoop:
 			Initiative:    10,
 			x:             rand.Intn(gridSize),
 			y:             rand.Intn(gridSize),
+			Weapons:       map[string]Equipment{},
+			Head:          map[string]Equipment{},
+			Armors:        map[string]Equipment{},
+			Hands:         map[string]Equipment{},
+			Legs:          map[string]Equipment{},
+			Feets:         map[string]Equipment{},
+			Rings1:        map[string]Equipment{},
+			Rings2:        map[string]Equipment{},
+			Necklace:      map[string]Equipment{},
 		}
 		return P1
 
 	case "Elfe":
 		P1 := Personnage{
-			Name:          Name,
-			Race:          Race,
-			Equipement:    equipement,
-			EquipementMap: map[string]Equipment{},
-
-			Level:        1,
-			Xp:           0,
-			XpMax:        100,
-			HpMax:        80,
-			Hp:           40,
-			Gold:         100,
-			InventoryCap: 10,
-			Spells:       []Spell{CoupdePoing},
+			Name:                   Name,
+			Race:                   Race,
+			Equipement:             equipement,
+			EquipementMap:          map[string]Equipment{},
+			EquipementDurabilities: map[string]int{},
+			Level:                  1,
+			Xp:                     0,
+			XpMax:                  100,
+			HpMax:                  80,
+			Hp:                     40,
+			Gold:                   100,
+			InventoryCap:           10,
+			Spells:                 []Spell{CoupdePoing},
 			Inventory: map[string]int{
 				"Potion de soin":   3,
 				"Potion de poison": 3,
@@ -154,24 +169,33 @@ RestartLoop:
 			Initiative: 20,
 			x:          rand.Intn(gridSize),
 			y:          rand.Intn(gridSize),
+			Weapons:    map[string]Equipment{},
+			Head:       map[string]Equipment{},
+			Armors:     map[string]Equipment{},
+			Hands:      map[string]Equipment{},
+			Legs:       map[string]Equipment{},
+			Feets:      map[string]Equipment{},
+			Rings1:     map[string]Equipment{},
+			Rings2:     map[string]Equipment{},
+			Necklace:   map[string]Equipment{},
 		}
 		return P1
 
 	case "Nain":
 		P1 := Personnage{
-			Name:          Name,
-			Race:          Race,
-			Equipement:    equipement,
-			EquipementMap: map[string]Equipment{},
-
-			Level:        1,
-			Xp:           0,
-			XpMax:        100,
-			HpMax:        120,
-			Hp:           60,
-			Gold:         100,
-			InventoryCap: 10,
-			Spells:       []Spell{CoupdePoing},
+			Name:                   Name,
+			Race:                   Race,
+			Equipement:             equipement,
+			EquipementMap:          map[string]Equipment{},
+			EquipementDurabilities: map[string]int{},
+			Level:                  1,
+			Xp:                     0,
+			XpMax:                  100,
+			HpMax:                  120,
+			Hp:                     60,
+			Gold:                   100,
+			InventoryCap:           10,
+			Spells:                 []Spell{CoupdePoing},
 			Inventory: map[string]int{
 				"Potion de soin":   3,
 				"Potion de poison": 3,
@@ -184,22 +208,31 @@ RestartLoop:
 			Initiative: 5,
 			x:          rand.Intn(gridSize),
 			y:          rand.Intn(gridSize),
+			Weapons:    map[string]Equipment{},
+			Head:       map[string]Equipment{},
+			Armors:     map[string]Equipment{},
+			Hands:      map[string]Equipment{},
+			Legs:       map[string]Equipment{},
+			Feets:      map[string]Equipment{},
+			Rings1:     map[string]Equipment{},
+			Rings2:     map[string]Equipment{},
+			Necklace:   map[string]Equipment{},
 		}
 		return P1
 
 	case "Mentor":
 		P1 := Personnage{
-			Name:          Name,
-			Race:          Race,
-			Equipement:    equipement,
-			EquipementMap: map[string]Equipment{},
-
-			Level:        99,
-			HpMax:        999999,
-			Hp:           999999,
-			Gold:         9999999,
-			InventoryCap: 99999999,
-			Spells:       []Spell{CoupdePoing, fireball, iceBlast},
+			Name:                   Name,
+			Race:                   Race,
+			Equipement:             equipement,
+			EquipementMap:          map[string]Equipment{},
+			EquipementDurabilities: map[string]int{},
+			Level:                  99,
+			HpMax:                  999999,
+			Hp:                     999999,
+			Gold:                   9999999,
+			InventoryCap:           99999999,
+			Spells:                 []Spell{CoupdePoing, fireball, iceBlast},
 			Inventory: map[string]int{
 				"Potion de soin":       99,
 				"Potion de poison":     99,
@@ -212,6 +245,9 @@ RestartLoop:
 				"Arc de l'aventurier":  1,
 				"Failure":              1,
 				"Wadô Ichimonji":       1,
+				"Head Test":            1,
+				"Test":                 1,
+				"Head Test2":           1,
 			},
 			Mana:       999,
 			ManaMax:    999,
@@ -220,6 +256,15 @@ RestartLoop:
 			Initiative: 999,
 			x:          rand.Intn(gridSize),
 			y:          rand.Intn(gridSize),
+			Weapons:    map[string]Equipment{},
+			Head:       map[string]Equipment{},
+			Armors:     map[string]Equipment{},
+			Hands:      map[string]Equipment{},
+			Legs:       map[string]Equipment{},
+			Feets:      map[string]Equipment{},
+			Rings1:     map[string]Equipment{},
+			Rings2:     map[string]Equipment{},
+			Necklace:   map[string]Equipment{},
 		}
 		return P1
 
@@ -235,9 +280,9 @@ func (P1 Personnage) DisplayInfo() {
 
 	for {
 		ClearConsole()
-		text1 := "\nNom : %s\nRace : %s\nNiveau : %d\nPoints de d'XP actuels : %d\nPoints de d'XP avant le prochain niveau : %d\n\nPoints de vie actuels : %d\nPoints de vie maximum : %d\n ATK : %d\n DEF : %d\nCash : %d\n"
+		text1 := "\nNom : %s\nRace : %s\nNiveau : %d\nPoints de d'XP actuels : %d\nPoints de d'XP avant le prochain niveau : %d\n\nPoints de vie actuels : %d\nPoints de vie maximum : %d\n ATK : %d\n DEF : %d\nInitiative : %d\nCash : %d\n"
 		centeredText1 := CenterText(text1)
-		fmt.Printf(centeredText1, P1.Name, P1.Race, P1.Level, P1.Xp, P1.XpMax, P1.Hp+P1.Equipement.HPBonus, P1.HpMax+P1.Equipement.HPBonus, P1.Atk+P1.Equipement.AtkBonus, P1.Defense+P1.Equipement.DefBonus, P1.Gold)
+		fmt.Printf(centeredText1, P1.Name, P1.Race, P1.Level, P1.Xp, P1.XpMax, P1.Hp+P1.Equipement.HPBonus, P1.HpMax+P1.Equipement.HPBonus, P1.Atk+P1.Equipement.AtkBonus, P1.Defense+P1.Equipement.DefBonus, P1.Initiative+P1.Equipement.InitiativeBonus, P1.Gold)
 
 		text11 := "\nSorts:"
 		centeredText11 := CenterText(text11)
@@ -251,10 +296,10 @@ func (P1 Personnage) DisplayInfo() {
 		text21 := "\nEquipements:"
 		centeredText21 := CenterText(text21)
 		fmt.Println(centeredText21)
-		text22 := "\n%s:\n Type: %s\n ATK: %d\n DEF: %d\n HP: %d\n Initiative: %d\n"
+		text22 := "\n%s:\n Type: %s\n ATK: %d\n DEF: %d\n HP: %d\n Initiative: %d\n Durability %d / %d \n"
 		centeredText22 := CenterText(text22)
 		for _, value := range P1.EquipementMap {
-			fmt.Printf(centeredText22, value.Name, value.Type, value.AtkBonus, value.DefBonus, value.HPBonus, value.InitiativeBonus)
+			fmt.Printf(centeredText22, value.Name, value.Type, value.AtkBonus, value.DefBonus, value.HPBonus, value.InitiativeBonus, value.Durability, value.DurabilityMax)
 		}
 
 		text := "\nType 0 to come back to main menu"

@@ -1,27 +1,37 @@
 package game
 
 type Personnage struct {
-	Name          string
-	Race          string
-	Equipement    Equipment
-	EquipementMap map[string]Equipment
-	Level         int
-	Xp            int
-	XpMax         int
-	HpMax         int
-	Hp            int
-	Inventory     map[string]int
-	InventoryUsed bool
-	AtkUsed       bool
-	Spells        []Spell
-	Gold          int
-	InventoryCap  int
-	Mana          int
-	ManaMax       int
-	Atk           int
-	Defense       int
-	Initiative    int
-	x, y          int
+	Name                   string
+	Race                   string
+	Equipement             Equipment
+	EquipementMap          map[string]Equipment
+	EquipementDurabilities map[string]int
+	Level                  int
+	Xp                     int
+	XpMax                  int
+	HpMax                  int
+	Hp                     int
+	Inventory              map[string]int
+	InventoryUsed          bool
+	AtkUsed                bool
+	Spells                 []Spell
+	Gold                   int
+	InventoryCap           int
+	Mana                   int
+	ManaMax                int
+	Atk                    int
+	Defense                int
+	Initiative             int
+	x, y                   int
+	Weapons                map[string]Equipment
+	Head                   map[string]Equipment
+	Armors                 map[string]Equipment
+	Hands                  map[string]Equipment
+	Legs                   map[string]Equipment
+	Feets                  map[string]Equipment
+	Rings1                 map[string]Equipment
+	Rings2                 map[string]Equipment
+	Necklace               map[string]Equipment
 }
 
 type Equipment struct {
@@ -29,9 +39,10 @@ type Equipment struct {
 	Type            string
 	Materials       map[string]int
 	Head            bool
-	Body            bool
+	Armor           bool
+	Hands           bool
 	Belt            bool
-	Leg             bool
+	Legs            bool
 	Boots           bool
 	Rings1          bool
 	Ring2           bool
@@ -43,6 +54,97 @@ type Equipment struct {
 	InitiativeBonus int
 	Durability      int
 	DurabilityMax   int
+}
+
+type Weapon struct {
+	Name            string
+	Type            string
+	DefBonus        int
+	Durability      int
+	DurabilityMax   int
+	HPBonus         int
+	InitiativeBonus int
+	AtkBonus        int
+}
+
+type Head struct {
+	Name            string
+	Type            string
+	DefBonus        int
+	Durability      int
+	DurabilityMax   int
+	HPBonus         int
+	InitiativeBonus int
+}
+type Armor struct {
+	Name            string
+	Type            string
+	DefBonus        int
+	Durability      int
+	DurabilityMax   int
+	HPBonus         int
+	InitiativeBonus int
+}
+type Hands struct {
+	Name            string
+	Type            string
+	DefBonus        int
+	Durability      int
+	DurabilityMax   int
+	HPBonus         int
+	InitiativeBonus int
+}
+type Legs struct {
+	Name            string
+	Type            string
+	DefBonus        int
+	Durability      int
+	DurabilityMax   int
+	HPBonus         int
+	InitiativeBonus int
+}
+type Feets struct {
+	Name            string
+	Type            string
+	DefBonus        int
+	Durability      int
+	DurabilityMax   int
+	HPBonus         int
+	InitiativeBonus int
+}
+type Rings1 struct {
+	Name            string
+	Type            string
+	DefBonus        int
+	Durability      int
+	DurabilityMax   int
+	HPBonus         int
+	InitiativeBonus int
+}
+type Rings2 struct {
+	Name            string
+	Type            string
+	DefBonus        int
+	Durability      int
+	DurabilityMax   int
+	HPBonus         int
+	InitiativeBonus int
+}
+type Necklace struct {
+	Name            string
+	Type            string
+	DefBonus        int
+	Durability      int
+	DurabilityMax   int
+	HPBonus         int
+	InitiativeBonus int
+}
+type Shield struct {
+	Name          string
+	Type          string
+	DefBonus      int
+	Durability    int
+	DurabilityMax int
 }
 
 type Marchand struct {

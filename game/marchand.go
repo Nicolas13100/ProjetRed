@@ -171,6 +171,21 @@ func askYesNo(question string) bool {
 	return choice == 1
 }
 
+func CalculerMontantTotal(items []string, quantite int, prices map[string]int) int {
+	montantTotal := 0
+
+	for _, itemName := range items {
+		price, existe := prices[itemName]
+		if !existe {
+			fmt.Printf("Le prix de l'objet %s n'est pas défini.\n", itemName)
+			continue
+		}
+
+		montantTotal += price * quantite
+	}
+
+	return montantTotal
+}
 func inventorySlice(inventory map[string]int) []string {
 	// Créez une tranche (slice) des objets de l'inventaire
 	var items []string
