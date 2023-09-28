@@ -138,8 +138,12 @@ func newJar() *Jar {
 	case Loot:
 		jar.HasLoot = true
 		jar.Contenu = []Item{
-			{Name: "Fourrure de Loup", Quantity: 1},
+			{Name: "Fourrure de Loup", Quantity: 2},
+			{Name: "Cuir de Sanglier", Quantity: 2},
+			{Name: "Peau de Troll", Quantity: 1},
 			{Name: "Epée de l'aventurier", Quantity: 1},
+			{Name: "Arc de l'aventurier", Quantity: 2},
+			{Name: "Acier", Quantity: 1},
 		}
 	case Monster:
 		jar.HasMonster = true

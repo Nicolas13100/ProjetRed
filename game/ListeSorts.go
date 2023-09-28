@@ -6,11 +6,23 @@ var (
 	CoupdePoing = Spell{
 		Name:     "Coup de Poing",
 		Type:     "Physic",
-		Damage:   5,
+		Damage:   6,
+		ManaCost: 0,
+	}
+	Shikai = Spell{
+		Name:     "Coup d'épée",
+		Type:     "Physic",
+		Damage:   10,
+		ManaCost: 2,
+	}
+	Pistol = Spell{
+		Name:     "Coup de Poing",
+		Type:     "Physic",
+		Damage:   6,
 		ManaCost: 0,
 	}
 
-	fireball = Spell{
+	Fireball = Spell{
 		Name:     "Fireball",
 		Type:     "Fire",
 		Damage:   20,

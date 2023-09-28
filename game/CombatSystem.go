@@ -10,20 +10,23 @@ var PlayerTurnTaken = false
 func Tutorial(p *Personnage) {
 	ClearConsole()
 	fmt.Println("Bienvenue dans le tutoriel")
-	fmt.Println("Nous allons vous apprendre les bases du combat en tour par tour")
-	fmt.Println("Vous allez vous battre contre un goblin d'entrainement")
+	fmt.Println("Nous allons vous apprendre les bases du combat en tour par tour.")
+	fmt.Println("Vous allez vous battre contre un goblin d'entrainement.")
 	fmt.Println("Bonne chance")
 	fmt.Println("-----------------------------------------------------------------------------")
 
 	goblin := Monstre{
 		Name:       "Goblin d'entrainement",
 		HpMax:      30,
-		Hp:         30,
+		Hp:         20,
 		ManaMax:    10,
 		Mana:       10,
 		Atk:        8,
 		Defense:    2,
 		Initiative: 12,
+	}
+	if P1.Hp >= 10 {
+		fmt.Println("Vous n'avez plus beaucoup de vie, prenez une potion de soin dans votre inventaire.")
 	}
 	Fight(p, &goblin)
 }
@@ -134,7 +137,7 @@ func charTurn(p *Personnage, Monstre1 *Monstre) {
 	fmt.Printf("Il reste %d Pv / %d Pv à l'ennemi \n", Monstre1.Hp, Monstre1.HpMax)
 	fmt.Printf("Il reste %d de mana restant / %d mana à l'ennemi \n", Monstre1.Mana, Monstre1.ManaMax)
 
-	fmt.Println("C'est votre tour, que voulez vous faire ?")
+	fmt.Println("C'est votre tour, que voulez-vous faire ?")
 	fmt.Println("1 : Attaquer")
 	fmt.Println("2 : Ouvrir l'inventaire")
 	fmt.Println("3 : Utiliser un sort")
@@ -149,7 +152,7 @@ func charTurn(p *Personnage, Monstre1 *Monstre) {
 			attaqueJoueur = 0
 		}
 
-		fmt.Printf("Vous avez infligé %d point de dégats\n", attaqueJoueur)
+		fmt.Printf("Vous avez infligé %d points de dégats\n", attaqueJoueur)
 		Monstre1.Hp -= attaqueJoueur
 		PlayerTurnTaken = true
 	case 2:
@@ -158,7 +161,7 @@ func charTurn(p *Personnage, Monstre1 *Monstre) {
 	case 3:
 		fmt.Println("Sélectionnez un sort :")
 		for i, spell := range p.Spells {
-			fmt.Printf("%d. %s (Type: %s, Dommages: %d, Coût en Mana: %d)\n", i+1, spell.Name, spell.Type, spell.Damage, spell.ManaCost)
+			fmt.Printf("%d. %s (Type: %s, Dégâts: %d, Coût en Mana: %d)\n", i+1, spell.Name, spell.Type, spell.Damage, spell.ManaCost)
 
 		}
 		var selectedSpellIndex int

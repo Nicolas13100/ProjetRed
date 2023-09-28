@@ -29,7 +29,7 @@ func CharCreation() Personnage {
 	var Race string
 	for {
 		ClearConsole()
-		text := "Création de votre personnage :\n Seulement des lettres de l'alphabet latin sont accepté, 10 lettres maximum\nEntrez votre nom : \n"
+		text := "Création de votre personnage :\n Seuls les lettres de l'alphabet latin sont acceptées, 10 lettres maximum\nEntrez votre nom : \n"
 		centeredText := CenterText(text)
 		fmt.Println(centeredText)
 		fmt.Scan(&Name)
@@ -74,7 +74,7 @@ RestartLoop:
 	for {
 		ClearConsole()
 		// Demander à l'utilisateur de choisir sa race (vous pouvez adapter cette partie selon vos besoins)
-		text := "Choisissez votre race : \nHumain : Vous commencez avec 100 PV Max, initiative moyenne\n Elfe : Vous commencez avec 80 PV Max, initiative elevé\nNain : Vous commencez avec 120 PV Max, initiative basse\n"
+		text := "Choisissez votre race : \nLuffy : Vous commencez avec 100 PV Max, initiative moyenne\n Naruto : Vous commencez avec 80 PV Max, initiative elevé\nIchigo : Vous commencez avec 120 PV Max, initiative basse\n"
 		centeredText := CenterText(text)
 		fmt.Println(centeredText)
 		fmt.Scan(&Race)
@@ -101,7 +101,7 @@ RestartLoop:
 
 	}
 	switch Race {
-	case "Humain":
+	case "Luffy":
 		P1 := Personnage{
 			Name:                   Name,
 			Race:                   Race,
@@ -114,7 +114,7 @@ RestartLoop:
 			HpMax:                  100,
 			Hp:                     50,
 			Gold:                   100,
-			InventoryCap:           10,
+			InventoryCap:           12,
 			Spells:                 []Spell{CoupdePoing},
 			Inventory: map[string]int{
 				"Potion de soin":   3,
@@ -125,9 +125,9 @@ RestartLoop:
 			AtkUsed:          false,
 			Mana:             40,
 			ManaMax:          100,
-			Atk:              5,
-			Defense:          0,
-			Initiative:       10,
+			Atk:              8,
+			Defense:          2,
+			Initiative:       12,
 			x:                rand.Intn(gridSize),
 			y:                rand.Intn(gridSize),
 			Weapon:           map[string]Equipment{},
@@ -151,7 +151,7 @@ RestartLoop:
 		}
 		return P1
 
-	case "Elfe":
+	case "Naruto":
 		P1 := Personnage{
 			Name:                   Name,
 			Race:                   Race,
@@ -171,9 +171,9 @@ RestartLoop:
 				"Potion de poison": 3,
 				"Potion de mana":   3,
 			},
-			Mana:             50,
+			Mana:             60,
 			ManaMax:          100,
-			Atk:              5,
+			Atk:              6,
 			Defense:          0,
 			Initiative:       20,
 			x:                rand.Intn(gridSize),
@@ -199,7 +199,7 @@ RestartLoop:
 		}
 		return P1
 
-	case "Nain":
+	case "Ichigo":
 		P1 := Personnage{
 			Name:                   Name,
 			Race:                   Race,
@@ -213,15 +213,15 @@ RestartLoop:
 			Hp:                     60,
 			Gold:                   100,
 			InventoryCap:           10,
-			Spells:                 []Spell{CoupdePoing},
+			Spells:                 []Spell{Shikai},
 			Inventory: map[string]int{
 				"Potion de soin":   3,
 				"Potion de poison": 3,
 				"Potion de mana":   3,
 			},
-			Mana:             40,
-			ManaMax:          90,
-			Atk:              5,
+			Mana:             50,
+			ManaMax:          120,
+			Atk:              7,
 			Defense:          0,
 			Initiative:       5,
 			x:                rand.Intn(gridSize),
@@ -259,7 +259,7 @@ RestartLoop:
 			Hp:                     999999,
 			Gold:                   9999999,
 			InventoryCap:           99999999,
-			Spells:                 []Spell{CoupdePoing, fireball, iceBlast},
+			Spells:                 []Spell{CoupdePoing, Pistol, Shikai, Fireball, iceBlast},
 			Inventory: map[string]int{
 				"Potion de soin":       99,
 				"Potion de poison":     99,
@@ -317,14 +317,14 @@ func (P1 Personnage) DisplayInfo() {
 
 	for {
 		ClearConsole()
-		text1 := "\nNom : %s\nRace : %s\nNiveau : %d\nPoints de d'XP actuels : %d\nPoints de d'XP avant le prochain niveau : %d\n\nPoints de vie actuels : %d\nPoints de vie maximum : %d\n ATK : %d\n DEF : %d\nInitiative : %d\nCash : %d\n"
+		text1 := "\nNom : %s\nRace : %s\nNiveau : %d\nPoints de d'XP actuels : %d\nPoints de d'XP avant le prochain niveau : %d\n\nPoints de vie actuels : %d\nPoints de vie maximum : %d\n Attaque : %d\n Défense : %d\nInitiative : %d\nCash : %d\n"
 		centeredText1 := CenterText(text1)
 		fmt.Printf(centeredText1, P1.Name, P1.Race, P1.Level, P1.Xp, P1.XpMax, P1.Hp+P1.Equipement.HPBonus, P1.HpMax+P1.Equipement.HPBonus, P1.Atk+P1.Equipement.AtkBonus, P1.Defense+P1.Equipement.DefBonus, P1.Initiative+P1.Equipement.InitiativeBonus, P1.Gold)
 
 		text11 := "\nSorts:"
 		centeredText11 := CenterText(text11)
 		fmt.Println(centeredText11)
-		text12 := "\n%d.Spell Name : %s\nType :   %s\nDamage :  %d\nMana Cost : %d\n"
+		text12 := "\n%d.Nom du sort : %s\nType :   %s\n Dégâts :  %d\n Coût en mana : %d\n"
 		centeredText12 := CenterText(text12)
 		for i, spell := range P1.Spells {
 			fmt.Printf(centeredText12, i+1, spell.Name, spell.Type, spell.Damage, spell.ManaCost)
@@ -333,7 +333,7 @@ func (P1 Personnage) DisplayInfo() {
 		text21 := "\nEquipements:"
 		centeredText21 := CenterText(text21)
 		fmt.Println(centeredText21)
-		text22 := "Weapon:\n%s:\n Type: %s\n ATK: %d\n DEF: %d\n HP: %d\n Initiative: %d\n Durability %d / %d \n"
+		text22 := "Arme :\n%s:\n Type: %s\n Attaque: %d\n Défense: %d\n HP: %d\n Initiative: %d\n Durabilité %d / %d \n"
 		centeredText22 := CenterText(text22)
 		for _, value := range P1.Weapon {
 			fmt.Printf(centeredText22, value.Name, value.Type, value.AtkBonus, value.DefBonus, value.HPBonus, value.InitiativeBonus, value.Durability, value.DurabilityMax)
@@ -353,7 +353,7 @@ func (P1 Personnage) DisplayInfo() {
 
 func (p1 *Personnage) Dead() {
 	if p1.Hp <= 0 {
-		text := "Vous avez perdu connaissance !\nVous vous retrouve face a une ombre, impossible de savoir de quoi il s'agit\nL'ombre vous propose un marché, 5% de vos pièce d'Or en enchange de votre resurection en pleine santé.\n"
+		text := "Vous avez perdu connaissance !\nVous vous retrouve face à une ombre, impossible de savoir de quoi il s'agit\nL'ombre vous propose un marché, 5% de vos pièces d'or en échange de votre résurrection à pleine santé.\n"
 		centeredText := CenterText(text)
 		fmt.Println(centeredText)
 		if askYesNo("Acceptez-vous ?") && p1.Gold > 0 {
@@ -361,12 +361,12 @@ func (p1 *Personnage) Dead() {
 			p1.Mana = p1.ManaMax
 			p1.Gold -= p1.Gold * 5 / 100
 			fmt.Printf("Vous avez été ressuscité avec %d PV et %d Mana\n", p1.Hp, p1.Mana)
-			fmt.Printf("Vous avez été ressuscité avec %d pièce d'Or\n", p1.Gold)
+			fmt.Printf("Vous avez été ressuscité avec %d pièces d'or\n", p1.Gold)
 			waitForUserInput("Entrer 0 pour continuer ...")
 		} else if askYesNo("Acceptez-vous ?") && p1.Gold < 0 {
 			p1.Hp = p1.HpMax / 2
 			p1.Mana = p1.ManaMax / 2
-			fmt.Printf("Vous n'aviez pas de pièce d'Or")
+			fmt.Printf("Vous n'aviez pas de pièces d'or")
 			fmt.Printf("Vous avez été ressuscité avec %d PV et %d Mana\n", p1.Hp, p1.Mana)
 			waitForUserInput("Entrer 0 pour continuer ...")
 		} else {

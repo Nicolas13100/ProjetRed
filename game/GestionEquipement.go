@@ -20,9 +20,9 @@ var (
 	Chapeau1 = Equipment{
 		Name:            "Chapeau de l'aventurier",
 		Type:            "Head",
-		HPBonus:         4,
-		DefBonus:        2,
-		InitiativeBonus: 2,
+		HPBonus:         5,
+		DefBonus:        3,
+		InitiativeBonus: 3,
 		Durability:      30,
 		DurabilityMax:   30,
 		Materials: map[string]int{
@@ -36,8 +36,8 @@ var (
 		HPBonus:         7,
 		DefBonus:        7,
 		InitiativeBonus: 2,
-		Durability:      50,
-		DurabilityMax:   50,
+		Durability:      30,
+		DurabilityMax:   30,
 		Materials: map[string]int{
 			"Peau de Troll":    1,
 			"Cuir de Sanglier": 2,
@@ -49,9 +49,9 @@ var (
 		Name: "Jambiere de l'aventurier",
 		Type: "Legs",
 
-		HPBonus:         5,
-		DefBonus:        2,
-		InitiativeBonus: 2,
+		HPBonus:         6,
+		DefBonus:        4,
+		InitiativeBonus: 3,
 		Durability:      30,
 		DurabilityMax:   30,
 		Materials: map[string]int{
@@ -64,14 +64,131 @@ var (
 		Name: "Bottes de l'aventurier",
 		Type: "Boots",
 
-		HPBonus:         5,
+		HPBonus:         4,
 		DefBonus:        2,
-		InitiativeBonus: 2,
+		InitiativeBonus: 3,
 		Durability:      30,
 		DurabilityMax:   30,
 		Materials: map[string]int{
 			"Cuir de Sanglier": 1,
 			"Fourrure de Loup": 1,
+		},
+	}
+	HeaumeCuir = Equipment{
+		Name:            "Heaume en cuir",
+		Type:            "Head",
+		HPBonus:         10,
+		DefBonus:        6,
+		InitiativeBonus: 6,
+		Durability:      50,
+		DurabilityMax:   50,
+		Materials: map[string]int{
+			"Cuir de Sanglier": 5,
+			"Fourrure de Loup": 2,
+			"Peau de Troll":    1,
+		},
+	}
+	PlastronCuir = Equipment{
+		Name:            "Plastron en cuir",
+		Type:            "Armor",
+		HPBonus:         15,
+		DefBonus:        15,
+		InitiativeBonus: 4,
+		Durability:      50,
+		DurabilityMax:   50,
+		Materials: map[string]int{
+			"Cuir de Sanglier": 6,
+			"Fourrure de Loup": 3,
+			"Peau de Troll":    2,
+		},
+	}
+	PantalonCuir = Equipment{
+		Name: "Pantalon en cuir",
+		Type: "Legs",
+
+		HPBonus:         12,
+		DefBonus:        8,
+		InitiativeBonus: 5,
+		Durability:      50,
+		DurabilityMax:   50,
+		Materials: map[string]int{
+			"Cuir de Sanglier": 5,
+			"Fourrure de Loup": 2,
+			"Peau de Troll":    1,
+		},
+	}
+	BottesCuir = Equipment{
+		Name: "Bottes en cuir",
+		Type: "Boots",
+
+		HPBonus:         8,
+		DefBonus:        5,
+		InitiativeBonus: 6,
+		Durability:      50,
+		DurabilityMax:   50,
+		Materials: map[string]int{
+			"Cuir de Sanglier": 3,
+			"Fourrure de Loup": 1,
+		},
+	}
+	HeaumeMetal = Equipment{
+		Name:            "Heaume en métal",
+		Type:            "Head",
+		HPBonus:         20,
+		DefBonus:        12,
+		InitiativeBonus: 9,
+		Durability:      100,
+		DurabilityMax:   100,
+		Materials: map[string]int{
+
+			"Fourrure de Loup": 2,
+			"Peau de Troll":    1,
+			"Acier":            5,
+		},
+	}
+	PlastronMetal = Equipment{
+		Name:            "Plastron en métal",
+		Type:            "Armor",
+		HPBonus:         30,
+		DefBonus:        30,
+		InitiativeBonus: 5,
+		Durability:      100,
+		DurabilityMax:   100,
+		Materials: map[string]int{
+			"Cuir de Sanglier": 2,
+			"Fourrure de Loup": 3,
+			"Peau de Troll":    2,
+			"Acier":            8,
+		},
+	}
+	PantalonMetal = Equipment{
+		Name: "Pantalon en métal",
+		Type: "Legs",
+
+		HPBonus:         25,
+		DefBonus:        16,
+		InitiativeBonus: 6,
+		Durability:      100,
+		DurabilityMax:   100,
+		Materials: map[string]int{
+			"Cuir de Sanglier": 1,
+			"Fourrure de Loup": 2,
+			"Peau de Troll":    1,
+			"Acier":            6,
+		},
+	}
+	BottesMetal = Equipment{
+		Name: "Bottes en métal",
+		Type: "Boots",
+
+		HPBonus:         16,
+		DefBonus:        10,
+		InitiativeBonus: 7,
+		Durability:      100,
+		DurabilityMax:   100,
+		Materials: map[string]int{
+			"Fourrure de Loup": 1,
+			"Acier":            4,
 		},
 	}
 
@@ -86,25 +203,64 @@ var (
 			"Cuir de Sanglier": 1,
 		},
 	}
+	Katana = Equipment{
+		Name:          "Katana",
+		Type:          "Weapon",
+		AtkBonus:      10,
+		Durability:    50,
+		DurabilityMax: 50,
+		Materials: map[string]int{
+			"Acier":            4,
+			"Cuir de Sanglier": 2,
+			"Peau de Troll":    1,
+		},
+	}
+	Epéerenforcé = Equipment{
+		Name:          "Epée renforcé",
+		Type:          "Weapon",
+		AtkBonus:      20,
+		Durability:    100,
+		DurabilityMax: 100,
+		Materials: map[string]int{
+			"Acier renforcé":   2,
+			"Cuir de Sanglier": 2,
+			"Peau de Troll":    1,
+		},
+	}
+
+	KatanaSup = Equipment{
+		Name:          "Katana supérieur",
+		Type:          "Weapon",
+		AtkBonus:      40,
+		Durability:    120,
+		DurabilityMax: 120,
+		Materials: map[string]int{
+			"Acier renforcé":   4,
+			"Cuir de Sanglier": 2,
+			"Peau de Troll":    2,
+		},
+	}
 
 	ZoroBlade = Equipment{
-		Name:          "Wadô Ichimonji",
-		Type:          "Weapon",
-		AtkBonus:      60,
-		Durability:    90,
-		DurabilityMax: 90,
+		Name:            "Wadô Ichimonji",
+		Type:            "Weapon",
+		AtkBonus:        60,
+		InitiativeBonus: 15,
+		Durability:      150,
+		DurabilityMax:   150,
 		Materials: map[string]int{
-			"Acier renforcé": 1,
-			"Peau de Troll":  2,
+			"Acier renforcé":   6,
+			"Cuir de Sanglier": 3,
+			"Peau de Troll":    3,
 		},
 	}
 	CouronneSphinx = Equipment{
 		Name:            "Couronne du Sphinx",
 		Type:            "Couronne",
-		Necklace:        true,
+		Head:            true,
 		AtkBonus:        30,
 		InitiativeBonus: 25,
-		HPBonus:         20,
+		HPBonus:         30,
 		Durability:      90,
 		DurabilityMax:   90,
 	}
@@ -121,6 +277,19 @@ var (
 			"Fil de Spayder":   1,
 		},
 	}
+	ArcSup = Equipment{
+		Name:            "Arc supérieur",
+		Type:            "Weapon",
+		AtkBonus:        20,
+		InitiativeBonus: 4,
+		Durability:      50,
+		DurabilityMax:   50,
+		Materials: map[string]int{
+			"Cuir de Sanglier":    3,
+			"Toile de la reignée": 1,
+			"Fil de Spayder":      2,
+		},
+	}
 	Failure = Equipment{
 		Name:            "Failure",
 		Type:            "Weapon",
@@ -130,33 +299,10 @@ var (
 		DurabilityMax:   200,
 		Materials: map[string]int{
 			"Squelette de Rouquin": 1,
-			"Acier renforcé":       2,
+			"Acier renforcé":       6,
+			"Peau de Troll":        2,
 		},
 	}
-	Headtest = Equipment{
-		Name:            "Head Test",
-		Type:            "Head",
-		HPBonus:         4,
-		DefBonus:        2,
-		InitiativeBonus: 2,
-		Durability:      3,
-		DurabilityMax:   3,
-	}
-	Headtest2 = Equipment{
-		Name:            "Head Test2",
-		Type:            "Head",
-		HPBonus:         4,
-		DefBonus:        2,
-		InitiativeBonus: 2,
-		Durability:      3,
-		DurabilityMax:   3,
-	}
-	Weapontest = Equipment{
-		Name:          "Test",
-		Type:          "Weapon",
-		AtkBonus:      1,
-		Durability:    3,
-		DurabilityMax: 3}
 )
 
 func (p *Personnage) EquipItem(item Equipment) {
@@ -217,7 +363,7 @@ func (p *Personnage) ListEquipableItems() []string {
 
 	for item := range p.Inventory {
 		switch item {
-		case "Test", "Head Test2", "Head Test", "Failure", "Wadô Ichimonji", "Chapeau de l'aventurier", "Tunique de l'aventurier", "Jambiere de l'aventurier", "Bottes de l'aventurier", "Epée de l'aventurier", "Arc de l'aventurier":
+		case "Failure", "Wadô Ichimonji", "Chapeau de l'aventurier", "Tunique de l'aventurier", "Jambiere de l'aventurier", "Bottes de l'aventurier", "Epée de l'aventurier", "Arc de l'aventurier", "Heaume en cuir", "Plastron en cuir", "Pantalon en cuir", "Bottes en cuir", "Heaume en métal", "Plastron en métal", "Pantalon en métal", "Bottes en métal", "Katana", "Epée renforcé", "Katana supérieur", "Couronne du Sphinx", "Arc supérieur":
 			equipableItems = append(equipableItems, item)
 		}
 	}
@@ -235,6 +381,22 @@ func (p *Personnage) GetItemByName(name string) Equipment {
 		return Jambe1
 	case "Bottes de l'aventurier":
 		return Bottes1
+	case "Heaume en cuir":
+		return HeaumeCuir
+	case "Plastron en cuir":
+		return PlastronCuir
+	case "Pantalon en cuir":
+		return PantalonCuir
+	case "Bottes en cuir":
+		return BottesCuir
+	case "Heaume en métal":
+		return HeaumeMetal
+	case "Plastron en métal":
+		return PlastronMetal
+	case "Pantalon en métal":
+		return PantalonMetal
+	case "Bottes en métal":
+		return BottesMetal
 	case "Epée de l'aventurier":
 		return Epée1
 	case "Wadô Ichimonji":
@@ -243,12 +405,7 @@ func (p *Personnage) GetItemByName(name string) Equipment {
 		return Arc1
 	case "Failure":
 		return Failure
-	case "Head Test":
-		return Headtest
-	case "Head Test2":
-		return Headtest2
-	case "Test":
-		return Weapontest
+
 	default:
 		return Equipment{}
 	}
