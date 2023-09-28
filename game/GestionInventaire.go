@@ -102,7 +102,7 @@ func (P1 *Personnage) BaseInventory() {
 			case 1:
 				P1.EquipItemFromInventory()
 			case 2:
-				printEquipmentMap(P1.EquipementMap)
+				PrintEquipmentMap(P1.EquipementMap)
 				waitForUserInput("Entrer 0 retourner en arrière\n")
 				continue
 			case 3:
@@ -139,6 +139,17 @@ func (P1 *Personnage) RemoveZeroValueItems() {
 	}
 }
 
+func PrintEquipmentMap(equipmentMap map[string]Equipment) {
+	text21 := "\nEquipements:"
+	centeredText21 := CenterText(text21)
+	fmt.Println(centeredText21)
+	text22 := "\n %s:\n Type: %s\n ATK: %d\n DEF: %d\n HP: %d\n Initiative: %d\n"
+	centeredText22 := CenterText(text22)
+	for _, value := range equipmentMap {
+		fmt.Printf(centeredText22, value.Name, value.Type, value.AtkBonus, value.DefBonus, value.HPBonus, value.InitiativeBonus)
+	}
+}
+
 func DropsToInventory(P1 *Personnage, itemDrop map[string]int) {
 	for itemName, quantityDropped := range itemDrop {
 
@@ -149,16 +160,5 @@ func DropsToInventory(P1 *Personnage, itemDrop map[string]int) {
 
 			P1.Inventory[itemName] = quantityDropped
 		}
-	}
-}
-
-func printEquipmentMap(equipmentMap map[string]Equipment) {
-	text21 := "\nEquipements:"
-	centeredText21 := CenterText(text21)
-	fmt.Println(centeredText21)
-	text22 := "\n %s:\n Type: %s\n ATK: %d\n DEF: %d\n HP: %d\n Initiative: %d\n"
-	centeredText22 := CenterText(text22)
-	for _, value := range equipmentMap {
-		fmt.Printf(centeredText22, value.Name, value.Type, value.AtkBonus, value.DefBonus, value.HPBonus, value.InitiativeBonus)
 	}
 }
