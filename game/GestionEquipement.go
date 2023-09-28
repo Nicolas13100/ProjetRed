@@ -131,33 +131,36 @@ func (p *Personnage) EquipItem(item Equipment) {
 	switch item.Type {
 	case "Head":
 		if p.Equipement.Head {
-			p.UnequipItem(item)
+			p.UnequipItem(p.Head)
 		}
 		p.Head[item.Name] = item
 		p.Equipement.Head = true
 	case "Armor":
 		if p.Equipement.Armor {
-			p.UnequipItem(item)
+			p.UnequipItem(p.Armors)
 		}
 		p.Armors[item.Name] = item
 		p.Equipement.Armor = true
 	case "Legs":
 		if p.Equipement.Legs {
-			p.UnequipItem(item)
+			p.UnequipItem(p.Legs)
 		}
 		p.Legs[item.Name] = item
 		p.Equipement.Legs = true
 	case "Boots":
 		if p.Equipement.Boots {
-			p.UnequipItem(item)
+			p.UnequipItem(p.Feets)
 		}
 		p.Feets[item.Name] = item
 		p.Equipement.Boots = true
 	case "Weapon":
 		if p.Equipement.Weapon {
-			p.UnequipItem(item)
+			oldItem := p.Weapons
+			fmt.Println(oldItem, ":")
+			p.UnequipItem(p.Weapons)
 		}
 		p.Weapons[item.Name] = item
+		fmt.Println(p.Weapons)
 		p.Equipement.Weapon = true
 	}
 
@@ -245,58 +248,60 @@ func (p *Personnage) EquipItemFromInventory() {
 	fmt.Printf("%s equipped!\n", selectedItemName)
 }
 
-func (p *Personnage) UnequipItem(item Equipment) {
+func (p *Personnage) UnequipItem(item map[string]Equipment) {
 	fmt.Println(item)
-	switch item.Type {
-	case "Head":
-		if p.Equipement.Head {
-			deletedItem := p.Head[item.Name]
-			delete(p.Head, item.Name)
-			p.Equipement.Head = false
-			// Remove item from EquipementMap
-			delete(p.EquipementMap, deletedItem.Name)
+	for itemName, equippedItem := range item {
+		switch equippedItem.Type {
+		case "Head":
+			if p.Equipement.Head {
+				deletedItem := itemName
+				delete(p.Head, deletedItem)
+				p.Equipement.Head = false
+				// Remove item from EquipementMap
+				delete(p.EquipementMap, deletedItem)
+			}
+		case "Armor":
+			if p.Equipement.Armor {
+				deletedItem := itemName
+				delete(p.Armors, deletedItem)
+				p.Equipement.Armor = false
+				// Remove item from EquipementMap
+				delete(p.EquipementMap, deletedItem)
+			}
+		case "Legs":
+			if p.Equipement.Legs {
+				deletedItem := itemName
+				delete(p.Legs, deletedItem)
+				p.Equipement.Legs = false
+				// Remove item from EquipementMap
+				delete(p.EquipementMap, deletedItem)
+			}
+		case "Boots":
+			if p.Equipement.Boots {
+				deletedItem := itemName
+				delete(p.Feets, deletedItem)
+				p.Equipement.Boots = false
+				// Remove item from EquipementMap
+				delete(p.EquipementMap, deletedItem)
+			}
+		case "Weapon":
+			if p.Equipement.Weapon {
+				deletedItem := itemName
+				delete(p.Weapons, deletedItem)
+				p.Equipement.Weapon = false
+				// Remove item from EquipementMap
+				delete(p.EquipementMap, deletedItem)
+			}
 		}
-	case "Armor":
-		if p.Equipement.Armor {
-			deletedItem := p.Armors[item.Name]
-			delete(p.Armors, item.Name)
-			p.Equipement.Armor = false
-			// Remove item from EquipementMap
-			delete(p.EquipementMap, deletedItem.Name)
-		}
-	case "Legs":
-		if p.Equipement.Legs {
-			deletedItem := p.Legs[item.Name]
-			delete(p.Legs, item.Name)
-			p.Equipement.Legs = false
-			// Remove item from EquipementMap
-			delete(p.EquipementMap, deletedItem.Name)
-		}
-	case "Boots":
-		if p.Equipement.Boots {
-			deletedItem := p.Feets[item.Name]
-			delete(p.Feets, item.Name)
-			p.Equipement.Boots = false
-			// Remove item from EquipementMap
-			delete(p.EquipementMap, deletedItem.Name)
-		}
-	case "Weapon":
-		if p.Equipement.Weapon {
-			deletedItem := p.Weapons[item.Name]
-			delete(p.Weapons, item.Name)
-			p.Equipement.Weapon = false
-			// Remove item from EquipementMap
-			delete(p.EquipementMap, deletedItem.Name)
-		}
+
+		// Update character stats based on the unequipped item
+		p.HpMax -= equippedItem.HPBonus
+		p.Atk -= equippedItem.AtkBonus
+		p.Defense -= equippedItem.DefBonus
+		p.Initiative -= equippedItem.InitiativeBonus
+		// ... add similar lines for other stats
+
+		// Update inventory if necessary (add item back to inventory)
+		p.Inventory[itemName]++
 	}
-
-	// Update character stats based on the unequipped item
-	p.HpMax -= item.HPBonus
-	p.Atk -= item.AtkBonus
-	p.Defense -= item.DefBonus
-	p.Initiative -= item.InitiativeBonus
-	// ... add similar lines for other stats
-
-	// Update inventory if necessary (add item back to inventory)
-	p.Inventory[item.Name]++
 }
