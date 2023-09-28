@@ -308,54 +308,84 @@ var (
 func (p *Personnage) EquipItem(item Equipment) {
 	switch item.Type {
 	case "Head":
-		if p.Equipement.Head {
-			p.UnequipItem(p.Head)
+		if item.Durability > 0 {
+			if p.Equipement.Head {
+				p.UnequipItem(p.Head)
+			}
+			p.Head[item.Name] = item
+			p.Equipement.Head = true
+			p.EquippedHead = item.Name
+			p.EquippedItems = append(p.EquippedItems, item.Name)
+		} else {
+			fmt.Println("Cette equipement n'a plus de durabilité")
+			return
 		}
-		p.Head[item.Name] = item
-		p.Equipement.Head = true
-		p.EquippedHead = item.Name
 	case "Armor":
-		if p.Equipement.Armor {
-			p.UnequipItem(p.Armor)
+		if item.Durability > 0 {
+			if p.Equipement.Armor {
+				p.UnequipItem(p.Armor)
+			}
+			p.Armor[item.Name] = item
+			p.Equipement.Armor = true
+			p.EquippedArmor = item.Name
+			p.EquippedItems = append(p.EquippedItems, item.Name)
+		} else {
+			fmt.Println("Cette equipement n'a plus de durabilité")
+			return
 		}
-		p.Armor[item.Name] = item
-		p.Equipement.Armor = true
-		p.EquippedArmor = item.Name
 	case "Legs":
-		if p.Equipement.Legs {
-			p.UnequipItem(p.Legs)
+		if item.Durability > 0 {
+			if p.Equipement.Legs {
+				p.UnequipItem(p.Legs)
+			}
+			p.Legs[item.Name] = item
+			p.Equipement.Legs = true
+			p.Equippedlegs = item.Name
+			p.EquippedItems = append(p.EquippedItems, item.Name)
+		} else {
+			fmt.Println("Cette equipement n'a plus de durabilité")
+			return
 		}
-		p.Legs[item.Name] = item
-		p.Equipement.Legs = true
-		p.Equippedlegs = item.Name
 	case "Boots":
-		if p.Equipement.Boots {
-			p.UnequipItem(p.Feets)
+		if item.Durability > 0 {
+			if p.Equipement.Boots {
+				p.UnequipItem(p.Feets)
+			}
+			p.Feets[item.Name] = item
+			p.Equipement.Boots = true
+			p.EquippedFeets = item.Name
+			p.EquippedItems = append(p.EquippedItems, item.Name)
+		} else {
+			fmt.Println("Cette equipement n'a plus de durabilité")
+			return
 		}
-		p.Feets[item.Name] = item
-		p.Equipement.Boots = true
-		p.EquippedFeets = item.Name
 	case "Weapon":
-		if p.Equipement.Weapon {
-			p.UnequipItem(p.Weapon)
+		if item.Durability > 0 {
+			if p.Equipement.Weapon {
+				p.UnequipItem(p.Weapon)
+			}
+			p.Weapon[item.Name] = item
+			p.Equipement.Weapon = true
+			p.EquippedWeapon = item.Name
+		} else {
+			fmt.Println("Cette equipement n'a plus de durabilité")
+			return
 		}
-		p.Weapon[item.Name] = item
-		p.Equipement.Weapon = true
-		p.EquippedWeapon = item.Name
 	}
+	if item.Durability > 0 {
+		// Update character stats based on the equipped item
+		p.HpMax += item.HPBonus
+		p.Atk += item.AtkBonus
+		p.Defense += item.DefBonus
+		p.Initiative += item.InitiativeBonus
+		// ... add similar lines for other stats
 
-	// Update character stats based on the equipped item
-	p.HpMax += item.HPBonus
-	p.Atk += item.AtkBonus
-	p.Defense += item.DefBonus
-	p.Initiative += item.InitiativeBonus
-	// ... add similar lines for other stats
+		// Update inventory if necessary (remove item from inventory)
+		delete(p.Inventory, item.Name)
 
-	// Update inventory if necessary (remove item from inventory)
-	delete(p.Inventory, item.Name)
-
-	// Add item to EquipementMap
-	p.EquipementMap[item.Name] = item
+		// Add item to EquipementMap
+		p.EquipementMap[item.Name] = item
+	}
 }
 
 func (p *Personnage) ListEquipableItems() []string {
@@ -449,6 +479,11 @@ func (p *Personnage) UnequipItem(item map[string]Equipment) {
 				p.Equipement.Head = false
 				// Remove item from EquipementMap
 				delete(p.EquipementMap, deletedItem)
+				for i, key := range p.EquippedItems {
+					if key == itemName {
+						p.EquippedItems = append(p.EquippedItems[:i], p.EquippedItems[i+1:]...)
+					}
+				}
 			}
 		case "Armor":
 			if p.Equipement.Armor {
@@ -457,6 +492,11 @@ func (p *Personnage) UnequipItem(item map[string]Equipment) {
 				p.Equipement.Armor = false
 				// Remove item from EquipementMap
 				delete(p.EquipementMap, deletedItem)
+				for i, key := range p.EquippedItems {
+					if key == itemName {
+						p.EquippedItems = append(p.EquippedItems[:i], p.EquippedItems[i+1:]...)
+					}
+				}
 			}
 		case "Legs":
 			if p.Equipement.Legs {
@@ -465,6 +505,11 @@ func (p *Personnage) UnequipItem(item map[string]Equipment) {
 				p.Equipement.Legs = false
 				// Remove item from EquipementMap
 				delete(p.EquipementMap, deletedItem)
+				for i, key := range p.EquippedItems {
+					if key == itemName {
+						p.EquippedItems = append(p.EquippedItems[:i], p.EquippedItems[i+1:]...)
+					}
+				}
 			}
 		case "Boots":
 			if p.Equipement.Boots {
@@ -473,6 +518,11 @@ func (p *Personnage) UnequipItem(item map[string]Equipment) {
 				p.Equipement.Boots = false
 				// Remove item from EquipementMap
 				delete(p.EquipementMap, deletedItem)
+				for i, key := range p.EquippedItems {
+					if key == itemName {
+						p.EquippedItems = append(p.EquippedItems[:i], p.EquippedItems[i+1:]...)
+					}
+				}
 			}
 		case "Weapon":
 			if p.Equipement.Weapon {
@@ -483,14 +533,12 @@ func (p *Personnage) UnequipItem(item map[string]Equipment) {
 				delete(p.EquipementMap, deletedItem)
 			}
 		}
-
 		// Update character stats based on the unequipped item
 		p.HpMax -= equippedItem.HPBonus
 		p.Atk -= equippedItem.AtkBonus
 		p.Defense -= equippedItem.DefBonus
 		p.Initiative -= equippedItem.InitiativeBonus
 		// ... add similar lines for other stats
-
 		// Update inventory if necessary (add item back to inventory)
 		p.Inventory[itemName]++
 	}

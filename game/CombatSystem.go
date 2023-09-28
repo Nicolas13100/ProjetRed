@@ -78,14 +78,19 @@ func Fight(p *Personnage, Monstre1 *Monstre) {
 				attaqueMonstre = 0
 			}
 			p.Hp -= attaqueMonstre
-
 			fmt.Printf("%s attaque %s et lui inflige %d points de dégâts.\n", Monstre1.Name, p.Name, attaqueMonstre)
-
+			randomItem, err := GetRandomEquippedItem(&P1)
+			if err != nil {
+				fmt.Println(err)
+			}
+			PickUpItem(randomItem, &P1)
 			// Check if the Player is defeated
 			if p.Hp <= 0 {
 				p.Dead()
 				break
 			}
+			Tours++
+			fmt.Println("-----------------------------------------------------------------------------")
 		}
 		if p.Initiative < Monstre1.Initiative {
 			if Tours == 1 {
@@ -120,7 +125,6 @@ func Fight(p *Personnage, Monstre1 *Monstre) {
 				Monstre1.DeadMonstre(p)
 				break
 			}
-
 			Tours++
 			fmt.Println("-----------------------------------------------------------------------------")
 		}
@@ -155,6 +159,20 @@ func charTurn(p *Personnage, Monstre1 *Monstre) {
 		fmt.Printf("Vous avez infligé %d points de dégats\n", attaqueJoueur)
 		Monstre1.Hp -= attaqueJoueur
 		PlayerTurnTaken = true
+		// Reduce durability of the equipped weapon
+		equippedItem, ok := p.EquipementMap[p.EquippedWeapon]
+		if !ok {
+			fmt.Println("Pas d'arme Equipé")
+			return
+		}
+		equippedItem.Durability -= 1
+		p.EquipementMap[p.EquippedWeapon] = equippedItem
+		p.Weapon[p.EquippedWeapon] = equippedItem
+		if equippedItem.Durability <= 0 {
+			p.UnequipItem(p.Weapon)
+			fmt.Printf("Votre %s c'est brisé !\n", p.EquippedWeapon)
+		}
+		fmt.Println("Durabilité restante :", equippedItem.Durability)
 	case 2:
 		p.FightInventory(Monstre1)
 
