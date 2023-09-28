@@ -71,10 +71,8 @@ func movePlayer() {
 	}
 	for _, jar := range currentRoom.Jars {
 		if P1.x == jar.x && P1.y == jar.y {
-			var loot = Item{
-				Name: "Fourrure de Loup",
-			}
-			encounterJar(P1, loot)
+
+			encounterJar(P1)
 		}
 	}
 	for _, monster := range currentRoom.Monsters {
@@ -158,7 +156,7 @@ func (j *Jar) openJar() Item {
 	return item
 }
 
-func encounterJar(P1 Personnage, item Item) {
+func encounterJar(P1 Personnage) {
 
 	rand.Seed(time.Now().UnixNano())
 	jar := newJar()
@@ -187,6 +185,7 @@ func encounterJar(P1 Personnage, item Item) {
 			switch Question {
 			case 1:
 				var choix string
+				fmt.Println("Vous êtes tombé face au Sphinx Kheir-eddine, il vous pose une question :")
 				fmt.Println("Quel être, pourvu d'une seule voix, a d'abord quatre jambes le matin, puis deux jambes à midi, et trois jambes le soir ? ")
 				fmt.Scan(&choix)
 				if choix == "Homme" || choix == "homme" {
@@ -202,9 +201,10 @@ func encounterJar(P1 Personnage, item Item) {
 				}
 			case 2:
 				var choix string
+				fmt.Println("Vous êtes tombé face au Père Fouras, il vous pose une question :")
 				fmt.Println("On la reçoit sans la remercier. On en profite sans savoir pourquoi. On la donne à d'autres. On la perd sans s'en apercevoir. Qui suis-je ?")
 				fmt.Scan(&choix)
-				if choix == "La vie" || choix == "Vie" || choix == "vie" || choix == "la vie" {
+				if choix == "Vie" || choix == "vie" {
 					fmt.Println("Ouiii, c'est la bonne réponse, voici ta récompense.")
 					P1.Inventory["La Clé"]++
 					fmt.Println("Vous avez obtenu La Clé !")
@@ -216,16 +216,18 @@ func encounterJar(P1 Personnage, item Item) {
 				}
 			case 3:
 				var choix string
-				fmt.Println("On la reçoit sans la remercier. On en profite sans savoir pourquoi. On la donne à d'autres. On la perd sans s'en apercevoir. Qui suis-je ?")
+				fmt.Println("Vous êtes tombé face à Chat Gpt, il vous pose une question :")
+
+				fmt.Println("Je suis invisible, mais je peux être vu. Je ne parle pas, mais je peux communiquer. Je n'ai pas de corps, mais je peux prendre de la place. Qui suis-je ?")
 				fmt.Scan(&choix)
-				if choix == "La vie" || choix == "Vie" || choix == "vie" || choix == "la vie" {
-					fmt.Println("Ouiii, c'est la bonne réponse, voici ta récompense.")
-					P1.Inventory["La Clé"]++
-					fmt.Println("Vous avez obtenu La Clé !")
+				if choix == "air" || choix == "Air" {
+					fmt.Println("Bravo ! Vous avez trouvé la réponse correcte. L'énigme parlait en effet de l'air, une substance invisible mais essentielle à la vie, qui peut être ressentie et qui transporte les sons permettant la communication. Très bien joué !")
+					P1.Inventory["Ytrack"]++
+					fmt.Println("Vous avez obtenu Ytrack !")
 					return
 				} else {
-					fmt.Println("Non, ce n'est pas la bonne réponse, la Boule t'amène à l'étage inférieur")
-					currentFloor -= 1
+					fmt.Println("Ce n'est pas la réponse que j'attendais, mais c'est une réponse créative ! ")
+					fmt.Println("Chat GPT vous laisse repartir.")
 					return
 				}
 			}
