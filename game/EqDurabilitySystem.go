@@ -55,7 +55,7 @@ func (p *Personnage) RepairAll() {
 
 	for key, item := range p.EquipementMap {
 		item.Durability = item.DurabilityMax // Set the durability to a desired value (e.g., 100 for full durability)
-		p.Weapon[key] = item
+		p.EquipementMap[key] = item
 	}
 }
 func (p *Personnage) RepairSelected() {
