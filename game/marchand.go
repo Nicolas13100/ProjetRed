@@ -20,40 +20,76 @@ var (
 		Defense:    0,
 		Initiative: 10,
 		Inventory: map[string]int{
-			"Arc de l'aventurier":                   1,
-			"Epée de l'aventurier":                  2,
-			"Arc de l'aventurier reconditionné(e)":  1,
-			"Epée de l'aventurier reconditionné(e)": 2,
-			"Heaume en cuir":                        1,
-			"Plastron en cuir":                      1,
-			"Pantalon en cuir":                      1,
-			"Rangers":                               1,
-			"Augmentation d'inventaire":             3,
-			"Potion de soin":                        3,
-			"Potion de poison":                      3,
-			"Potion de mana":                        3,
-			"Livre de sort : Boule de feu":          1,
-			"Fourrure de Loup":                      10,
-			"Peau de Troll":                         10,
-			"Cuir de Sanglier":                      10,
-			"Plume de Corbeau":                      10,
+			"Arc de l'aventurier":       1,
+			"Epée de l'aventurier":      2,
+			"Chapeau de l'aventurier":   1,
+			"Tunique de l'aventurier":   1,
+			"Jambiere de l'aventurier":  1,
+			"Bottes de l'aventurier":    1,
+			"Heaume en cuir":            1,
+			"Plastron en cuir":          1,
+			"Pantalon en cuir":          1,
+			"Bottes en cuir":            1,
+			"Augmentation d'inventaire": 3,
+			"Potion de soin":            3,
+			"Potion de poison":          3,
+			"Potion de mana":            3,
+			"Boule de feu":              1,
+			"Stalactites glacés":        1,
+			"Avalanche":                 1,
+			"Tsunami":                   1,
+			"Vase Aquatique":            1,
+			"Extension de territoire : Sphère de l'Espace Infini": 1,
+			"Picots de glace":     1,
+			"Eruption Volcanique": 1,
+			"Fourrure de Loup":    10,
+			"Peau de Troll":       10,
+			"Cuir de Sanglier":    10,
+			"Plume de Corbeau":    10,
+			"Heaume en métal":     1,
+			"Plastron en métal":   1,
+			"Pantalon en métal":   1,
+			"Bottes en métal":     1,
+			"Katana":              1,
+			"Epée renforcé":       1,
+			"Katana supérieur":    1,
+			"Arc supérieur":       1,
 		},
 		Prices: map[string]int{
-			"Potion de soin":               3,
-			"Potion de poison":             6,
-			"Potion de mana":               8,
-			"Arc de l'aventurier":          15,
-			"Epée de l'aventurier":         20,
-			"Heaume en cuir":               25,
-			"Plastron en cuir":             35,
-			"Pantalon en cuir":             30,
-			"Rangers":                      18,
-			"Livre de sort : Boule de feu": 25,
-			"Augmentation d'inventaire":    30,
-			"Fourrure de Loup":             4,
-			"Peau de Troll":                7,
-			"Cuir de Sanglier":             3,
-			"Plume de Corbeau":             1,
+			"Potion de soin":           3,
+			"Potion de poison":         6,
+			"Potion de mana":           8,
+			"Arc de l'aventurier":      15,
+			"Epée de l'aventurier":     20,
+			"Chapeau de l'aventurier":  25,
+			"Tunique de l'aventurier":  35,
+			"Jambiere de l'aventurier": 30,
+			"Bottes de l'aventurier":   18,
+			"Heaume en cuir":           50,
+			"Plastron en cuir":         75,
+			"Pantalon en cuir":         65,
+			"Boule de feu":             25,
+			"Stalactites glacés":       50,
+			"Avalanche":                70,
+			"Tsunami":                  75,
+			"Vase Aquatique":           25,
+			"Extension de territoire : Sphère de l'Espace Infini": 6999,
+			"Picots de glace":           20,
+			"Eruption Volcanique":       75,
+			"Augmentation d'inventaire": 30,
+			"Fourrure de Loup":          4,
+			"Peau de Troll":             7,
+			"Cuir de Sanglier":          3,
+			"Plume de Corbeau":          1,
+			"Bottes en cuir":            40,
+			"Heaume en métal":           100,
+			"Plastron en métal":         130,
+			"Pantalon en métal":         115,
+			"Bottes en métal":           80,
+			"Katana":                    50,
+			"Epée renforcé":             70,
+			"Katana supérieur":          90,
+			"Arc supérieur":             60,
 		},
 	}
 )
@@ -61,7 +97,8 @@ var (
 func Buy(P1 *Personnage, m1 *Marchand) {
 
 	for {
-		fmt.Println("Les objets disponibles à la vente sont :")
+		ClearConsole()
+		fmt.Println("Les objets disponibles à l'achat sont :")
 		buyableItem := inventorySlice(m1.Inventory)
 		for i, itemName := range buyableItem {
 			price, existePrix := m1.Prices[itemName]
@@ -104,7 +141,7 @@ func Buy(P1 *Personnage, m1 *Marchand) {
 			fmt.Println("Vous n'avez pas assez d'argent pour acheter cet objet.")
 			return
 		}
-		if askYesNo("Voulez-vous acheté autre-chose ?") {
+		if askYesNo("Voulez-vous acheter autre-chose ?") {
 			continue
 		} else {
 			break
@@ -115,6 +152,7 @@ func Buy(P1 *Personnage, m1 *Marchand) {
 func Sell(P1 *Personnage, m1 *Marchand) {
 
 	for {
+		ClearConsole()
 		fmt.Println("Les objets disponibles à la vente sont :")
 
 		SelleableItem := inventorySlice(P1.Inventory)

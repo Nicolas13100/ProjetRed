@@ -4,7 +4,7 @@ import "fmt"
 
 func Campain(P1 *Personnage) {
 	if P1.Level < 5 {
-		fmt.Println("Vous entrez un fôret remplie de monstres et d'animaux sauvages, souhaitez-vous combattre ou vous ballader ? (1 : Combattre / 2 : Se ballader / 0 : Partir)")
+		fmt.Println("Vous entrez dans une fôret remplie de monstres et d'animaux sauvages, souhaitez-vous combattre ou faire demi-tour ? (1 : Combattre / 0 : Partir)")
 		var choix int
 		fmt.Scan(&choix)
 		switch choix {
@@ -33,40 +33,5 @@ func Campain(P1 *Personnage) {
 		case 2:
 			return
 		}
-	} else if P1.Level >= 5 {
-		fmt.Println("Vous avez les capacités nécessaires pour aller dans la montagne, continuer ?(1 : Oui / 2 : Non)")
-		var choix int
-		fmt.Scan(&choix)
-		switch choix {
-		case 1:
-			fmt.Println("Quel monstre ou animal souhaitez vous affronter ? (1 : Maitre Corbeau / 2 : Sanglier enragé  / 3 : Loup ténébreux / 4 : Troll des montagnes)")
-			var mechant int
-			fmt.Scan(&mechant)
-			switch mechant {
-			case 1:
-				fmt.Println("Vous avez choisi d'affronter le Maître Corbeau ! ")
-				mechant := Corbeau2
-				Fight(P1, &mechant)
-				return
-			case 2:
-				fmt.Println("Vous avez choisi d'affronter le Sanglier enragé ! ")
-				mechant := Sanglier2
-				Fight(P1, &mechant)
-				return
-			case 3:
-				fmt.Println("Vous avez choisi d'affronter le Loup ténébreux ! ")
-				mechant := Loup2
-				Fight(P1, &mechant)
-				return
-			case 4:
-				fmt.Println("Vous avez choisi d'affronter le Troll des montagnes! ")
-				mechant := Troll2
-				Fight(P1, &mechant)
-				return
-			}
-		}
-	} else {
-		return
 	}
-
 }

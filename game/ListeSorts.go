@@ -5,35 +5,72 @@ import "fmt"
 var (
 	CoupdePoing = Spell{
 		Name:     "Coup de Poing",
-		Type:     "Physic",
+		Type:     "Physique",
 		Damage:   6,
 		ManaCost: 0,
 	}
 	Shikai = Spell{
-		Name:     "Coup d'épée",
-		Type:     "Physic",
+		Name:     "Shikai",
+		Type:     "Physique",
 		Damage:   10,
 		ManaCost: 2,
 	}
 	Pistol = Spell{
-		Name:     "Coup de Poing",
-		Type:     "Physic",
+		Name:     "Gomu Gomu no Pistol",
+		Type:     "Physique",
 		Damage:   6,
 		ManaCost: 0,
 	}
 
-	Fireball = Spell{
-		Name:     "Fireball",
-		Type:     "Fire",
+	BouleFeu = Spell{
+		Name:     "Boule de feu",
+		Type:     "Feu",
 		Damage:   20,
+		ManaCost: 7,
+	}
+	Eruption = Spell{
+		Name:     "Eruption Volcanique",
+		Type:     "Feu",
+		Damage:   80,
+		ManaCost: 35,
+	}
+	ProjectGlace = Spell{
+		Name:     "Picots de glace",
+		Type:     "Glace",
+		Damage:   15,
+		ManaCost: 8,
+	}
+	Stalactites = Spell{
+		Name:     "Stalactites glacés",
+		Type:     "Glace",
+		Damage:   35,
+		ManaCost: 15,
+	}
+	Avalanche = Spell{
+		Name:     "Avalanche",
+		Type:     "Glace",
+		Damage:   70,
 		ManaCost: 10,
 	}
 
-	iceBlast = Spell{
-		Name:     "Ice Blast",
-		Type:     "Ice",
-		Damage:   15,
-		ManaCost: 8,
+	VaseEau = Spell{
+		Name:     "Vase Aquatique",
+		Type:     "Eau",
+		Damage:   20,
+		ManaCost: 7,
+	}
+
+	Tsunami = Spell{
+		Name:     "Tsunami",
+		Type:     "Eau",
+		Damage:   90,
+		ManaCost: 50,
+	}
+	Infini = Spell{
+		Name:     "Extension de territoire : Sphère de l'Espace Infini",
+		Type:     "Infini",
+		Damage:   999999,
+		ManaCost: 999,
 	}
 )
 

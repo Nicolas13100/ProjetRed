@@ -4,7 +4,7 @@ import "fmt"
 
 func (P1 *Personnage) FightInventory(Monstre1 *Monstre) {
 	for {
-
+		ClearConsole()
 		fmt.Println("\nInventaire:")
 		fmt.Println("Cash :", P1.Gold)
 		for key, value := range P1.Inventory {
@@ -56,6 +56,7 @@ func (P1 *Personnage) FightInventory(Monstre1 *Monstre) {
 
 func (P1 *Personnage) BaseInventory() {
 	for {
+		ClearConsole()
 		fmt.Println("\nInventaire:")
 		fmt.Println("Cash :", P1.Gold)
 		for key, value := range P1.Inventory {

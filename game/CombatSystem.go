@@ -33,7 +33,7 @@ func Tutorial(p *Personnage) {
 
 func Entrainement(p *Personnage) {
 	ClearConsole()
-	text := "Bienvenue dans la zone d'entrainement\nAmusez-vous a tapé le mannequin d'entrainement\n-----------------------------------------------------------------------------\n"
+	text := "Bienvenue dans la zone d'entrainement\nAmusez-vous à taper le mannequin d'entrainement\n-----------------------------------------------------------------------------\n"
 	centeredText := CenterText(text)
 	fmt.Println(centeredText)
 
@@ -151,24 +151,10 @@ func charTurn(p *Personnage, Monstre1 *Monstre) {
 		if attaqueJoueur < 0 {
 			attaqueJoueur = 0
 		}
-<<<<<<< HEAD
 
 		fmt.Printf("Vous avez infligé %d points de dégats\n", attaqueJoueur)
-=======
-		fmt.Printf("Vous avez infligé %d point de dégats\n", attaqueJoueur)
->>>>>>> 00bf64990541f59a788ce1b655431da0e204f1f5
 		Monstre1.Hp -= attaqueJoueur
 		PlayerTurnTaken = true
-		// Reduce durability of the equipped weapon
-		equippedItem, ok := p.EquipementMap[p.EquippedWeapon]
-		if !ok {
-			fmt.Println("Pas de durabilité")
-			return
-		}
-		equippedItem.Durability -= 5
-		p.EquipementMap[p.EquippedWeapon] = equippedItem
-		p.Weapon[p.EquippedWeapon] = equippedItem
-		fmt.Println("Durabilité restante :", equippedItem.Durability)
 	case 2:
 		p.FightInventory(Monstre1)
 

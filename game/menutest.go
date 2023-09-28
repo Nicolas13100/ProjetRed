@@ -40,7 +40,7 @@ func Menu() {
 
 	for {
 		ClearConsole()
-		text := "Bienvenue dans le jeu RPG\n 1.Commencer le jeu\n 2.Charger le jeu\n 3.Quitter\n Entrer votre choix"
+		text := "GOGOLAND\n 1.Commencer le jeu\n 2.Charger le jeu\n 3.Quitter\n Entrer votre choix"
 		centeredText := CenterText(text)
 		fmt.Println(centeredText)
 
@@ -48,7 +48,12 @@ func Menu() {
 
 		switch startChoice {
 		case 1:
+
 			P1 = CharCreation()
+			ClearConsole()
+			fmt.Println("Vous vous réveillez avec un mal de tête épouvantable, vous observez les environs sans les reconnaîtres.")
+			fmt.Println("Tout à coup, un dragon passe au dessus de vous, vous comprenez que vous avez mis les pieds dans un endroit aussi inconnu que fantastique !")
+			fmt.Println("Bienvenue à GoGoLand !")
 			var choice1 int
 			text := "Voulez-vous un tutoriel ? 1.Oui / 2.Non\n"
 			centeredText := CenterText(text)
@@ -67,7 +72,7 @@ func Menu() {
 			}
 			ClearConsole()
 			for {
-				text := "Bienvenue à toi:%s\n\nQue voulez-vous faire ?\n1. Afficher les informations du personnage \n2. Accéder au contenu de l'inventaire\n3. Marchand \n4. Forgeron\n5. Entrainement \n6. Dongeon\n8. sauvegarder \n9. Qui sont-ils ?\n0. Quitter\nEntrer votre choix :\n"
+				text := "Bienvenue à toi:%s\n\nQue voulez-vous faire ?\n1. Afficher les informations du personnage \n2. Accéder au contenu de l'inventaire\n3. Marchand \n4. Forgeron\n5. Entrainement \n6. Dongeon\n7.Campagne\n8. sauvegarder \n9. Qui sont-ils ?\n0. Quitter\nEntrer votre choix :\n"
 				centeredText := CenterText(text)
 				fmt.Printf(centeredText, P1.Name)
 

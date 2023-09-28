@@ -74,7 +74,7 @@ RestartLoop:
 	for {
 		ClearConsole()
 		// Demander à l'utilisateur de choisir sa race (vous pouvez adapter cette partie selon vos besoins)
-		text := "Choisissez votre race : \nLuffy : Vous commencez avec 100 PV Max, initiative moyenne\n Naruto : Vous commencez avec 80 PV Max, initiative elevé\nIchigo : Vous commencez avec 120 PV Max, initiative basse\n"
+		text := "Choisissez votre race : \nPourfendeur : Vous commencez avec 100 PV Max, initiative moyenne\n Exorciste : Vous commencez avec 80 PV Max, initiative elevé\nShinigami : Vous commencez avec 120 PV Max, initiative basse\n"
 		centeredText := CenterText(text)
 		fmt.Println(centeredText)
 		fmt.Scan(&Race)
@@ -101,7 +101,7 @@ RestartLoop:
 
 	}
 	switch Race {
-	case "Luffy":
+	case "Pourfendeur":
 		P1 := Personnage{
 			Name:                   Name,
 			Race:                   Race,
@@ -151,7 +151,7 @@ RestartLoop:
 		}
 		return P1
 
-	case "Naruto":
+	case "Exorciste":
 		P1 := Personnage{
 			Name:                   Name,
 			Race:                   Race,
@@ -199,7 +199,7 @@ RestartLoop:
 		}
 		return P1
 
-	case "Ichigo":
+	case "Shinigami":
 		P1 := Personnage{
 			Name:                   Name,
 			Race:                   Race,
@@ -259,7 +259,7 @@ RestartLoop:
 			Hp:                     999999,
 			Gold:                   9999999,
 			InventoryCap:           99999999,
-			Spells:                 []Spell{CoupdePoing, Pistol, Shikai, Fireball, iceBlast},
+			Spells:                 []Spell{CoupdePoing, Pistol, Shikai, BouleFeu, ProjectGlace, Infini, Eruption, Stalactites, Avalanche, VaseEau, Tsunami},
 			Inventory: map[string]int{
 				"Potion de soin":       99,
 				"Potion de poison":     99,

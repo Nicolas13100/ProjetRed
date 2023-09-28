@@ -28,6 +28,18 @@ var (
 			"Bottes de l'aventurier":   1,
 			"Jambiere de l'aventurier": 1,
 			"Tunique de l'aventurier":  1,
+			"Heaume en cuir":           1,
+			"Plastron en cuir":         1,
+			"Pantalon en cuir":         1,
+			"Bottes en cuir":           1,
+			"Heaume en métal":          1,
+			"Plastron en métal":        1,
+			"Pantalon en métal":        1,
+			"Bottes en métal":          1,
+			"Katana":                   1,
+			"Epée renforcé":            1,
+			"Katana supérieur":         1,
+			"Arc supérieur":            1,
 		},
 	}
 )

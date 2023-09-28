@@ -52,15 +52,19 @@ var (
 	}
 
 	Goblin = Monstre{
-		Name:       "Goblin",
+		Name:       "Gobelin",
 		Atk:        10,
 		HpMax:      50,
 		Hp:         50,
 		Mana:       20,
-		Type:       "Goblin",
+		Type:       "Gobelin",
 		Defense:    0,
 		Initiative: 0,
 		XpDrop:     20,
+		ItemDrop: map[string]int{
+			"Oreilles de Gobelin": 2,
+			"Griffes de Gobelin":  1,
+		},
 	}
 
 	Orc = Monstre{
@@ -73,6 +77,10 @@ var (
 		Defense:    10,
 		Initiative: 0,
 		XpDrop:     20,
+		ItemDrop: map[string]int{
+			"Défenses d'Orc": 1,
+			"Hache abîmée":   1,
+		},
 	}
 
 	HamsterGeant = Monstre{
@@ -85,6 +93,10 @@ var (
 		Defense:    20,
 		Initiative: 0,
 		XpDrop:     20,
+		ItemDrop: map[string]int{
+			"Roulette Rousse":   1,
+			"Dents de Rongeurs": 1,
+		},
 	}
 
 	Loup = Monstre{
