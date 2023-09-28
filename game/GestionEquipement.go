@@ -167,30 +167,35 @@ func (p *Personnage) EquipItem(item Equipment) {
 		}
 		p.Head[item.Name] = item
 		p.Equipement.Head = true
+		p.EquippedHead = item.Name
 	case "Armor":
 		if p.Equipement.Armor {
 			p.UnequipItem(p.Armor)
 		}
 		p.Armor[item.Name] = item
 		p.Equipement.Armor = true
+		p.EquippedArmor = item.Name
 	case "Legs":
 		if p.Equipement.Legs {
 			p.UnequipItem(p.Legs)
 		}
 		p.Legs[item.Name] = item
 		p.Equipement.Legs = true
+		p.Equippedlegs = item.Name
 	case "Boots":
 		if p.Equipement.Boots {
 			p.UnequipItem(p.Feets)
 		}
 		p.Feets[item.Name] = item
 		p.Equipement.Boots = true
+		p.EquippedFeets = item.Name
 	case "Weapon":
 		if p.Equipement.Weapon {
 			p.UnequipItem(p.Weapon)
 		}
 		p.Weapon[item.Name] = item
 		p.Equipement.Weapon = true
+		p.EquippedWeapon = item.Name
 	}
 
 	// Update character stats based on the equipped item
