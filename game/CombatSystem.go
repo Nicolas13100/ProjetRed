@@ -25,9 +25,7 @@ func Tutorial(p *Personnage) {
 		Defense:    2,
 		Initiative: 12,
 	}
-	if P1.Hp >= 10 {
-		fmt.Println("Vous n'avez plus beaucoup de vie, prenez une potion de soin dans votre inventaire.")
-	}
+
 	Fight(p, &goblin)
 }
 

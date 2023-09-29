@@ -119,12 +119,9 @@ RestartLoop:
 			InventoryCap:           12,
 			Spells:                 []Spell{CoupdePoing},
 			Inventory: map[string]int{
-				"Potion de soin":          3,
-				"Potion de poison":        3,
-				"Potion de mana":          3,
-				"Head Test":               1,
-				"Test":                    1,
-				"Tunique de l'aventurier": 1,
+				"Potion de soin":   3,
+				"Potion de poison": 3,
+				"Potion de mana":   3,
 			},
 			InventoryUsed:    false,
 			AtkUsed:          false,
@@ -326,7 +323,7 @@ func (P1 Personnage) DisplayInfo() {
 
 	for {
 		ClearConsole()
-		text1 := "\nNom : %s\nRace : %s\nNiveau : %d\nPoints de d'XP actuels : %d\nPoints de d'XP avant le prochain niveau : %d\n\nPoints de vie actuels : %d\nPoints de vie maximum : %d\n Attaque : %d\n Défense : %d\nInitiative : %d\nCash : %d\n"
+		text1 := "\nNom : %s\nRace : %s\nNiveau : %d\nPoints d'XP actuels : %d\nPoints d'XP avant le prochain niveau : %d\n\nPoints de vie actuels : %d\nPoints de vie maximum : %d\n Attaque : %d\n Défense : %d\nInitiative : %d\nCash : %d\n"
 		centeredText1 := CenterText(text1)
 		fmt.Printf(centeredText1, P1.Name, P1.Race, P1.Level, P1.Xp, P1.XpMax, P1.Hp+P1.Equipement.HPBonus, P1.HpMax+P1.Equipement.HPBonus, P1.Atk+P1.Equipement.AtkBonus, P1.Defense+P1.Equipement.DefBonus, P1.Initiative+P1.Equipement.InitiativeBonus, P1.Gold)
 

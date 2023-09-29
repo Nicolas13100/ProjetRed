@@ -58,6 +58,9 @@ func Forge(P1 *Personnage, f1 *Forgeron) {
 		var choice int
 		fmt.Print("Quel équipement souhaitez-vous forger ? (entrez le numéro) : ")
 		fmt.Scan(&choice)
+		if choice == 0 {
+			return
+		}
 		// Récupérez l'objet choisi par l'utilisateur
 		chosenItemName := ForgeableItems[choice-1]
 
@@ -116,13 +119,13 @@ func Forge(P1 *Personnage, f1 *Forgeron) {
 		}
 
 	case 3:
-		fmt.Println("1.Reparation de tous ce que tu as, 2.ou d'un equiement en particulier?")
+		fmt.Println("1.Réparation de tout ce que tu as, 2. D'un équipement en particulier?")
 		fmt.Scan(&choice)
 		switch choice {
 		case 1:
 			P1.RepairAll()
 		case 2:
-			fmt.Println("Cet espace est en renovation")
+			fmt.Println("Cet espace est en rénovation")
 			waitForUserInput("Entrer 0 pour continuer")
 		}
 
